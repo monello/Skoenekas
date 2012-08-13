@@ -1,0 +1,80 @@
+/* DNA Gifts - DNA Gifts page */
+div.mod-languages_dna {
+  display: inline !important;
+  float: left;
+  width: 100px;
+}
+span.testlanguage {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+}
+div#btl {
+  display: inline;
+  width: 200px;
+  float: right;
+}
+
+/* form overrides */
+form#adminForm .formelm {
+  padding-top: 0px;
+  padding-bottom: 4px;
+}
+
+form#adminForm > fieldset {
+  border: 1px solid LightGrey;
+}
+form#adminForm .formelm label {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 20px;
+  vertical-align: top;
+  width: auto;
+}
+
+form#adminForm .formelm > label {
+  width: 230px;
+}
+
+form#adminForm .formelm > label#jform_church_name-lbl,
+form#adminForm .formelm > label#jform_pastor_reverend-lbl {
+  width: 215px;
+}
+
+form#adminForm .formelm fieldset {
+  display: inline-block;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+}
+
+img.introanimation {
+  float: left;
+  border: 3px solid black;
+  margin: 0 10px 0px 0;
+}
+
+table#introtable,
+table#introtable tbody,
+table#introtable tr,
+table#introtable tr td {
+  border: 0 !important;
+}
+table#introtable td p {
+  margin-bottom: 10px;
+  line-height: 1.5em;
+}
+
+table#picktesttable thead {
+  background-color: LightGrey;
+}
+
+table#picktesttable th,
+table#picktesttable td {
+  padding: 5px;
+}

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field
+			name="id"
+			type="hidden"
+		/>
+		
+		<field
+			name="question_code"
+			type="text"
+			label="COM_DNAGIFTS_QUESTION_FIELD_CODE_LABEL"
+			description="COM_DNAGIFTS_QUESTION_FIELD_CODE_DESC"
+			size="10"
+			class="inputbox"
+			default=""
+			required="true"
+		/>
+		
+		<field
+			name="question_text"
+			type="text"
+			label="COM_DNAGIFTS_QUESTION_FIELD_TEXT_LABEL"
+			description="COM_DNAGIFTS_QUESTION_FIELD_TEXT_DESC"
+			size="100"
+			maxlength="255"
+			class="inputbox"
+			default=""
+			required="true"
+		/>
+		
+		<field
+			name="question_hint"
+			type="text"
+			label="COM_DNAGIFTS_QUESTION_FIELD_HINT_LABEL"
+			description="COM_DNAGIFTS_QUESTION_FIELD_HINT_DESC"
+			size="100"
+			maxlength="255"
+			class="inputbox"
+			default=""
+			required="true"
+		/>
+		
+		<field name="question_reason"
+			type="editor"
+			buttons="true"
+			hide="pagebreak,readmore"
+			class="inputbox"
+			filter="JComponentHelper::filterText"
+			label="COM_DNAGIFTS_QUESTION_FIELD_REASON_LABEL"
+			description="COM_DNAGIFTS_QUESTION_FIELD_REASON_DESC"
+			/>
+		
+		<field name="question_notes"
+			type="editor"
+			buttons="true"
+			hide="pagebreak,readmore"
+			class="inputbox"
+			filter="JComponentHelper::filterText"
+			label="COM_DNAGIFTS_QUESTION_FIELD_NOTES_LABEL"
+			description="COM_DNAGIFTS_QUESTION_FIELD_NOTES_DESC"
+			/>
+		
+		<field name="gift_id" type="questiongift"
+			label="COM_DNAGIFTS_QUESTION_FIELD_GIFTID_LABEL" description="COM_DNAGIFTS_QUESTION_FIELD_GIFTID_DESC" />
+		
+		<field
+			name="language"
+			type="list"
+			label="COM_DNAGIFTS_QUESTION_FIELD_LANGUAGE_LABEL"
+			description="COM_DNAGIFTS_QUESTION_FIELD_LANGUAGE_DESC"
+			class="inputbox"
+			size="1"
+			default="English"
+			required="true">
+			<option value="English">English</option>
+			<option value="Afrikaans">Afrikaans</option>
+		</field>
+		
+		<field name="created_by"
+			type="user"
+			label="JGLOBAL_FIELD_CREATED_BY_LABEL"
+			description="JGLOBAL_FIELD_CREATED_BY_Desc"
+			required="true"
+			/>
+		
+		<field name="created_by_alias"
+			type="text"
+			label="JGLOBAL_FIELD_CREATED_BY_ALIAS_LABEL"
+			description="JGLOBAL_FIELD_CREATED_BY_ALIAS_DESC"
+			class="inputbox"
+			size="20"
+			/>
+		
+		<field name="created"
+			type="calendar"
+			label="JGLOBAL_FIELD_CREATED_LABEL"
+			description="JGLOBAL_FIELD_CREATED_DESC"
+			class="inputbox"
+			size="22"
+			format="%Y-%m-%d %H:%M:%S"
+			filter="user_utc"
+			required="true"
+			/>
+		
+		<field
+			name="published"
+			type="list"
+			label="JSTATUS"
+			description="COM_DNAGIFTS_QUESTION_FIELD_STATE_DESC"
+			class="inputbox"
+			size="1"
+			default="1"
+			required="true">
+			<option
+				value="1">JPUBLISHED</option>
+			<option
+				value="0">JUNPUBLISHED</option>
+			<option
+				value="2">JARCHIVED</option>
+			<option
+				value="-2">JTRASHED</option>
+		</field>
+		
+	</fieldset>
+</form>

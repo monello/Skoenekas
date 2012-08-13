@@ -1,0 +1,10 @@
+.sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+.sortable li { margin: 0 3px 3px 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+.ui-state-highlight { height: 1.5em; line-height: 1.2em; border-color: #c10000;}
+
+.testQuestionLanguage, .testButtonLanguage { display: inline; font-size: 8pt; width: 90px;}
+.testShowDuration { display: inline; font-size: 8pt; width: 20px;}
+.testQuestionText, .testButtonText { display: inline; max-width: 350px; overflow: hidden; white-space:nowrap;}
+.actionButtonSpacer { float:right; width:20px; }
+.questionDetailsContainer, .buttonDetailsContainer { display: inline; float:left; width: 60%; min-width: 200px; overflow: hidden; }
+.actionQuestionsContainer, .actionButtonsContainer { display: inline; float:right; width: 120px; }

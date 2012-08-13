@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field
+			name="id"
+			type="hidden"
+		/>
+		
+		<field name="is_christian" type="radio"
+									label="COM_DNAGIFTS_PRETEST_FIELD_ISCHRISTIAN_LABEL"
+									description="COM_DNAGIFTS_PRETEST_FIELD_ISCHRISTIAN_DESC"
+									>
+				<option class="required" value="1">COM_DNAGIFTS_PRETEST_FIELD_VALUE_YESCHRISTIAN</option>
+				<option value="0">COM_DNAGIFTS_PRETEST_FIELD_VALUE_NOCHRISTIAN</option>
+		</field>
+		
+		<field name="in_church" type="radio"
+									label="COM_DNAGIFTS_PRETEST_FIELD_INCHURCH_LABEL"
+									description="COM_DNAGIFTS_PRETEST_FIELD_INCHURCH_DESC">
+				<option class="required" value="1">COM_DNAGIFTS_PRETEST_FIELD_VALUE_YESCHURCH</option>
+				<option value="0">COM_DNAGIFTS_PRETEST_FIELD_VALUE_NOCHURCH</option>
+		</field>
+		
+		<field
+			name="church_name" type="text"
+			label="COM_DNAGIFTS_PRETEST_FIELD_CHURCHNAME_LABEL"
+			description="" 
+			size="50" maxlength="50" default=""/>
+		
+		<field
+			name="your_city" type="text"
+			label="COM_DNAGIFTS_PRETEST_FIELD_YOURCITY_LABEL"
+			description="COM_DNAGIFTS_PRETEST_FIELD_YOURCITY_DESC"
+			size="50" default=""
+			class="required" 
+			/>
+		
+		<field name="your_country" type="CountryList"
+				label="COM_DNAGIFTS_PRETEST_FIELD_YOURCOUNTRY_LABEL" description="COM_DNAGIFTS_PRETEST_FIELD_YOURCOUNTRY_DESC"
+				size="1" default="" class="required" />
+		
+		<field
+			name="pastor_reverend" type="text"
+			label="COM_DNAGIFTS_PRETEST_FIELD_PASTORREVEREND_LABEL"
+			description="COM_DNAGIFTS_PRETEST_FIELD_PASTORREVEREND_DESC"
+			size="50" default="" />
+		
+		<field name="believe_divine" type="radio"
+									label="COM_DNAGIFTS_PRETEST_FIELD_DIVINE_LABEL"
+									description="COM_DNAGIFTS_PRETEST_FIELD_DIVINE_DESC">
+				<option class="required" value="1">COM_DNAGIFTS_PRETEST_FIELD_VALUE_YESDIVINE</option>
+				<option value="0">COM_DNAGIFTS_PRETEST_FIELD_VALUE_NODIVINE</option>
+		</field>
+		
+	</fieldset>
+</form>
