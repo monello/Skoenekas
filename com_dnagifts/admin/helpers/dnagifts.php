@@ -112,7 +112,7 @@ class DnagiftsHelper
 		return $options;
 	}
 	
-	public static function getButtonOptions($record_id, $language)
+	public static function getButtonOptions($record_id, $language, $is_update, $button_id=0)
 	{
 		// Initialize variables.
 		$options = array();
@@ -124,7 +124,17 @@ class DnagiftsHelper
 		$query->from($db->quoteName('#__dnagifts_option_button'));
 		$query->where('published = 1');
 		
-		$query->where('id NOT IN (SELECT button_id FROM '.$db->quoteName('#__dnagifts_lnk_test_buttonset').' WHERE test_id = '.$record_id.')');
+		if ($is_update == 'false') {
+			$query->where('id NOT IN ('.
+										'SELECT button_id FROM '.$db->quoteName('#__dnagifts_lnk_test_buttonset').
+										' WHERE test_id = '.$record_id.')');
+		} else {
+			$query->where('id NOT IN ('.
+										'SELECT button_id FROM '.$db->quoteName('#__dnagifts_lnk_test_buttonset').
+										' WHERE test_id = '.$record_id.
+										' AND button_id != '.$button_id.
+										')');
+		}
 		
 		if ($language && $language != 'all') {
 			$query->where('language = \''.$language.'\'');

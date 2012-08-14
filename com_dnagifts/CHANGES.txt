@@ -1,0 +1,23 @@
+0.0.1
+-----
+
+-  Initial version
+
+0.0.2 (2012/08/13)
+-----
+- Test upgrade
+
+0.0.3 (2012/08/13)
+-----
+* Also see Git Log
+ - Added the use_timing field to the dnagifts_test table
+ - Fixed the bugs that was not updating the metadata tags when managing buttons and questions
+ 
+0.0.4 (2012/08/13)
+-----
+* Also see Git Log
+ - Added the default_duration field to the dnagifts_test table
+ - Added the test_duration field to the dnagifts_test table
+ - Added the show_progressbar field to the dnagifts_test table
+ - Updated the manage-single test screen to save the General Test Configurations to the database
+ - Updated the front-end test selection table to use the test-duration value

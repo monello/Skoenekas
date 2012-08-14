@@ -22,7 +22,7 @@ class DnaGiftsViewDnaGifts extends JView
 		$state			= $this->get('State');
 		$this->form	= $this->get('Form');
 		$this->item = $this->get('Item');
- 
+		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) 
 		{

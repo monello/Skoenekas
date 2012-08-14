@@ -28,8 +28,10 @@ class DnaGiftsControllerTest extends JControllerForm
 	public function getButtonsByLanguage() {
 		$record_id = JRequest::getCmd('record_id');
 		$language = JRequest::getCmd('language');
+		$is_update = JRequest::getCmd('is_update', false);
+		$button_id = JRequest::getCmd('button_id', 0);
 		$data = array("results" => array(
-				"buttons" => DnaGiftsHelper::getButtonOptions($record_id, $language)
+				"buttons" => DnaGiftsHelper::getButtonOptions($record_id, $language, $is_update, $button_id)
 		));
 		echo json_encode($data);
 	}
@@ -272,6 +274,74 @@ class DnaGiftsControllerTest extends JControllerForm
 		$db->setQuery($query);
 		if (!$db->query()) {
 			$this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_DELETE_QUESTION'));
+			echo json_encode(array("success"=> false));
+		} else {
+			echo json_encode(array("success" => true));
+		}
+	}
+	
+	public function saveUseTiming() {
+		$test_id = JRequest::getCmd('test_id');
+		$use_timing = JRequest::getCmd('use_timing');
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->update('#__dnagifts_test');
+		$query->set('use_timing = ' . (int) $use_timing);
+		$query->where('id = ' . (int) $test_id);
+		$db->setQuery($query);
+		if (!$db->query()) {
+			$this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_UPDATE_USETIMING'));
+			echo json_encode(array("success"=> false));
+		} else {
+			echo json_encode(array("success" => true));
+		}
+	}
+	
+	public function saveDefaultDuration() {
+		$test_id = JRequest::getCmd('test_id');
+		$default_duration = JRequest::getCmd('default_duration');
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->update('#__dnagifts_test');
+		$query->set('default_duration = ' . (int) $default_duration);
+		$query->where('id = ' . (int) $test_id);
+		$db->setQuery($query);
+		if (!$db->query()) {
+			$this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_UPDATE_DEFAULTDURATION'));
+			echo json_encode(array("success"=> false));
+		} else {
+			echo json_encode(array("success" => true));
+		}
+	}
+	
+	public function saveTestDuration() {
+		$test_id = JRequest::getCmd('test_id');
+		$test_duration = JRequest::getCmd('test_duration');
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->update('#__dnagifts_test');
+		$query->set('test_duration = \'' . $test_duration.'\'');
+		$query->where('id = ' . (int) $test_id);
+		$db->setQuery($query);
+		if (!$db->query()) {
+			$this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_UPDATE_TESTDURATION'));
+			echo json_encode(array("success"=> false));
+		} else {
+			echo json_encode(array("success" => true));
+		}
+	}
+	
+	public function saveShowProgressbar() {
+		$test_id = JRequest::getCmd('test_id');
+		$show_progressbar= JRequest::getCmd('show_progressbar');
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->update('#__dnagifts_test');
+		$query->set('show_progressbar = ' . (int) $show_progressbar);
+		$query->where('id = ' . (int) $test_id);
+		$db->setQuery($query);
+		if (!$db->query()) {
+			$this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_UPDATE_SHOWPROGRESSBAR'));
 			echo json_encode(array("success"=> false));
 		} else {
 			echo json_encode(array("success" => true));

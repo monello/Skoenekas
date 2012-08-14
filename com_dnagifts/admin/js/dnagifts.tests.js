@@ -7,7 +7,7 @@ root.myNamespace.create('DnaGifts.Test', {
       
       var url='index.php?option=com_dnagifts&format=json&task=test.getButtonsByLanguage';
       var language = jQuery("#language"+edit).val();
-      var record_id = help.getRecordID("test-form");
+      var test_id = help.getRecordID("test-form");
       
       if (!language) {
          return false;
@@ -17,8 +17,10 @@ root.myNamespace.create('DnaGifts.Test', {
          type: "POST",
          url: url,
          data: {
-            record_id: record_id,
-            language: language
+            record_id: test_id,
+            language: language,
+            is_update: isUpdate,
+            button_id: DnaGifts.Test.button_id
          },
          success: function(json_data) {
             help.deleteOptions("button_id"+edit);
@@ -28,6 +30,9 @@ root.myNamespace.create('DnaGifts.Test', {
                   help.appendOption("button_id"+edit, button.value, button.text);
                });  
                jQuery("#button_id"+edit).attr("disabled",false);
+               if (isUpdate) {
+                  jQuery("#button_id"+edit+" option[value='"+DnaGifts.Test.button_id+"']").attr("selected", true);
+               }
             }
          }
       });
@@ -102,8 +107,8 @@ root.myNamespace.create('DnaGifts.Test', {
                var test_id = jQuery("#test-button-"+DnaGifts.Test.link_id).metadata().test_id;
                jQuery("#test-button-"+DnaGifts.Test.link_id+" .testButtonText:first").html(json_data.text);
                jQuery("#test-button-"+DnaGifts.Test.link_id+" .testButtonLanguage:first").html("("+language+")");
-               jQuery("#test-button-"+DnaGifts.Test.link_id+" .testButtonLanguage:first").attr("data",
-                  "{link_id: '"+DnaGifts.Test.link_id+"', test_id: '"+test_id+"', button_id: '"+button_id+"', language: '"+language+"'}");
+               jQuery("#test-button-"+DnaGifts.Test.link_id).metadata().button_id = button_id;
+               jQuery("#test-button-"+DnaGifts.Test.link_id).metadata().language = language;
                jQuery( "#edit-test-button" ).dialog( "close" );
             } else {
                alert("There was an error updating this button");
@@ -406,6 +411,102 @@ root.myNamespace.create('DnaGifts.Test', {
          url: url,
          data: {questions: list}
       });
+   },
+   saveUseTiming: function() {
+      var use_timing = jQuery("input[name='user_timing']:checked").val();
+      var test_id = jQuery("#tdTestConfig").metadata().test_id;
+      
+      jQuery("#svUseTiming").hide();
+      jQuery("#spUseTiming").show();
+      
+      var url='index.php?option=com_dnagifts&format=json&task=test.saveUseTiming';
+      jQuery.ajax({
+         type: "POST",
+         url: url,
+         data: {
+            test_id: test_id,
+            use_timing: use_timing
+         },
+         success : function(json_data) {
+            if (!json_data.success) {
+               alert(json_data.message);
+            }
+            jQuery("#spUseTiming").hide();
+            jQuery("#svUseTiming").show();
+         }
+      });
+   },
+   saveDefaultDuration: function() {
+      var default_duration = jQuery("#default_duration").val();
+      var test_id = jQuery("#tdTestConfig").metadata().test_id;
+      
+      jQuery("#svDefaultDuration").hide();
+      jQuery("#spDefaultDuration").show();
+      
+      var url='index.php?option=com_dnagifts&format=json&task=test.saveDefaultDuration';
+      jQuery.ajax({
+         type: "POST",
+         url: url,
+         data: {
+            test_id: test_id,
+            default_duration: default_duration
+         },
+         success : function(json_data) {
+            if (!json_data.success) {
+               alert(json_data.message);
+            }
+            jQuery("#spDefaultDuration").hide();
+            jQuery("#svDefaultDuration").show();
+         }
+      });
+   },
+   saveTestDuration: function() {
+      var test_duration = jQuery("#test_duration").val();
+      var test_id = jQuery("#tdTestConfig").metadata().test_id;
+      
+      jQuery("#svTestDuration").hide();
+      jQuery("#spTestDuration").show();
+      
+      var url='index.php?option=com_dnagifts&format=json&task=test.saveTestDuration';
+      jQuery.ajax({
+         type: "POST",
+         url: url,
+         data: {
+            test_id: test_id,
+            test_duration: test_duration
+         },
+         success : function(json_data) {
+            if (!json_data.success) {
+               alert(json_data.message);
+            }
+            jQuery("#spTestDuration").hide();
+            jQuery("#svTestDuration").show();
+         }
+      });
+   },
+   saveShowProgressbar: function() {
+      var show_progressbar = jQuery("input[name='show_progressbar']:checked").val();
+      var test_id = jQuery("#tdTestConfig").metadata().test_id;
+      
+      jQuery("#svShowProgressbar").hide();
+      jQuery("#spShowProgressbar").show();
+      
+      var url='index.php?option=com_dnagifts&format=json&task=test.saveShowProgressbar';
+      jQuery.ajax({
+         type: "POST",
+         url: url,
+         data: {
+            test_id: test_id,
+            show_progressbar: show_progressbar
+         },
+         success : function(json_data) {
+            if (!json_data.success) {
+               alert(json_data.message);
+            }
+            jQuery("#spShowProgressbar").hide();
+            jQuery("#svShowProgressbar").show();
+         }
+      });
    }
 });
 
@@ -445,6 +546,7 @@ Base.Helpers.bind_load(function () {
    jQuery('#select_buttons .goDeleteBtn').live("click", ns.goDeleteButton);
    jQuery('#select_buttons .goEditBtn').live("click", function() {
       DnaGifts.Test.link_id = jQuery(this).parent().parent().metadata().link_id;
+      DnaGifts.Test.button_id = jQuery(this).parent().parent().metadata().button_id;
       jQuery( "#edit-test-button" ).dialog( "open" );
     });
    
@@ -470,7 +572,7 @@ Base.Helpers.bind_load(function () {
          }
       },
       open: ns.goEditButton,
-      close: function(){DnaGifts.Test.link_id = undefined}
+      close: function(){DnaGifts.Test.link_id = DnaGifts.Test.button_id = undefined}
    });
    jQuery("#edit-test-question").dialog({
       autoOpen: false,
@@ -485,4 +587,17 @@ Base.Helpers.bind_load(function () {
       open: ns.goEditQuestion,
       close: function(){DnaGifts.Test.link_id = DnaGifts.Test.question_id = undefined}
    });
+   
+   jQuery("#svUseTiming").bind("click", ns.saveUseTiming);
+   jQuery("#svDefaultDuration").bind("click", ns.saveDefaultDuration);
+   jQuery("#svTestDuration").bind("click", ns.saveTestDuration);
+   jQuery("#svShowProgressbar").bind("click", ns.saveShowProgressbar);
+   
+   jQuery("a.ajaxSaveBtn").button({
+      icons: {
+         primary: "ui-icon-disk"
+      },
+      text: false
+   });
+   
 });

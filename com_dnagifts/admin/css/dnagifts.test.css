@@ -8,3 +8,8 @@
 .actionButtonSpacer { float:right; width:20px; }
 .questionDetailsContainer, .buttonDetailsContainer { display: inline; float:left; width: 60%; min-width: 200px; overflow: hidden; }
 .actionQuestionsContainer, .actionButtonsContainer { display: inline; float:right; width: 120px; }
+
+fieldset.panelform table#tdTestConfig td label {
+  min-width: 30px;
+  clear: none;
+}

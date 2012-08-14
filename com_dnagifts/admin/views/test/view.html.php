@@ -89,6 +89,7 @@ class DnaGiftsViewTest extends JView
 		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.sortable.min.js');		
 		// -- Widgets
 		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.dialog.min.js');
+		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.button.min.js');
 		
 		// - Other
 		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/Namespace.min.js');
