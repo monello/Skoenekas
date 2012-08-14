@@ -4,7 +4,8 @@ defined('_JEXEC') or die('Restricted access');
  
 // import Joomla controller library
 jimport('joomla.application.component.controllerform');
- 
+JLoader::register('DnaGiftsHelper', JPATH_COMPONENT.'/helpers/dnagifts.php');
+
 /**
  * DNA Gifts Component Controller
  */

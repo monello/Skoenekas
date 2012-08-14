@@ -165,6 +165,7 @@ class DnaGiftsControllerTest extends JControllerForm
 		$show_duration = JRequest::getCmd('show_duration');
 		
 		$db = JFactory::getDbo();
+		$user	= JFactory::getUser();
 		
 		$query = $db->getQuery(true);
 		$query->select('MAX(ordering) + 1 As ordering');
@@ -176,8 +177,8 @@ class DnaGiftsControllerTest extends JControllerForm
 		// Insert the new record
 		$query = $db->getQuery(true);
 		$query->insert('#__dnagifts_lnk_test_question ');
-		$query->columns('test_id, question_id, show_duration, ordering');
-		$query->values((int) $test_id . ',' . (int) $question_id . ',' . (int) $show_duration . ',' .(int) $data->ordering);
+		$query->columns('test_id, question_id, show_duration, ordering, created_by, published');
+		$query->values((int) $test_id . ',' . (int) $question_id . ',' . (int) $show_duration . ',' .(int) $data->ordering . ',' . $user->get('id') . ', 1');
 		$db->setQuery($query);
 		if (!$db->query()) {
 			$this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_QUESTION'));

@@ -121,11 +121,12 @@ class DnaGiftsModelDnaGifts extends JModelForm
 		$language = DnagiftsHelper::getCurrentLanguageString();
 		
 		// Select the required fields from the table.
-		$query->select('*');
-		$query->from($db->quoteName('#__dnagifts_test'));
-		$query->where('published = 1');
-		$query->where('language = \''.$language.'\'');
-		$query->order($db->getEscaped('ordering ASC'));
+		$query->select('a.id AS test_id, a. test_description AS test_description, a.test_reason AS test_reason, a. test_duration AS test_duration, b.howmany AS howmany');
+		$query->from($db->quoteName('#__dnagifts_test'). ' AS a');
+		$query->join('LEFT', $db->quoteName('#__dnagifts_count_testquestions').' AS b ON b.test_id = a.id');
+		$query->where('a.published = 1');
+		$query->where('a.language = \''.$language.'\'');
+		$query->order($db->getEscaped('a.ordering ASC'));
 		
 		$db->setQuery($query);
 		

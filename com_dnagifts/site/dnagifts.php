@@ -6,10 +6,13 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.controller');
 
 $document = JFactory::getDocument();
-
+/**
+* NOTE: Only add stylesheets and scripts here that are applicable multiple pages
+* 		If the stylesheet or script is applicable to only page, add it to the
+* 		view.html.php -> setDocument() function of the view
+**/
 // Stylesheets
 $document->addStyleSheet(JURI::root(true).'/administrator/components/com_dnagifts/css/themes/base/jquery.ui.all.css');
-$document->addStyleSheet(JURI::root(true).'/components/com_dnagifts/css/dnagifts.css');
 
 // Javascripts
 // - JQuery
@@ -28,7 +31,6 @@ $document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js
 // - DNA Gifts
 $document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/dnagifts.base.js');
 $document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/dnagifts.init.js');
-$document->addScript(JURI::root(true).'/components/com_dnagifts/js/dnagifts.js');
 
  
 // Get an instance of the controller prefixed by DnaGifts

@@ -8,8 +8,6 @@ defined('JPATH_BASE') or die;
 
 JFormHelper::loadFieldClass('list');
 
-JLoader::register('DnaGiftsHelper', JPATH_COMPONENT.'/helpers/dnagifts.php');
-
 /**
  * Bannerclient Field class for the Joomla Framework.
  *

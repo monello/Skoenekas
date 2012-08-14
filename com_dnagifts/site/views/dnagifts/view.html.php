@@ -34,13 +34,20 @@ class DnaGiftsViewDnaGifts extends JView
 		parent::display($tpl);
 		
 		// Set the document
-		//$this->setDocument();
+		$this->setDocument();
 	}
 	
 	protected function setDocument() 
 	{
-		//$document = JFactory::getDocument();
-		//$document->addStyleSheet('/administrator/components/com_dnagifts/css/themes/base/jquery.ui.all.css');
-		//$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/jquery-1.7.2.min.js');
+		$document = JFactory::getDocument();
+		
+		/**
+		 * NOTE: Only add stylesheets and scripts here that are applicable ONLY to
+		 * 		this page. If it is needed on multiple pages add it to <root>/dnagifts.php
+		**/
+		// Stylesheets
+		$document->addStyleSheet(JURI::root(true).'/components/com_dnagifts/css/dnagifts.css');
+		// Javascripts
+		$document->addScript(JURI::root(true).'/components/com_dnagifts/js/dnagifts.js');
 	}
 }
