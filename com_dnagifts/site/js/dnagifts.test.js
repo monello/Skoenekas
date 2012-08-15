@@ -1,25 +1,29 @@
 root.myNamespace.create('DnaGifts.test', {
-    language: 'af',
+    language: 'en',
     translations: {
       af: {
         nextQuestionLoading: "Volgende vraag laai ...",
         completedTest: "U het die toets voltooi",
         thankYou: "Dankie dat u aan die Dynamic Natutal Ability (DNA) toets deelgeneem het.<br/>U resultate sal binnekort aan u ge-epos word.",
-        hitPlay: "Kliek die speel knoppie on voort te gaan...",
+        hitPlay: "Kliek die \"Play\" knoppie sodra u gereed is om voort te gaan...",
         question: "vraag",
         questions: "vrae",
         completed: "voltooi",
-        togo: "om te gaan"
+        togo: "om te gaan",
+        complete: "voltooi",
+        thetestis: "Die toets is"
       },
       en: {
         nextQuestionLoading: "Next question loading ...",
         completedTest: "You have completed the test",
         thankYou: "Thank you for participating in the Dynamic Natural Ability (DNA) Test.<br/>We will be emailing your report to you soon.",
-        hitPlay: "Click the play-button to continue...",
+        hitPlay: "Click the play-button as soon as you are ready to continue...",
         question: "question",
         questions: "questions",
         completed: "completed",
-        togo: "to go"
+        togo: "to go",
+        complete: "complete",
+        thetestis: "The test is"
       }
     },
     translate: function(key) {
@@ -43,6 +47,8 @@ root.myNamespace.create('DnaGifts.test', {
             ns.is_paused = true;
             return false;
         }
+        jQuery("#startmessage").hide();
+        jQuery("#dnaProgress, #dnaProgressBar").show();
         jQuery("#dnaCountdown").html('<em style="color: #ff8000">'+ns.translate('nextQuestionLoading')+'</em>');
         
         ns.clearPreviousQuestion();
@@ -80,6 +86,7 @@ root.myNamespace.create('DnaGifts.test', {
         jQuery("#dnaCountdown").html('<em style="color: #ff8000">'+ns.translate('completedTest')+'</em>');
         jQuery("#dnaQuestionText").html(ns.translate("thankYou"));
         jQuery("#dnaQuestionText, #dnaCountdown").show();
+        jQuery("#dnaProgressBar").fadeOut(1500, function(){jQuery("#postTestHome").show();});
     },
     executePause: function()
     {
@@ -147,7 +154,7 @@ root.myNamespace.create('DnaGifts.test', {
         var ssdone = counts.done != 1 ? ns.translate('questions') : ns.translate('question');
         var sstogo = counts.togo != 1 ? ns.translate('questions') : ns.translate('question');
         jQuery("#progressbar").progressbar("value", counts.progress);
-        jQuery("#progresspercent").text(counts.progress+"% complete");
+        jQuery("#progresspercent").text(ns.translate("thetestis")+" "+counts.progress+"% "+ns.translate('complete'));
         jQuery("#dnaProgress").html(
             counts.done + " " + ssdone + " " + ns.translate('completed')+" | " +
             counts.togo + " " + sstogo + " " + ns.translate('togo'));
@@ -155,6 +162,12 @@ root.myNamespace.create('DnaGifts.test', {
     saveAnswer: function()
     {
         var ns = DnaGifts.test;
+        
+        // if the user answers a question during the count-down to pause, pause-action will be cancelled
+        if(Base.countdown.is_paused) {
+            ns.executePlay();
+        }
+        
         ns.is_stopped = true;
         jQuery('#dnaCountdown').countdown('pause');
         
@@ -205,10 +218,13 @@ root.myNamespace.create('DnaGifts.test', {
     onload_functions: function()
     {
         var nsCD = Base.countdown;
+        nsCD.is_paused = true;
+        jQuery("#dnaPauseButton").hide();
+        jQuery(".dnaPauseDivider").hide();
         nsCD.createCountDown(7, this.autoPassQuestion);
-        nsCD.startCountDown();
-        this.nextQuestion();
-        jQuery.metadata.setType('attr','data');
+        //nsCD.startCountDown();
+        //this.nextQuestion();
+        
     }
 });
 
@@ -217,6 +233,8 @@ root.myNamespace.create('DnaGifts.test', {
 */
 Base.Helpers.bind_load(function () {
     var ns = DnaGifts.test;
+    jQuery.metadata.setType('attr','data');
+    ns.language = jQuery("#dnaTestSpace").metadata().userlanguage;
     ns.onload_functions();
     jQuery("#dnaPauseButton").bind("click", ns.pauseTest);
     jQuery(".playbutton").bind("click", ns.executePlay);

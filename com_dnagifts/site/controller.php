@@ -36,8 +36,6 @@ class DnaGiftsController extends JControllerForm
     if ($saveditem) {
       $lang_code = DnagiftsHelper::getCurrentLanguageCode();
       $app->redirect('/index.php/'.$lang_code.'/?Itemid='.$data['menuid']);
-    } else {
-      echo "<h2>Updated Greeting failed to be saved</h2>";
     }
     return true;
   }

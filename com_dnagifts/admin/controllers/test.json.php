@@ -142,7 +142,7 @@ class DnaGiftsControllerTest extends JControllerForm
 		
 		$html = '<li id="test-button-'.$link_id.'" data="{link_id: \''.$link_id.'\', test_id: \''.$test_id.'\', button_id: \''.$button_id.'\', language: \''.$language.'\'}" class="ui-state-default">'.
 			'<div class="buttonDetailsContainer">'.
-				'<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.
+				'<a class="ui-icon ui-icon-arrowthick-2-n-s " title="Click and drag Button to new position" href="#" style="float:left">Drag Button</a>'.
 				'<div class="testButtonText">'.$button_text.'</div>'.
 				'<div class="testButtonLanguage"> ('.$language.')</div>'.
 			'</div>'.

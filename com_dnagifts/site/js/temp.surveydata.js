@@ -4,7 +4,7 @@ var surveydata = [
     catid: 1,
     question: 'I present truth and facts in a logical arranged and systematic way',
     answer: undefined,
-    duration: 7
+    duration: 20
   },
   {
     id: 2,

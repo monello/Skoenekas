@@ -11,7 +11,7 @@ div#dnaTopBar {
 
 div#dnaCountdown {
   float: left;
-  width: 160px;
+  width: 180px;
   padding-left: 10px;
   padding-top: 5px;
 }
@@ -86,9 +86,13 @@ div#dnaTestSpace td {
 #progresspercent {
   font-weight: bold;
   margin-bottom: 0;
-  margin-left: 47%;
+  margin-left: 43%;
   margin-right: 0;
   margin-top: 3px;
   position: absolute;
-  width: 100px;
+  width: 160px;
+}
+div#startmessage {
+  text-align: center;
+  font-size: 16pt;
 }

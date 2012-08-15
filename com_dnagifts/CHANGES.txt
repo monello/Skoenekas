@@ -29,3 +29,9 @@
  - Fixed the save new test-button link to add the created_by and published fields
  - Re-organized some of the javascript includes
  - Implemented the framework for the tests in the front end
+    (2012/08/15)
+ - Added the start screen to the Test
+ - Updated some of the user-test interactions.
+ - Implemented the passing of the surveydata to JS (albeit fake data for now)
+ - Made some minor GUI enhancements
+ 
