@@ -34,4 +34,9 @@
  - Updated some of the user-test interactions.
  - Implemented the passing of the surveydata to JS (albeit fake data for now)
  - Made some minor GUI enhancements
- 
+
+0.0.6 (2012/08/16)
+------------------
+* Also see Git Log
+ - Added the mysql view to list all the test questions
+ - Added the mysql view to list all the test bottons (options/answers)
