@@ -48,11 +48,15 @@ root.myNamespace.create('DnaGifts.test', {
             return false;
         }
         jQuery("#startmessage").hide();
-        jQuery("#dnaProgress, #dnaProgressBar").show();
-        jQuery("#dnaCountdown").html('<em style="color: #ff8000">'+ns.translate('nextQuestionLoading')+'</em>');
+        jQuery("#backButton").hide();
+        jQuery("#dnaProgress").show();
+        if(parseInt(surveyconfig.show_progressbar)) {
+            jQuery("#dnaProgressBar").show();
+        }
+        jQuery("#dnaCountdown").hide();
+        jQuery("#dnaMessages").html('<em style="color: #ff8000">'+ns.translate('nextQuestionLoading')+'</em>').show();
         
         ns.clearPreviousQuestion();
-        
         ns.currQuestion = ns.fetchNextQuestion();
         
         if (!ns.currQuestion && ns.currQuestion !== 0) {
@@ -62,30 +66,36 @@ root.myNamespace.create('DnaGifts.test', {
         
         // load the next question
         ns.placeNextQuestion();
-        
         setTimeout(function() {
             ns.showNextQuestion();
-        
-            // restart the countdown
-            nsCD.startCountDown();
             
+            if(parseInt(surveyconfig.use_timing)) {
+                // restart the countdown
+                nsCD.startCountDown();
+            }
             jQuery("#dnaPauseButton").show();
             jQuery(".dnaPauseDivider").show();
             jQuery("#dnaPassButton").show();
-            jQuery("#dnaCountdown").show();
-        }, 1000);
+            jQuery("#dnaMessages").hide();
+            if (parseInt(surveyconfig.use_timing)){
+                jQuery("#dnaCountdown").show();
+            }
+        }, 500);
         
         return true;
     },
     testComplete: function() {
         var ns = DnaGifts.test;
         ns.updateProgress();
-        jQuery("#dnaCountdown").countdown("pause");
+        if (parseInt(surveyconfig.use_timing))
+            jQuery("#dnaCountdown").countdown("pause");
         ns.is_stopped = true;
         jQuery(".dnaAnswerButton, #dnaLoadingDiv").hide();
-        jQuery("#dnaCountdown").html('<em style="color: #ff8000">'+ns.translate('completedTest')+'</em>');
+        jQuery("#dnaMessages").html('<em style="color: #ff8000">'+ns.translate('completedTest')+'</em>').show();
         jQuery("#dnaQuestionText").html(ns.translate("thankYou"));
-        jQuery("#dnaQuestionText, #dnaCountdown").show();
+        jQuery("#dnaQuestionText").show();
+        jQuery("#dnaCountdown").hide();
+        jQuery("#dnaMessages").show();
         jQuery("#dnaProgressBar").fadeOut(1500, function(){jQuery("#postTestHome").show();});
     },
     executePause: function()
@@ -105,14 +115,29 @@ root.myNamespace.create('DnaGifts.test', {
         jQuery("#dnaPauseDiv").hide();
         ns.nextQuestion();
         jQuery(".dnaPlayButton").hide();
+        //if (!user_test_id) {
+            var url='index.php?option=com_dnagifts&format=json&task=test.logUserTest';
+            jQuery.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    test_id: surveyconfig.id
+                },
+                success: function(json_data){
+                    user_test_id = json_data.user_test_id;
+                }
+            });
+        
+        //}
+        return false;
     },
     clearPreviousQuestion: function()
     {
         var ns = DnaGifts.test;
         if (!Base.countdown.is_paused)
-            jQuery("#dnaCountdown").html('<em style="color: #ff8000">'+ns.translate('nextQuestionLoading')+'</em>');
+            jQuery("#dnaMessages").html('<em style="color: #ff8000">'+ns.translate('nextQuestionLoading')+'</em>').show();
         else
-            jQuery("#dnaCountdown").html('<em style="color: #ff8000">'+ns.translate('hitPlay')+'</em>');
+            jQuery("#dnaMessages").html('<em style="color: #ff8000">'+ns.translate('hitPlay')+'</em>').show();
         jQuery("#dnaQuestionText").hide();
         jQuery(".dnaAnswerButton").hide();
         
@@ -126,15 +151,19 @@ root.myNamespace.create('DnaGifts.test', {
         jQuery("#dnaLoadingDiv").hide();
         jQuery("#dnaQuestionText").show();
         jQuery(".dnaAnswerButton").show();
+        jQuery("#dnaButtonsBar").show();
     },
     fetchNextQuestion: function()
     {
+        var ns = DnaGifts.test;
         var nsCD = Base.countdown;
         var nextquestion = undefined;
-        jQuery.each(surveydata, function(index) {
-            if (!surveydata[index].answer) {
+        ns.question_id = undefined;
+        jQuery.each(surveydata, function(index, elem) {
+            if (!elem.answer && elem.answer !== 0) {
                 nextquestion = index;
-                nsCD.duration = surveydata[index].duration;
+                ns.question_id = elem.id;
+                nsCD.duration = (parseInt(elem.duration)) ? parseInt(elem.duration) : parseInt(surveyconfig.default_duration);
                 return false;
             }
             return true;
@@ -169,15 +198,27 @@ root.myNamespace.create('DnaGifts.test', {
         }
         
         ns.is_stopped = true;
-        jQuery('#dnaCountdown').countdown('pause');
+        jQuery('#dnaCountdown').countdown('pause').hide();
         
-        // this function will save the answer
+        // this function will save the answer to the JS object
         var answer = jQuery(this).metadata().answer;
         surveydata[ns.currQuestion].answer = answer;
         
+        // now we send it to the database too.
+        var url='index.php?option=com_dnagifts&format=json&task=test.saveAnswer';
+        jQuery.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                user_test_id: user_test_id,
+                question_id: ns.question_id,
+                score: answer
+            }
+        });
+        
         // ... and attempt to load the next question
         ns.is_stopped = false;
-        jQuery('#dnaCountdown').countdown('resume');
+        jQuery('#dnaCountdown').countdown('resume').show();
         jQuery(".dnaPauseDivider").hide();
         jQuery("#dnaPauseButton").hide();
         jQuery("#dnaPassButton").hide();
@@ -221,10 +262,9 @@ root.myNamespace.create('DnaGifts.test', {
         nsCD.is_paused = true;
         jQuery("#dnaPauseButton").hide();
         jQuery(".dnaPauseDivider").hide();
-        nsCD.createCountDown(7, this.autoPassQuestion);
-        //nsCD.startCountDown();
-        //this.nextQuestion();
-        
+        if(parseInt(surveyconfig.use_timing)) {
+            nsCD.createCountDown(7, this.autoPassQuestion);
+        }
     }
 });
 

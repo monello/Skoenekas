@@ -2,6 +2,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 $model = $this->getModel('dnagifts');
+
 ?>
 <?php echo JText::_('COM_DNAGIFTS_TESTINTRO_HEAD'); ?>
 
@@ -10,7 +11,13 @@ $model = $this->getModel('dnagifts');
     <td><?php echo JText::_('COM_DNAGIFTS_TESTINTRO_BLURB'); ?></td>
 </tr></tbody></table>
 
-<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_PICKTEST'); ?>
+<?php
+if (!$model->countActiveTests()) {
+  echo JText::_('COM_DNAGIFTS_TESTINTRO_HEAD_NOTESTS');
+  return;
+}
+echo JText::_('COM_DNAGIFTS_TESTINTRO_PICKTEST');
+?>
 
 <table width="100%" id="picktesttable"><thead>
     <tr>

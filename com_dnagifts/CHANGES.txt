@@ -39,4 +39,18 @@
 ------------------
 * Also see Git Log
  - Added the mysql view to list all the test questions
- - Added the mysql view to list all the test bottons (options/answers)
+ - Added the mysql view to list all the test buttons (options/answers)
+ - Pulled through real data
+ - updated the UX in the test. Moved some of the divs around
+ - ironed out some bugs around saving test data to the db
+
+0.0.7  (2012/08/18)
+------------------
+* Also see Git Log
+ - Finally able to do a test from front to back.
+ - Made some minor UX updates like tooltips to explain buttons and questions. 
+ - User can do the same test muliple times, but not during the same session.
+ - Added the session is to the lnk_users_test tables to use as a reference between test instance and session
+    So if the user reloads the page or returns to the test after not having completed it he will be taken to the last question he did.
+    
+ 

@@ -25,13 +25,13 @@ root.myNamespace.create('Base.countdown', {
     is_paused: false,
     createCountDown: function(duration, callback)
     {
-        this.duration = duration ? duration : 7; // defaults to 7 seconds
+        Base.countdown.duration = (parseInt(duration)) ? parseInt(duration) : parseInt(surveyconfig.default_duration); 
         jQuery('#dnaCountdown').countdown({until: this.shortly, onExpiry: callback, onTick: this.watchCountDown}); 
     },
     startCountDown: function()
     {
         this.shortly = new Date(); 
-        this.shortly.setSeconds(this.shortly.getSeconds() + this.duration); 
+        this.shortly.setSeconds(this.shortly.getSeconds() + Base.countdown.duration); 
         jQuery('#dnaCountdown').countdown('change', {until: this.shortly}); 
     },
     watchCountDown: function(periods) {
@@ -39,13 +39,13 @@ root.myNamespace.create('Base.countdown', {
         ns.togo = periods[6];
         ss = ns.togo > 1 ? 's' : '';
         if (ns.running) {
-            if (ns.is_paused)
-                jQuery('#dnaCountdown').html('<em style="color:#ff8000">' + ns.translate("pause") + ' ' + ns.togo + ' ' + ns.translate("second") + ss+'</em>');
+            if (ns.is_paused) {
+                jQuery('#dnaMessages').html('<em style="color:#ff8000">' + ns.translate("pause") + ' ' + ns.togo + ' ' + ns.translate("second") + ss+'</em>').show();
+                jQuery('#dnaCountdown').hide()
+            }
             else
-                jQuery('#dnaCountdown').html(ns.translate("just") + ' <span style="font-size: 14pt;font-weight:bold;">' + ns.togo + '</span> ' + ns.translate("second") + ss + ' ' + ns.translate("togo"));
+                jQuery('#dnaCountdown').html(ns.translate("just") + ' <span style="font-size: 14pt;font-weight:bold;">' + ns.togo + '</span> ' + ns.translate("second") + ss + ' ' + ns.translate("togo")).show();
             jQuery("#dnaInteractions").show();
-            jQuery("#dnaCountdown").show();
-            jQuery("#dnaButtonsBar").show();
         } else {
             jQuery('#dnaCountdown').html('&nbsp;');
             ns.running = true;

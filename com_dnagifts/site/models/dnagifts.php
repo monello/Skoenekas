@@ -90,7 +90,6 @@ class DnaGiftsModelDnaGifts extends JModelForm
 			echo json_encode(array("success"=> false, "message" => JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_BUTTON')));
 			return false;
 		}
-		
 		return true;
   }
 
@@ -138,6 +137,30 @@ class DnaGiftsModelDnaGifts extends JModelForm
 		}
 		
 		return $data;
+	}
+	
+	public function countActiveTests()
+	{
+		// Create a new query object.
+		$db = $this->getDbo();
+		$query = $db->getQuery(true);
+		
+		$language = DnagiftsHelper::getCurrentLanguageString();
+		
+		// Select the required fields from the table.
+		$query->select('COUNT(*)');
+		$query->from($db->quoteName('#__dnagifts_test'));
+		$query->where('published = 1');
+		$query->where('language = \''.$language.'\'');
+		
+		$db->setQuery($query);
+		
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		return $db->loadResult();
 	}
 	
 }

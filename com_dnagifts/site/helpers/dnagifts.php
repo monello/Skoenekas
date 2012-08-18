@@ -10,6 +10,31 @@ defined('_JEXEC') or die;
  */
 class DnagiftsHelper
 {
+	public static function getSessionID() {
+		$user = JFactory::getUser();
+		
+		if (!$user) {
+			return 0;
+		}
+		
+		$db = JFactory::getDBO();
+		$query = "SELECT session_id
+				FROM ".$db->nameQuote('#__session')."
+				WHERE ".$db->nameQuote('userid')." = ".$db->quote($user->get("id"))."
+				AND ".$db->nameQuote('client_id')." = 1";
+		echo $query;
+		$db->setQuery($query);
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		if ($session_id = $db->loadResult()) {
+			return $session_id;
+		} else {
+			return '0';
+		}
+	}
 	public static function addEllipsis($string, $length, $end='...')
   {
     return (strlen($string) > $length) ? substr($string, 0, $length - strlen($end )) . $end : $string;
@@ -59,6 +84,31 @@ class DnagiftsHelper
 		}
 		
 		return($db->loadResult());
+	}
+	
+	public static function getUserTestID($test_id = 0) {
+		$user = JFactory::getUser();
+		
+		if (!$user || !$test_id) {
+			return 0;
+		}
+		
+		$db = JFactory::getDBO();
+		$query = "SELECT id
+				FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
+				WHERE ".$db->nameQuote('user_id')." = ".$db->quote($user->get("id"))."
+				AND ".$db->nameQuote('test_id')." = ".$test_id;
+		$db->setQuery($query);
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		if ($test_user_id = $db->loadResult()) {
+			return $test_user_id;
+		} else {
+			return 'undefined';
+		}
 	}
 	
 	public static function getCountryOptions()

@@ -16,5 +16,8 @@ jimport('joomla.application.component.controllerform');
  */
 class DnaGiftsControllerTest extends JControllerForm
 {
-	
+	public function loadtest() {
+    $test_id = JRequest::getCmd('id');
+    $this->setRedirect(JRoute::_('index.php?option=com_dnagifts&view=test&id='.$test_id, false));
+  }
 }
