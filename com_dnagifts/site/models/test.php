@@ -10,26 +10,30 @@ jimport('joomla.application.component.model');
  */
 class DnaGiftsModelTest extends JModel
 {
-	public function getTestQuestions($test_id) {
+	public function getTestData($test_id, $user_test_id) {
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 		
 		$query->select('*');
-		$query->from($db->quoteName('#__dnagifts_list_testquestions'));
-		$query->order($db->getEscaped('ordering ASC'));
+		$query->from($db->quoteName('#__dnagifts_testquestions_and_answers'));
+		$query->where($db->quoteName('test_id') . " = " . $db->quote($test_id));
 		$db->setQuery($query);
 		$data = $db->loadObjectList();
 		
 		$survey_data = array();
 		
 		foreach($data as $i => $test) {
-			$survey_data[] = array(
+			$data = array(
 				'id' => $test->question_id,
 				'duration' => $test->show_duration,
 		    'question' => $test->question_text,
 				'hint' => $test->question_hint,
 				'catid' => $test->gift_id
 			);
+			if ($test->answer_score && $test->lnk_user_test_id == $user_test_id) {
+				$data['answer']  = $test->answer_score;
+			}
+			$survey_data[] = $data;
 		}
 		
 		// Check for a database error.

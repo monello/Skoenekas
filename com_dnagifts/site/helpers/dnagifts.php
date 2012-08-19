@@ -22,7 +22,6 @@ class DnagiftsHelper
 				FROM ".$db->nameQuote('#__session')."
 				WHERE ".$db->nameQuote('userid')." = ".$db->quote($user->get("id"))."
 				AND ".$db->nameQuote('client_id')." = 1";
-		echo $query;
 		$db->setQuery($query);
 		// Check for a database error.
 		if ($db->getErrorNum()) {
@@ -87,17 +86,15 @@ class DnagiftsHelper
 	}
 	
 	public static function getUserTestID($test_id = 0) {
-		$user = JFactory::getUser();
-		
-		if (!$user || !$test_id) {
+		$session_id = DnagiftsHelper::getSessionID();
+		if (!$session_id || !$test_id) {
 			return 0;
 		}
 		
 		$db = JFactory::getDBO();
 		$query = "SELECT id
 				FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
-				WHERE ".$db->nameQuote('user_id')." = ".$db->quote($user->get("id"))."
-				AND ".$db->nameQuote('test_id')." = ".$test_id;
+				WHERE ".$db->nameQuote('session_id')." = ".$db->quote($session_id);
 		$db->setQuery($query);
 		// Check for a database error.
 		if ($db->getErrorNum()) {
@@ -172,20 +169,20 @@ class DnagiftsHelper
 		$query = "
 			SELECT howmany
 				FROM ".$db->nameQuote('#__dnagifts_count_testquestions')."
-				WHERE ".$db->nameQuote('test_id')." = ".$db-quote($test_id).";";
+				WHERE ".$db->nameQuote('test_id')." = ".$db->quote($test_id).";";
 		$db->setQuery($query);
 		$progress['howmany'] = $db->loadResult();
 		
 		// count the number of answers
 		$query = "
 			SELECT COUNT(*)
-				FROM ".$db->nameQuote('#__lnk_user_test_answers')."
-				WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db-quote($user_test_id).";";
+				FROM ".$db->nameQuote('#__dnagifts_lnk_user_test_answers')."
+				WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id).";";
 		$db->setQuery($query);
 		$progress['answers'] = $db->loadResult();
 		
 		// get percentage complete
-		$progress['spercent'] = round($progress['answers'] / $progress['questions']);
+		$progress['percent'] = round($progress['answers'] / $progress['howmany'] * 100);
 		
 		// check if the test is still in-progres for this user
 		if ((int) $progress['percent'] > 0 && (int) $progress['percent'] < 100) {

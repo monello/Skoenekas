@@ -23,9 +23,6 @@ class DnaGiftsViewDnaGifts extends JView
 		$this->form	= $this->get('Form');
 		$this->item = $this->get('Item');
 		
-		$progress		= DnagiftsHelper::getUserProgress( $user_test_id, $test_id );
-		$this->assignRef( 'progress', $progress );
-		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) 
 		{

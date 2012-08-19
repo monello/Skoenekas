@@ -61,7 +61,8 @@ class DnaGiftsControllerTest extends JControllerForm
     $user_test_id = $db->loadResult();
     
     if ($user_test_id) {
-      return $user_test_id;
+      echo json_encode(array("success" => true, "user_test_id" => $user_test_id));
+			return;
     }
     
     $query    = $db->getQuery(true);

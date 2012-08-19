@@ -31,6 +31,10 @@ echo JText::_('COM_DNAGIFTS_TESTINTRO_PICKTEST');
   </thead>  
   <tbody>
     <?php foreach($model->getAllActiveTests() as $i => $test): ?>
+    <?php
+      $user_test_id = DnagiftsHelper::getUserTestID( $test->test_id );
+      $progress		  = DnagiftsHelper::getUserProgress( $user_test_id, $test->test_id );
+    ?>
     <tr valign="top">
       <td><?php echo $test->test_description; ?></td>
       <td><?php echo $test->test_reason; ?></td>
@@ -42,20 +46,33 @@ echo JText::_('COM_DNAGIFTS_TESTINTRO_PICKTEST');
           echo "&nbsp;";
       endif; ?>
       </td>
-      <td align="center"><a href="<?php echo JRoute::_('index.php?option=com_dnagifts&view=test&id='.$test->test_id, false) ?>" class="doTestButton">
-        <?php if ($this->progress['inprogress']): ?>
-          <span title="<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_PERCENT', $this->progress['percent']); ?>"
-              href="<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_QUESTIONS', $this->progress['answers'], $this->progress['howmany']); ?>"
-              class="hasTip"><?php echo $this->progress['percent']; ?>%</span>
+      <td align="center">
+        <?php if ($progress['inprogress']): ?>
+          <a href="<?php echo JRoute::_('index.php?option=com_dnagifts&view=test&id='.$test->test_id, false) ?>" class="doTestButton">
+          <span title="<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_PERCENT', $progress['percent']); ?>"
+              href="<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_QUESTIONS', $progress['answers'], $progress['howmany']); ?>"
+              class="hasTip"><?php echo $progress['percent']; ?>%</span>
+          </a>
         <?php else: ?>
-          <img src="/media/com_dnagifts/images/play-small.png"
+          <?php if ((int) $progress['percent'] >= 100): ?>
+            <img src="/media/com_dnagifts/images/tinycheck.png"
+              height="16px"
+              width="16px"
+              alt="<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_DONE_BUTTON'); ?>"
+              title="<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_DONE_BUTTON'); ?>"
+              class="hasTip"/>
+          <?php else: ?>
+            <a href="<?php echo JRoute::_('index.php?option=com_dnagifts&view=test&id='.$test->test_id, false) ?>" class="doTestButton">
+            <img src="/media/com_dnagifts/images/play-small.png"
               height="16px"
               width="16px"
               alt="<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_STARTTEST_BUTTON'); ?>"
               title="<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_STARTTEST_BUTTON'); ?>"
               class="hasTip"/>
+            </a>
+          <?php endif; ?>
         <?php endif; ?>
-      </a></td>
+      </td>
       
     </tr>
     <?php endforeach; ?>

@@ -22,9 +22,9 @@ class DnaGiftsViewTest extends JView
 		
 		$model 				= $this->getModel();
 		$buttons			= $model->getTestButtons( $test_id );
-		$data 				= $model->getTestQuestions( $test_id );
-    $config 			= $model->getTestConfig( $test_id );
+		$config 			= $model->getTestConfig( $test_id );
 		$user_test_id = DnaGiftsHelper::getUserTestID( $test_id );
+		$data 				= $model->getTestData( $test_id, $user_test_id );
 		
 		$this->assignRef( 'testid', $test_id );
 		$this->assignRef( 'user_test_id', $user_test_id );

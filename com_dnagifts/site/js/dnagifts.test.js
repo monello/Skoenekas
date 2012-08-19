@@ -40,7 +40,6 @@ root.myNamespace.create('DnaGifts.test', {
         
         if (ns.is_stopped)
             return false;
-        
         if (nsCD.is_paused) {
             if (ns.is_paused)
                 ns.executePause();
@@ -115,20 +114,17 @@ root.myNamespace.create('DnaGifts.test', {
         jQuery("#dnaPauseDiv").hide();
         ns.nextQuestion();
         jQuery(".dnaPlayButton").hide();
-        //if (!user_test_id) {
-            var url='index.php?option=com_dnagifts&format=json&task=test.logUserTest';
-            jQuery.ajax({
-                type: "POST",
-                url: url,
-                data: {
-                    test_id: surveyconfig.id
-                },
-                success: function(json_data){
-                    user_test_id = json_data.user_test_id;
-                }
-            });
-        
-        //}
+        var url='index.php?option=com_dnagifts&format=json&task=test.logUserTest';
+        jQuery.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                test_id: surveyconfig.id
+            },
+            success: function(json_data){
+                user_test_id = json_data.user_test_id;
+            }
+        });
         return false;
     },
     clearPreviousQuestion: function()
