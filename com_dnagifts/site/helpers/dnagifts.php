@@ -162,4 +162,38 @@ class DnagiftsHelper
 		
 		return($db->loadResult());
 	}
+	
+	public static function getUserProgress($user_test_id, $test_id) {
+		$db		= JFactory::getDBO();
+		
+		$progress = array();
+		
+		// count the number of questions
+		$query = "
+			SELECT howmany
+				FROM ".$db->nameQuote('#__dnagifts_count_testquestions')."
+				WHERE ".$db->nameQuote('test_id')." = ".$db-quote($test_id).";";
+		$db->setQuery($query);
+		$progress['howmany'] = $db->loadResult();
+		
+		// count the number of answers
+		$query = "
+			SELECT COUNT(*)
+				FROM ".$db->nameQuote('#__lnk_user_test_answers')."
+				WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db-quote($user_test_id).";";
+		$db->setQuery($query);
+		$progress['answers'] = $db->loadResult();
+		
+		// get percentage complete
+		$progress['spercent'] = round($progress['answers'] / $progress['questions']);
+		
+		// check if the test is still in-progres for this user
+		if ((int) $progress['percent'] > 0 && (int) $progress['percent'] < 100) {
+			$progress['inprogress'] = true;
+		} else {
+			$progress['inprogress'] = false;
+		}
+		
+		return $progress;
+	}
 }

@@ -1,6 +1,7 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
+JHtml::_('behavior.tooltip');
 $model = $this->getModel('dnagifts');
 
 ?>
@@ -41,7 +42,21 @@ echo JText::_('COM_DNAGIFTS_TESTINTRO_PICKTEST');
           echo "&nbsp;";
       endif; ?>
       </td>
-      <td align="center"><a href="<?php echo JRoute::_('index.php?option=com_dnagifts&view=test&id='.$test->test_id, false) ?>" class="doTestButton"><?php echo JText::_('COM_DNAGIFTS_TESTINTRO_STARTTEST_BUTTON'); ?></a></td>
+      <td align="center"><a href="<?php echo JRoute::_('index.php?option=com_dnagifts&view=test&id='.$test->test_id, false) ?>" class="doTestButton">
+        <?php if ($this->progress['inprogress']): ?>
+          <span title="<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_PERCENT', $this->progress['percent']); ?>"
+              href="<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_QUESTIONS', $this->progress['answers'], $this->progress['howmany']); ?>"
+              class="hasTip"><?php echo $this->progress['percent']; ?>%</span>
+        <?php else: ?>
+          <img src="/media/com_dnagifts/images/play-small.png"
+              height="16px"
+              width="16px"
+              alt="<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_STARTTEST_BUTTON'); ?>"
+              title="<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_STARTTEST_BUTTON'); ?>"
+              class="hasTip"/>
+        <?php endif; ?>
+      </a></td>
+      
     </tr>
     <?php endforeach; ?>
 </tbody></table>
