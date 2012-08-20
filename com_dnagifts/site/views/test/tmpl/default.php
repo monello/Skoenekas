@@ -3,14 +3,19 @@
 defined('_JEXEC') or die('Restricted access');
 JHtml::_('behavior.tooltip');
 
-$buttonwidth = 16;
+if ($this->progress['inprogress']) {
+  $playmessage = 'COM_DNAGIFTS_TEST_CONTINUEMESSAGE';
+  $playbutton = 'pause';
+} else {
+  $playmessage = 'COM_DNAGIFTS_TEST_STARTMESSAGE';
+  $playbutton = 'play';
+}
 ?>
 
 <script type="text/javascript">
 var surveyconfig = <?php echo $this->testconfig; ?>;
 var surveydata = <?php echo $this->surveydata; ?>;
 var user_test_id = <?php echo $this->user_test_id; ?>;
-
 </script>
 
 <div id="dnaTestSpace" data="{userlanguage: '<?php echo DnagiftsHelper::getCurrentLanguageCode(); ?>'}">
@@ -31,18 +36,19 @@ var user_test_id = <?php echo $this->user_test_id; ?>;
         <img src="/media/com_dnagifts/images/loading.gif" width="100px" height="100px" style="margin: 25px 45%"/>
     </div>
     <div id="dnaPauseDiv">
-        <a href="&nbsp;<?php echo JText::_('COM_DNAGIFTS_TEST_STARTMESSAGE'); ?>" title="<?php echo JText::_('COM_DNAGIFTS_TEST_STARTMESSAGE_TITLE'); ?>"
-            class="hasTip playbutton" data="{test_id: <?php echo $this->testid; ?>}"><img src="/media/com_dnagifts/images/play.png" width="100px" height="100px" style="margin: 25px 45%"/></a>
+        <a href="&nbsp;<?php echo JText::_($playmessage); ?>" title="<?php echo JText::_($playmessage.'_TITLE'); ?>"
+            class="hasTip playbutton" data="{test_id: <?php echo $this->testid; ?>}"><img src="/media/com_dnagifts/images/<?php echo $playbutton; ?>.png" width="100px" height="100px" style="margin: 25px 45%"/></a>
+      
     </div>
     <div id="dnaQuestionText" style="display: none"></div>
   </div>
-  <div id="startmessage"><em><?php echo JText::_('COM_DNAGIFTS_TEST_STARTMESSAGE'); ?></em></div>
+  <div id="startmessage"><em><?php echo JText::_($playmessage); ?></em></div>
   <div id="dnaButtonsBar" style="display:none">
     <table width="100%" height="100%">
       <tbody>
         <tr id="trButtons">
           <?php foreach($this->buttons as $i => $button): ?>
-          <td width="<?php echo $buttonwidth; ?>%"><div class="dnaAnswerButton"><a title='The "<?php echo $button->button_text; ?>" button'
+          <td width="<?php echo $this->buttonwidth; ?>%"><div class="dnaAnswerButton"><a title='The "<?php echo $button->button_text; ?>" button'
               class="<?php echo $button->css_class; ?> btnAnswer hasTip" href="&nbsp;<?php echo $button->button_hint; ?>" data="{answer: <?php echo $button->score; ?>}"><?php echo $button->button_text; ?></a></div></td>
           <?php endforeach; ?>
         </tr>

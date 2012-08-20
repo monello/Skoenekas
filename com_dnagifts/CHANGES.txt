@@ -70,10 +70,15 @@
  - Dropped the progress field from the user-test table and it is beter to calculate it on-the-fly
  - Implemented the progress checks and related UX updates in the test-selection screen
  
-0.0.11 (2012/0/19 b)
+0.0.11 (2012/08/19 b)
 -----------------
 * Also see Git Log
  - Fixed some issues around session based progress checking. User cannot do the same test during the same session
  - added the view ccblm_dnagifts_testquestions_and_answers to ease the extraction of test data
  - Fixed a few bugs and now the test loads the questions form where the user was last time, when he left the test halfway
  
+ (2012/08/20)
+ - added some code to auto calculate the button widths
+ - added watermark text to the "show duration" field in the test management screen (back end)
+ - Updated the refresh ux of tests. If a user starts a new test it's a play button and if he continues the test it's a pause button.
+   Related text was also updated

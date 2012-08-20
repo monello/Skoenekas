@@ -78,6 +78,7 @@ class DnaGiftsViewTest extends JView
 		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/jquery-1.7.2.min.js');
 		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/jquery.noconflict.js');
 		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/jquery.metadata.js');
+		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/jquery.watermark.min.js');
 		
 		// - JQuery - UI
 		// -- core

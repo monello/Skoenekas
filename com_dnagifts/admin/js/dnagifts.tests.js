@@ -599,5 +599,5 @@ Base.Helpers.bind_load(function () {
       },
       text: false
    });
-   
+   jQuery("#show_duration").watermark("Duration");
 });

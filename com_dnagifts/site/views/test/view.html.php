@@ -25,12 +25,17 @@ class DnaGiftsViewTest extends JView
 		$config 			= $model->getTestConfig( $test_id );
 		$user_test_id = DnaGiftsHelper::getUserTestID( $test_id );
 		$data 				= $model->getTestData( $test_id, $user_test_id );
+		$progress 		= DnagiftsHelper::getUserProgress( $user_test_id, $test_id );
+		
+		$buttonwidth  = floor(100 / count($buttons));
 		
 		$this->assignRef( 'testid', $test_id );
 		$this->assignRef( 'user_test_id', $user_test_id );
 		$this->assignRef( 'buttons', $buttons );
     $this->assignRef( 'surveydata', $data );
 		$this->assignRef( 'testconfig', $config );
+		$this->assignRef( 'buttonwidth', $buttonwidth );
+		$this->assignRef( 'progress', $progress );
 		
 		// Display the template
 		parent::display();
