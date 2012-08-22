@@ -82,3 +82,6 @@
  - added watermark text to the "show duration" field in the test management screen (back end)
  - Updated the refresh ux of tests. If a user starts a new test it's a play button and if he continues the test it's a pause button.
    Related text was also updated
+   
+ (2012/02/22)
+ - made some styling updates to all the test buttons.

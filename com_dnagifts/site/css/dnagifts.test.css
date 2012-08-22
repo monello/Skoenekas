@@ -64,13 +64,14 @@ div#dnaButtonsBar a {
 
 div.dnaAnswerButton {
   font-family: fantasy;
-  font-size: 18pt;
+  font-size: 16pt;
 }
+
 
 div#dnaTestSpace a:hover {
   background-color: transparent;
-  color: black;
 }
+
 
 div#dnaTestSpace table,
 div#dnaTestSpace tbody,
@@ -84,6 +85,7 @@ div#dnaTestSpace td {
   width: 80%;
   height: 20px;
   margin-left: 80px;
+  margin-top: 25px;
 }
 #progresspercent {
   font-weight: bold;
@@ -99,9 +101,77 @@ div#startmessage {
   font-size: 16pt;
 }
 
+a.btnAnswer,
+div#postTestHome,
+div#backButton{
+  display: block;
+  width: 114px;
+  height: 35px;
+  background-image: url(/media/com_dnagifts/images/button-bg.png);
+  /*text-indent: -3000px;*/
 
+}
+div#postTestHome:hover,
+div#backButton:hover{
+  background: transparent url(/media/com_dnagifts/images/button-bg.png) 0px -35px;
+}
+a.btnAnswer {
+  height: 30px;
+}
+
+div#postTestHome a,
+div#backButton a{
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: white !important;
+  text-align: center;
+  padding-top: 2px;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+}
+
+div#postTestHome a:link,
+div#postTestHome a:visited,
+div#postTestHome a:hover,
+div#postTestHome a:active
+div#postTestHome a:focus,
+div#backButton a:link,
+div#backButton a:visited,
+div#backButton a:hover,
+div#backButton a:active
+div#backButton a:focus{
+  background-color: transparent;
+}
+a.btnAnswer,
+div#postTestHome a h2,
+div#backButton a h2{
+  color: white;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+}
+
+div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:link,
+div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:visited,
+div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:active
+div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:focus{
+  color: white;
+  padding-top: 5px;
+  background-image: url(/media/com_dnagifts/images/button-bg.png);
+  background-position: 0px 0px;
+  background-color: transparent;
+}
+div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:hover {
+  color: white;
+  padding-top: 5px;
+  background: transparent url(/media/com_dnagifts/images/button-bg.png) 0px -35px;
+}
+
+a.playbutton {
+  display: block;
+  margin: 0 45%;
+}
 
 /****** tool tips override ***/
+/*
 .tip-wrap{
 background: #FFF;
 border: 1px solid #000;
@@ -115,7 +185,8 @@ background: #FFF;
 border: 1px solid #000;
 padding: 5px;
 color:#000000;
-width: 400px;}
+width: 400px;
+}
 
 .tip-title {
 padding: 0;
@@ -125,3 +196,4 @@ margin-top: -15px;
 padding-top: 15px;
 padding-bottom: 5px;
 color:#000000;}
+*/

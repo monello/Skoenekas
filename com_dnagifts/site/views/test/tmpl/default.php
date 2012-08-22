@@ -37,7 +37,7 @@ var user_test_id = <?php echo $this->user_test_id; ?>;
     </div>
     <div id="dnaPauseDiv">
         <a href="&nbsp;<?php echo JText::_($playmessage); ?>" title="<?php echo JText::_($playmessage.'_TITLE'); ?>"
-            class="hasTip playbutton" data="{test_id: <?php echo $this->testid; ?>}"><img src="/media/com_dnagifts/images/<?php echo $playbutton; ?>.png" width="100px" height="100px" style="margin: 25px 45%"/></a>
+            class="hasTip playbutton" data="{test_id: <?php echo $this->testid; ?>}"><img src="/media/com_dnagifts/images/<?php echo $playbutton; ?>.png" width="100px" height="100px" style="display:block; margin: 25px 45%"/></a>
       
     </div>
     <div id="dnaQuestionText" style="display: none"></div>
@@ -48,7 +48,7 @@ var user_test_id = <?php echo $this->user_test_id; ?>;
       <tbody>
         <tr id="trButtons">
           <?php foreach($this->buttons as $i => $button): ?>
-          <td width="<?php echo $this->buttonwidth; ?>%"><div class="dnaAnswerButton"><a title='The "<?php echo $button->button_text; ?>" button'
+          <td width="<?php echo $this->buttonwidth; ?>%" align="center"><div class="dnaAnswerButton"><a title='The "<?php echo $button->button_text; ?>" button'
               class="<?php echo $button->css_class; ?> btnAnswer hasTip" href="&nbsp;<?php echo $button->button_hint; ?>" data="{answer: <?php echo $button->score; ?>}"><?php echo $button->button_text; ?></a></div></td>
           <?php endforeach; ?>
         </tr>
@@ -63,7 +63,7 @@ var user_test_id = <?php echo $this->user_test_id; ?>;
   <div id="postTestHome" style="display:none">
     <a href="<?php echo JURI::root(true) ?>"><?php echo jText::_('COM_DNAGIFTS_TEST_HOMEPAGE'); ?></a>
   </div>
-  <div id="backButton">
+  <div id="backButton" class="hasTip" title="<?php echo jText::_('COM_DNAGIFTS_TEST_SELECTPAGE'); ?>">
     <a href="<?php echo htmlspecialchars($_SERVER['HTTP_REFERER']) ?>"><?php echo jText::_('COM_DNAGIFTS_TEST_BACKBUTTON'); ?></a>
   </div>
 </div>
