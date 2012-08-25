@@ -31,7 +31,7 @@ echo JHtml::_('sliders.panel', JText::_('COM_DNAGIFTS_TEST_CONFIG_HEADER'), 'pub
 					</td>
 					<td width="40px">
 						<a href="#" class="ajaxSaveBtn" name="svUseTiming" id="svUseTiming">save</a>
-						<img src="/media/com_dnagifts/images/spinner16x16.gif" id="spUseTiming" height="16px" width="16px" style="display: none"/>
+						<img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/spinner16x16.gif" id="spUseTiming" height="16px" width="16px" style="display: none"/>
 					</td>
 				</tr>
 				<tr id="trDefaultDuration" >
@@ -39,7 +39,7 @@ echo JHtml::_('sliders.panel', JText::_('COM_DNAGIFTS_TEST_CONFIG_HEADER'), 'pub
 					<td><input type="text" name="default_duration" id="default_duration" value="<?php echo $this->item->default_duration; ?>" size="10" maxlength="5"/> seconds</td>
 					<td>
 						<a href="#" class="ajaxSaveBtn" name="svDefaultDuration" id="svDefaultDuration">save</a>
-						<img src="/media/com_dnagifts/images/spinner16x16.gif" id="spDefaultDuration" height="16px" width="16px" style="display: none"/>
+						<img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/spinner16x16.gif" id="spDefaultDuration" height="16px" width="16px" style="display: none"/>
 					</td>
 				</tr>
 				<tr id="trTestDuration">
@@ -47,7 +47,7 @@ echo JHtml::_('sliders.panel', JText::_('COM_DNAGIFTS_TEST_CONFIG_HEADER'), 'pub
 					<td><input type="text" name="test_duration" id="test_duration" value="<?php echo $this->item->test_duration; ?>" size="10" maxlength="5"/> minutes</td>
 					<td>
 						<a href="#" class="ajaxSaveBtn" name="svTestDuration" id="svTestDuration">save</a>
-						<img src="/media/com_dnagifts/images/spinner16x16.gif" id="spTestDuration" height="16px" width="16px" style="display: none"/>
+						<img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/spinner16x16.gif" id="spTestDuration" height="16px" width="16px" style="display: none"/>
 					</td>
 				</tr>
 				<tr id="trShowProgressbar">
@@ -63,7 +63,7 @@ echo JHtml::_('sliders.panel', JText::_('COM_DNAGIFTS_TEST_CONFIG_HEADER'), 'pub
 					</td>
 					<td>
 						<a href="#" class="ajaxSaveBtn" name="svShowProgressbar" id="svShowProgressbar">save</a>
-						<img src="/media/com_dnagifts/images/spinner16x16.jpg" id="spShowProgressbar" height="16px" width="16px" style="display: none"/>
+						<img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/spinner16x16.jpg" id="spShowProgressbar" height="16px" width="16px" style="display: none"/>
 					</td>
 				</tr>
 			</tbody>	

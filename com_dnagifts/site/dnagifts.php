@@ -12,13 +12,13 @@ $document = JFactory::getDocument();
 * 		view.html.php -> setDocument() function of the view
 **/
 // Stylesheets
-$document->addStyleSheet(JURI::root(true).'/administrator/components/com_dnagifts/css/themes/base/jquery.ui.all.css');
+$document->addStyleSheet(JURI::base(true).'/administrator/components/com_dnagifts/css/themes/base/jquery.ui.all.css');
 
 // Javascripts
 // - JQuery
-$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/jquery-1.7.2.min.js');
-$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/jquery.noconflict.js');
-$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/jquery.metadata.js');
+$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/jquery-1.7.2.min.js');
+$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/jquery.noconflict.js');
+$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/jquery.metadata.js');
 
 // - JQuery - UI
 // -- core
@@ -26,11 +26,11 @@ $document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js
 // -- Widgets
 
 // - Other
-$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/Namespace.min.js');
+$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/Namespace.min.js');
 
 // - DNA Gifts
-$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/dnagifts.base.js');
-$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/dnagifts.init.js');
+$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/dnagifts.base.js');
+$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/dnagifts.init.js');
 
  
 // Get an instance of the controller prefixed by DnaGifts

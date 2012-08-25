@@ -43,11 +43,11 @@ class DnaGiftsViewDnaGifts extends JView
 		
 		/**
 		 * NOTE: Only add stylesheets and scripts here that are applicable ONLY to
-		 * 		this page. If it is needed on multiple pages add it to <root>/dnagifts.php
+		 * 		this page. If it is needed on multiple pages add it to <base>/dnagifts.php
 		**/
 		// Stylesheets
-		$document->addStyleSheet(JURI::root(true).'/components/com_dnagifts/css/dnagifts.css');
+		$document->addStyleSheet(JURI::base(true).'/components/com_dnagifts/css/dnagifts.css');
 		// Javascripts
-		$document->addScript(JURI::root(true).'/components/com_dnagifts/js/dnagifts.js');
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/dnagifts.js');
 	}
 }

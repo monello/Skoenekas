@@ -55,18 +55,18 @@ class DnaGiftsViewTest extends JView
 		
 		/**
 		 * NOTE: Only add stylesheets and scripts here that are applicable ONLY to
-		 * 		this page. If it is needed on multiple pages add it to <root>/dnagifts.php
+		 * 		this page. If it is needed on multiple pages add it to <base>/dnagifts.php
 		**/
 		// Stylesheets
-		$document->addStyleSheet(JURI::root(true).'/components/com_dnagifts/css/dnagifts.test.css');
+		$document->addStyleSheet(JURI::base(true).'/components/com_dnagifts/css/dnagifts.test.css');
 		
 		// Javascripts
-		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/ui/jquery.effects.core.min.js');
-		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.widget.min.js');
-		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.progressbar.min.js');
-		$document->addScript(JURI::root(true).'/administrator/components/com_dnagifts/js/jquery.countdown.min.js');
-		//$document->addScript(JURI::root(true).'/components/com_dnagifts/js/temp.surveydata.js');
-		$document->addScript(JURI::root(true).'/components/com_dnagifts/js/dnagifts.test.countdown.js');
-		$document->addScript(JURI::root(true).'/components/com_dnagifts/js/dnagifts.test.js');
+		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.effects.core.min.js');
+		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.widget.min.js');
+		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.progressbar.min.js');
+		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/jquery.countdown.min.js');
+		//$document->addScript(JURI::base(true).'/components/com_dnagifts/js/temp.surveydata.js');
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/dnagifts.test.countdown.js');
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/dnagifts.test.js');
 	}
 }

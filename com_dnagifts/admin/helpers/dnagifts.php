@@ -261,22 +261,22 @@ class DnagiftsHelper
 		$document = JFactory::getDocument();
 		
 		$document->addStyleDeclaration('.icon-16-dnagifts16x16-test ' .
-		    '{background-image: url(../media/com_dnagifts/images/Tests-16x16.png);}');
+		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/Tests-16x16.png);}');
 		$document->addStyleDeclaration('.icon-16-dnagifts16x16-question ' .
-		    '{background-image: url(../media/com_dnagifts/images/Options-16x16.png);}');
+		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/Options-16x16.png);}');
 		$document->addStyleDeclaration('.icon-16-dnagifts16x16-gift ' .
-		    '{background-image: url(../media/com_dnagifts/images/gift-16x16.png);}');
+		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/gift-16x16.png);}');
 		$document->addStyleDeclaration('.icon-16-dnagifts16x16-answer ' .
-		    '{background-image: url(../media/com_dnagifts/images/answers-16x16.png);}');
+		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/answers-16x16.png);}');
 		
 		$document->addStyleDeclaration('.icon-48-dnatests48x48 ' .
-		    '{background-image: url(../media/com_dnagifts/images/Tests-48x48.png);}');
+		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/Tests-48x48.png);}');
 		$document->addStyleDeclaration('.icon-48-dnagifts48x48 ' .
-		    '{background-image: url(../media/com_dnagifts/images/gift-48x48.png);}');
+		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/gift-48x48.png);}');
 		$document->addStyleDeclaration('.icon-48-dnaquestions48x48 ' .
-		    '{background-image: url(../media/com_dnagifts/images/Options-48x48.png);}');
+		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/Options-48x48.png);}');
 		$document->addStyleDeclaration('.icon-48-dnaanswers48x48 ' .
-		    '{background-image: url(../media/com_dnagifts/images/answers-48x48.png);}');
+		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/answers-48x48.png);}');
 		
 		$document->addStyleDeclaration('.colorpatch {float: right; display: inline; height: 15px; width: 30px;}');
 	}

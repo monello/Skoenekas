@@ -83,5 +83,8 @@
  - Updated the refresh ux of tests. If a user starts a new test it's a play button and if he continues the test it's a pause button.
    Related text was also updated
    
- (2012/02/22)
+ (2012/08/22)
  - made some styling updates to all the test buttons.
+ 
+ (2012/08/25)
+- updated the relative paths to images to user JURI::base

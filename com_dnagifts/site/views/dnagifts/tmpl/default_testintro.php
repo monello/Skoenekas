@@ -55,7 +55,7 @@ echo JText::_('COM_DNAGIFTS_TESTINTRO_PICKTEST');
           </a>
         <?php else: ?>
           <?php if ((int) $progress['percent'] >= 100): ?>
-            <img src="/media/com_dnagifts/images/tinycheck.png"
+            <img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/tinycheck.png"
               height="16px"
               width="16px"
               alt="<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_DONE_BUTTON'); ?>"
@@ -63,7 +63,7 @@ echo JText::_('COM_DNAGIFTS_TESTINTRO_PICKTEST');
               class="hasTip"/>
           <?php else: ?>
             <a href="<?php echo JRoute::_('index.php?option=com_dnagifts&view=test&id='.$test->test_id, false) ?>" class="doTestButton">
-            <img src="/media/com_dnagifts/images/play-small.png"
+            <img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/play-small.png"
               height="16px"
               width="16px"
               alt="<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_STARTTEST_BUTTON'); ?>"

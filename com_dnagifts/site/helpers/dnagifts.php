@@ -21,8 +21,9 @@ class DnagiftsHelper
 		$query = "SELECT session_id
 				FROM ".$db->nameQuote('#__session')."
 				WHERE ".$db->nameQuote('userid')." = ".$db->quote($user->get("id"))."
-				AND ".$db->nameQuote('client_id')." = 1";
+				AND ".$db->nameQuote('client_id')." = 0";
 		$db->setQuery($query);
+		
 		// Check for a database error.
 		if ($db->getErrorNum()) {
 			JError::raiseWarning(500, $db->getErrorMsg());

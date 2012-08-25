@@ -33,11 +33,11 @@ var user_test_id = <?php echo $this->user_test_id; ?>;
   </div>
   <div id="dnaTestBody">
     <div id="dnaLoadingDiv" style="display: none">
-        <img src="/media/com_dnagifts/images/loading.gif" width="100px" height="100px" style="margin: 25px 45%"/>
+        <img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/loading.gif" width="100px" height="100px" style="margin: 25px 45%"/>
     </div>
     <div id="dnaPauseDiv">
         <a href="&nbsp;<?php echo JText::_($playmessage); ?>" title="<?php echo JText::_($playmessage.'_TITLE'); ?>"
-            class="hasTip playbutton" data="{test_id: <?php echo $this->testid; ?>}"><img src="/media/com_dnagifts/images/<?php echo $playbutton; ?>.png" width="100px" height="100px" style="display:block; margin: 25px 45%"/></a>
+            class="hasTip playbutton" data="{test_id: <?php echo $this->testid; ?>}"><img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/<?php echo $playbutton; ?>.png" width="100px" height="100px" style="display:block; margin: 25px 45%"/></a>
       
     </div>
     <div id="dnaQuestionText" style="display: none"></div>
@@ -61,7 +61,7 @@ var user_test_id = <?php echo $this->user_test_id; ?>;
     <div id="progressbar"></div>
   </div>
   <div id="postTestHome" style="display:none">
-    <a href="<?php echo JURI::root(true) ?>"><?php echo jText::_('COM_DNAGIFTS_TEST_HOMEPAGE'); ?></a>
+    <a href="<?php echo JURI::base() ?>"><?php echo jText::_('COM_DNAGIFTS_TEST_HOMEPAGE'); ?></a>
   </div>
   <div id="backButton" class="hasTip" title="<?php echo jText::_('COM_DNAGIFTS_TEST_SELECTPAGE'); ?>">
     <a href="<?php echo htmlspecialchars($_SERVER['HTTP_REFERER']) ?>"><?php echo jText::_('COM_DNAGIFTS_TEST_BACKBUTTON'); ?></a>

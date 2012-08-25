@@ -54,7 +54,7 @@
 	
 	<administration>
 		<!-- Administration Menu Section -->
-		<!-- <menu img="class:dnagifts16x16-gift">COM_DNAGIFTS_MENU</menu> -->
+		 <!--<menu img="class:dnagifts16x16-gift">COM_DNAGIFTS_MENU</menu> -->
 		<menu img="../media/com_dnagifts/images/gift-16x16.png">COM_DNAGIFTS_MENU</menu>
 		<submenu>
 		 <!--

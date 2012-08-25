@@ -55,7 +55,7 @@ div#dnaQuestionText {
 }
 
 div#dnaButtonsBar {
-  height: 35px;
+  height: 33px;
   text-align: center;
 }
 div#dnaButtonsBar a {
@@ -80,11 +80,11 @@ div#dnaTestSpace td {
   border: 0px !important;
 }
 
-.ui-progressbar .ui-progressbar-value { background-image: url(/media/com_dnagifts/images/pbar-ani.gif); }
+.ui-progressbar .ui-progressbar-value { background-image: url(../../../media/com_dnagifts/images/pbar-ani.gif); }
 #progressbar {
   width: 80%;
   height: 20px;
-  margin-left: 80px;
+  margin-left: 70px;
   margin-top: 25px;
 }
 #progresspercent {
@@ -95,6 +95,7 @@ div#dnaTestSpace td {
   margin-top: 3px;
   position: absolute;
   width: 180px;
+  font-size: 10pt;
 }
 div#startmessage {
   text-align: center;
@@ -105,15 +106,16 @@ a.btnAnswer,
 div#postTestHome,
 div#backButton{
   display: block;
-  width: 114px;
-  height: 35px;
-  background-image: url(/media/com_dnagifts/images/button-bg.png);
+  width: 110px;
+  height: 33px;
+  background-image: url(../../../media/com_dnagifts/images/button-bg.png);
+  margin-top: 20px;
   /*text-indent: -3000px;*/
 
 }
 div#postTestHome:hover,
 div#backButton:hover{
-  background: transparent url(/media/com_dnagifts/images/button-bg.png) 0px -35px;
+  background: transparent url(../../../media/com_dnagifts/images/button-bg.png) 0px -33px;
 }
 a.btnAnswer {
   height: 30px;
@@ -128,6 +130,10 @@ div#backButton a{
   text-align: center;
   padding-top: 2px;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+}
+
+.ict-postcontent h2{
+  margin-top: 2px;
 }
 
 div#postTestHome a:link,
@@ -147,6 +153,8 @@ div#postTestHome a h2,
 div#backButton a h2{
   color: white;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+  margin-top: 4px;
+  font-size: 14pt;
 }
 
 div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:link,
@@ -155,14 +163,14 @@ div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:active
 div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:focus{
   color: white;
   padding-top: 5px;
-  background-image: url(/media/com_dnagifts/images/button-bg.png);
+  background-image: url(../../../media/com_dnagifts/images/button-bg.png);
   background-position: 0px 0px;
   background-color: transparent;
 }
 div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:hover {
   color: white;
   padding-top: 5px;
-  background: transparent url(/media/com_dnagifts/images/button-bg.png) 0px -35px;
+  background: transparent url(../../../media/com_dnagifts/images/button-bg.png) 0px -33px;
 }
 
 a.playbutton {
