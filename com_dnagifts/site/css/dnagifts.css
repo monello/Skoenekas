@@ -88,6 +88,28 @@ table#picktesttable tbody td a.doTestButton {
   color: #ff8000;
 }
 table#picktesttable tbody td a.doTestButton:hover {
-  color: white;
-  background-color: #ff8000;
+  background-color: transparent;
+  text-decoration: underline overline;
+}
+
+div#simplemodal-container{
+  font-family: arial,helvetica,sans-serif;
+}
+
+table#picktesttable td p {
+  margin: 0;
+}
+
+div#dnaTestSpace h2 {
+  color: #00386D;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+}
+
+div#dnaTestSpace input,
+div#dnaTestSpace select,
+div#dnaTestSpace textarea {
+  font-weight: normal;
+}
+div#btl div#module-in-profile div.module > div {
+  display: none;
 }

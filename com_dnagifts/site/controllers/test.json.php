@@ -65,6 +65,15 @@ class DnaGiftsControllerTest extends JControllerForm
 			return;
     }
     
+    // Update test Hits
+    $query = $db->getQuery(true);
+		$query->update('#__dnagifts_test');
+		$query->set('hits = hits + 1');
+		$query->where('id = ' . (int) $test_id);
+		$db->setQuery($query);
+		$db->query();
+    
+    // Log the new Session ID
     $query    = $db->getQuery(true);
     $query->insert('#__dnagifts_lnk_user_tests');
     $query->columns('session_id, user_id, test_id');
@@ -85,4 +94,15 @@ class DnaGiftsControllerTest extends JControllerForm
     
   }
   
+  public function logTestComplete()
+  {
+    $test_id  = JRequest::getCmd('test_id');
+    $db       = JFactory::getDbo();
+    $query    = $db->getQuery(true);
+		$query->update('#__dnagifts_test');
+		$query->set('complete = complete + 1');
+		$query->where('id = ' . (int) $test_id);
+		$db->setQuery($query);
+		$db->query();
+  }
 }

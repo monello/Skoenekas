@@ -16,6 +16,9 @@ defined('_JEXEC') or die('Restricted Access');
 		<?php echo JHtml::_('grid.sort', 'COM_DNAGIFTS_TESTS_HEADING_TESTDESCRIPTION', 'test_description', $this->listDirn, $this->listOrder); ?>
 	</th>
 	<th width="5%">
+		<?php echo JHtml::_('grid.sort', 'COM_DNAGIFTS_TESTS_HEADING_HOWMANY', 'howmany', $this->listDirn, $this->listOrder); ?>
+	</th>
+	<th width="5%">
 		<?php echo JHtml::_('grid.sort', 'JGLOBAL_HITS', 'hits', $this->listDirn, $this->listOrder); ?>
 	</th>
 	<th width="5%">

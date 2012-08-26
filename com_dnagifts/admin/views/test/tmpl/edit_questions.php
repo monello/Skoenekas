@@ -56,7 +56,7 @@ $record_id = ($this->item->id) ? $this->item->id : -1;
 							class="ui-state-default">
 						<div class="questionDetailsContainer">
 							<a class="ui-icon ui-icon-arrowthick-2-n-s " title="Click and drag Question to new position" href="#" style="float:left">Drag Question</a>
-							<div class="testQuestionText"><?php echo DnaGiftsHelper::addEllipsis($question->text, 30); ?></div>
+							<div class="testQuestionText"><?php echo $question->question_code; ?>: <?php echo DnaGiftsHelper::addEllipsis($question->text, 30); ?></div>
 							<div class="testQuestionLanguage">(<?php echo $question->language; ?>)</div>
               <div class="testShowDuration"> (<?php echo $question->show_duration; ?> sec)</div>
 						</div>

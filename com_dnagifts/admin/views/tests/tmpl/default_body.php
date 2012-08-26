@@ -19,6 +19,9 @@ defined('_JEXEC') or die('Restricted Access');
 			<?php echo $item->test_description; ?>
 		</td>
 		<td class="center">
+			<?php echo $item->howmany; ?>
+		</td>
+		<td class="center">
 			<?php echo $item->hits; ?>
 		</td>
 		<td class="center">

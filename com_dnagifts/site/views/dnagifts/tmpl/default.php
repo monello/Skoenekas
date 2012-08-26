@@ -9,6 +9,7 @@ JHtml::_('behavior.tooltip');
 $this->isLoggedIn = DnaGiftsHelper::authenticate();
 $this->hasPretestInfo = DnagiftsHelper::hasPretestInfo();
 
+echo '<div id="dnaTestSpace">';
 echo '<span class="testlanguage">'.JText::_('COM_DNAGIFTS_TESTLANGUAGE').'</span>';
 echo DnaGiftsHelper::loadLanguageSwitch();
 
@@ -24,6 +25,7 @@ if (!$this->hasPretestInfo) { return; }
 
 // Test Intro
 echo $this->loadTemplate('testintro');
+echo '</div>';
 ?>
 
 

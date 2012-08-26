@@ -10,7 +10,8 @@ defined('_JEXEC') or die;
  */
 class DnagiftsHelper
 {
-	public static function getSessionID() {
+	public static function getSessionID()
+	{
 		$user = JFactory::getUser();
 		
 		if (!$user) {
@@ -86,7 +87,8 @@ class DnagiftsHelper
 		return($db->loadResult());
 	}
 	
-	public static function getUserTestID($test_id = 0) {
+	public static function getUserTestID($test_id = 0)
+	{
 		$session_id = DnagiftsHelper::getSessionID();
 		if (!$session_id || !$test_id) {
 			return 0;
@@ -136,13 +138,15 @@ class DnagiftsHelper
 		return $options;
 	}
 	
-	public static function getCurrentLanguageCode() {
+	public static function getCurrentLanguageCode()
+	{
 		$lang_code = JFactory::getLanguage()->getTag();
     $sef = explode('-',$lang_code);
 		return $sef[0];
 	}
 	
-	public static function getCurrentLanguageString() {
+	public static function getCurrentLanguageString()
+	{
 		$lang_code = DnagiftsHelper::getCurrentLanguageCode();
 		
 		$db = JFactory::getDBO();
@@ -161,7 +165,8 @@ class DnagiftsHelper
 		return($db->loadResult());
 	}
 	
-	public static function getUserProgress($user_test_id, $test_id) {
+	public static function getUserProgress($user_test_id, $test_id)
+	{
 		$db		= JFactory::getDBO();
 		
 		$progress = array();

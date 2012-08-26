@@ -52,6 +52,7 @@ div#dnaQuestionText {
   padding-top: 50px;
   font-family: fantasy;
   font-size: 18pt;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
 }
 
 div#dnaButtonsBar {
@@ -67,11 +68,9 @@ div.dnaAnswerButton {
   font-size: 16pt;
 }
 
-
 div#dnaTestSpace a:hover {
   background-color: transparent;
 }
-
 
 div#dnaTestSpace table,
 div#dnaTestSpace tbody,
@@ -87,6 +86,7 @@ div#dnaTestSpace td {
   margin-left: 70px;
   margin-top: 25px;
 }
+
 #progresspercent {
   font-weight: bold;
   margin-bottom: 0;
@@ -97,6 +97,7 @@ div#dnaTestSpace td {
   width: 180px;
   font-size: 10pt;
 }
+
 div#startmessage {
   text-align: center;
   font-size: 16pt;
@@ -107,18 +108,19 @@ div#postTestHome,
 div#backButton{
   display: block;
   width: 110px;
-  height: 33px;
+  height: 34px;
   background-image: url(../../../media/com_dnagifts/images/button-bg.png);
   margin-top: 20px;
   /*text-indent: -3000px;*/
-
 }
+
 div#postTestHome:hover,
 div#backButton:hover{
-  background: transparent url(../../../media/com_dnagifts/images/button-bg.png) 0px -33px;
+  background: transparent url(../../../media/com_dnagifts/images/button-bg.png) 0px -34px;
 }
+
 a.btnAnswer {
-  height: 30px;
+  height: 29px;
 }
 
 div#postTestHome a,
@@ -148,6 +150,7 @@ div#backButton a:active
 div#backButton a:focus{
   background-color: transparent;
 }
+
 a.btnAnswer,
 div#postTestHome a h2,
 div#backButton a h2{
@@ -167,15 +170,30 @@ div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:focus{
   background-position: 0px 0px;
   background-color: transparent;
 }
+
 div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:hover {
   color: white;
   padding-top: 5px;
-  background: transparent url(../../../media/com_dnagifts/images/button-bg.png) 0px -33px;
+  background: transparent url(../../../media/com_dnagifts/images/button-bg.png) 0px -34px;
 }
 
 a.playbutton {
   display: block;
   margin: 0 45%;
+}
+
+div#simplemodal-container{
+  font-family: arial,helvetica,sans-serif;
+}
+
+div#dnaTestSpace input,
+div#dnaTestSpace select,
+div#dnaTestSpace textarea {
+  font-weight: normal;
+}
+
+div#btl div#module-in-profile div.module > div {
+  display: none;
 }
 
 /****** tool tips override ***/

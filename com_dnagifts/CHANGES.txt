@@ -88,3 +88,12 @@
  
  (2012/08/25)
 - updated the relative paths to images to user JURI::base
+
+0.0.12 (2012/08/26)
+-------------------
+ - made some more GUI updates to make the test look better in the client site
+ - added a test "Hits" counter
+ - added a test "Completed" counter
+ - Killed a few small bugs
+ - Added the number of questions to the tests management list (back end)
+ 

@@ -96,6 +96,16 @@ root.myNamespace.create('DnaGifts.test', {
         jQuery("#dnaCountdown").hide();
         jQuery("#dnaMessages").show();
         jQuery("#dnaProgressBar").fadeOut(1500, function(){jQuery("#postTestHome").show();});
+        
+        // kick off some ajax to increment the Completed-counter for this test
+        var url='index.php?option=com_dnagifts&format=json&task=test.logTestComplete';
+        jQuery.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                test_id: surveyconfig.id
+            }
+        });
     },
     executePause: function()
     {

@@ -37,7 +37,7 @@ var user_test_id = <?php echo $this->user_test_id; ?>;
     </div>
     <div id="dnaPauseDiv">
         <a href="&nbsp;<?php echo JText::_($playmessage); ?>" title="<?php echo JText::_($playmessage.'_TITLE'); ?>"
-            class="hasTip playbutton" data="{test_id: <?php echo $this->testid; ?>}"><img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/<?php echo $playbutton; ?>.png" width="100px" height="100px" style="display:block; margin: 25px 45%"/></a>
+            class="hasTip playbutton" data="{test_id: <?php echo $this->testid; ?>}"><img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/<?php echo $playbutton; ?>.png" width="100px" height="100px" style="display:block; margin: 25px -40%"/></a>
       
     </div>
     <div id="dnaQuestionText" style="display: none"></div>

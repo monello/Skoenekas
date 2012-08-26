@@ -90,31 +90,35 @@ class DnaGiftsModelTests extends JModelList
 		$query = $db->getQuery(true);
 		
 		// Select the required fields from the table.
-		$query->select('id, published, test_name, test_description, ordering, hits, complete, language, created');
-		$query->from($db->quoteName('#__dnagifts_test'));
+		$query->select('a.id, a.published, a.test_name, a.test_description, a.ordering, a.hits, a.complete, a.language, a.created');
+		$query->from($db->quoteName('#__dnagifts_test'). ' AS a');
+		
+		// Join over the lst_gift
+		$query->select('b.howmany AS howmany');
+		$query->join('LEFT', $db->quoteName('#__dnagifts_count_testquestions').' AS b ON b.test_id = a.id');
 		
 		// Filter by published state
 		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
-			$query->where('published = '.(int) $published);
+			$query->where('a.published = '.(int) $published);
 		} else if ($published === '') {
-			$query->where('published IN (0, 1)');
+			$query->where('a.published IN (0, 1)');
 		}
 		
 		// Filter by language
 		$language = $this->getState('filter.language');
 		if ($language && $language != 'all') {
-			$query->where('language = \''.$language.'\'');
+			$query->where('a.language = \''.$language.'\'');
 		}
 		
 		// Filter by search in title
 		$search = $this->getState('filter.search');
 		if (!empty($search)) {
 			if (stripos($search, 'id:') === 0) {
-				$query->where('id = '.(int) substr($search, 3));
+				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-				$query->where('test_name LIKE '.$search.'');
+				$query->where('a.test_name LIKE '.$search.'');
 			}
 		}
 		

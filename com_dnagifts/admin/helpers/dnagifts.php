@@ -60,7 +60,7 @@ class DnagiftsHelper
 		$db		= JFactory::getDbo();
 		$query	= $db->getQuery(true);
 		
-		$query->select('a.id As value, a.question_text AS text, a.language AS language, b.show_duration AS show_duration');
+		$query->select('a.id As value, a.question_text AS text, a.language AS language, b.show_duration AS show_duration, a.question_code AS question_code');
 		$query->from($db->quoteName('#__dnagifts_question').' AS a');
 		$query->select('b.id As id, b.ordering AS ordering');
 		$query->join('LEFT', $db->quoteName('#__dnagifts_lnk_test_question').' AS b ON b.question_id = a.id');
