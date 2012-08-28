@@ -50,8 +50,8 @@ class DnaGiftsControllerTest extends JControllerForm
     $query = "
 			SELECT id
 				FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
-				WHERE ".$db->nameQuote('session_id')." = ".$db->quote($sessionID).";
-			";
+				WHERE ".$db->nameQuote('session_id')." = ".$db->quote($sessionID)."
+				AND ".$db->nameQuote('test_id')." = ".$db->quote($test_id);
 		$db->setQuery($query);
     
 		// Check for a database error.

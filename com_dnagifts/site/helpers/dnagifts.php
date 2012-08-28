@@ -182,8 +182,10 @@ class DnagiftsHelper
 		// count the number of answers
 		$query = "
 			SELECT COUNT(*)
-				FROM ".$db->nameQuote('#__dnagifts_lnk_user_test_answers')."
-				WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id).";";
+			FROM ".$db->nameQuote('#__dnagifts_testquestions_and_answers')." AS a
+			WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id)."
+			AND ".$db->nameQuote('test_id')." = ".$db->quote($test_id);
+			
 		$db->setQuery($query);
 		$progress['answers'] = $db->loadResult();
 		

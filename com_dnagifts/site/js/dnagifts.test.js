@@ -1,6 +1,7 @@
 root.myNamespace.create('DnaGifts.test', {
     language: 'en',
-    translations: {
+    translations:
+    {
       af: {
         nextQuestionLoading: "Volgende vraag laai ...",
         completedTest: "U het die toets voltooi",
@@ -26,7 +27,8 @@ root.myNamespace.create('DnaGifts.test', {
         thetestis: "The test is"
       }
     },
-    translate: function(key) {
+    translate: function(key)
+    {
       var ns = DnaGifts.test;
       return ns.translations[ns.language][key];
     },
@@ -83,7 +85,8 @@ root.myNamespace.create('DnaGifts.test', {
         
         return true;
     },
-    testComplete: function() {
+    testComplete: function()
+    {
         var ns = DnaGifts.test;
         ns.updateProgress();
         if (parseInt(surveyconfig.use_timing))
@@ -183,7 +186,9 @@ root.myNamespace.create('DnaGifts.test', {
         
         this.updateProgress();
     },
-    updateProgress: function(){
+    updateProgress: function()
+    {
+        console.log("updating progress");
         var ns = DnaGifts.test;
         var counts = this.countQuestions();
         var ssdone = counts.done != 1 ? ns.translate('questions') : ns.translate('question');
@@ -197,7 +202,6 @@ root.myNamespace.create('DnaGifts.test', {
     saveAnswer: function()
     {
         var ns = DnaGifts.test;
-        
         // if the user answers a question during the count-down to pause, pause-action will be cancelled
         if(Base.countdown.is_paused) {
             ns.executePlay();
@@ -236,7 +240,7 @@ root.myNamespace.create('DnaGifts.test', {
         var counts = {total: 0, done: 0, togo: 0};
         jQuery.each(surveydata, function(index) {
             counts.total++
-            if (surveydata[index].answer)
+            if (surveydata[index].answer || surveydata[index].answer === 0)
                 counts.done++;
         });
         counts.togo = counts.total - counts.done;
@@ -244,7 +248,8 @@ root.myNamespace.create('DnaGifts.test', {
         return counts;
     },
     
-    autoPassQuestion: function() {
+    autoPassQuestion: function()
+    {
         var ns = DnaGifts.test;
         jQuery(".dnaPauseDivider").hide();
         jQuery("#dnaPauseButton").hide();
@@ -254,7 +259,8 @@ root.myNamespace.create('DnaGifts.test', {
         ns.nextQuestion();
     },
     
-    pauseTest: function() {
+    pauseTest: function()
+    {
         jQuery("#dnaPauseButton").hide();
         jQuery(".dnaPauseDivider").hide();
         Base.countdown.is_paused = true;

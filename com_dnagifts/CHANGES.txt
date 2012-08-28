@@ -97,3 +97,9 @@
  - Killed a few small bugs
  - Added the number of questions to the tests management list (back end)
  
+0.0.13 (2012/08/28)
+-------------------
+ - Fixed the progress bar. An answer of the value (int) 0 was not counted. Updated the code to specifically check for 0 "==="
+ - Updated the questions and answers view.
+ - Updated some logic around displaying test progress and pulling existing answers in to tests.
+ 
