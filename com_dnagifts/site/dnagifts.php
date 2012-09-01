@@ -13,6 +13,7 @@ $document = JFactory::getDocument();
 **/
 // Stylesheets
 $document->addStyleSheet(JURI::base(true).'/administrator/components/com_dnagifts/css/themes/base/jquery.ui.all.css');
+$document->addStyleSheet(JURI::base(true).'/components/com_dnagifts/css/dnagifts.general.css');
 
 // Javascripts
 // - JQuery

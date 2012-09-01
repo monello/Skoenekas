@@ -26,7 +26,7 @@ var user_test_id = <?php echo $this->user_test_id; ?>;
       <span id="pauseTestContainer" style="display:none">
         <a id="dnaPauseButton" href="javascript:void(0)">PAUSE</a>
         <a id="dnaPlayButton" class="playbutton" href="javascript:void(0)" style="display:none">PLAY</a>
-        <span class="dnaPauseDivider">&nbsp; | &nbsp;</span>
+        <span class="dnaPauseDivider">&nbsp;/&nbsp;</span>
       </span>
       <a id="dnaPassButton" href="javascript:void(0)">PASS</a>
     </div>
@@ -39,12 +39,12 @@ var user_test_id = <?php echo $this->user_test_id; ?>;
     </div>
     <div id="dnaPauseDiv">
         <a href="&nbsp;<?php echo JText::_($playmessage); ?>" title="<?php echo JText::_($playmessage.'_TITLE'); ?>"
-            class="hasTip playbutton" data="{test_id: <?php echo $this->testid; ?>}"><img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/<?php echo $playbutton; ?>.png" width="100px" height="100px" style="display:block; margin: 25px -40%"/></a>
+            class="hasTip <?php echo $playbutton; ?>button" data="{test_id: <?php echo $this->testid; ?>}"></a>
       
     </div>
     <div id="dnaQuestionText" style="display: none"></div>
   </div>
-  <div id="startmessage"><em><?php echo JText::_($playmessage); ?></em></div>
+  <div id="startmessage"><?php echo JText::_($playmessage); ?></div>
   <div id="dnaButtonsBar" style="display:none">
     <table width="100%" height="100%">
       <tbody>

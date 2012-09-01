@@ -71,7 +71,8 @@ table#introtable td p {
 }
 
 table#picktesttable thead {
-  background-color: LightGrey;
+  background-color: lightslategrey;
+  text-shadow: 1px 1px 1px linen;
 }
 
 table#picktesttable th,
@@ -81,7 +82,7 @@ table#picktesttable td {
 
 table#picktesttable tbody td a.doTestButton {
   text-decoration: none !important;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+  text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.7);
   font-weight: bold;
   font-size: large;
   padding: 2px;
@@ -102,7 +103,7 @@ table#picktesttable td p {
 
 div#dnaTestSpace h2 {
   color: #00386D;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+  text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 div#dnaTestSpace input,

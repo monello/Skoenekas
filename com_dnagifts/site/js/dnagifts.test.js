@@ -262,21 +262,7 @@ root.myNamespace.create('DnaGifts.test', {
     
     requeueQuestion: function()
     {
-        var from = DnaGifts.test.getQuestionIndex();
-        surveydata.push(surveydata.splice(from,1)[0]);
-    },
-    getQuestionIndex: function()
-    {
-        var ns = DnaGifts.test;
-        var qIndex = 0;
-        jQuery.each(surveydata, function(index, elem) {
-            if (elem.id == ns.currQuestion) {
-                qIndex = index;
-                return false;
-            }
-            return true;
-        });
-        return qIndex;
+        surveydata.push(surveydata.splice(DnaGifts.test.currQuestion,1)[0]);
     },
     
     pauseTest: function()
@@ -309,7 +295,7 @@ Base.Helpers.bind_load(function () {
     ns.language = jQuery("#dnaTestSpace").metadata().userlanguage;
     ns.onload_functions();
     jQuery("#dnaPauseButton").bind("click", ns.pauseTest);
-    jQuery(".playbutton").bind("click", ns.executePlay);
+    jQuery(".playbutton, .pausebutton").bind("click", ns.executePlay);
     jQuery("#dnaPassButton").bind("click", ns.autoPassQuestion);
     jQuery(".btnAnswer").bind("click", ns.saveAnswer);
     jQuery("#progressbar").progressbar({ value: 0 });

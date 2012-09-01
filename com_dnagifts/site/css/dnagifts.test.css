@@ -17,6 +17,9 @@ div#dnaCountdown, div#dnaMessages {
 div#Messages {
   padding-top: 5px;
 }
+div#dnaCountdown span {
+  text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.7);
+}
 
 div#dnaInteractions{
   float: left;
@@ -46,13 +49,16 @@ div#dnaQuestionText {
   left: 0px;
 }
 
-div#dnaQuestionText {
+div#dnaQuestionText, div#startmessage {
   width: 100%;
   text-align: center;
-  padding-top: 50px;
   font-family: fantasy;
   font-size: 18pt;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+  text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+div#dnaQuestionText {
+  padding-top: 50px;
 }
 
 div#dnaButtonsBar {
@@ -131,7 +137,7 @@ div#backButton a{
   color: white !important;
   text-align: center;
   padding-top: 2px;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+  text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .ict-postcontent h2{
@@ -155,9 +161,15 @@ a.btnAnswer,
 div#postTestHome a h2,
 div#backButton a h2{
   color: white;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+  text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.7);
   margin-top: 4px;
   font-size: 14pt;
+}
+
+a.btnAnswer:hover,
+div#postTestHome a h2:hover,
+div#backButton a h2:hover{
+  text-shadow: 0px 0px 2px white;
 }
 
 div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:link,
@@ -177,9 +189,25 @@ div#dnaTestSpace div.dnaAnswerButton a.btnAnswer:hover {
   background: transparent url(../../../media/com_dnagifts/images/button-bg.png) 0px -34px;
 }
 
-a.playbutton {
+div#dnaTestSpace a.playbutton,
+div#dnaTestSpace a.pausebutton {
   display: block;
   margin: 0 45%;
+  width: 100px;
+  height: 100px;
+}
+div#dnaTestSpace a.pausebutton {
+  background: transparent url(../../../media/com_dnagifts/images/pause.png) no-repeat left -100px;
+}
+div#dnaTestSpace a.pausebutton:hover {
+  background: transparent url(../../../media/com_dnagifts/images/pause.png) no-repeat left top;
+}
+
+div#dnaTestSpace a.playbutton {
+  background: transparent url(../../../media/com_dnagifts/images/play.png) no-repeat left -100px;
+}
+div#dnaTestSpace a.playbutton:hover {
+  background: transparent url(../../../media/com_dnagifts/images/play.png) no-repeat left top;
 }
 
 div#simplemodal-container{
@@ -196,30 +224,25 @@ div#btl div#module-in-profile div.module > div {
   display: none;
 }
 
-/****** tool tips override ***/
-/*
-.tip-wrap{
-background: #FFF;
-border: 1px solid #000;
-padding: 5px;
-color:#000000;
-max-width: 412px;}
-
-.tip {
-float: left;
-background: #FFF;
-border: 1px solid #000;
-padding: 5px;
-color:#000000;
-width: 400px;
+#dnaInteractions a{
+  font-weight: 900;
+  color: orange;
+  text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.7);
+  text-decoration: none;
+  font-size: 14pt;
+  padding: 0 5px 0 5px;
+  border: 1px solid white;
 }
 
-.tip-title {
-padding: 0;
-margin: 0;
-font-weight: bold;
-margin-top: -15px;
-padding-top: 15px;
-padding-bottom: 5px;
-color:#000000;}
-*/
+div#dnaTestSpace #dnaInteractions a:hover {
+  border: 1px solid #B4B4B4;
+  color: white;
+  background: #0078FF url(../../../media/com_dnagifts/images/gradient.png) repeat-x 0 -100px;
+}
+.dnaPauseDivider {
+  font-weight: 900;
+  color: #333333;
+  text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.7);
+  font-size: 14pt;
+}
+

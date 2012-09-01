@@ -111,3 +111,9 @@
  - Fixed the requeue of questions when "passing" an answer.
  - Hid the "pause test" button if timings aren't used.
  - Styled the "pause test" and "pass question" buttons;
+ 
+ - updated the play and un-pause button styling
+ - updated the tooltip styling
+ - added a general include file for the css
+ - fixed the "Pass-question" issue.
+ 
