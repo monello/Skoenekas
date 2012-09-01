@@ -103,3 +103,11 @@
  - Updated the questions and answers view.
  - Updated some logic around displaying test progress and pulling existing answers in to tests.
  
+ (2012/08/30)
+ - Fixed a bug in the query for extracting test questions and answers.
+ - Fixed the bug that starts the test as question 1 after each refresh instead of the next unanswered question.
+ 
+ (2012/09/01)
+ - Fixed the requeue of questions when "passing" an answer.
+ - Hid the "pause test" button if timings aren't used.
+ - Styled the "pause test" and "pass question" buttons;

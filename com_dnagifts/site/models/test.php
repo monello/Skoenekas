@@ -15,7 +15,7 @@ class DnaGiftsModelTest extends JModel
 		$query = $db->getQuery(true);
 		
 		$query->select('*');
-		$query->from($db->quoteName('#__dnagifts_testquestions_and_answers'));
+		$query->from($db->quoteName('#__dnagifts_list_testquestions'));
 		$query->where($db->quoteName('test_id') . " = " . $db->quote($test_id));
 		$db->setQuery($query);
 		$data = $db->loadObjectList();
@@ -23,18 +23,30 @@ class DnaGiftsModelTest extends JModel
 		$survey_data = array();
 		
 		foreach($data as $i => $test) {
-			$data = array(
+			$tmpdata = array(
 				'id' => $test->question_id,
 				'duration' => $test->show_duration,
 		    'question' => $test->question_text,
 				'hint' => $test->question_hint,
 				'catid' => $test->gift_id
 			);
-			if ($test->answer_score && $test->lnk_user_test_id == $user_test_id) {
-				$data['answer']  = $test->answer_score;
-			}
-			$survey_data[] = $data;
+			$survey_data[] = $tmpdata;
 		}
+		
+		$query = $db->getQuery(true);
+		$query->select('*');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_test_answers'));
+		$query->where($db->quoteName('lnk_user_test_id') . " = " . $db->quote($user_test_id));
+		$db->setQuery($query);
+		$data = $db->loadObjectList();
+		foreach($data as $i => $answer) {
+			foreach($survey_data as $ii => $survdat){
+				if($survdat['id'] == $answer->question_id) {
+					$survey_data[$ii]['answer'] = $answer->answer_score;
+				}
+			}
+		}
+		
 		
 		// Check for a database error.
 		if ($db->getErrorNum()) {

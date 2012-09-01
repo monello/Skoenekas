@@ -23,9 +23,11 @@ var user_test_id = <?php echo $this->user_test_id; ?>;
     <div id="dnaCountdown" style="display:none"></div>
     <div id="dnaMessages" style="display:none"></div>
     <div id="dnaInteractions" style="display:none">
-      <a id="dnaPauseButton" href="javascript:void(0)">PAUSE</a>
-      <a id="dnaPlayButton" class="playbutton" href="javascript:void(0)" style="display:none">PLAY</a>
-      <span class="dnaPauseDivider">&nbsp; | &nbsp;</span>
+      <span id="pauseTestContainer" style="display:none">
+        <a id="dnaPauseButton" href="javascript:void(0)">PAUSE</a>
+        <a id="dnaPlayButton" class="playbutton" href="javascript:void(0)" style="display:none">PLAY</a>
+        <span class="dnaPauseDivider">&nbsp; | &nbsp;</span>
+      </span>
       <a id="dnaPassButton" href="javascript:void(0)">PASS</a>
     </div>
     <div id="dnaProgress" style="display:none"></div>

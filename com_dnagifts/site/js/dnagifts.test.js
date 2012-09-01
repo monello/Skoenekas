@@ -80,6 +80,7 @@ root.myNamespace.create('DnaGifts.test', {
             jQuery("#dnaMessages").hide();
             if (parseInt(surveyconfig.use_timing)){
                 jQuery("#dnaCountdown").show();
+                jQuery("#pauseTestContainer").show();
             }
         }, 500);
         
@@ -117,6 +118,7 @@ root.myNamespace.create('DnaGifts.test', {
         jQuery("#dnaPauseButton").hide();
         jQuery(".dnaPauseDivider").hide();
         jQuery(".dnaPlayButton").show();
+        jQuery("#dnaInteractions").hide();
     },
     executePlay: function()
     {
@@ -127,6 +129,7 @@ root.myNamespace.create('DnaGifts.test', {
         jQuery("#dnaPauseDiv").hide();
         ns.nextQuestion();
         jQuery(".dnaPlayButton").hide();
+        jQuery("#dnaInteractions").show();
         var url='index.php?option=com_dnagifts&format=json&task=test.logUserTest';
         jQuery.ajax({
             type: "POST",
@@ -188,7 +191,6 @@ root.myNamespace.create('DnaGifts.test', {
     },
     updateProgress: function()
     {
-        console.log("updating progress");
         var ns = DnaGifts.test;
         var counts = this.countQuestions();
         var ssdone = counts.done != 1 ? ns.translate('questions') : ns.translate('question');
@@ -254,9 +256,27 @@ root.myNamespace.create('DnaGifts.test', {
         jQuery(".dnaPauseDivider").hide();
         jQuery("#dnaPauseButton").hide();
         jQuery("#dnaPassButton").hide();
-        var questionDict = surveydata.shift();
-        surveydata.push(questionDict);
+        ns.requeueQuestion();
         ns.nextQuestion();
+    },
+    
+    requeueQuestion: function()
+    {
+        var from = DnaGifts.test.getQuestionIndex();
+        surveydata.push(surveydata.splice(from,1)[0]);
+    },
+    getQuestionIndex: function()
+    {
+        var ns = DnaGifts.test;
+        var qIndex = 0;
+        jQuery.each(surveydata, function(index, elem) {
+            if (elem.id == ns.currQuestion) {
+                qIndex = index;
+                return false;
+            }
+            return true;
+        });
+        return qIndex;
     },
     
     pauseTest: function()

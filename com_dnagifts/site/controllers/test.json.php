@@ -11,7 +11,8 @@ require_once JPATH_COMPONENT.'/helpers/dnagifts.php';
  */
 class DnaGiftsControllerTest extends JControllerForm
 {
-  public function saveAnswer() {
+  public function saveAnswer()
+	{
     $user_test_id = JRequest::getCmd('user_test_id');
     $question_id  = JRequest::getCmd('question_id');
     $score        = JRequest::getCmd('score');
@@ -40,7 +41,8 @@ class DnaGiftsControllerTest extends JControllerForm
 		}
   }
   
-  public function logUserTest() {
+  public function logUserTest()
+	{
     $test_id  = JRequest::getCmd('test_id');
     
     $db       = JFactory::getDbo();
