@@ -117,3 +117,7 @@
  - added a general include file for the css
  - fixed the "Pass-question" issue.
  
+ (2012/09/01)
+ - Added pdf functionality
+ - Added a test pdf functionality (need to do some config)
+ 

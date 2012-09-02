@@ -8,6 +8,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controllerform');
+JLoader::register('DnaGiftsHelper', JPATH_COMPONENT.'/helpers/dnagifts.php');
 
 /**
  * @package		Joomla.Site
@@ -16,5 +17,10 @@ jimport('joomla.application.component.controllerform');
  */
 class DnaGiftsControllerTest extends JControllerForm
 {
-
+  public function  pdf()
+  {
+    DnagiftsHelper::generatepdf('Morne Louw', $title='DNA Gifts - Report',
+				$subject='Test Results', $keywords='DNA Gifts, Free Test',
+				$documentname='results001', $displaytype='I');
+  }
 }
