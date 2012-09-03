@@ -284,6 +284,39 @@ EOD;
     
     // Close and output PDF document
     // This method has several options, check the source code documentation for more information.
-    $pdf->Output($documentname.'.pdf', $displaytype);
+    //$filename = $pdf->Output($documentname.'.pdf', $displaytype);
+	$filename = JPATH_SITE.DS."tmp".DS.$documentname.".pdf";
+	$pdf->Output($filename, 'F');
+	
+	$subject = "You have a new message";
+	$body = "Here is the body of your message.";
+	$to = "louw.morne@gmail.com";
+	$from = array("louw.morne@ymail.com", "Morne Louw");
+	 
+	# Invoke JMail Class
+	$mailer = JFactory::getMailer();
+	 
+	# Set sender array so that my name will show up neatly in your inbox
+	$mailer->setSender($from);
+	 
+	# Add a recipient -- this can be a single address (string) or an array of addresses
+	$mailer->addRecipient($to);
+	 
+	$mailer->setSubject($subject);
+	$mailer->setBody($body);
+	 
+	# If you would like to send as HTML, include this line; otherwise, leave it out
+	$mailer->isHTML();
+	
+	//$attachment = JPATH_SITE."/README.txt";
+	$mailer->addAttachment($filename);
+	
+	# Send once you have set all of your options
+	$mailer->send();
+	
+	unlink($filename);
+	
+	echo "PDF EMAIL SENT 8";
 	}
+	
 }
