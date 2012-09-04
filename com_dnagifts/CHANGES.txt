@@ -121,6 +121,13 @@
  - Added pdf functionality
  - Added a test pdf functionality (need to do some config)
  
- (2012/09/03)
+0.0.14 (2012/09/03)
+-------------------
  - Added some test code to generate a pdf and attach it to an email, then clean up the tmp file.
+
+0.0.15 (2012/09/04)
+-------------------
+ - Fixed the tooltips.
+ - added test code to render a template manually
+ - fixed minor div/0 bugs
  

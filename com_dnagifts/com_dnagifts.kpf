@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Komodo Project File - DO NOT EDIT -->
-<project id="8b5896ee-8da0-46c2-b0da-993ea1099ad8" kpf_version="4" name="com_dnagifts.kpf">
-<livefolder id="8b5896ee-8da0-46c2-b0da-993ea1099ad8/admin/views/language" idref="8b5896ee-8da0-46c2-b0da-993ea1099ad8/admin/views" name="language" url="admin/language">
-</livefolder>
-<preference-set idref="8b5896ee-8da0-46c2-b0da-993ea1099ad8">
-  <boolean id="import_live">1</boolean>
-</preference-set>
-</project>

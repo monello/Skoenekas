@@ -49,8 +49,8 @@ echo JText::_('COM_DNAGIFTS_TESTINTRO_PICKTEST');
       <td align="center">
         <?php if ($progress['inprogress']): ?>
           <a href="<?php echo JRoute::_('index.php?option=com_dnagifts&view=test&id='.$test->test_id, false) ?>" class="doTestButton">
-          <span title="<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_PERCENT', $progress['percent']); ?>"
-              href="<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_QUESTIONS', $progress['answers'], $progress['howmany']); ?>"
+          <span title="<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_PERCENT', $progress['percent']); ?>::<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_QUESTIONS', $progress['answers'], $progress['howmany']); ?>"
+              href="#"
               class="hasTip"><?php echo $progress['percent']; ?>%</span>
           </a>
         <?php else: ?>

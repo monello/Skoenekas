@@ -31,7 +31,15 @@ class DnaGiftsViewDnaGifts extends JView
 		}
 		
 		// Display the template
-		parent::display($tpl);
+		//parent::display($tpl);
+		
+		$result = $this->loadTemplate($tpl);
+		if ($result instanceof Exception)
+		{
+			return $result;
+		}
+
+		echo $result;
 		
 		// Set the document
 		$this->setDocument();
