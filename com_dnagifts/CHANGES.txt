@@ -128,6 +128,6 @@
 0.0.15 (2012/09/04)
 -------------------
  - Fixed the tooltips.
- - added test code to render a template manually
- - fixed minor div/0 bugs
+ - Added test code to render a template manually
+ - Fixed minor div/0 bugs
  
