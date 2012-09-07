@@ -26,8 +26,3 @@ if (!$this->hasPretestInfo) { return; }
 // Test Intro
 echo $this->loadTemplate('testintro');
 echo '</div>';
-?>
-
-
-
-

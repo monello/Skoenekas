@@ -131,3 +131,6 @@
  - Added test code to render a template manually
  - Fixed minor div/0 bugs
  
+0.0.16 (2012/09/06)
+------------------
+ - Messed around with graphs t try and get them imported into pdf
