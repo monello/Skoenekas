@@ -12,9 +12,8 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 </div>
 
 <table >
-
+<tr><td align="center"><strong>DNA CHART</strong></td></tr>
 <tr><td>
-...
 <!--
 Dark	| Light
 FF0000	| CC6666
@@ -27,43 +26,34 @@ FFFF00	| FFFF99
 -->
 <?php
 	$charttype = 'lxy';
-	$chartsize = '200x125';
-	$chartdata = 't:9,17,26,34,43,51,59|23,18,16,49,35,40,19';
+	$chartsize = '400x300';
+	$chartdata = 't:7,15,23,30,38,46,53|23,18,16,49,35,40,19';
 	$chartscale = '0,60';
-	$visibleaxes = 'x,y'; // (x,y,t,b) (x-axis, y-axis, top, bottom)
-	$axeslabels = '0:| |P|S|T|E|G|R|M| |1:|0|10|20|30|40|50|60';
-	$seriescolors = '000000';
-	$linestyles = '1'; // thickness, dash_length (optional), space_length (dependent, optional)
-	$markers = 'd,FF0000,0,0,10|d,FFC000,0,1,10|d,FFFF00,0,2,10|d,00B050,0,3,10|d,538ED5,0,4,10|d,333391,0,5,10|d,990099,0,6,10'; // marker typr, color, series index, which points, size
+	$seriescolors = 'FF0000|FFC000|FFFF00|00B050|538ED5|333391|990099';
+	$linestyle = '1';
+	$visibleaxes = 'x,x,y'; // (x,y,t,b) (x-axis, y-axis, top, bottom)
+	$axeslabels = '0:| |P|S|T|E|G|R|M| |1:| |23|18|16|49|35|40|19| |2:|0|10|20|30|40|50|60';
+	$chartgrid = '100.0,25.0';
+	$chartfill = 'bg,ls,0,FFFFFF,0.09,CC6666,0.10,FFCC99,0.095,FFFF99,0.095,99CC99,0.10,66CCCC,0.10,6666CC,0.09,9966CC,0.09,FFFFFF,0.2';
+	$markers = 'd,FF0000,0,0,10|d,FFC000,0,1,10|d,FFFF00,0,2,10|d,00B050,0,3,10|d,538ED5,0,4,10|d,333391,0,5,10|d,990099,0,6,10'; // marker type, color, series index, which points, size
+	$legends = 'Perceiver|Servant|Teacher|Exhorter|Giver|Ruler|Mercy';
+	$primarybubble = 'y;s=bubble_text_small;d=bb,Primary+Gift,FF8,000;ds=0;dp=3';
+	$secondarybubble = 'y;s=bubble_text_small;d=bb,Secondary+Gift,FF8,000;ds=0;dp=5';
+	
 ?>
 <img src="https://chart.googleapis.com/chart?cht=<?php echo $charttype;
 	?>&chs=<?php echo $chartsize;
 	?>&chd=<?php echo $chartdata;
 	?>&chds=<?php echo $chartscale;
-	?>&chxt=?<?php echo $visibleaxes;
-	?>&chxl=<?php echo $axeslabels;
 	?>&chco=<?php echo $seriescolors;
-	?>&chls=<?php echo $linestyles;
-	?>&chm=<?php echo $markers; ?>">
-</td></tr>
-
-<tr><td>
-<?php
-	$charttype = 'lxy';
-	$chartsize = '220x125';
-	$chartdata = 't:7,15,23,30,38,46,53|23,18,16,49,35,40,19';
-	$chartscale = '0,60';
-	$visibleaxes = 'x,y'; // (x,y,t,b) (x-axis, y-axis, top, bottom)
-	$axeslabels = '0:| |P|S|T|E|G|R|M| |1:|0|10|20|30|40|50|60';
-	$seriescolors = '000000';
-	$linestyles = '1'; // thickness, dash_length (optional), space_length (dependent, optional)
-	$markers = 'd,FF0000,0,0,10|d,FFC000,0,1,10|d,FFFF00,0,2,10|d,00B050,0,3,10|d,538ED5,0,4,10|d,333391,0,5,10|d,990099,0,6,10'; // marker typr, color, series index, which points, size
-?>
-2
-<img src="https://chart.googleapis.com/chart?cht=<?php echo $charttype;
-	?>&chs=<?php echo $chartsize;
-	?>&chd=<?php echo $chartdata;
-	?>&chds=0,60&chco=000000&chxt=x,x,y&chxl=0:| |P|S|T|E|G|R|M| |1:| |23|18|16|49|35|40|19| |2:|0|10|20|30|40|50|60&chg=100.0,25.0&chf=bg,ls,0,FFFFFF,0.13,CC6666,0.12,FFCC99,0.12,FFFF99,0.11,99CC99,0.11,66CCCC,0.12,6666CC,0.12,9966CC,0.11&chm=d,FF0000,0,0,10|d,FFC000,0,1,10|d,FFFF00,0,2,10|d,00B050,0,3,10|d,538ED5,0,4,10|d,333391,0,5,10|d,990099,0,6,10">
+	?>&chls=<?php echo $linestyle;
+	?>&chxt=<?php echo $visibleaxes;
+	?>&chxl=<?php echo $axeslabels;
+	?>&chg=<?php echo $chartgrid;
+	?>&chf=<?php echo $chartfill;
+	?>&chm=<?php echo $markers;
+	?>&chdl=<?php echo $legends;
+	?>&chem=<?php echo $primarybubble; ?>|<?php echo $secondarybubble; ?>">
 </td></tr>
 
 </table>

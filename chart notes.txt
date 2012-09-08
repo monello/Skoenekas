@@ -1,0 +1,18 @@
+chart type
+----------
+cht=lc
+
+chart size
+----------
+chs=400x125
+(width x height)
+
+chart data
+----------
+chd=t:23,18,16,49,35,40,19,_
+
+chart scale
+-----------
+chds=0,60
+y-axis: min, max
+

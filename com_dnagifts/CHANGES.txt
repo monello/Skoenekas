@@ -140,3 +140,8 @@
  - Added the report and reports controllers
  - Also added the report view.
  - Added some tests charts
+ 
+0.0.18 (2012/09/08)
+------------------
+ - Fine tuned the chart formatting
+ 

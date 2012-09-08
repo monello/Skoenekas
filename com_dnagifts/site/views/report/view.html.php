@@ -30,12 +30,12 @@ class DnaGiftsViewReport extends JView
 			return $html;
 		}
 
-		echo $html;
+		//echo $html;
 		
 		
-		//DnagiftsHelper::generatepdf('Morne Louw', 'DNA Gifts - Report',
-		//		'Test Results', 'DNA Gifts, Free Test',
-		//		'results001', $html, 'I');
+		DnagiftsHelper::generatepdf('Morne Louw', 'DNA Gifts - Report',
+				'Test Results', 'DNA Gifts, Free Test',
+				'results001', $html, 'I');
 		
 		
 		// Set the document
