@@ -134,3 +134,9 @@
 0.0.16 (2012/09/06)
 ------------------
  - Messed around with graphs t try and get them imported into pdf
+
+0.0.17 (2012/09/08)
+------------------
+ - Added the report and reports controllers
+ - Also added the report view.
+ - Added some tests charts
