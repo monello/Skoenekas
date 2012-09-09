@@ -144,4 +144,8 @@
 0.0.18 (2012/09/08)
 ------------------
  - Fine tuned the chart formatting
- 
+
+0.0.19 (2012/09/09)
+------------------ 
+ - Managed to get the new Google Charts SVG images to show in TCPDF
+ - Did plenty of testing, need to design report layouts. (yucky)

@@ -7,9 +7,16 @@ JHtml::_('behavior.tooltip');
 $this->isLoggedIn = DnaGiftsHelper::authenticate();
 
 ?>
+
+<script type="text/javascript">var dnaChartCount = 2;</script>
+
 <div id="dnaReportSpace">
 	<a href="http://localhost/" class="hasTip" title="This is a tip Title::This is the tip body text">back</a>
 </div>
+
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+<div id="piechart_div" style="width: 900px; height: 500px;"></div>
+
 
 <table >
 <tr><td align="center"><strong>DNA CHART</strong></td></tr>

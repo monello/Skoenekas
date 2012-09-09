@@ -30,13 +30,12 @@ class DnaGiftsViewReport extends JView
 			return $html;
 		}
 
-		//echo $html;
+		echo $html;
 		
-		
-		DnagiftsHelper::generatepdf('Morne Louw', 'DNA Gifts - Report',
+		/*DnagiftsHelper::generatepdf('Morne Louw', 'DNA Gifts - Report',
 				'Test Results', 'DNA Gifts, Free Test',
 				'results001', $html, 'I');
-		
+		*/
 		
 		// Set the document
 		$this->setDocument();
@@ -44,6 +43,10 @@ class DnaGiftsViewReport extends JView
 	
 	protected function setDocument() 
 	{
-//		$document = JFactory::getDocument();
+		$document = JFactory::getDocument();
+		
+		// Javascripts
+		$document->addScript('https://www.google.com/jsapi');
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/dnagifts.report.js');
 	}
 }
