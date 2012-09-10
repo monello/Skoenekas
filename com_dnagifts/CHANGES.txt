@@ -149,3 +149,7 @@
 ------------------ 
  - Managed to get the new Google Charts SVG images to show in TCPDF
  - Did plenty of testing, need to design report layouts. (yucky)
+ 
+0.0.20 (2012/09/10)
+------------------
+ - Implemented the intial "reports" list code.

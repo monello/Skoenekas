@@ -207,9 +207,33 @@ class DnagiftsHelper
 		return $progress;
 	}
 	
+	public static function hasCompletedTests()
+	{
+		$user = JFactory::getUser();
+		
+		if (!$user) {
+			return 0;
+		}
+		
+		$db	= JFactory::getDBO();
+		
+		$query = "
+			SELECT *
+			FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
+			WHERE ".$db->nameQuote('user_id')." = ".$db->quote($user->get("id"));
+		$db->setQuery($query);
+		$data = $db->loadObjectList();
+		
+		foreach($data as $i => $lut) {
+			$progress = DnagiftsHelper::getUserProgress($lut->id, $lut->test_id);
+			if ((int) $progress['percent'] >= 100) {
+				return 1;
+			}
+		}
+		return 0;
+	}
 	
-	
-	
+/*	
 	public static function generatepdf($author='Nicola Asuni', $title='TCPDF Example 001',
 				$subject='TCPDF Tutorial', $keywords='TCPDF, PDF, example, test, guide',
 				$documentname='example001', $html='No content', $displaytype='I')
@@ -306,7 +330,7 @@ class DnagiftsHelper
 	}
 	$pdf->Output($filename, $displaytype);
 	
-	/*
+	
 	$subject = "You have a new message";
 	$body = "Here is the body of your message.";
 	$to = "louw.morne@gmail.com";
@@ -332,10 +356,11 @@ class DnagiftsHelper
 	
 	# Send once you have set all of your options
 	$mailer->send();
-	*/
+	
 	unlink($filename);
 	
 	echo "PDF EMAIL SENT 8";
 	}
+*/
 	
 }

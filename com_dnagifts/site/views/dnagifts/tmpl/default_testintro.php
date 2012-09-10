@@ -7,10 +7,19 @@ $model = $this->getModel('dnagifts');
 ?>
 <?php echo JText::_('COM_DNAGIFTS_TESTINTRO_HEAD'); ?>
 
-<table width="100%" id="introtable"><tbody><tr>
+<table width="100%" id="introtable"><tbody>
+  <tr>
     <td valign="top"><img src="<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_ANIMATION_PATH'); ?>" class="introanimation"/></td>
     <td><?php echo JText::_('COM_DNAGIFTS_TESTINTRO_BLURB'); ?></td>
-</tr></tbody></table>
+  </tr>
+
+<?php if ((int) DnagiftsHelper::hasCompletedTests() > 0): ?>
+  <tr>
+    <td colspan=2><p><?php echo JText::_('COM_DNAGIFTS_TESTINTRO_TESTSDONETEXT'); ?><a href="<?php echo JRoute::_('index.php?option=com_dnagifts&view=reports', false) ?>"><?php echo JText::_('COM_DNAGIFTS_TESTINTRO_YOURRESULTS'); ?></a></p></td>
+  </tr>
+<?php endif; ?>
+
+</tbody></table>
 
 <?php
 if (!$model->countActiveTests()) {
