@@ -10,6 +10,7 @@ class DnaGiftsControllerReport extends JControllerForm
     public function emailReportPDF() {
         $displaytype        = 'F'; //use 'F' for emailing not 'E' as I want to save a real file to the tmp folder
         $svgData            = $_POST['svgData'];
+        $userTestID       = $_POST['userTestID'];
 
         $svgDisplayOrder    = JRequest::getCmd( 'svgDisplayOrder' );
         $author             = JText::_( 'COM_DNAGIFTS_PDF_AUTHOR' );
@@ -22,7 +23,22 @@ class DnaGiftsControllerReport extends JControllerForm
         $bannerText         = JText::_( 'COM_DNAGIFTS_PDF_BANNERTEXT' );
         $bannerImageWidth   = 100;
         $html               = '';
-    
+        
+        $user = JFactory::getUser();
+		$user_id = $user->get("id");
+        
+        $db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+        $query->select('test_id, started_datetime');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
+		$query->where('id = '.$userTestID);
+        $db->setQuery($query);
+        $result = $db->loadObject();
+        $timeblah = array('-',':',' ');
+        $timestamp = str_replace($timeblah, "", $result->started_datetime);
+        
+        $documentname = $documentname." (".$user_id."-".$timestamp."-".$result->test_id.")".".pdf";
+        
         @ob_end_clean();      
         
         require_once(JPATH_ROOT.DS.'tcpdf'.DS.'config/lang/eng.php');
@@ -109,10 +125,7 @@ EOD;
         
         $charturl = "https://chart.googleapis.com/chart?cht=".$charttype."&chs=".$chartsize."&chd=".$chartdata."&chds=".$chartscale."&chco=".$seriescolors."&chls=".$linestyle."&chxt=".$visibleaxes."&chxl=".$axeslabels."&chg=".$chartgrid."&chf=".$chartfill."&chm=".$markers."&chdl=".$legends."&chem=".$primarybubble."|".$secondarybubble;
         $pdf->Image($charturl, '', '', 100);
-        //$pdf->Image(<IMAGE URL>, <left>, <top>, <width>);
-    	//$pdf->Image('http://chart.apis.google.com/chart?cht=ls&chd=t:1366,1459,2534,2551,2589&chco=76A4FB&chls=2.0,0.0,0.0&chxt=x&chxl=0:|19|20|21|22|23&chs=600x150&chds=1366,2589', 50, 150, 100);
-    	//$pdf->Image('http://chart.apis.google.com/chart?cht=bvg&chs=200×125&chd=s:hello,world&chco=cc0000,00aa00', '', '', 100);
-        
+		
         // ---------------------------------------------------------
         
     	//$pdf->ImageSVG($file='@<svg width="400" height="300" style="overflow: hidden;"><defs id="defs"/><rect x="0" y="0" width="400" height="300" stroke="none" stroke-width="0" fill="#ffffff"/><g><text text-anchor="start" x="77" y="38.35" font-family="Arial" font-size="11" font-weight="bold" stroke="none" stroke-width="0" fill="#000000">How Much Pizza I Ate Last Night</text></g><g><rect x="248" y="58" width="76" height="83" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><rect x="248" y="58" width="76" height="11" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><text text-anchor="start" x="263" y="67.35" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#222222">Mushrooms</text></g><rect x="248" y="58" width="11" height="11" stroke="none" stroke-width="0" fill="#3366cc"/></g><g><rect x="248" y="76" width="76" height="11" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><text text-anchor="start" x="263" y="85.35" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#222222">Onions</text></g><rect x="248" y="76" width="11" height="11" stroke="none" stroke-width="0" fill="#dc3912"/></g><g><rect x="248" y="94" width="76" height="11" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><text text-anchor="start" x="263" y="103.35" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#222222">Olives</text></g><rect x="248" y="94" width="11" height="11" stroke="none" stroke-width="0" fill="#ff9900"/></g><g><rect x="248" y="112" width="76" height="11" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><text text-anchor="start" x="263" y="121.35" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#222222">Zucchini</text></g><rect x="248" y="112" width="11" height="11" stroke="none" stroke-width="0" fill="#109618"/></g><g><rect x="248" y="130" width="76" height="11" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><text text-anchor="start" x="263" y="139.35" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#222222">Pepperoni</text></g><rect x="248" y="130" width="11" height="11" stroke="none" stroke-width="0" fill="#990099"/></g></g><g><path d="M154,151L154,75A76,76,0,0,1,207.74011537017762,204.7401153701776L154,151A0,0,0,0,0,154,151" stroke="#ffffff" stroke-width="1" fill="#3366cc"/><text text-anchor="start" x="183.37241046222232" y="136.26323901017514" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">37.5%</text></g><g><path d="M154,151L78,151A76,76,0,0,1,154,75L154,151A0,0,0,0,0,154,151" stroke="#ffffff" stroke-width="1" fill="#990099"/><text text-anchor="start" x="105.37040213776933" y="117.22040213776936" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">25%</text></g><g><path d="M154,151L100.2598846298224,204.74011537017762A76,76,0,0,1,78,151L154,151A0,0,0,0,0,154,151" stroke="#ffffff" stroke-width="1" fill="#109618"/><text text-anchor="start" x="93.62758953777768" y="173.43676098982488" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">12.5%</text></g><g><path d="M154,151L154,227A76,76,0,0,1,100.2598846298224,204.74011537017762L154,151A0,0,0,0,0,154,151" stroke="#ffffff" stroke-width="1" fill="#ff9900"/><text text-anchor="start" x="118.28323932673234" y="203.65757780465376" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">12.5%</text></g><g><path d="M154,151L207.74011537017762,204.7401153701776A76,76,0,0,1,154,227L154,151A0,0,0,0,0,154,151" stroke="#ffffff" stroke-width="1" fill="#dc3912"/><text text-anchor="start" x="158.71676067326766" y="203.65757780465373" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">12.5%</text></g><g/></svg>', $x=30, $y=100, $w='', $h=100, $link='', $align='', $palign='', $border=0, $fitonpage=false);
@@ -121,12 +134,8 @@ EOD;
         
         $pdf->writeHTML($html);
         
-        // Close and output PDF document
-        // This method has several options, check the source code documentation for more information.
-        //$filename = $pdf->Output($documentname.'.pdf', $displaytype);
-        
         if ($displaytype == 'F') {
-            $filename = JPATH_SITE.DS."tmp".DS.$documentname.".pdf";
+            $filename = JPATH_SITE.DS."components".DS."com_dnagifts".DS."store".DS.$documentname;
         } else {
             $filename = $documentname.".pdf";
         }
@@ -135,9 +144,9 @@ EOD;
         
         $subject = JText::_( 'COM_DNAGIFTS_REPORT_EMAILSUBJECT' ); 
         $body = JText::_( 'COM_DNAGIFTS_REPORT_EMAILMESSAGE' ); 
-        $to = "louw.morne@gmail.com";
+        $to = $user->get("email"); //louw.morne@gmail.com";
         $from = array('no-reply@dnagifts,co.za', JText::_( 'COM_DNAGIFTS_PDF_AUTHOR' ));
-         
+        
         # Invoke JMail Class
         $mailer = JFactory::getMailer();
          
@@ -158,8 +167,6 @@ EOD;
         
         # Send once you have set all of your options
         $mailer->send();
-        
-        unlink($filename);
         
         echo json_encode(array("success" => true, "message" => 'Your report is sent to you by email'));
     }

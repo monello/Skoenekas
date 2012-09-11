@@ -21,6 +21,7 @@ root.myNamespace.create('DnaGifts.report', {
             type: "POST",
             url: url,
             data: {
+				userTestID: 1,
                 svgData: ns.chartSVG,
 				svgDisplayOrder: ns.svgDisplayOrder
             },

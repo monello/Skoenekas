@@ -153,3 +153,8 @@
 0.0.20 (2012/09/10)
 ------------------
  - Implemented the intial "reports" list code.
+ 
+0.0.21 (2012/09/11)
+------------------
+ - Writing files to disk so that pdf's can easily be generated again and sent by email
+ 
