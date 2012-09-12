@@ -30,15 +30,27 @@ class DnaGiftsControllerTest extends JControllerForm
       echo json_encode(array("success"=> false, "message" => JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_ANSWER')));
       return false;
     }
-    // No need to return anyhting
-    
-    $answer_id = $db->insertid();
-    
-    if (!$user_test_id) {
-			echo json_encode(array("success"=> false));
-		} else {
-			echo json_encode(array("success" => true, "answer_id" => $answer_id));
-		}
+	
+	$answer_id = $db->insertid();
+	
+	// Calculate test progress
+	$query = "
+		SELECT id
+			FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
+			WHERE ".$db->nameQuote('id')." = ".$db->quote($user_test_id);
+	$db->setQuery($query);
+	$test_id = $db->loadResult();
+	$progress = DnaGiftsHelper::getUserProgress($user_test_id, $test_id);
+	
+	// Update the progress
+	$query = $db->getQuery(true);
+	$query->update('#__dnagifts_lnk_user_tests');
+	$query->set('progress = '.$db->quote($progress));
+	$query->where('id = ' . (int) $user_test_id);
+	$db->setQuery($query);
+	$db->query();
+	
+    echo json_encode(array("success" => true, "answer_id" => $answer_id));
   }
   
   public function logUserTest()
@@ -50,16 +62,16 @@ class DnaGiftsControllerTest extends JControllerForm
     $sessionID = DnaGiftsHelper::getSessionID();
     
     $query = "
-			SELECT id
-				FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
-				WHERE ".$db->nameQuote('session_id')." = ".$db->quote($sessionID)."
-				AND ".$db->nameQuote('test_id')." = ".$db->quote($test_id);
-		$db->setQuery($query);
-    
-		// Check for a database error.
-		if ($db->getErrorNum()) {
-			JError::raiseWarning(500, $db->getErrorMsg());
-		}
+		SELECT id
+			FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
+			WHERE ".$db->nameQuote('session_id')." = ".$db->quote($sessionID)."
+			AND ".$db->nameQuote('test_id')." = ".$db->quote($test_id);
+	$db->setQuery($query);
+
+	// Check for a database error.
+	if ($db->getErrorNum()) {
+		JError::raiseWarning(500, $db->getErrorMsg());
+	}
     $user_test_id = $db->loadResult();
     
     if ($user_test_id) {
@@ -69,11 +81,11 @@ class DnaGiftsControllerTest extends JControllerForm
     
     // Update test Hits
     $query = $db->getQuery(true);
-		$query->update('#__dnagifts_test');
-		$query->set('hits = hits + 1');
-		$query->where('id = ' . (int) $test_id);
-		$db->setQuery($query);
-		$db->query();
+	$query->update('#__dnagifts_test');
+	$query->set('hits = hits + 1');
+	$query->where('id = ' . (int) $test_id);
+	$db->setQuery($query);
+	$db->query();
     
     // Log the new Session ID
     $query    = $db->getQuery(true);

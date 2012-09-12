@@ -158,3 +158,9 @@
 ------------------
  - Writing files to disk so that pdf's can easily be generated again and sent by email
  
+0.0.22 (2012/09/12)
+------------------
+ - Replaced the field 'progress' to the table 'dnagifts_lnk_user_tests'
+ - Added the field 'report_name' to the table 'dnagifts_lnk_user_tests'
+ - Added some code to keep the user's test progress up to date
+ - Added the basic HTML and CSS for the reports list page.

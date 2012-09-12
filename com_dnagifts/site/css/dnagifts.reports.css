@@ -1,0 +1,17 @@
+/* DNA Gifts - Reports page */
+div#dnaReportSpace h2 {
+  color: #00386D;
+  text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+table#pickreporttable thead {
+    background-color: lightslategrey;
+    text-shadow: 1px 1px 1px linen;
+}
+
+table#pickreporttable th, table#pickreporttable td {
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+}

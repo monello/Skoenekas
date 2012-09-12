@@ -14,12 +14,12 @@ class DnaGiftsViewDnaGifts extends JView
 	{
 		require_once JPATH_COMPONENT.'/helpers/dnagifts.php';
 		
-		$app				= JFactory::getApplication();
-    $params    	= $app->getParams();
-    $dispatcher	= JDispatcher::getInstance();
+		$app		= JFactory::getApplication();
+		$params    	= $app->getParams();
+		$dispatcher	= JDispatcher::getInstance();
 		
 		// Get some data from the models
-		$state			= $this->get('State');
+		$state		= $this->get('State');
 		$this->form	= $this->get('Form');
 		$this->item = $this->get('Item');
 		

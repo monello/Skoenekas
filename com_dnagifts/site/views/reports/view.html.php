@@ -16,8 +16,6 @@ class DnaGiftsViewReports extends JView
 	 */
 	public function display($tpl=null) 
 	{
-		
-		
 		// Display the template
 		parent::display();
 		
@@ -39,10 +37,9 @@ class DnaGiftsViewReports extends JView
 		 * 		this page. If it is needed on multiple pages add it to <base>/dnagifts.php
 		**/
 		// Stylesheets
-		//$document->addStyleSheet(JURI::base(true).'/components/com_dnagifts/css/dnagifts.test.css');
+		$document->addStyleSheet(JURI::base(true).'/components/com_dnagifts/css/dnagifts.reports.css');
 		
 		// Javascripts
-		//$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.effects.core.min.js');
 		//$document->addScript(JURI::base(true).'/components/com_dnagifts/js/dnagifts.test.js');
 	}
 }
