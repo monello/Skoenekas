@@ -8,6 +8,10 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 
 ?>
 
+<div id="notificationcontainer">
+  <div id="notificationtab"><?php echo JText::_('COM_DNAGIFTS_REPORT_PREPEMAIL'); ?></div>
+</div>
+
 <script type="text/javascript">var dnaChartCount = 2;</script>
 
 <div id="dnaReportSpace">

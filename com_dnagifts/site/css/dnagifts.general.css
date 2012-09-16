@@ -4,3 +4,23 @@ body .tip {
   border: 1px solid #B4B4B4;
   color: white;
 }
+
+div#notificationcontainer{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+div#notificationtab{
+  margin: 0 auto;
+  width: auto;
+  width: 400px;
+  padding: 5px;
+  background-color: #ffff80;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  text-align: center;
+}

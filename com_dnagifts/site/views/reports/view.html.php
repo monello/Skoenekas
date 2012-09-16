@@ -16,6 +16,15 @@ class DnaGiftsViewReports extends JView
 	 */
 	public function display($tpl=null) 
 	{
+		$model		= $this->getModel();
+		$reports 	= $model->getUserReports();
+		$this->assignRef( 'reports', $reports );
+		
+		if (count($this->reports) <= 0){
+			$app = JFactory::getApplication();
+			$app->redirect('/index.php?option=com_dnagifts');
+		}
+		
 		// Display the template
 		parent::display();
 		

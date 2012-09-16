@@ -192,9 +192,9 @@ class DnagiftsHelper
 		$progress['answers'] = $db->loadResult();
 		
 		// get percentage complete
-    $progress['percent'] = 0;
-    if ($progress['howmany']) {
-      $progress['percent'] = round($progress['answers'] / $progress['howmany'] * 100);
+		$progress['percent'] = 0;
+		if ($progress['howmany']) {
+			$progress['percent'] = round($progress['answers'] / $progress['howmany'] * 100);
 		}
     
 		// check if the test is still in-progres for this user

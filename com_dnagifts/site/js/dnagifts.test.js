@@ -12,7 +12,8 @@ root.myNamespace.create('DnaGifts.test', {
         completed: "voltooi",
         togo: "om te gaan",
         complete: "voltooi",
-        thetestis: "Die toets is"
+        thetestis: "Die toets is",
+        generating: "<div class=\"rptgenerating\">U DNA Gawes rapport is amper gereed</div>"
       },
       en: {
         nextQuestionLoading: "Next question loading ...",
@@ -24,7 +25,8 @@ root.myNamespace.create('DnaGifts.test', {
         completed: "completed",
         togo: "to go",
         complete: "complete",
-        thetestis: "The test is"
+        thetestis: "The test is",
+        generating: "<div class=\"rptgenerating\">Your DNA report is almost ready</div>"
       }
     },
     translate: function(key)
@@ -99,7 +101,7 @@ root.myNamespace.create('DnaGifts.test', {
         jQuery("#dnaQuestionText").show();
         jQuery("#dnaCountdown").hide();
         jQuery("#dnaMessages").show();
-        jQuery("#dnaProgressBar").fadeOut(1500, function(){jQuery("#postTestHome").show();});
+        jQuery("#dnaProgressBar").fadeOut(1500);
         
         // kick off some ajax to increment the Completed-counter for this test
         var url='index.php?option=com_dnagifts&format=json&task=test.logTestComplete';
@@ -108,6 +110,11 @@ root.myNamespace.create('DnaGifts.test', {
             url: url,
             data: {
                 test_id: surveyconfig.id
+            },
+            success: function(json) {
+                jQuery("#notificationtab").html(json.message);
+                jQuery("#notificationtab").show();
+                setInterval(function(){window.location = reporting_url+surveyconfig.id}, 5000);
             }
         });
     },

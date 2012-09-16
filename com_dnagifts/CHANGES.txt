@@ -164,3 +164,13 @@
  - Added the field 'report_name' to the table 'dnagifts_lnk_user_tests'
  - Added some code to keep the user's test progress up to date
  - Added the basic HTML and CSS for the reports list page.
+
+0.0.23 (2012/09/16)
+------------------
+ - tied up the test and report generation procedure
+ - added the store folder
+ - added the PDF icons
+ - added dnagifts.report.css
+ - added the reports helper class
+ - added the reports model
+ - implemented the notification-indicator tab

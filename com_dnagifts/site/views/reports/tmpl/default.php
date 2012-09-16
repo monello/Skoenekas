@@ -14,12 +14,18 @@ defined('_JEXEC') or die('Restricted access');
     </tr>
   </thead>  
   <tbody>
+    <?php foreach($this->reports as $i => $report): ?>
     <tr>
-      <td>2012/09/12</td>
-      <td>Example Test Name</td>
-      <td><a href="<?php echo JURI::base(true).'/components/com_dnagifts/store/DNA%20Gifts%20Assessment%20Report%20(42-20120910232321-1).pdf'; ?>">DNA Gifts Assessment Report</a></td>
+      <td><?php echo $report->started_datetime; ?></td>
+      <td><?php echo $report->test_name; ?></td>
+      <td><a href="<?php echo JURI::base(true).'/components/com_dnagifts/store/<?php echo $report->report_name; ?>'; ?>"><?php echo str_replace("\s","%20",$report->report_name); ?></a></td>
     </tr>
+    <?php endforeach; ?>
   </tbody>
 </table>
 
+</div>
+
+<div id="postTestHome">
+  <a href="<?php echo JURI::base() ?>"><?php echo jText::_('COM_DNAGIFTS_TEST_HOMEPAGE'); ?></a>
 </div>

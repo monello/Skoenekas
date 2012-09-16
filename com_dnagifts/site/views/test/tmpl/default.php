@@ -12,10 +12,15 @@ if ($this->progress['inprogress']) {
 }
 ?>
 
+<div id="notificationcontainer">
+  <div id="notificationtab" style="display: none"></div>
+</div>
+
 <script type="text/javascript">
 var surveyconfig = <?php echo $this->testconfig; ?>;
 var surveydata = <?php echo $this->surveydata; ?>;
 var user_test_id = <?php echo $this->user_test_id; ?>;
+var reporting_url = '<?php echo JURI::base(); ?>index.php?option=com_dnagifts&view=report&id=';
 </script>
 
 <div id="dnaTestSpace" data="{userlanguage: '<?php echo DnagiftsHelper::getCurrentLanguageCode(); ?>'}">
@@ -62,10 +67,7 @@ var user_test_id = <?php echo $this->user_test_id; ?>;
     <div id="progresspercent"></div>
     <div id="progressbar"></div>
   </div>
-  <div id="postTestHome" style="display:none">
-    <a href="<?php echo JURI::base() ?>"><?php echo jText::_('COM_DNAGIFTS_TEST_HOMEPAGE'); ?></a>
-  </div>
-  <div id="backButton" class="hasTip" title="<?php echo jText::_('COM_DNAGIFTS_TEST_SELECTPAGE'); ?>">
-    <a href="<?php echo htmlspecialchars($_SERVER['HTTP_REFERER']) ?>"><?php echo jText::_('COM_DNAGIFTS_TEST_BACKBUTTON'); ?></a>
+  <div id="backButton" class="hasTip" title="<?php echo JText::_('COM_DNAGIFTS_TEST_SELECTPAGE'); ?>">
+    <a href="<?php echo htmlspecialchars($_SERVER['HTTP_REFERER']) ?>"><?php echo JText::_('COM_DNAGIFTS_TEST_BACKBUTTON'); ?></a>
   </div>
 </div>

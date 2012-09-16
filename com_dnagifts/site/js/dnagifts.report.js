@@ -10,13 +10,13 @@ root.myNamespace.create('DnaGifts.report', {
 		ns.chartSVG[divID] = ns.htmlEncode(chartArea.innerHTML);
 		ns.svgDisplayOrder.push(divID);
 		if (dnaChartCount == ns.svgDisplayOrder.length) {
-			ns.generatePDF();
+			ns.dispatchReport();
 		}
 	},
-	generatePDF: function()
+	dispatchReport: function()
 	{
 		var ns = DnaGifts.report;
-		var url='index.php?option=com_dnagifts&format=json&task=report.emailReportPDF';
+		var url='index.php?option=com_dnagifts&format=json&task=report.dispatchReport';
         jQuery.ajax({
             type: "POST",
             url: url,
@@ -27,9 +27,8 @@ root.myNamespace.create('DnaGifts.report', {
             },
 			success: function(json) {
 				if (json.success) {
-					alert(json.message);
-				} else {
-					alert("There was an error generating your report PDF.\nPlease use the Email button to try again");
+					jQuery("#notificationtab").html(json.message);
+					setInterval(function(){jQuery("#notificationtab").fadeOut()}, 3000);
 				}
 			}
         });

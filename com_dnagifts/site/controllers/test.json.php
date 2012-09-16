@@ -7,7 +7,7 @@ jimport('joomla.application.component.controllerform');
 require_once JPATH_COMPONENT.'/helpers/dnagifts.php';
 
 /**
- * Tests Controller
+ * Tests JSON (Ajax) Controller
  */
 class DnaGiftsControllerTest extends JControllerForm
 {
@@ -37,7 +37,7 @@ class DnaGiftsControllerTest extends JControllerForm
 	$query = "
 		SELECT id
 			FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
-			WHERE ".$db->nameQuote('id')." = ".$db->quote($user_test_id);
+			WHERE id = ".$db->quote($user_test_id);
 	$db->setQuery($query);
 	$test_id = $db->loadResult();
 	$progress = DnaGiftsHelper::getUserProgress($user_test_id, $test_id);
@@ -45,7 +45,7 @@ class DnaGiftsControllerTest extends JControllerForm
 	// Update the progress
 	$query = $db->getQuery(true);
 	$query->update('#__dnagifts_lnk_user_tests');
-	$query->set('progress = '.$db->quote($progress));
+	$query->set('progress = '. (int) $progress['percent']);
 	$query->where('id = ' . (int) $user_test_id);
 	$db->setQuery($query);
 	$db->query();
@@ -55,28 +55,27 @@ class DnaGiftsControllerTest extends JControllerForm
   
   public function logUserTest()
 	{
-    $test_id  = JRequest::getCmd('test_id');
-    
-    $db       = JFactory::getDbo();
-    $user	    = JFactory::getUser();
-    $sessionID = DnaGiftsHelper::getSessionID();
+    $test_id	= JRequest::getCmd('test_id');
+    $db		 	= JFactory::getDbo();
+    $user	 	= JFactory::getUser();
+    $sessionID	= DnaGiftsHelper::getSessionID();
     
     $query = "
-		SELECT id
-			FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
-			WHERE ".$db->nameQuote('session_id')." = ".$db->quote($sessionID)."
-			AND ".$db->nameQuote('test_id')." = ".$db->quote($test_id);
+	  SELECT id
+		FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
+		WHERE ".$db->nameQuote('session_id')." = ".$db->quote($sessionID)."
+		AND ".$db->nameQuote('test_id')." = ".$db->quote($test_id);
 	$db->setQuery($query);
 
 	// Check for a database error.
 	if ($db->getErrorNum()) {
-		JError::raiseWarning(500, $db->getErrorMsg());
+	  JError::raiseWarning(500, $db->getErrorMsg());
 	}
     $user_test_id = $db->loadResult();
     
     if ($user_test_id) {
       echo json_encode(array("success" => true, "user_test_id" => $user_test_id));
-			return;
+	  return;
     }
     
     // Update test Hits
@@ -88,7 +87,7 @@ class DnaGiftsControllerTest extends JControllerForm
 	$db->query();
     
     // Log the new Session ID
-    $query    = $db->getQuery(true);
+    $query = $db->getQuery(true);
     $query->insert('#__dnagifts_lnk_user_tests');
     $query->columns('session_id, user_id, test_id');
     $query->values($db->quote($sessionID) . ',' .(int) $user->get('id') . ',' . (int) $test_id);
@@ -101,11 +100,10 @@ class DnaGiftsControllerTest extends JControllerForm
     $user_test_id = $db->insertid();
     
     if (!$user_test_id) {
-			echo json_encode(array("success"=> false));
-		} else {
-			echo json_encode(array("success" => true, "user_test_id" => $user_test_id));
-		}
-    
+	  echo json_encode(array("success"=> false));
+	} else {
+	  echo json_encode(array("success" => true, "user_test_id" => $user_test_id));
+	}
   }
   
   public function logTestComplete()
@@ -113,10 +111,11 @@ class DnaGiftsControllerTest extends JControllerForm
     $test_id  = JRequest::getCmd('test_id');
     $db       = JFactory::getDbo();
     $query    = $db->getQuery(true);
-		$query->update('#__dnagifts_test');
-		$query->set('complete = complete + 1');
-		$query->where('id = ' . (int) $test_id);
-		$db->setQuery($query);
-		$db->query();
+	$query->update('#__dnagifts_test');
+	$query->set('complete = complete + 1');
+	$query->where('id = ' . (int) $test_id);
+	$db->setQuery($query);
+	$db->query();
+	echo json_encode(array("success" => true, "message" => jText::_('COM_DNAGIFTS_TEST_PROCESSING')));
   }
 }
