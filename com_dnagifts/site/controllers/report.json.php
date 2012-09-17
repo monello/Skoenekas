@@ -18,7 +18,7 @@ class DnaGiftsControllerReport extends JControllerForm
         $svgData		= $_POST['svgData'];
         $userTestID		= $_POST['userTestID'];
 		ReportsHelper::generateReportPDF($displaytype, $svgData, $userTestID);
-		ReportsHelper::emailReportPDF($userTestID);
+		//ReportsHelper::emailReportPDF($userTestID);
 		echo json_encode(array("success" => true, "message" => jText::_('COM_DNAGIFTS_REPORT_SENTEMAIL')));
 	}
 	

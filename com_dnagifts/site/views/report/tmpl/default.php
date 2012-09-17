@@ -18,7 +18,8 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 	<a href="http://localhost/" class="hasTip" title="This is a tip Title::This is the tip body text">back</a>
 </div>
 
-<div id="chart_div" style="width: 900px; height: 500px;"></div>
+<div id="gaugechart_div" style="width: 800px; height: 120px;"></div>
+<div id="columnchart_div" style="width: 900px; height: 500px;"></div>
 <div id="piechart_div" style="width: 900px; height: 500px;"></div>
 
 

@@ -174,3 +174,10 @@
  - added the reports helper class
  - added the reports model
  - implemented the notification-indicator tab
+ 
+0.0.24 (2012/09/17)
+------------------
+ - Updated the getActiveTests function to only extract tests with listed questions.
+ - Added a check on the list of tests to check if any tests are available and provide a proper message if none.
+ - Finetuned some of the charts
+ 

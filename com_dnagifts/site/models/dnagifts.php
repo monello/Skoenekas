@@ -125,6 +125,7 @@ class DnaGiftsModelDnaGifts extends JModelForm
 		$query->join('LEFT', $db->quoteName('#__dnagifts_count_testquestions').' AS b ON b.test_id = a.id');
 		$query->where('a.published = 1');
 		$query->where('a.language = \''.$language.'\'');
+		$query->where('b.howmany > 0');
 		$query->order($db->getEscaped('a.ordering ASC'));
 		
 		$db->setQuery($query);

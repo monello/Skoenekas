@@ -133,7 +133,7 @@ EOD;
         $secondarybubble = 'y;s=bubble_text_small;d=bb,Secondary+Gift,FF8,000;ds=0;dp=5';
         
         $charturl = "https://chart.googleapis.com/chart?cht=".$charttype."&chs=".$chartsize."&chd=".$chartdata."&chds=".$chartscale."&chco=".$seriescolors."&chls=".$linestyle."&chxt=".$visibleaxes."&chxl=".$axeslabels."&chg=".$chartgrid."&chf=".$chartfill."&chm=".$markers."&chdl=".$legends."&chem=".$primarybubble."|".$secondarybubble;
-        $pdf->Image($charturl, '', '', 100);
+        //$pdf->Image($charturl, '', '', 100);
 		
         // ---------------------------------------------------------
         
