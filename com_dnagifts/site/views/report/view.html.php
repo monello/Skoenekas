@@ -16,6 +16,7 @@ class DnaGiftsViewReport extends JView
 	    $params    	= $app->getParams();
     	$dispatcher	= JDispatcher::getInstance();
 		
+		$this->assignRef( 'user', JFactory::getUser() );
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) 
@@ -44,6 +45,13 @@ class DnaGiftsViewReport extends JView
 	protected function setDocument() 
 	{
 		$document = JFactory::getDocument();
+		
+		/**
+		 * NOTE: Only add stylesheets and scripts here that are applicable ONLY to
+		 * 		this page. If it is needed on multiple pages add it to <base>/dnagifts.php
+		**/
+		// Stylesheets
+		$document->addStyleSheet(JURI::base(true).'/components/com_dnagifts/css/dnagifts.report.css');
 		
 		// Javascripts
 		$document->addScript('https://www.google.com/jsapi');

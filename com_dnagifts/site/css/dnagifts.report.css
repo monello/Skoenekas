@@ -40,3 +40,46 @@ div#postTestHome a h2 {
 div#postTestHome a h2:hover {
   text-shadow: 0px 0px 2px white;
 }
+
+
+table#tblScores th,
+table#tblScores td {
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+table#tblScores thead th {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+table#tblScores tbody tr td { text-align: center; }
+table#tblScores tbody tr td.tdYourGift { padding-left: 5px; text-align: left; }
+table#tblScores tbody tr td.tdScore { background-color: LightGrey; color: black; }
+table#tblScores tbody tr.trPerceiver { background-color: #FF0000; }
+table#tblScores tbody tr.trServant { background-color: #FFC000; }
+table#tblScores tbody tr.trTeacher { background-color: #FFFF00; }
+table#tblScores tbody tr.trExhorter { background-color: #00B050; }
+table#tblScores tbody tr.trGiver { background-color: #538ED5; }
+table#tblScores tbody tr.trRuler { background-color: #333391; color: white; }
+table#tblScores tbody tr.trMercy { background-color: #990099; color: white; }
+
+div.reportSection{
+    border-bottom-color: LightGrey;
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+div.rptLeft{
+    float: left;
+    width: 64%;
+}
+div.rptRight{
+    float: left;
+    width: 34%;
+}
+.rptText16{
+    font-size: 16pt;
+}

@@ -14,18 +14,71 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 
 <script type="text/javascript">var dnaChartCount = 2;</script>
 
-<div id="dnaReportSpace">
-	<a href="http://localhost/" class="hasTip" title="This is a tip Title::This is the tip body text">back</a>
+<div class="reportSection">
+	<div class="rptLeft rptText16">
+		<p>Hi <?php echo $this->user->name; ?></p>
+		<p>Here are your DNA test results.</p>
+	</div>
+	
+	<div class="rptRight">
+		<table id="tblScores" width="200">
+			<thead>
+				<th>Gift</th>
+				<th>Score</th>
+				<th>Your Gift</th>
+			</thead>
+			<tbody>
+				<tr class="trPerceiver">
+					<td>P</td>
+					<td class="tdScore">23</td>
+					<td class="tdYourGift">Perceiver</td>
+				</tr>
+				<tr class="trServant">
+					<td>S</td>
+					<td class="tdScore">18</td>
+					<td class="tdYourGift">Servant</td>
+				</tr>
+				<tr class="trTeacher">
+					<td>T</td>
+					<td class="tdScore">16</td>
+					<td class="tdYourGift">Teacher</td>
+				</tr>
+				<tr class="trExhorter">
+					<td>E</td>
+					<td class="tdScore">49</td>
+					<td class="tdYourGift">Exhorter</td>
+				</tr>
+				<tr class="trGiver">
+					<td>G</td>
+					<td class="tdScore">35</td>
+					<td class="tdYourGift">Giver</td>
+				</tr>
+				<tr class="trRuler">
+					<td>R</td>
+					<td class="tdScore">40</td>
+					<td class="tdYourGift">Ruler</td>
+				</tr>
+				<tr class="trMercy">
+					<td>M</td>
+					<td class="tdScore">19</td>
+					<td class="tdYourGift">Mercy</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="clear"></div>
 </div>
 
-<div id="gaugechart_div" style="width: 800px; height: 120px;"></div>
-<div id="columnchart_div" style="width: 900px; height: 500px;"></div>
-<div id="piechart_div" style="width: 900px; height: 500px;"></div>
 
-
-<table >
-<tr><td align="center"><strong>DNA CHART</strong></td></tr>
-<tr><td>
+<div class="reportSection">
+	<table>
+		<tr>
+			<td align="center">
+				<strong>DNA CHART</strong>
+			</td>
+		</tr>
+		<tr>
+			<td>
 <!--
 Dark	| Light
 FF0000	| CC6666
@@ -36,39 +89,54 @@ FFFF00	| FFFF99
 333391	| 6666CC
 990099	| 9966CC
 -->
-<?php
-	$charttype = 'lxy';
-	$chartsize = '400x300';
-	$chartdata = 't:7,15,23,30,38,46,53|23,18,16,49,35,40,19';
-	$chartscale = '0,60';
-	$seriescolors = 'FF0000|FFC000|FFFF00|00B050|538ED5|333391|990099';
-	$linestyle = '1';
-	$visibleaxes = 'x,x,y'; // (x,y,t,b) (x-axis, y-axis, top, bottom)
-	$axeslabels = '0:| |P|S|T|E|G|R|M| |1:| |23|18|16|49|35|40|19| |2:|0|10|20|30|40|50|60';
-	$chartgrid = '100.0,25.0';
-	$chartfill = 'bg,ls,0,FFFFFF,0.09,CC6666,0.10,FFCC99,0.095,FFFF99,0.095,99CC99,0.10,66CCCC,0.10,6666CC,0.09,9966CC,0.09,FFFFFF,0.2';
-	$markers = 'd,FF0000,0,0,10|d,FFC000,0,1,10|d,FFFF00,0,2,10|d,00B050,0,3,10|d,538ED5,0,4,10|d,333391,0,5,10|d,990099,0,6,10'; // marker type, color, series index, which points, size
-	$legends = 'Perceiver|Servant|Teacher|Exhorter|Giver|Ruler|Mercy';
-	$primarybubble = 'y;s=bubble_text_small;d=bb,Primary+Gift,FF8,000;ds=0;dp=3';
-	$secondarybubble = 'y;s=bubble_text_small;d=bb,Secondary+Gift,FF8,000;ds=0;dp=5';
-	
-?>
-<img src="https://chart.googleapis.com/chart?cht=<?php echo $charttype;
-	?>&chs=<?php echo $chartsize;
-	?>&chd=<?php echo $chartdata;
-	?>&chds=<?php echo $chartscale;
-	?>&chco=<?php echo $seriescolors;
-	?>&chls=<?php echo $linestyle;
-	?>&chxt=<?php echo $visibleaxes;
-	?>&chxl=<?php echo $axeslabels;
-	?>&chg=<?php echo $chartgrid;
-	?>&chf=<?php echo $chartfill;
-	?>&chm=<?php echo $markers;
-	?>&chdl=<?php echo $legends;
-	?>&chem=<?php echo $primarybubble; ?>|<?php echo $secondarybubble; ?>">
-</td></tr>
+				<?php
+					$charttype = 'lxy';
+					$chartsize = '400x300';
+					$chartdata = 't:7,15,23,30,38,46,53|23,18,16,49,35,40,19';
+					$chartscale = '0,60';
+					$seriescolors = 'FF0000|FFC000|FFFF00|00B050|538ED5|333391|990099';
+					$linestyle = '1';
+					$visibleaxes = 'x,x,y'; // (x,y,t,b) (x-axis, y-axis, top, bottom)
+					$axeslabels = '0:| |P|S|T|E|G|R|M| |1:| |23|18|16|49|35|40|19| |2:|0|10|20|30|40|50|60';
+					$chartgrid = '100.0,25.0';
+					$chartfill = 'bg,ls,0,FFFFFF,0.09,CC6666,0.10,FFCC99,0.095,FFFF99,0.095,99CC99,0.10,66CCCC,0.10,6666CC,0.09,9966CC,0.09,FFFFFF,0.2';
+					$markers = 'd,FF0000,0,0,10|d,FFC000,0,1,10|d,FFFF00,0,2,10|d,00B050,0,3,10|d,538ED5,0,4,10|d,333391,0,5,10|d,990099,0,6,10'; // marker type, color, series index, which points, size
+					$legends = 'Perceiver|Servant|Teacher|Exhorter|Giver|Ruler|Mercy';
+					$primarybubble = 'y;s=bubble_text_small;d=bb,Primary+Gift,FF8,000;ds=0;dp=3';
+					$secondarybubble = 'y;s=bubble_text_small;d=bb,Secondary+Gift,FF8,000;ds=0;dp=5';
+					
+				?>
+				<img src="https://chart.googleapis.com/chart?cht=<?php echo $charttype;
+					?>&chs=<?php echo $chartsize;
+					?>&chd=<?php echo $chartdata;
+					?>&chds=<?php echo $chartscale;
+					?>&chco=<?php echo $seriescolors;
+					?>&chls=<?php echo $linestyle;
+					?>&chxt=<?php echo $visibleaxes;
+					?>&chxl=<?php echo $axeslabels;
+					?>&chg=<?php echo $chartgrid;
+					?>&chf=<?php echo $chartfill;
+					?>&chm=<?php echo $markers;
+					?>&chdl=<?php echo $legends;
+					?>&chem=<?php echo $primarybubble; ?>|<?php echo $secondarybubble; ?>">
+			</td>
+		</tr>
+	</table>
+	<div class="clear"></div>
+</div>
 
-</table>
+<div id="gaugechart_div" style="width: 800px; height: 120px;"></div>
+<div id="columnchart_div" style="width: 900px; height: 500px;"></div>
+<div id="piechart_div" style="width: 900px; height: 500px;"></div>
+
+
+
+<!--
+<div id="dnaReportSpace">
+	<a href="http://localhost/" class="hasTip" title="This is a tip Title::This is the tip body text">back</a>
+</div>
+-->
+
 
 <!--
 <img src="http://chart.apis.google.com/chart?chs=300x150&amp;cht=p3&amp;chco=7777CC|76A4FB|3399CC|3366CC&amp;chd=s:Uf9a&amp;chdl=January|February|March|April" class="gallery-img">

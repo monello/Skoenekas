@@ -181,3 +181,8 @@
  - Added a check on the list of tests to check if any tests are available and provide a proper message if none.
  - Finetuned some of the charts
  
+0.0.25 (2012/09/18)
+------------------
+ - Added the Scores table the the HTML report
+ - Added the dnagifts.report.css style sheet to the report template
+ 

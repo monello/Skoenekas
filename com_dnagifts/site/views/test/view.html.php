@@ -35,7 +35,7 @@ class DnaGiftsViewTest extends JView
 		$this->assignRef( 'testid', $test_id );
 		$this->assignRef( 'user_test_id', $user_test_id );
 		$this->assignRef( 'buttons', $buttons );
-    $this->assignRef( 'surveydata', $data );
+		$this->assignRef( 'surveydata', $data );
 		$this->assignRef( 'testconfig', $config );
 		$this->assignRef( 'buttonwidth', $buttonwidth );
 		$this->assignRef( 'progress', $progress );
