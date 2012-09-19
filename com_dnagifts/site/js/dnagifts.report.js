@@ -125,7 +125,6 @@ function drawCharts(){
 		['Mercy', scores.mercy]
 	]);
 	var pieoptions = {
-		title: 'Your DNA Gifts',
 		is3D: true,
 		slices: {
 			0:{color: 'FF0000'},

@@ -186,3 +186,7 @@
  - Added the Scores table the the HTML report
  - Added the dnagifts.report.css style sheet to the report template
  
+0.0.26 (2012/09/19)
+------------------
+ - Finally formatted the HTML report.
+ 

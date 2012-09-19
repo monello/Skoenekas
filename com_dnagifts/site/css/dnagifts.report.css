@@ -44,7 +44,7 @@ div#postTestHome a h2:hover {
 
 table#tblScores th,
 table#tblScores td {
-    border: 1px solid black;
+    border: 1px solid black !important;
     font-weight: bold;
 }
 
@@ -82,4 +82,9 @@ div.rptRight{
 }
 .rptText16{
     font-size: 16pt;
+}
+div.reportSection table,
+div.reportSection table tr,
+div.reportSection table tr td{
+    border: none !important;
 }

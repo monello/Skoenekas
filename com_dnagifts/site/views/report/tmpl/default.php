@@ -15,9 +15,12 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 <script type="text/javascript">var dnaChartCount = 2;</script>
 
 <div class="reportSection">
-	<div class="rptLeft rptText16">
-		<p>Hi <?php echo $this->user->name; ?></p>
-		<p>Here are your DNA test results.</p>
+	<p class="rptText16">Hi <?php echo $this->user->name; ?></p>
+	<div class="rptLeft">
+		<p class="rptText16">Here are your DNA test results.</p>
+		<p>Each statement in this test was linked to a DNA Gift.<br/>
+		Each answer button awarded a different score depending how much you agreed with the statement.</p>
+		<p>The Primary Gifting is therfore determined by finding the set of statements that you agreed with the most (has the highest score).</p>
 	</div>
 	
 	<div class="rptRight">
@@ -71,14 +74,16 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 
 
 <div class="reportSection">
-	<table>
-		<tr>
-			<td align="center">
-				<strong>DNA CHART</strong>
-			</td>
-		</tr>
-		<tr>
-			<td>
+	<p class="rptText16">This is your DNA Gifts Line Profile.</p>
+	<div class="rptLeft">
+		<table>
+			<tr>
+				<td align="center">
+					<strong>DNA CHART</strong>
+				</td>
+			</tr>
+			<tr>
+				<td>
 <!--
 Dark	| Light
 FF0000	| CC6666
@@ -89,45 +94,65 @@ FFFF00	| FFFF99
 333391	| 6666CC
 990099	| 9966CC
 -->
-				<?php
-					$charttype = 'lxy';
-					$chartsize = '400x300';
-					$chartdata = 't:7,15,23,30,38,46,53|23,18,16,49,35,40,19';
-					$chartscale = '0,60';
-					$seriescolors = 'FF0000|FFC000|FFFF00|00B050|538ED5|333391|990099';
-					$linestyle = '1';
-					$visibleaxes = 'x,x,y'; // (x,y,t,b) (x-axis, y-axis, top, bottom)
-					$axeslabels = '0:| |P|S|T|E|G|R|M| |1:| |23|18|16|49|35|40|19| |2:|0|10|20|30|40|50|60';
-					$chartgrid = '100.0,25.0';
-					$chartfill = 'bg,ls,0,FFFFFF,0.09,CC6666,0.10,FFCC99,0.095,FFFF99,0.095,99CC99,0.10,66CCCC,0.10,6666CC,0.09,9966CC,0.09,FFFFFF,0.2';
-					$markers = 'd,FF0000,0,0,10|d,FFC000,0,1,10|d,FFFF00,0,2,10|d,00B050,0,3,10|d,538ED5,0,4,10|d,333391,0,5,10|d,990099,0,6,10'; // marker type, color, series index, which points, size
-					$legends = 'Perceiver|Servant|Teacher|Exhorter|Giver|Ruler|Mercy';
-					$primarybubble = 'y;s=bubble_text_small;d=bb,Primary+Gift,FF8,000;ds=0;dp=3';
-					$secondarybubble = 'y;s=bubble_text_small;d=bb,Secondary+Gift,FF8,000;ds=0;dp=5';
-					
-				?>
-				<img src="https://chart.googleapis.com/chart?cht=<?php echo $charttype;
-					?>&chs=<?php echo $chartsize;
-					?>&chd=<?php echo $chartdata;
-					?>&chds=<?php echo $chartscale;
-					?>&chco=<?php echo $seriescolors;
-					?>&chls=<?php echo $linestyle;
-					?>&chxt=<?php echo $visibleaxes;
-					?>&chxl=<?php echo $axeslabels;
-					?>&chg=<?php echo $chartgrid;
-					?>&chf=<?php echo $chartfill;
-					?>&chm=<?php echo $markers;
-					?>&chdl=<?php echo $legends;
-					?>&chem=<?php echo $primarybubble; ?>|<?php echo $secondarybubble; ?>">
-			</td>
-		</tr>
-	</table>
+					<?php
+						$charttype = 'lxy';
+						$chartsize = '400x300';
+						$chartdata = 't:7,15,23,30,38,46,53|23,18,16,49,35,40,19';
+						$chartscale = '0,60';
+						$seriescolors = 'FF0000|FFC000|FFFF00|00B050|538ED5|333391|990099';
+						$linestyle = '1';
+						$visibleaxes = 'x,x,y'; // (x,y,t,b) (x-axis, y-axis, top, bottom)
+						$axeslabels = '0:| |P|S|T|E|G|R|M| |1:| |23|18|16|49|35|40|19| |2:|0|10|20|30|40|50|60';
+						$chartgrid = '100.0,25.0';
+						$chartfill = 'bg,ls,0,FFFFFF,0.09,CC6666,0.10,FFCC99,0.095,FFFF99,0.095,99CC99,0.10,66CCCC,0.10,6666CC,0.09,9966CC,0.09,FFFFFF,0.2';
+						$markers = 'd,FF0000,0,0,10|d,FFC000,0,1,10|d,FFFF00,0,2,10|d,00B050,0,3,10|d,538ED5,0,4,10|d,333391,0,5,10|d,990099,0,6,10'; // marker type, color, series index, which points, size
+						$legends = 'Perceiver|Servant|Teacher|Exhorter|Giver|Ruler|Mercy';
+						$primarybubble = 'y;s=bubble_text_small;d=bb,Primary+Gift,FF8,000;ds=0;dp=3';
+						$secondarybubble = 'y;s=bubble_text_small;d=bb,Secondary+Gift,FF8,000;ds=0;dp=5';
+						
+					?>
+					<img src="https://chart.googleapis.com/chart?cht=<?php echo $charttype;
+						?>&chs=<?php echo $chartsize;
+						?>&chd=<?php echo $chartdata;
+						?>&chds=<?php echo $chartscale;
+						?>&chco=<?php echo $seriescolors;
+						?>&chls=<?php echo $linestyle;
+						?>&chxt=<?php echo $visibleaxes;
+						?>&chxl=<?php echo $axeslabels;
+						?>&chg=<?php echo $chartgrid;
+						?>&chf=<?php echo $chartfill;
+						?>&chm=<?php echo $markers;
+						?>&chdl=<?php echo $legends;
+						?>&chem=<?php echo $primarybubble; ?>|<?php echo $secondarybubble; ?>">
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="rptRight">
+		<p>Your Line Profile is a direct reflection of your test results.</p>
+		<p>The higher you scored in a specific gift, the higher the score will plot on this chart.</p>
+		<p>From this graph you can clearly see what your strongest natural gifts are.</p>
+		<p>We indicated your strongest gift as your Primary Gift and your second most strongest gift as Secondary Gift.</p>
+		<p>This merely means that these naturally stand out for you and not that you are weak an all the other Gifts.</p>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="reportSection">
+	<p class="rptText16">Your DNA composition looks like this.</p>
+	<div class="rptLeft">
+		<div id="piechart_div" style="width: 500px; height: 300px;"></div>
+	</div>
+	<div class="rptRight">
+		<p>The composition pie chart puts into perspective how much each Gift make up of your overall DNA.</p>
+		<p>This is expressed as a percentage, based on the scores you earned for each answer as you progressed through the test.</p>
+	</div>
 	<div class="clear"></div>
 </div>
 
 <div id="gaugechart_div" style="width: 800px; height: 120px;"></div>
 <div id="columnchart_div" style="width: 900px; height: 500px;"></div>
-<div id="piechart_div" style="width: 900px; height: 500px;"></div>
+
 
 
 
