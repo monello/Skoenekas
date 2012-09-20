@@ -84,16 +84,6 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 			</tr>
 			<tr>
 				<td>
-<!--
-Dark	| Light
-FF0000	| CC6666
-FFC000	| FFCC99
-FFFF00	| FFFF99
-00B050	| 99CC99
-538ED5	| 66CCCC
-333391	| 6666CC
-990099	| 9966CC
--->
 					<?php
 						$charttype = 'lxy';
 						$chartsize = '400x300';
@@ -150,8 +140,37 @@ FFFF00	| FFFF99
 	<div class="clear"></div>
 </div>
 
-<div id="gaugechart_div" style="width: 800px; height: 120px;"></div>
-<div id="columnchart_div" style="width: 900px; height: 500px;"></div>
+<div class="reportSection">
+	<p class="rptText16">This is the order of your motivational flow.</p>
+	<div class="rptLeft">
+		<div id="linechart_div" style="width: 500px; height: 300px;"></div>
+	</div>
+	<div class="rptRight">
+		<p>Here goes some explanation of what the user should read and get from this graph.</p>
+		<p>Here goes some explanation of what the user should read and get from this graph.</p>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="reportSection">
+	<p class="rptText16">Lets take a look at your motivational flow in more detail:</p>
+	<div class="rptLeft">
+		<p class="rptText14">Your Primary Gift is Exhorter</p>
+		<p>Your Primary Primary flow comes from this gift.</p>
+		<div style="float:left; width: 94px; height: 127px;"><img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/exhorter.png" /></div>
+		<div style="float:left; width: 130px; height: 150px;margin-left: 50px">
+			<div id="gauge1chart_div"></div>
+			Agreement Meter
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="rptRight">
+		<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/exhorter-header.png" />
+		<p>Your birthright is locked up inside this gift, your <strong>DYNAMIC NATURAL ABILITY/AUTHORITY/ATTRIBUTES</strong> comes from this gift that God placed inside you.</p>
+		<p>The agreement meter shows how much you agreed with all the Exhorter statements in the test.</p>
+	</div>
+	<div class="clear"></div>
+</div>
 
 
 

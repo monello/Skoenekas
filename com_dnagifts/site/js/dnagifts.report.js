@@ -67,6 +67,7 @@ function drawCharts(){
 	};
 	
 	// - GAUGES
+	/*
 	var gaugedata = google.visualization.arrayToDataTable([
 		['Label', 'Value'],
 		['Perceiver', Math.round(scores.perceiver/60*100)],
@@ -88,30 +89,56 @@ function drawCharts(){
 	ns.chartContainer[gaugedivID] = document.getElementById(gaugedivID);
 	var gaugechart = new google.visualization.Gauge(ns.chartContainer[gaugedivID]);
 	gaugechart.draw(gaugedata, gaugeoptions);
+	*/
+	var gauge1data = google.visualization.arrayToDataTable([
+		['Label', 'Value'],
+		['Exhorter', Math.round(scores.exhorter/60*100)]
+	]);
 
-	// - COLUMN CHART
-	var columndata = google.visualization.arrayToDataTable([
-        ['Gift', 'Perceiver', 'Servant', 'Teacher', 'Exhorter', 'Giver', 'Ruler', 'Mercy'],
-        ['Giftings', scores.perceiver, scores.servant, scores.teacher, scores.exhorter, scores.giver, scores.ruler, scores.mercy]
+	var gauge1options = {
+		width: 130,
+		height: 130,
+		redFrom: 66,
+		redTo: 100,
+		redColor: '00B050',
+		yellowFrom:33,
+		yellowTo: 66,
+		yellowColor: '99CC99',
+		greenFrom: 0,
+		greenTo: 33,
+		greenColor: 'BFFFBF',
+		minorTicks: 5
+	};
+	var gauge1divID = 'gauge1chart_div';
+	ns.chartContainer[gauge1divID] = document.getElementById(gauge1divID);
+	var gauge1chart = new google.visualization.Gauge(ns.chartContainer[gauge1divID]);
+	gauge1chart.draw(gauge1data, gauge1options);
+	
+	// - LINE CHART
+	var linedata = google.visualization.arrayToDataTable([
+		['Gift', 'Motivational Flow Level'],
+		['Exhorter', scores.exhorter],
+		['Ruler', scores.ruler],
+		['Giver', scores.giver],
+		['Perceiver', scores.perceiver],
+		['Mercy', scores.mercy],
+		['Servant', scores.servant],
+		['Teacher', scores.teacher]
     ]);
 
-    var columnoptions = {
-        title: 'Your DNA Gifts',
-		series: {
-			0:{color: 'FF0000', visibleInLegend: true},
-			1:{color: 'FFC000', visibleInLegend: true},
-			2:{color: 'FFFF00', visibleInLegend: true},
-			3:{color: '00B050', visibleInLegend: true},
-			4:{color: '538ED5', visibleInLegend: true},
-			5:{color: '333391', visibleInLegend: true},
-			6:{color: '990099', visibleInLegend: true}
-		}
+    var lineoptions = {
+        title: 'Your Motivational Flow',
+		series: {0:{color: '000000', visibleInLegend: false}},
+		pointSize: 3,
+		height: 300,
+		width: 500,
+		hAxis: {slantedText: true, slantedTextAngle: 90, gridlines: {color: '#333', count: 4}}
 	};
 
-	var columndivID = 'columnchart_div';
-	ns.chartContainer[columndivID] = document.getElementById(columndivID);
-    var columnchart = new google.visualization.ColumnChart(ns.chartContainer[columndivID]);
-    columnchart.draw(columndata, columnoptions);
+	var linedivID = 'linechart_div';
+	ns.chartContainer[linedivID] = document.getElementById(linedivID);
+    var linechart = new google.visualization.LineChart(ns.chartContainer[linedivID]);
+    linechart.draw(linedata, lineoptions);
 	
 	// - PIE CHART
 	var piedata = google.visualization.arrayToDataTable([

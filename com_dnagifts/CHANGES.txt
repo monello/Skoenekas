@@ -190,3 +190,8 @@
 ------------------
  - Finally formatted the HTML report.
  
+0.0.27 (2012/09/20)
+------------------
+ - Made some more tweaks to the report
+ - Added the motivational flow line chart
+ 
