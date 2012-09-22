@@ -201,3 +201,7 @@
  - Cleaned up some of the report generating JS
  - Recoded all charts from hard coded to using data (test data for now)
  
+0.0.29 (2012/09/22)
+------------------
+ - Updated the report related language Contants and prints
+ 
