@@ -27,7 +27,8 @@ root.myNamespace.create('DnaGifts.report', {
             },
 			success: function(json) {
 				if (json.success) {
-					jQuery("#notificationtab").html(json.message);
+					jQuery("#notificationtext").html(json.message);
+					jQuery("#notificationtab").show();
 					setInterval(function(){jQuery("#notificationtab").fadeOut()}, 3000);
 				}
 			}
@@ -45,6 +46,7 @@ root.myNamespace.create('DnaGifts.report', {
 Base.Helpers.bind_load(function () {
     var ns = DnaGifts.report;
     jQuery.metadata.setType('attr','data');
+	setInterval(function(){jQuery("#notificationtab").fadeOut()}, 6000);
     
 });
 
@@ -53,85 +55,50 @@ Base.Helpers.bind_load(function () {
 google.load("visualization", "1", {packages:["corechart", "gauge"]});
 google.setOnLoadCallback(drawCharts);
 
-function drawCharts(){
+function getResultsByPosition(position){
+	for (var i=0;i<dnaResults.length;i++){
+		if (dnaResults[i].position == position) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+function drawCharts() {
 	var ns = DnaGifts.report;
 	
-	var scores = {
-		perceiver: 23,
-		servant: 18,
-		teacher: 16,
-		exhorter: 49,
-		giver: 35,
-		ruler: 40,
-		mercy: 19
-	};
-	
+	/*************************************************************************/
 	// - GAUGES
-	/*
-	var gaugedata = google.visualization.arrayToDataTable([
-		['Label', 'Value'],
-		['Perceiver', Math.round(scores.perceiver/60*100)],
-		['Servant', Math.round(scores.servant/60*100)],
-		['Teacher', Math.round(scores.teacher/60*100)],
-		['Exhorter', Math.round(scores.exhorter/60*100)],
-		['Giver', Math.round(scores.giver/60*100)],
-		['Ruler', Math.round(scores.ruler/60*100)],
-		['Mercy', Math.round(scores.mercy/60*100)]
-	]);
-
-	var gaugeoptions = {
-		width: 800, height: 120,
-		redFrom: 90, redTo: 100,
-		yellowFrom:75, yellowTo: 90,
-		minorTicks: 5
-	};
-	var gaugedivID = 'gaugechart_div';
-	ns.chartContainer[gaugedivID] = document.getElementById(gaugedivID);
-	var gaugechart = new google.visualization.Gauge(ns.chartContainer[gaugedivID]);
-	gaugechart.draw(gaugedata, gaugeoptions);
-	*/
-	var gauge1data = google.visualization.arrayToDataTable([
-		['Label', 'Value'],
-		['Exhorter', Math.round(scores.exhorter/60*100)]
-	]);
-
-	var gauge1options = {
-		width: 130,
-		height: 130,
-		redFrom: 66,
-		redTo: 100,
-		redColor: '00B050',
-		yellowFrom:33,
-		yellowTo: 66,
-		yellowColor: '99CC99',
-		greenFrom: 0,
-		greenTo: 33,
-		greenColor: 'BFFFBF',
-		minorTicks: 5
-	};
-	var gauge1divID = 'gauge1chart_div';
-	ns.chartContainer[gauge1divID] = document.getElementById(gauge1divID);
-	var gauge1chart = new google.visualization.Gauge(ns.chartContainer[gauge1divID]);
-	gauge1chart.draw(gauge1data, gauge1options);
+	var gaugelist = ['gauge1chart_div','gauge2chart_div','gauge3chart_div']
+	for (var i=0;i<gaugelist.length;i++){
+		var position = getResultsByPosition(i);
+		drawDnaGaugechart(
+			dnaResults[position].label,
+			dnaResults[position].score,
+			dnaMaxScore,
+			dnaResults[position].redColor,
+			dnaResults[position].yellowColor,
+			dnaResults[position].greenColor,
+			gaugelist[i]
+		);
+	}
 	
+	/*************************************************************************/
 	// - LINE CHART
-	var linedata = google.visualization.arrayToDataTable([
-		['Gift', 'Motivational Flow Level'],
-		['Exhorter', scores.exhorter],
-		['Ruler', scores.ruler],
-		['Giver', scores.giver],
-		['Perceiver', scores.perceiver],
-		['Mercy', scores.mercy],
-		['Servant', scores.servant],
-		['Teacher', scores.teacher]
-    ]);
+	var linedataData = [['Gift', 'Motivational Flow Level']];
+	for (var i=0;i<7;i++) {
+		var position = getResultsByPosition(i);
+		linedataData.push([dnaResults[position].label,dnaResults[position].score]);
+	}
+	var linedata = google.visualization.arrayToDataTable(linedataData);
 
     var lineoptions = {
         title: 'Your Motivational Flow',
 		series: {0:{color: '000000', visibleInLegend: false}},
 		pointSize: 3,
 		height: 300,
-		width: 500,
+		width: 400,
+		chartArea: { left: 20, top: 20, width: 350, height: 230},
 		hAxis: {slantedText: true, slantedTextAngle: 90, gridlines: {color: '#333', count: 4}}
 	};
 
@@ -140,28 +107,31 @@ function drawCharts(){
     var linechart = new google.visualization.LineChart(ns.chartContainer[linedivID]);
     linechart.draw(linedata, lineoptions);
 	
+	/*************************************************************************/
 	// - PIE CHART
 	var piedata = google.visualization.arrayToDataTable([
 		['Gifting', 'Score'],
-		['Perceiver', scores.perceiver],
-		['Servant', scores.servant],
-		['Teacher', scores.teacher],
-		['Exhorter', scores.exhorter],
-		['Giver', scores.giver],
-		['Ruler', scores.ruler],
-		['Mercy', scores.mercy]
+		[dnaResults[0].label, dnaResults[0].score],
+		[dnaResults[1].label, dnaResults[1].score],
+		[dnaResults[2].label, dnaResults[2].score],
+		[dnaResults[3].label, dnaResults[3].score],
+		[dnaResults[4].label, dnaResults[4].score],
+		[dnaResults[5].label, dnaResults[5].score],
+		[dnaResults[6].label, dnaResults[6].score]
 	]);
 	var pieoptions = {
 		is3D: true,
 		slices: {
-			0:{color: 'FF0000'},
-			1:{color: 'FFC000', textStyle: {color: 'black'}},
-			2:{color: 'FFFF00', textStyle: {color: 'black'}},
-			3:{color: '00B050'},
-			4:{color: '538ED5'},
-			5:{color: '333391'},
-			6:{color: '990099'}
-		}
+			0:{color: dnaResults[0].redColor},
+			1:{color: dnaResults[1].redColor, textStyle: {color: 'black'}},
+			2:{color: dnaResults[2].redColor, textStyle: {color: 'black'}},
+			3:{color: dnaResults[3].redColor},
+			4:{color: dnaResults[4].redColor},
+			5:{color: dnaResults[5].redColor},
+			6:{color: dnaResults[6].redColor}
+		},
+		chartArea: {left: 50, top: 0, width: 500, height: 300},
+		legend: {position: 'right', alignment: 'center'}
 	};
 	var piedivID = 'piechart_div';
 	ns.chartContainer[piedivID] = document.getElementById(piedivID);
@@ -170,4 +140,29 @@ function drawCharts(){
 	piechart.draw(piedata, pieoptions);
 
 }
-/*********************************************************/
+
+function drawDnaGaugechart(chartLabel, score, maxScore, redColor, yellowColor, greenColor, divID) {
+	var ns = DnaGifts.report;
+	var data = google.visualization.arrayToDataTable([
+		['Label', 'Value'],
+		[chartLabel, Math.round(score/maxScore*100)]
+	]);
+	var options = {
+		width: 130,
+		height: 130,
+		redFrom: 66,
+		redTo: 100,
+		redColor: redColor,
+		yellowFrom:33,
+		yellowTo: 66,
+		yellowColor: yellowColor,
+		greenFrom: 0,
+		greenTo: 33,
+		greenColor: greenColor,
+		minorTicks: 5
+	};
+	ns.chartContainer[divID] = document.getElementById(divID);
+	var chart = new google.visualization.Gauge(ns.chartContainer[divID]);
+	chart.draw(data, options);
+}
+

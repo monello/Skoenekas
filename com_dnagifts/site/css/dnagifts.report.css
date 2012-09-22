@@ -41,11 +41,37 @@ div#postTestHome a h2:hover {
   text-shadow: 0px 0px 2px white;
 }
 
+.rptText16{
+    font-size: 16pt;
+}
+.rptText14{
+    font-size: 14pt;
+}
 
+table#tblReportSection,
+table#tblReportSection tr,
+table#tblReportSection tr td {
+    border: none !important;
+    vertical-align: top;
+}
+
+table#tblReportSection td p {
+    line-height: 1.3em !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+
+/*  score table styling */
+table#tblScores {
+    border: 1px solid #c5c5c5 !important;
+    border-collapse: separate !important
+}
 table#tblScores th,
 table#tblScores td {
-    border: 1px solid black !important;
+    border: none !important;
     font-weight: bold;
+    border-collapse: separate !important
 }
 
 table#tblScores thead th {
@@ -54,9 +80,10 @@ table#tblScores thead th {
     text-align: center;
 }
 
+table#tblScores tbody tr { color: #333333; }
 table#tblScores tbody tr td { text-align: center; }
 table#tblScores tbody tr td.tdYourGift { padding-left: 5px; text-align: left; }
-table#tblScores tbody tr td.tdScore { background-color: LightGrey; color: black; }
+table#tblScores tbody tr td.tdScore { background-color: LightGrey; color: black;  }
 table#tblScores tbody tr.trPerceiver { background-color: #FF0000; }
 table#tblScores tbody tr.trServant { background-color: #FFC000; }
 table#tblScores tbody tr.trTeacher { background-color: #FFFF00; }
@@ -65,6 +92,26 @@ table#tblScores tbody tr.trGiver { background-color: #538ED5; }
 table#tblScores tbody tr.trRuler { background-color: #333391; color: white; }
 table#tblScores tbody tr.trMercy { background-color: #990099; color: white; }
 
+table#tblDNAChart,
+table#tblDNAChart tr,
+table#tblDNAChart tr td {
+    border: 0 !important;
+    padding: 0 !important;
+}
+
+hr.sectionSeparator {
+    margin: 20px auto;
+    border: 1px dashed #999;
+    width: 70%;
+}
+
+div.gaugecontainer table,
+div.gaugecontainer table tr,
+div.gaugecontainer table tr td {
+    border: none !important;
+}
+
+/*
 div.reportSection{
     border-bottom-color: LightGrey;
     border-bottom-style: dashed;
@@ -80,14 +127,10 @@ div.rptRight{
     float: left;
     width: 34%;
 }
-.rptText16{
-    font-size: 16pt;
-}
-.rptText14{
-    font-size: 14pt;
-}
+
 div.reportSection table,
 div.reportSection table tr,
 div.reportSection table tr td{
     border: none !important;
 }
+*/

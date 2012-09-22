@@ -12,6 +12,7 @@ div#notificationcontainer{
   display: block;
   width: 100%;
   height: auto;
+  z-index: 1000;
 }
 div#notificationtab{
   margin: 0 auto;

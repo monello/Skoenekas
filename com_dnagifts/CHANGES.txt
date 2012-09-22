@@ -195,3 +195,9 @@
  - Made some more tweaks to the report
  - Added the motivational flow line chart
  
+0.0.28 (2012/09/22)
+------------------
+ - Updated the report format to fit narrower report space in templates.
+ - Cleaned up some of the report generating JS
+ - Recoded all charts from hard coded to using data (test data for now)
+ 
