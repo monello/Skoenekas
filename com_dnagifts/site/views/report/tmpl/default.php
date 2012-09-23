@@ -16,9 +16,12 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 </div>
 
 <script type="text/javascript">
-	var dnaChartCount = 2;
+	var dnaChartCount = 5;
 	var dnaMaxScore = 60;
 	var dnaResults = <?php echo json_encode($this->dnaResults)?>;
+	var dnaReportCopy = {
+		'motivationalflow': "<?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_CHARTHEAD'); ?>"
+	};
 </script>
 
 <table id="tblReportSection" width="670" cellpadding="0" cellspacing="0">
@@ -101,8 +104,8 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 								',0,4,10|d,'.$this->markersArr[5].
 								',0,5,10|d,'.$this->markersArr[6].
 								',0,6,10'; // marker type, color, series index, which points, size
-							$primarybubble = 'y;s=bubble_text_small;d=bb,Primary+Gift,FF8,000;ds=0;dp='.$this->primaryDatapoint;
-							$secondarybubble = 'y;s=bubble_text_small;d=bb,Secondary+Gift,FF8,000;ds=0;dp='.$this->secondaryDatapoint;
+							$primarybubble = 'y;s=bubble_text_small;d=bb,'.JText::_('COM_DNAGIFTS_REPORT_PRIMARYGIFTBUBBLE').',FF8,000;ds=0;dp='.$this->primaryDatapoint;
+							$secondarybubble = 'y;s=bubble_text_small;d=bb,'.JText::_('COM_DNAGIFTS_REPORT_SECONDARYGIFTBUBBLE').',FF8,000;ds=0;dp='.$this->secondaryDatapoint;
 							
 						?>
 						<img src="https://chart.googleapis.com/chart?cht=<?php echo $charttype;

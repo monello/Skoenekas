@@ -17,7 +17,8 @@ class DnaGiftsControllerReport extends JControllerForm
 		$displaytype	= 'F'; //use 'F' for emailing not 'E' as I want to save a real file to a folder and attache that to the email
         $svgData		= $_POST['svgData'];
         $userTestID		= $_POST['userTestID'];
-		ReportsHelper::generateReportPDF($displaytype, $svgData, $userTestID);
+		$imgChartSRC	= $_POST['imgChartSRC'];
+		ReportsHelper::generateReportPDF($displaytype, $svgData, $imgChartSRC, $userTestID);
 		//ReportsHelper::emailReportPDF($userTestID);
 		echo json_encode(array("success" => true, "message" => jText::_('COM_DNAGIFTS_REPORT_SENTEMAIL')));
 	}

@@ -1,21 +1,47 @@
 root.myNamespace.create('DnaGifts.report', {
     chartContainer: {},
 	chartSVG: {},
-	svgDisplayOrder: [],
-    getSVG: function(divID)
+	chartLog: [],
+	intervals: {},
+	extractSVG: function(divID)
 	{
-        var ns = DnaGifts.report;
-		var chartArea = ns.chartContainer[divID].getElementsByTagName('iframe')[0].
-			contentDocument.getElementById('chartArea');
-		ns.chartSVG[divID] = ns.htmlEncode(chartArea.innerHTML);
-		ns.svgDisplayOrder.push(divID);
-		if (dnaChartCount == ns.svgDisplayOrder.length) {
+		var ns = DnaGifts.report;
+		ns.intervals[divID] = setInterval(function(){ns._extractSVG(divID)},100);
+	},
+    _extractSVG: function(divID)
+	{
+		var ns = DnaGifts.report;
+		var svg = jQuery("#"+divID+" iframe:first").contents().find('#chartArea').html();
+		if (!svg)
+			return false;
+		clearInterval(ns.intervals[divID]);
+		
+		ns.chartSVG[divID] = ns.htmlEncode(svg);
+		
+		// When all the chart svg code has been extracted, dispatch the report
+		// 	- dnaChartCount: The number of SVG charts expected
+		//	- svgDataOrder: is a list of the order that
+		var howmany = ns.countSVGExtracted();
+		if (dnaChartCount == howmany) {
 			ns.dispatchReport();
 		}
+		return true;
+	},
+	countSVGExtracted: function ()
+	{
+		var ns = DnaGifts.report;
+		var howmany = 0;
+		jQuery.each(ns.chartSVG, function(k,v) {
+			howmany++;
+		});
+		return howmany;
 	},
 	dispatchReport: function()
 	{
 		var ns = DnaGifts.report;
+		
+		console.log("HREF: "+jQuery("table#tblDNAChart img:first").attr("src"));
+		
 		var url='index.php?option=com_dnagifts&format=json&task=report.dispatchReport';
         jQuery.ajax({
             type: "POST",
@@ -23,7 +49,7 @@ root.myNamespace.create('DnaGifts.report', {
             data: {
 				userTestID: 1,
                 svgData: ns.chartSVG,
-				svgDisplayOrder: ns.svgDisplayOrder
+				imgChartSRC: jQuery("table#tblDNAChart img:first").attr("src")
             },
 			success: function(json) {
 				if (json.success) {
@@ -55,57 +81,8 @@ Base.Helpers.bind_load(function () {
 google.load("visualization", "1", {packages:["corechart", "gauge"]});
 google.setOnLoadCallback(drawCharts);
 
-function getResultsByPosition(position){
-	for (var i=0;i<dnaResults.length;i++){
-		if (dnaResults[i].position == position) {
-			return i;
-		}
-	}
-	return -1;
-}
-
 function drawCharts() {
 	var ns = DnaGifts.report;
-	
-	/*************************************************************************/
-	// - GAUGES
-	var gaugelist = ['gauge1chart_div','gauge2chart_div','gauge3chart_div']
-	for (var i=0;i<gaugelist.length;i++){
-		var position = getResultsByPosition(i);
-		drawDnaGaugechart(
-			dnaResults[position].label,
-			dnaResults[position].score,
-			dnaMaxScore,
-			dnaResults[position].redColor,
-			dnaResults[position].yellowColor,
-			dnaResults[position].greenColor,
-			gaugelist[i]
-		);
-	}
-	
-	/*************************************************************************/
-	// - LINE CHART
-	var linedataData = [['Gift', 'Motivational Flow Level']];
-	for (var i=0;i<7;i++) {
-		var position = getResultsByPosition(i);
-		linedataData.push([dnaResults[position].label,dnaResults[position].score]);
-	}
-	var linedata = google.visualization.arrayToDataTable(linedataData);
-
-    var lineoptions = {
-        title: 'Your Motivational Flow',
-		series: {0:{color: '000000', visibleInLegend: false}},
-		pointSize: 3,
-		height: 300,
-		width: 400,
-		chartArea: { left: 20, top: 20, width: 350, height: 230},
-		hAxis: {slantedText: true, slantedTextAngle: 90, gridlines: {color: '#333', count: 4}}
-	};
-
-	var linedivID = 'linechart_div';
-	ns.chartContainer[linedivID] = document.getElementById(linedivID);
-    var linechart = new google.visualization.LineChart(ns.chartContainer[linedivID]);
-    linechart.draw(linedata, lineoptions);
 	
 	/*************************************************************************/
 	// - PIE CHART
@@ -136,9 +113,49 @@ function drawCharts() {
 	var piedivID = 'piechart_div';
 	ns.chartContainer[piedivID] = document.getElementById(piedivID);
 	var piechart = new google.visualization.PieChart(document.getElementById(piedivID));
-	google.visualization.events.addListener(piechart, 'ready', function(){ns.getSVG(piedivID)});
+	google.visualization.events.addListener(piechart, 'ready', function(){ns.extractSVG(piedivID)});
 	piechart.draw(piedata, pieoptions);
 
+	/*************************************************************************/
+	// - LINE CHART
+	var linedataData = [['Gift', 'Motivational Flow Level']];
+	for (var i=0;i<7;i++) {
+		var position = getResultsByPosition(i);
+		linedataData.push([dnaResults[position].label,dnaResults[position].score]);
+	}
+	var linedata = google.visualization.arrayToDataTable(linedataData);
+
+    var lineoptions = {
+        title: dnaReportCopy.motivationalflow,
+		series: {0:{color: '000000', visibleInLegend: false}},
+		pointSize: 3,
+		height: 300,
+		width: 400,
+		chartArea: { left: 20, top: 20, width: 350, height: 230},
+		hAxis: {slantedText: true, slantedTextAngle: 90, gridlines: {color: '#333', count: 4}}
+	};
+
+	var linedivID = 'linechart_div';
+	ns.chartContainer[linedivID] = document.getElementById(linedivID);
+    var linechart = new google.visualization.LineChart(ns.chartContainer[linedivID]);
+	google.visualization.events.addListener(linechart, 'ready', function(){ns.extractSVG(linedivID)});
+    linechart.draw(linedata, lineoptions);
+	
+	/*************************************************************************/
+	// - GAUGES
+	var gaugelist = ['gauge1chart_div','gauge2chart_div','gauge3chart_div']
+	for (var i=0;i<gaugelist.length;i++){
+		var position = getResultsByPosition(i);
+		drawDnaGaugechart(
+			dnaResults[position].label,
+			dnaResults[position].score,
+			dnaMaxScore,
+			dnaResults[position].redColor,
+			dnaResults[position].yellowColor,
+			dnaResults[position].greenColor,
+			gaugelist[i]
+		);
+	}
 }
 
 function drawDnaGaugechart(chartLabel, score, maxScore, redColor, yellowColor, greenColor, divID) {
@@ -163,6 +180,15 @@ function drawDnaGaugechart(chartLabel, score, maxScore, redColor, yellowColor, g
 	};
 	ns.chartContainer[divID] = document.getElementById(divID);
 	var chart = new google.visualization.Gauge(ns.chartContainer[divID]);
+	google.visualization.events.addListener(chart, 'ready', function(){ns.extractSVG(divID)});
 	chart.draw(data, options);
 }
 
+function getResultsByPosition(position){
+	for (var i=0;i<dnaResults.length;i++){
+		if (dnaResults[i].position == position) {
+			return i;
+		}
+	}
+	return -1;
+}

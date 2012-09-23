@@ -205,3 +205,10 @@
 ------------------
  - Updated the report related language Contants and prints
  
+0.0.30 (2012/09/23)
+------------------
+ - Made some minor fixes to report/charts copy and language management
+ - Implemented all the SVG extraction code
+ - Started with the initial layout of the PDF version of the report
+ 
+ 
