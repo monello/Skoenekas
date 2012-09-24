@@ -5,16 +5,26 @@ root.myNamespace.create('DnaGifts.report', {
 	intervals: {},
 	extractSVG: function(divID)
 	{
+		console.log("Extracting SVG for "+divID);
 		var ns = DnaGifts.report;
 		ns.intervals[divID] = setInterval(function(){ns._extractSVG(divID)},100);
 	},
     _extractSVG: function(divID)
 	{
 		var ns = DnaGifts.report;
-		var svg = jQuery("#"+divID+" iframe:first").contents().find('#chartArea').html();
+		var svg = undefined;
+		if (jQuery("#"+divID+" iframe:first")){
+			svg = jQuery("#"+divID+" iframe:first").contents().find('#chartArea').html();
+		}
+		if (!svg && jQuery("#"+divID+" svg:first")) {
+			svg = jQuery("#"+divID+" svg:first").parent().html();
+		}
+		
 		if (!svg)
 			return false;
 		clearInterval(ns.intervals[divID]);
+		
+		console.log(svg);
 		
 		ns.chartSVG[divID] = ns.htmlEncode(svg);
 		
@@ -22,6 +32,7 @@ root.myNamespace.create('DnaGifts.report', {
 		// 	- dnaChartCount: The number of SVG charts expected
 		//	- svgDataOrder: is a list of the order that
 		var howmany = ns.countSVGExtracted();
+		console.log("Howmany: "+howmany);
 		if (dnaChartCount == howmany) {
 			ns.dispatchReport();
 		}
@@ -39,8 +50,6 @@ root.myNamespace.create('DnaGifts.report', {
 	dispatchReport: function()
 	{
 		var ns = DnaGifts.report;
-		
-		console.log("HREF: "+jQuery("table#tblDNAChart img:first").attr("src"));
 		
 		var url='index.php?option=com_dnagifts&format=json&task=report.dispatchReport';
         jQuery.ajax({

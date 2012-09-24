@@ -211,4 +211,6 @@
  - Implemented all the SVG extraction code
  - Started with the initial layout of the PDF version of the report
  
- 
+0.0.31 (2012/09/24)
+------------------
+ - Applied a fix to cater for the iframes that were removed from Google charts :/
