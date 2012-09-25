@@ -83,7 +83,7 @@ table#tblScores thead th {
 table#tblScores tbody tr { color: #333333; }
 table#tblScores tbody tr td { text-align: center; }
 table#tblScores tbody tr td.tdYourGift { padding-left: 5px; text-align: left; }
-table#tblScores tbody tr td.tdScore { background-color: LightGrey; color: black;  }
+table#tblScores tbody tr td.tdScore { background-color: LightGrey; color: #333333;  }
 table#tblScores tbody tr.trPerceiver { background-color: #FF0000; }
 table#tblScores tbody tr.trServant { background-color: #FFC000; }
 table#tblScores tbody tr.trTeacher { background-color: #FFFF00; }
@@ -110,27 +110,3 @@ div.gaugecontainer table tr,
 div.gaugecontainer table tr td {
     border: none !important;
 }
-
-/*
-div.reportSection{
-    border-bottom-color: LightGrey;
-    border-bottom-style: dashed;
-    border-bottom-width: 1px;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-}
-div.rptLeft{
-    float: left;
-    width: 64%;
-}
-div.rptRight{
-    float: left;
-    width: 34%;
-}
-
-div.reportSection table,
-div.reportSection table tr,
-div.reportSection table tr td{
-    border: none !important;
-}
-*/

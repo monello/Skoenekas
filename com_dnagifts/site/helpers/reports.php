@@ -23,6 +23,10 @@ class ReportsHelper
         $bannerImageWidth   = 100;
         $html               = '';
         
+		$report				= new DnaGiftsControllerReport();
+		$model				= $report->getModel('Report', 'DnaGiftsModel');
+		$dnaResults			= $model->getResultsObject($userTestID);
+		
 		// Generate the report's document name
         $user = JFactory::getUser();
 		$user_id = $user->get("id");
@@ -102,11 +106,13 @@ class ReportsHelper
         
 		// ----------------- end document setup ---------------------
 		
-		$linestyle = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '', 'phase' => 0, 'color' => array(255, 0, 0));
+		$linestyle = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '2,1', 'phase' => 0, 'color' => array(211, 211, 211));
+		// Line: Left-start, Top-start, Left-stop, Top-stop
 		$pdf->Line(1, 30, 200, 30, $linestyle);
 		$pdf->Line(15, 15, 15, 280, $linestyle);
 		$pdf->Line(115, 15, 115, 280, $linestyle);
 		$pdf->Line(120, 15, 120, 280, $linestyle);
+		$pdf->Line(195, 15, 195, 280, $linestyle);
 		
 		$pdf->SetXY(15, 30);
 		$pdf->Write(0, 'Hi XXXXXXXXXXXXX', '', 0, 'L', true, 0, false, false, 0);
@@ -114,87 +120,51 @@ class ReportsHelper
 		$y = $pdf->GetY();
 		$pdf->SetY($y + 5);
 		
+		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_HEREYOURESULTS	= JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS');
+		$COM_DNAGIFTS_REPORT_INTRO_P1		= JText::_('COM_DNAGIFTS_REPORT_INTRO_P1');
+		$COM_DNAGIFTS_REPORT_INTRO_P2		= JText::_('COM_DNAGIFTS_REPORT_INTRO_P2');
+		$COM_DNAGIFTS_REPORT_THGIFT			= JText::_('COM_DNAGIFTS_REPORT_THGIFT');
+		$COM_DNAGIFTS_REPORT_THSCORE		= JText::_('COM_DNAGIFTS_REPORT_THSCORE');
+		$COM_DNAGIFTS_REPORT_THYOURGIFT		= JText::_('COM_DNAGIFTS_REPORT_THYOURGIFT');
+		
 		$html = <<<EOD
-		<table border="1" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
 			<tr>
 				<td width="350">
-					<p style="font-size: 16pt">Hier is U DNA toets resultate</p>
-					<p>Elke stelling in die toets was gekoppel aan 'n spesefieke DNA Gawe.
-					<br>
-					Elke andwoord knoppie het 'n sekere hoeveelheid punte aan die gawe toegeken
-					afhangende van hoeveel u met die stelling saam gestem het.</p>
-					<p>De Prim&#234;re Gawe is dus bepaal deur the stelligns te vind waarmee u die
-					meeste saam gestem het (met die hoogste punte telling).</p>
+					<p style="font-size: 16pt">$COM_DNAGIFTS_REPORT_HEREYOURESULTS</p>
+					<p>$COM_DNAGIFTS_REPORT_INTRO_P1</p>
+					<p>$COM_DNAGIFTS_REPORT_INTRO_P2</p>
 				</td>
-				<td width="20">&nbsp;</td>
-				<td width="250">
+				<td width="15">&nbsp;</td>
+				<td width="255">
 				
-				<table width="250" cellspacing="3" id="tblScores">
-				<thead>
-					<tr><th>Gawe</th>
-					<th>Telling</th>
-					<th>U Gawe</th>
-				</tr></thead>
-				<tbody>
-					<tr class="trPerceiver">						
-						<td>P</td>
-						<td class="tdScore">23</td>
-						<td class="tdYourGift">Perceiver</td>
+				<table width="255" cellspacing="3" cellpadding="3" id="tblScores" style="border: 1px solid #c5c5c5;">
+					<tr style="background-color: #000000; color: #ffffff; text-align: center;">
+						<td width="75">$COM_DNAGIFTS_REPORT_THGIFT</td>
+						<td width="75">$COM_DNAGIFTS_REPORT_THSCORE</td>
+						<td>$COM_DNAGIFTS_REPORT_THYOURGIFT</td>
 					</tr>
-					<tr class="trServant">						
-						<td>S</td>
-						<td class="tdScore">18</td>
-						<td class="tdYourGift">Servant</td>
-					</tr>
-					<tr class="trTeacher">						
-						<td>T</td>
-						<td class="tdScore">16</td>
-						<td class="tdYourGift">Teacher</td>
-					</tr>
-					<tr class="trExhorter">						
-						<td>E</td>
-						<td class="tdScore">49</td>
-						<td class="tdYourGift">Exhorter</td>
-					</tr>
-					<tr class="trGiver">						
-						<td>G</td>
-						<td class="tdScore">35</td>
-						<td class="tdYourGift">Giver</td>
-					</tr>
-					<tr class="trRuler">						
-						<td>R</td>
-						<td class="tdScore">40</td>
-						<td class="tdYourGift">Ruler</td>
-					</tr>
-					<tr class="trMercy">						
-						<td>M</td>
-						<td class="tdScore">19</td>
-						<td class="tdYourGift">Mercy</td>
-					</tr>
-				</tbody>
-			</table>
-				
-				</td>
-			</tr>
-		</table>
 EOD;
-        // Set some content to print
-//        $html = <<<EOD
-//	<p style="font-size: 16pt">Hier is U DNA toets resultate</p>
-//	<p>Elke stelling in die toets was gekoppel aan 'n spesefieke DNA Gawe.
-//	<br>
-//	Elke andwoord knoppie het 'n sekere hoeveelheid punte aan die gawe toegeken
-//	afhangende van hoeveel u met die stelling saam gestem het.</p>
-//	<p>De Prim&#234;re Gawe is dus bepaal deur the stelligns te vind waarmee u die
-//	meeste saam gestem het (met die hoogste punte telling).</p>
-//	
-//    <h1>Welcome to <a href="http://www.tcpdf.org" style="text-decoration:none;background-color:#CC0000;color:black;">&nbsp;<span style="color:black;">TC</span><span style="color:white;">PDF</span>&nbsp;</a>!</h1>
-//    <i>This is the first example of TCPDF library.</i>
-//    <p>This text is printed using the <i>writeHTMLCell()</i> method but you can also use: <i>Multicell(), writeHTML(), Write(), Cell() and Text()</i>.</p>
-//    <p>Please check the source code documentation and other examples for further information.</p>
-//    <p style="color:#CC0000;">TO IMPROVE AND EXPAND TCPDF I NEED YOUR SUPPORT, PLEASE <a href="http://sourceforge.net/donate/index.php?group_id=128076">MAKE A DONATION!</a></p>
-//EOD;
+
+		foreach($dnaResults as $data):
+			$tdcolor = '';
+			if ( in_array($data['abbr'], array('R','M')) ):
+				$tdcolor = 'color: #ffffff;';
+			endif;
+			$html .= '<tr style="text-align: center; color: #333333; background-color: #'.$data['redColor'].';">'.
+					'<td style="'.$tdcolor.'">'.$data['abbr'].'</td>'.
+					'<td style="background-color: LightGrey;">'.$data['score'].'</td>'.
+					'<td style="text-align: left;'.$tdcolor.'">'.$data['label'].'</td>'.
+				'</tr>';
+		endforeach;
+		
+		$html .= '</table></td></tr></table>'.
+			'<hr style="margin: 20px auto;border: 1px dashed #999;width: 70%;"/>';
         
+		$pdf->Line(1, '', 200, '', $linestyle);
+		
         // Print text using writeHTMLCell()
         //$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='', $html, $border=0, $ln=1, $fill=0, $reseth=true, $align='', $autopadding=true);
             

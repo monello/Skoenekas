@@ -214,3 +214,8 @@
 0.0.31 (2012/09/24)
 ------------------
  - Applied a fix to cater for the iframes that were removed from Google charts :/
+
+0.0.32 (2012/09/25)
+------------------
+ - Completely formatted the first section of the pdf report
+ 

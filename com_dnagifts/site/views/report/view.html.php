@@ -17,7 +17,9 @@ class DnaGiftsViewReport extends JView
 	    $params    	= $app->getParams();
     	$dispatcher	= JDispatcher::getInstance();
 		
-		$this->assignRef( 'dnaResults', $model->getResultsObject());
+		$test_user_id = 1; //mrl: provide real test_user_id
+		
+		$this->assignRef( 'dnaResults', $model->getResultsObject($test_user_id));
 		$this->assignRef( 'user', JFactory::getUser() );
 		
 		$chartdataArr = array();

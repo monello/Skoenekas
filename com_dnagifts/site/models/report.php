@@ -7,7 +7,7 @@ jimport('joomla.application.component.model');
 
 class DnaGiftsModelReport extends JModel
 {
-	public function getResultsObject() {
+	public function getResultsObject($test_user_id) {
 		$dnaResults = array(
 			array(
 				'label' => 'Perceiver',

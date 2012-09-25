@@ -5,7 +5,6 @@ root.myNamespace.create('DnaGifts.report', {
 	intervals: {},
 	extractSVG: function(divID)
 	{
-		console.log("Extracting SVG for "+divID);
 		var ns = DnaGifts.report;
 		ns.intervals[divID] = setInterval(function(){ns._extractSVG(divID)},100);
 	},
@@ -24,15 +23,12 @@ root.myNamespace.create('DnaGifts.report', {
 			return false;
 		clearInterval(ns.intervals[divID]);
 		
-		console.log(svg);
-		
 		ns.chartSVG[divID] = ns.htmlEncode(svg);
 		
 		// When all the chart svg code has been extracted, dispatch the report
 		// 	- dnaChartCount: The number of SVG charts expected
 		//	- svgDataOrder: is a list of the order that
 		var howmany = ns.countSVGExtracted();
-		console.log("Howmany: "+howmany);
 		if (dnaChartCount == howmany) {
 			ns.dispatchReport();
 		}
