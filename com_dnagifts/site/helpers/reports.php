@@ -117,8 +117,8 @@ class ReportsHelper
 		$pdf->SetXY(15, 30);
 		$pdf->Write(0, 'Hi XXXXXXXXXXXXX', '', 0, 'L', true, 0, false, false, 0);
 
-		$y = $pdf->GetY();
-		$pdf->SetY($y + 5);
+		//$y = $pdf->GetY();
+		//$pdf->SetY($y + 5);
 		
 		
 		// TEXT REPLACEMENT VARIABLES
@@ -133,7 +133,7 @@ class ReportsHelper
 		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
 			<tr>
 				<td width="350">
-					<p style="font-size: 16pt">$COM_DNAGIFTS_REPORT_HEREYOURESULTS</p>
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_HEREYOURESULTS</p>
 					<p>$COM_DNAGIFTS_REPORT_INTRO_P1</p>
 					<p>$COM_DNAGIFTS_REPORT_INTRO_P2</p>
 				</td>
@@ -160,16 +160,99 @@ EOD;
 				'</tr>';
 		endforeach;
 		
-		$html .= '</table></td></tr></table>'.
-			'<hr style="margin: 20px auto;border: 1px dashed #999;width: 70%;"/>';
+		$html .= '</table></td></tr></table>';
         
-		$pdf->Line(1, '', 200, '', $linestyle);
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
+		$y = $pdf->GetY();
+		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
+		
+		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_YOURLINEPROFILE	= JText::_('COM_DNAGIFTS_REPORT_YOURLINEPROFILE');
+		$COM_DNAGIFTS_REPORT_DNACHART			= JText::_('COM_DNAGIFTS_REPORT_DNACHART');
+		$COM_DNAGIFTS_REPORT_DNACHART_P1		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P1');
+		$COM_DNAGIFTS_REPORT_DNACHART_P2		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P2');
+		$COM_DNAGIFTS_REPORT_DNACHART_P3		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P3');
+		$COM_DNAGIFTS_REPORT_DNACHART_P4		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P4');
+		$COM_DNAGIFTS_REPORT_DNACHART_P5		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P5');
+		$primsecimg = '<img src="'.JURI::base(true).'/media/com_dnagifts/images/primary-secondary-'.JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG').'-2.png" />';
+		$html = <<<EOD
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+			<tr>
+				<td colspan="3">
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_YOURLINEPROFILE</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="350">
+					<table id="tblDNAChart">
+						<tr>
+							<td align="center">
+								<strong>$COM_DNAGIFTS_REPORT_DNACHART</strong>
+							</td>
+						</tr>
+						<tr>	
+							<td>
+								<img src="$imgChartSRC" />
+								$primsecimg
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+					<p>$COM_DNAGIFTS_REPORT_DNACHART_P1</p>
+					<p>$COM_DNAGIFTS_REPORT_DNACHART_P2</p>
+					<p>$COM_DNAGIFTS_REPORT_DNACHART_P3</p>
+					<p>$COM_DNAGIFTS_REPORT_DNACHART_P4</p>
+					<p>$COM_DNAGIFTS_REPORT_DNACHART_P5</p>
+				</td>
+			</tr>	
+		</table>	
+EOD;
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
+		$y = $pdf->GetY();
+		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
+
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_DNACOMP	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP');
+		$COM_DNAGIFTS_REPORT_DNACOMP_P1	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P1');
+		$COM_DNAGIFTS_REPORT_DNACOMP_P2	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P2');
+		$html = <<<EOD
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+			<tr>
+				<td colspan="3"><p class="rptText16">$COM_DNAGIFTS_REPORT_DNACOMP</p></td>
+			</tr>
+			<tr>
+				<td>
+
+				</td>
+				<td>&nbsp;</td>
+				<td>
+					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P1</p>
+					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P2</p>
+				</td>
+			</tr>
+EOD;
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['piechart_div']), $x='', $y=$pdf->GetY() - 50, $w='', $h=75, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		
+		$y = $pdf->GetY();
+		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
+				
+		
 		
         // Print text using writeHTMLCell()
         //$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='', $html, $border=0, $ln=1, $fill=0, $reseth=true, $align='', $autopadding=true);
             
-        // Print text using writeHTML()
-        $pdf->writeHTML($html);
     
         // ---------------------------------------------------------
         

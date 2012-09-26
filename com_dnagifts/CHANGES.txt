@@ -219,3 +219,8 @@
 ------------------
  - Completely formatted the first section of the pdf report
  
+0.0.33 (2012/09/26)
+------------------
+ - added the line graph to the pdf
+ - attempted the pie chart SVG, still needs some work
+ 

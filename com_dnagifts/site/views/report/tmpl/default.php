@@ -88,14 +88,15 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 								'| |1:| |'.$this->axeslabelsScores.
 								'| |2:|0|10|20|30|40|50|60';
 							$chartgrid = '100.0,25.0';
-							$chartfill = 'bg,ls,0,FFFFFF,0.09,'.$this->chartfillArr[0].
-								',0.10,'.$this->chartfillArr[1].
-								',0.095,'.$this->chartfillArr[2].
-								',0.095,'.$this->chartfillArr[3].
-								',0.10,'.$this->chartfillArr[4].
-								',0.10,'.$this->chartfillArr[5].
-								',0.09,'.$this->chartfillArr[6].
-								',0.09,FFFFFF,0.2';
+							$chartfill = 'c,ls,0,FFFFFF,0.07,'.$this->chartfillArr[0].
+								',0.12,'.$this->chartfillArr[1].
+								',0.13,'.$this->chartfillArr[2].
+								',0.12,'.$this->chartfillArr[3].
+								',0.12,'.$this->chartfillArr[4].
+								',0.13,'.$this->chartfillArr[5].
+								',0.13,'.$this->chartfillArr[6].
+								',0.13,FFFFFF,0.2';
+							//$chartfill='c,ls,0,FFFFFF,0.07,FF6262,0.1,FFCC99,0.095,FFFF99,0.095,99CC99,0.1,66CCCC,0.1,6666CC,0.09,9966CC,0.09,FFFFFF,0.2';
 							$markers = 'd,'.$this->markersArr[0].
 								',0,0,10|d,'.$this->markersArr[1].
 								',0,1,10|d,'.$this->markersArr[2].
@@ -104,8 +105,8 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 								',0,4,10|d,'.$this->markersArr[5].
 								',0,5,10|d,'.$this->markersArr[6].
 								',0,6,10'; // marker type, color, series index, which points, size
-							$primarybubble = 'y;s=bubble_text_small;d=bb,'.JText::_('COM_DNAGIFTS_REPORT_PRIMARYGIFTBUBBLE').',FF8,000;ds=0;dp='.$this->primaryDatapoint;
-							$secondarybubble = 'y;s=bubble_text_small;d=bb,'.JText::_('COM_DNAGIFTS_REPORT_SECONDARYGIFTBUBBLE').',FF8,000;ds=0;dp='.$this->secondaryDatapoint;
+							$primarybubble = 'y;s=bubble_text_small_withshadow;d=bb,'.JText::_('COM_DNAGIFTS_REPORT_PRIMARYGIFTBUBBLE').',FF8,000;ds=0;dp='.$this->primaryDatapoint;
+							$secondarybubble = 'y;s=bubble_text_small_withshadow;d=bb,'.JText::_('COM_DNAGIFTS_REPORT_SECONDARYGIFTBUBBLE').',FF8,000;ds=0;dp='.$this->secondaryDatapoint;
 							
 						?>
 						<img src="https://chart.googleapis.com/chart?cht=<?php echo $charttype;
@@ -121,6 +122,7 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 							?>&chm=<?php echo $markers;
 							?>&chdl=<?php echo $this->legends;
 							?>&chem=<?php echo $primarybubble; ?>|<?php echo $secondarybubble; ?>">
+						<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/primary-secondary-<?php echo JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG'); ?>-2.png" />
 					</td>
 				</tr>
 			</table>
