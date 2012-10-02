@@ -8,57 +8,42 @@ defined('_JEXEC') or die;
  * @subpackage	com_dnagifts
  * @since		1.6
  */
+
+//require_once(JPATH_ROOT.DS.'tcpdf'.DS.'config/lang/eng.php');
+//require_once(JPATH_ROOT.DS.'tcpdf'.DS.'tcpdf.php');
+
+//// Extra header voor background color
+//class MYPDF extends TCPDF {
+//	//Page header public
+//	function Header() {
+//		// Background color
+//		$this->Rect(0,0,210,297,'F','',$fill_color = array(255, 170, 96));
+//	}
+//}
+ 
 class ReportsHelper
 {
-	public static function generateReportPDF($displaytype, $svgData, $imgChartSRC, $userTestID)
+	public static function &documentSetup($userTestID)
 	{
 		$author             = JText::_( 'COM_DNAGIFTS_PDF_AUTHOR' );
         $title              = JText::_( 'COM_DNAGIFTS_PDF_TITLE' );
 		$subject            = JText::_( 'COM_DNAGIFTS_PDF_SUBJECT' );
         $keywords           = JText::_( 'COM_DNAGIFTS_PDF_KEYWORDS' );
-		$documentname       = JText::_( 'COM_DNAGIFTS_PDF_FILENAME' );
         $bannerImage        = JText::_( 'COM_DNAGIFTS_PDF_BANNERIMAGE' );
         $bannerTitle        = JText::_( 'COM_DNAGIFTS_PDF_BANNERTITLE' );
         $bannerText         = JText::_( 'COM_DNAGIFTS_PDF_BANNERTEXT' );
         $bannerImageWidth   = 100;
-        $html               = '';
         
-		$report				= new DnaGiftsControllerReport();
-		$model				= $report->getModel('Report', 'DnaGiftsModel');
-		$dnaResults			= $model->getResultsObject($userTestID);
-		
-		// Generate the report's document name
-        $user = JFactory::getUser();
-		$user_id = $user->get("id");
-        
-        $db = JFactory::getDbo();
-		$query = $db->getQuery(true);
-        $query->select('test_id, started_datetime');
-		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
-		$query->where('id = '.$userTestID);
-        $db->setQuery($query);
-        $result = $db->loadObject();
-        $timeblah = array('-',':',' ');
-        $timestamp = str_replace($timeblah, "", $result->started_datetime);
-        
-        $documentname = $documentname." (".$user_id."-".$timestamp."-".$result->test_id.")".".pdf";
-        
-		// Log the report name in next to the user-test record
-		$query = $db->getQuery(true);
-		$query->update('#__dnagifts_lnk_user_tests');
-		$query->set('report_name = '.$db->quote($documentname));
-		$query->where('id = ' . (int) $userTestID);
-		$db->setQuery($query);
-		$db->query();
+		require_once(JPATH_ROOT.DS.'tcpdf'.DS.'config/lang/eng.php');
+		require_once(JPATH_ROOT.DS.'tcpdf'.DS.'tcpdf.php');
 		
 		// Generate the PDF
-        @ob_end_clean();      
-        
-        require_once(JPATH_ROOT.DS.'tcpdf'.DS.'config/lang/eng.php');
-        require_once(JPATH_ROOT.DS.'tcpdf'.DS.'tcpdf.php');
-        
+        @ob_end_clean();
+
 		// ----------------- document setup ---------------------
 		
+		// create new PDF document
+		//$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         
         // set document information
@@ -69,8 +54,8 @@ class ReportsHelper
         
         // set default header data
         $pdf->SetHeaderData($bannerImage, $bannerImageWidth, $bannerTitle, $bannerText);
-        
-        // set header and footer fonts
+		
+		// set header and footer fonts
         $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
         $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
         
@@ -105,6 +90,225 @@ class ReportsHelper
         $pdf->AddPage();
         
 		// ----------------- end document setup ---------------------
+		
+		return $pdf;
+	}
+		
+	public static function getFilename($displaytype, $documentname)
+	{
+		// ------------- write the document to disk -------------------
+        if ($displaytype == 'F') {
+            $filename = JPATH_SITE.DS."components".DS."com_dnagifts".DS."store".DS.$documentname;
+        } else {
+            $filename = $documentname.".pdf";
+        }
+		
+        return $filename;
+	}
+	
+	public static function prepareData($userTestID)
+	{
+		$documentname       = JText::_( 'COM_DNAGIFTS_PDF_FILENAME' );
+		$report				= new DnaGiftsControllerReport();
+		$model				= $report->getModel('Report', 'DnaGiftsModel');
+		$dnaResults			= $model->getResultsObject($userTestID);
+		
+		// Generate the report's document name
+        $user = JFactory::getUser();
+		$user_id = $user->get("id");
+        
+        $db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+        $query->select('test_id, started_datetime');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
+		$query->where('id = '.$userTestID);
+        $db->setQuery($query);
+		print $query;
+        $result = $db->loadObject();
+        $timeblah = array('-',':',' ');
+        $timestamp = str_replace($timeblah, "", $result->started_datetime);
+        
+        $documentname = $documentname." (".$user_id."-".$timestamp."-".$result->test_id.")".".pdf";
+        
+		// Log the report name in next to the user-test record
+		$query = $db->getQuery(true);
+		$query->update('#__dnagifts_lnk_user_tests');
+		$query->set('report_name = '.$db->quote($documentname));
+		$query->where('id = ' . (int) $userTestID);
+		$db->setQuery($query);
+		$db->query();
+		
+		return array($documentname, $dnaResults);
+	}
+	
+	public static function generateReportMSIEPDF($displaytype, $userTestID)
+	{
+		$pdf =& ReportsHelper::documentSetup($userTestID);
+		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
+		$html = '';
+		
+		
+		
+		
+		
+		// get html from template
+		$linestyle = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '2,1', 'phase' => 0, 'color' => array(211, 211, 211));
+		// Line: Left-start, Top-start, Left-stop, Top-stop
+		$pdf->Line(1, 30, 200, 30, $linestyle);
+		$pdf->Line(15, 15, 15, 280, $linestyle);
+		$pdf->Line(115, 15, 115, 280, $linestyle);
+		$pdf->Line(120, 15, 120, 280, $linestyle);
+		$pdf->Line(195, 15, 195, 280, $linestyle);
+		
+		$pdf->SetXY(15, 30);
+		$pdf->Write(0, 'Hi XXXXXXXXXXXXX', '', 0, 'L', true, 0, false, false, 0);
+
+		//$y = $pdf->GetY();
+		//$pdf->SetY($y + 5);
+		
+		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_HEREYOURESULTS	= JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS');
+		$COM_DNAGIFTS_REPORT_INTRO_P1		= JText::_('COM_DNAGIFTS_REPORT_INTRO_P1');
+		$COM_DNAGIFTS_REPORT_INTRO_P2		= JText::_('COM_DNAGIFTS_REPORT_INTRO_P2');
+		$COM_DNAGIFTS_REPORT_THGIFT			= JText::_('COM_DNAGIFTS_REPORT_THGIFT');
+		$COM_DNAGIFTS_REPORT_THSCORE		= JText::_('COM_DNAGIFTS_REPORT_THSCORE');
+		$COM_DNAGIFTS_REPORT_THYOURGIFT		= JText::_('COM_DNAGIFTS_REPORT_THYOURGIFT');
+		
+		$html = <<<EOD
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+			<tr>
+				<td width="350">
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_HEREYOURESULTS</p>
+					<p>$COM_DNAGIFTS_REPORT_INTRO_P1</p>
+					<p>$COM_DNAGIFTS_REPORT_INTRO_P2</p>
+				</td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+				
+				<table width="255" cellspacing="3" cellpadding="3" id="tblScores" style="border: 1px solid #c5c5c5;">
+					<tr style="background-color: #000000; color: #ffffff; text-align: center;">
+						<td width="75">$COM_DNAGIFTS_REPORT_THGIFT</td>
+						<td width="75">$COM_DNAGIFTS_REPORT_THSCORE</td>
+						<td>$COM_DNAGIFTS_REPORT_THYOURGIFT</td>
+					</tr>
+EOD;
+
+		foreach($dnaResults as $data):
+			$tdcolor = '';
+			if ( in_array($data['abbr'], array('R','M')) ):
+				$tdcolor = 'color: #ffffff;';
+			endif;
+			$html .= '<tr style="text-align: center; color: #333333; background-color: #'.$data['redColor'].';">'.
+					'<td style="'.$tdcolor.'">'.$data['abbr'].'</td>'.
+					'<td style="background-color: LightGrey;">'.$data['score'].'</td>'.
+					'<td style="text-align: left;'.$tdcolor.'">'.$data['label'].'</td>'.
+				'</tr>';
+		endforeach;
+		
+		$html .= '</table></td></tr></table>';
+        
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
+		$y = $pdf->GetY();
+		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
+		
+		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_YOURLINEPROFILE	= JText::_('COM_DNAGIFTS_REPORT_YOURLINEPROFILE');
+		$COM_DNAGIFTS_REPORT_DNACHART			= JText::_('COM_DNAGIFTS_REPORT_DNACHART');
+		$COM_DNAGIFTS_REPORT_DNACHART_P1		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P1');
+		$COM_DNAGIFTS_REPORT_DNACHART_P2		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P2');
+		$COM_DNAGIFTS_REPORT_DNACHART_P3		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P3');
+		$COM_DNAGIFTS_REPORT_DNACHART_P4		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P4');
+		$COM_DNAGIFTS_REPORT_DNACHART_P5		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P5');
+		$primsecimg = '<img src="'.JURI::base(true).'/media/com_dnagifts/images/primary-secondary-'.JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG').'-2.png" />';
+		$html = <<<EOD
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+			<tr>
+				<td colspan="3">
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_YOURLINEPROFILE</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="350">
+					<table id="tblDNAChart">
+						<tr>
+							<td align="center">
+								<strong>$COM_DNAGIFTS_REPORT_DNACHART</strong>
+							</td>
+						</tr>
+						<tr>	
+							<td>
+								<img src="$imgChartSRC" />
+								$primsecimg
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+					<p>$COM_DNAGIFTS_REPORT_DNACHART_P1</p>
+					<p>$COM_DNAGIFTS_REPORT_DNACHART_P2</p>
+					<p>$COM_DNAGIFTS_REPORT_DNACHART_P3</p>
+					<p>$COM_DNAGIFTS_REPORT_DNACHART_P4</p>
+					<p>$COM_DNAGIFTS_REPORT_DNACHART_P5</p>
+				</td>
+			</tr>	
+		</table>	
+EOD;
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+//		
+//		$y = $pdf->GetY();
+//		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
+//
+//		// TEXT REPLACEMENT VARIABLES
+//		$COM_DNAGIFTS_REPORT_DNACOMP	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP');
+//		$COM_DNAGIFTS_REPORT_DNACOMP_P1	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P1');
+//		$COM_DNAGIFTS_REPORT_DNACOMP_P2	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P2');
+//		$html = <<<EOD
+//		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+//			<tr>
+//				<td colspan="3"><p class="rptText16">$COM_DNAGIFTS_REPORT_DNACOMP</p></td>
+//			</tr>
+//			<tr>
+//				<td>
+//
+//				</td>
+//				<td>&nbsp;</td>
+//				<td>
+//					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P1</p>
+//					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P2</p>
+//				</td>
+//			</tr>
+//EOD;
+//
+//		// Print text using writeHTML()
+//        $pdf->writeHTML($html);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//$pdf->writeHTML($html);
+		
+		$filename = ReportsHelper::getFilename($displaytype, $documentname);
+        $pdf->Output($filename, $displaytype);
+	}
+	
+	public static function generateReportPDF($displaytype, $svgData, $imgChartSRC, $userTestID)
+	{
+		$pdf =& ReportsHelper::documentSetup($userTestID);
+		
+		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
+		$html = '';
 		
 		$linestyle = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '2,1', 'phase' => 0, 'color' => array(211, 211, 211));
 		// Line: Left-start, Top-start, Left-stop, Top-stop
@@ -264,16 +468,7 @@ EOD;
         //$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['linechart_div']), $x='', $y='', $w='', $h=200, $link='', $align='', $palign='', $border=0, $fitonpage=false);
         //$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['piechart_div']), $x='', $y='', $w='', $h=100, $link='', $align='', $palign='', $border=0, $fitonpage=false);
         
-		
-		
-		
-        // ------------- write the document to disk -------------------
-        if ($displaytype == 'F') {
-            $filename = JPATH_SITE.DS."components".DS."com_dnagifts".DS."store".DS.$documentname;
-        } else {
-            $filename = $documentname.".pdf";
-        }
-		
+		$filename = ReportsHelper::getFilename($displaytype, $documentname);
         $pdf->Output($filename, $displaytype);
 	}
 	

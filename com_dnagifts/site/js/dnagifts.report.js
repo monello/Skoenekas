@@ -5,8 +5,12 @@ root.myNamespace.create('DnaGifts.report', {
 	intervals: {},
 	extractSVG: function(divID)
 	{
+		if (jQuery.browser.msie) {
+			return false;
+		}
 		var ns = DnaGifts.report;
-		ns.intervals[divID] = setInterval(function(){ns._extractSVG(divID)},100);
+		ns.intervals[divID] = setInterval(function(){ns._extractSVG(divID)},1000);
+		return true;
 	},
     _extractSVG: function(divID)
 	{
@@ -65,6 +69,26 @@ root.myNamespace.create('DnaGifts.report', {
 			}
         });
 	},
+	dispatchMSIEReport: function()
+	{
+		var ns = DnaGifts.report;
+		
+		var url='index.php?option=com_dnagifts&format=json&task=report.dispatchMSIEReport';
+        jQuery.ajax({
+            type: "POST",
+            url: url,
+            data: {
+				userTestID: 1
+            },
+			success: function(json) {
+				if (json.success) {
+					jQuery("#notificationtext").html(json.message);
+					jQuery("#notificationtab").show();
+					setInterval(function(){jQuery("#notificationtab").fadeOut()}, 3000);
+				}
+			}
+        });
+	},
 	htmlEncode: function(value){
 		return jQuery('<div/>').text(value).html();
 	}
@@ -75,10 +99,12 @@ root.myNamespace.create('DnaGifts.report', {
 * Queue the functions below into the load_array, to be called from the init function
 */
 Base.Helpers.bind_load(function () {
-    var ns = DnaGifts.report;
+	var ns = DnaGifts.report;
     jQuery.metadata.setType('attr','data');
 	setInterval(function(){jQuery("#notificationtab").fadeOut()}, 6000);
-    
+    if (jQuery.browser.msie) {
+		ns.dispatchMSIEReport();
+	}
 });
 
 

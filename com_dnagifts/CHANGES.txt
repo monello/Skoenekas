@@ -224,3 +224,7 @@
  - added the line graph to the pdf
  - attempted the pie chart SVG, still needs some work
  
+0.0.33 (2012/10/02)
+------------------
+ - Started coding the MSIE report
+ 

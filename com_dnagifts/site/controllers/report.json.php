@@ -22,15 +22,23 @@ class DnaGiftsControllerReport extends JControllerForm
 		//ReportsHelper::emailReportPDF($userTestID);
 		echo json_encode(array("success" => true, "message" => jText::_('COM_DNAGIFTS_REPORT_SENTEMAIL')));
 	}
-	
-	public function generateReportPDF()
+	public function dispatchMSIEReport()
 	{
 		$displaytype	= 'F'; //use 'F' for emailing not 'E' as I want to save a real file to a folder and attache that to the email
-        $svgData		= $_POST['svgData'];
         $userTestID		= $_POST['userTestID'];
-		ReportsHelper::generateReportPDF($displaytype, $svgData, $userTestID);
+		ReportsHelper::generateReportMSIEPDF($displaytype, $userTestID);
+		//ReportsHelper::emailReportPDF($userTestID);
+		echo json_encode(array("success" => true, "message" => jText::_('COM_DNAGIFTS_REPORT_SENTEMAIL')));
 	}
 	
+//	public function generateReportPDF()
+//	{
+//		$displaytype	= 'F'; //use 'F' for emailing not 'E' as I want to save a real file to a folder and attache that to the email
+//        $svgData		= $_POST['svgData'];
+//        $userTestID		= $_POST['userTestID'];
+//		ReportsHelper::generateReportPDF($displaytype, $svgData, $userTestID);
+//	}
+//	
 	public function emailReportPDF()
 	{
 		$userTestID	= $_POST['userTestID'];
