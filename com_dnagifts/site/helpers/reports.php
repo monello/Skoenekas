@@ -123,7 +123,6 @@ class ReportsHelper
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
 		$query->where('id = '.$userTestID);
         $db->setQuery($query);
-		print $query;
         $result = $db->loadObject();
         $timeblah = array('-',':',' ');
         $timestamp = str_replace($timeblah, "", $result->started_datetime);
@@ -145,11 +144,12 @@ class ReportsHelper
 	{
 		$pdf =& ReportsHelper::documentSetup($userTestID);
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
+		
+		// prepare the image charts
+		$dnaChartSrc	= ReportsHelper::generateDNAChart($dnaResults);
+		$dnaPieChartSrc	= ReportsHelper::generateImagePieChart($dnaResults);
+		print $dnaPieChartSrc;
 		$html = '';
-		
-		
-		
-		
 		
 		// get html from template
 		$linestyle = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '2,1', 'phase' => 0, 'color' => array(211, 211, 211));
@@ -241,7 +241,7 @@ EOD;
 						</tr>
 						<tr>	
 							<td>
-								<img src="$imgChartSRC" />
+								<img src="$dnaChartSrc" />
 								$primsecimg
 							</td>
 						</tr>
@@ -261,6 +261,44 @@ EOD;
 
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
+		
+
+		
+		
+		//###################################################################################################################
+		
+		
+		$y = $pdf->GetY();
+		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
+		
+		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_DNACOMP	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP');
+		$COM_DNAGIFTS_REPORT_DNACOMP_P1	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P1');
+		$COM_DNAGIFTS_REPORT_DNACOMP_P1	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P2');
+		$html = <<<EOD
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+			<tr>
+				<td colspan="3">
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_DNACOMP</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="350">
+					<img src="$dnaPieChartSrc" />
+				</td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P1</p>
+					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P1</p>
+				</td>
+			</tr>	
+		</table>	
+EOD;
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
 //		
 //		$y = $pdf->GetY();
 //		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
@@ -472,6 +510,136 @@ EOD;
         $pdf->Output($filename, $displaytype);
 	}
 	
+	public static function generateDNAChart($dnaResults)
+	{
+		$chartdataArr = array();
+		$seriescolorsArr = array();
+		$axeslabelsAbbrArr = array();
+		$axeslabelsScoresArr = array();
+		$chartfillArr = array();
+		$markersArr = array();
+		$legendsArr = array();
+		$primaryDatapoint = 0;
+		$secondaryDatapoint = 0;
+		
+		$cntr = 0;
+		foreach($dnaResults as $data) {
+			array_push($chartdataArr,$data['score']);
+			array_push($seriescolorsArr,$data['redColor']);
+			array_push($axeslabelsAbbrArr,$data['abbr']);
+			array_push($axeslabelsScoresArr,$data['score']);
+			array_push($chartfillArr,$data['yellowColor']);
+			array_push($markersArr,$data['redColor']);
+			array_push($legendsArr,$data['label']);
+			if ((int) $data['position'] == 0) {
+				$primaryDatapoint = $cntr;
+			}
+			if ((int) $data['position'] == 1) {
+				$secondaryDatapoint = $cntr;
+			}
+			$cntr++;
+		}
+		
+		$chartParams = array(
+			'chartdata' 			=> implode(",",$chartdataArr),
+			'seriescolors'			=> implode("|",$seriescolorsArr),
+			'axeslabelsAbbr'		=> implode("|",$axeslabelsAbbrArr),
+			'axeslabelsScores'		=> implode("|",$axeslabelsScoresArr),
+			'legends'				=> implode("|",$legendsArr),
+			'chartfillArr'			=> $chartfillArr,
+			'markersArr'			=> $markersArr,
+			'primaryDatapoint'		=> $primaryDatapoint,
+			'secondaryDatapoint'	=> $secondaryDatapoint
+		);
+		
+		$charttype = 'lxy';
+		$chartsize = '400x300';
+		$chartdata = 't:7,15,23,30,38,46,53|'.$chartParams['chartdata'];
+		$chartscale = '0,60';
+		$linestyle = '1';
+		$visibleaxes = 'x,x,y'; // (x,y,t,b) (x-axis, y-axis, top, bottom)
+		$axeslabels = '0:| |'.$chartParams['axeslabelsAbbr'].
+			'| |1:| |'.$chartParams['axeslabelsScores'].
+			'| |2:|0|10|20|30|40|50|60';
+		$chartgrid = '100.0,25.0';
+		$chartfill = 'c,ls,0,FFFFFF,0.07,'.$chartParams['chartfillArr'][0].
+			',0.12,'.$chartParams['chartfillArr'][1].
+			',0.13,'.$chartParams['chartfillArr'][2].
+			',0.12,'.$chartParams['chartfillArr'][3].
+			',0.12,'.$chartParams['chartfillArr'][4].
+			',0.13,'.$chartParams['chartfillArr'][5].
+			',0.13,'.$chartParams['chartfillArr'][6].
+			',0.13,FFFFFF,0.2';
+		//$chartfill='c,ls,0,FFFFFF,0.07,FF6262,0.1,FFCC99,0.095,FFFF99,0.095,99CC99,0.1,66CCCC,0.1,6666CC,0.09,9966CC,0.09,FFFFFF,0.2';
+		$markers = 'd,'.$chartParams['markersArr'][0].
+			',0,0,10|d,'.$chartParams['markersArr'][1].
+			',0,1,10|d,'.$chartParams['markersArr'][2].
+			',0,2,10|d,'.$chartParams['markersArr'][3].
+			',0,3,10|d,'.$chartParams['markersArr'][4].
+			',0,4,10|d,'.$chartParams['markersArr'][5].
+			',0,5,10|d,'.$chartParams['markersArr'][6].
+			',0,6,10'; // marker type, color, series index, which points, size
+		$primarybubble = 'y;s=bubble_text_small_withshadow;d=bb,'.JText::_('COM_DNAGIFTS_REPORT_PRIMARYGIFTBUBBLE').',FF8,000;ds=0;dp='.$chartParams['primaryDatapoint'];
+		$secondarybubble = 'y;s=bubble_text_small_withshadow;d=bb,'.JText::_('COM_DNAGIFTS_REPORT_SECONDARYGIFTBUBBLE').',FF8,000;ds=0;dp='.$chartParams['secondaryDatapoint'];
+		
+		$dnaChart="https://chart.googleapis.com/chart".
+			"?cht=".$charttype.
+			"&chs=".$chartsize.
+			"&chd=".$chartdata.
+			"&chds=".$chartscale.
+			"&chco=".$chartParams['seriescolors'].
+			"&chls=".$linestyle.
+			"&chxt=".$visibleaxes.
+			"&chxl=".$axeslabels.
+			"&chg=".$chartgrid.
+			"&chf=".$chartfill.
+			"&chm=".$markers.
+			"&chdl=".$chartParams['legends'].
+			"&chem=".$primarybubble."|".$secondarybubble;
+		return $dnaChart;
+	}
+	
+	public static function generateImagePieChart($dnaResults)
+	{
+		$chartdataArr = array();
+		$seriescolorsArr = array();
+		$legendsArr = array();
+		
+		$total = 0;
+		foreach($dnaResults as $data) {
+			$total += (int) $data['score'];	
+		}
+		
+		$cntr = 0;
+		foreach($dnaResults as $data) {
+			$percentage = round((int) $data['score'] / $total * 100, 1);
+			array_push($chartdataArr,$data['score']);
+			array_push($seriescolorsArr,$data['redColor']);
+			array_push($legendsArr,$data['label']." (".$percentage."%)");
+			$cntr++;
+		}
+		
+		$chartParams = array(
+			'chartdata' 	=> implode(",",$chartdataArr),
+			'seriescolors'	=> implode("|",$seriescolorsArr),
+			'legends'		=> implode("|",$legendsArr)
+		);
+		
+		$charttype = 'p3';
+		$chartsize = '300x150';
+		$rotateAngle = 4.7;
+		
+		$dnaChart="https://chart.googleapis.com/chart".
+			"?cht=".$charttype.
+			"&chs=".$chartsize.
+			"&chd=t:".$chartParams['chartdata'].
+			//"&chl=11.5%|9%|8%|24.5%|17.5%|20%|9.5%".
+			"&chdl=".$chartParams['legends'].
+			"&chco=".$chartParams['seriescolors'].
+			"&chp=".$rotateAngle;
+			
+		return $dnaChart;
+	}
 	public static function emailReportPDF($userTestID)
 	{
 		$user = JFactory::getUser();

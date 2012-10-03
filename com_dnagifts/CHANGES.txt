@@ -224,7 +224,14 @@
  - added the line graph to the pdf
  - attempted the pie chart SVG, still needs some work
  
-0.0.33 (2012/10/02)
+0.0.34 (2012/10/02)
 ------------------
  - Started coding the MSIE report
+ 
+0.0.35 (2012/10/04)
+------------------
+ - move all the image chart generation the report-helper so I can call it from multiple places and cater for the MSIE version of the PDF
+ - Modularized the Report generation code to support re-using.
+ - Added the Image Pie Chart to the MSIE PDF.
+ - Removed the HTML for the hyperlink from the PDF header as it does not work.
  
