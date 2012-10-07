@@ -146,26 +146,24 @@ class ReportsHelper
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
 		
 		// prepare the image charts
-		$dnaChartSrc	= ReportsHelper::generateDNAChart($dnaResults);
-		$dnaPieChartSrc	= ReportsHelper::generateImagePieChart($dnaResults);
-		print $dnaPieChartSrc;
+		$dnaChartSrc		= ReportsHelper::generateDNAChart($dnaResults);
+		$dnaPieChartSrc		= ReportsHelper::generateImagePieChart($dnaResults);
+		$dnaLineChartSrc	= ReportsHelper::generateImageLineChart($dnaResults);
+		
 		$html = '';
 		
 		// get html from template
 		$linestyle = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '2,1', 'phase' => 0, 'color' => array(211, 211, 211));
-		// Line: Left-start, Top-start, Left-stop, Top-stop
-		$pdf->Line(1, 30, 200, 30, $linestyle);
-		$pdf->Line(15, 15, 15, 280, $linestyle);
-		$pdf->Line(115, 15, 115, 280, $linestyle);
-		$pdf->Line(120, 15, 120, 280, $linestyle);
-		$pdf->Line(195, 15, 195, 280, $linestyle);
+		//// Line: Left-start, Top-start, Left-stop, Top-stop
+		//$pdf->Line(1, 30, 200, 30, $linestyle);
+		//$pdf->Line(15, 15, 15, 280, $linestyle);
+		//$pdf->Line(115, 15, 115, 280, $linestyle);
+		//$pdf->Line(120, 15, 120, 280, $linestyle);
+		//$pdf->Line(195, 15, 195, 280, $linestyle);
 		
 		$pdf->SetXY(15, 30);
 		$pdf->Write(0, 'Hi XXXXXXXXXXXXX', '', 0, 'L', true, 0, false, false, 0);
 
-		//$y = $pdf->GetY();
-		//$pdf->SetY($y + 5);
-		
 		
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_HEREYOURESULTS	= JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS');
@@ -176,7 +174,7 @@ class ReportsHelper
 		$COM_DNAGIFTS_REPORT_THYOURGIFT		= JText::_('COM_DNAGIFTS_REPORT_THYOURGIFT');
 		
 		$html = <<<EOD
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
 			<tr>
 				<td width="350">
 					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_HEREYOURESULTS</p>
@@ -210,11 +208,7 @@ EOD;
         
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
-		
-		$y = $pdf->GetY();
-		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
-		
-		
+				
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_YOURLINEPROFILE	= JText::_('COM_DNAGIFTS_REPORT_YOURLINEPROFILE');
 		$COM_DNAGIFTS_REPORT_DNACHART			= JText::_('COM_DNAGIFTS_REPORT_DNACHART');
@@ -223,9 +217,9 @@ EOD;
 		$COM_DNAGIFTS_REPORT_DNACHART_P3		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P3');
 		$COM_DNAGIFTS_REPORT_DNACHART_P4		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P4');
 		$COM_DNAGIFTS_REPORT_DNACHART_P5		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P5');
-		$primsecimg = '<img src="'.JURI::base(true).'/media/com_dnagifts/images/primary-secondary-'.JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG').'-2.png" />';
+		$primsecimg = '<img width="350" height="52" src="'.JURI::base(true).'/media/com_dnagifts/images/primary-secondary-'.JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG').'-2.png" />';
 		$html = <<<EOD
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
 			<tr>
 				<td colspan="3">
 					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_YOURLINEPROFILE</p>
@@ -261,23 +255,15 @@ EOD;
 
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
-		
 
-		
-		
 		//###################################################################################################################
-		
-		
-		$y = $pdf->GetY();
-		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
-		
 		
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_DNACOMP	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP');
 		$COM_DNAGIFTS_REPORT_DNACOMP_P1	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P1');
 		$COM_DNAGIFTS_REPORT_DNACOMP_P1	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P2');
 		$html = <<<EOD
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
 			<tr>
 				<td colspan="3">
 					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_DNACOMP</p>
@@ -299,35 +285,74 @@ EOD;
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
 		
-//		
-//		$y = $pdf->GetY();
-//		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
-//
-//		// TEXT REPLACEMENT VARIABLES
-//		$COM_DNAGIFTS_REPORT_DNACOMP	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP');
-//		$COM_DNAGIFTS_REPORT_DNACOMP_P1	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P1');
-//		$COM_DNAGIFTS_REPORT_DNACOMP_P2	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P2');
-//		$html = <<<EOD
-//		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
-//			<tr>
-//				<td colspan="3"><p class="rptText16">$COM_DNAGIFTS_REPORT_DNACOMP</p></td>
-//			</tr>
-//			<tr>
-//				<td>
-//
-//				</td>
-//				<td>&nbsp;</td>
-//				<td>
-//					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P1</p>
-//					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P2</p>
-//				</td>
-//			</tr>
-//EOD;
-//
-//		// Print text using writeHTML()
-//        $pdf->writeHTML($html);
+		//###################################################################################################################
 		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_MOTIFLOW		= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW');
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_P1	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_P1');
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_P2	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_P2');
+		$html = <<<EOD
+		<br/><br/><br/>
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
+			<tr>
+				<td colspan="3">
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="350">
+					<img src="$dnaLineChartSrc" />
+				</td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+					<p>$COM_DNAGIFTS_REPORT_MOTIFLOW_P1</p>
+					<p>$COM_DNAGIFTS_REPORT_MOTIFLOW_P2</p>
+				</td>
+			</tr>	
+		</table>	
+EOD;
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
 		
+		//###################################################################################################################
+		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL');
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY');
+		$html = <<<EOD
+		<br/><br/><br/>
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
+			<tr>
+				<td colspan="3">
+					<p style="font-size: 16pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL</p>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY ?????????</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="350">
+					<p>Your Primary Primary flow comes from this gift.</p>
+					<div style="float:left; width: 140px; height: 200px;"><img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/exhorter.png" /></div>
+					<div style="float:left; width: 130px; height: 150px;margin-left: 50px">
+					
+					</div>
+				</td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+					<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/exhorter-header.png" />
+					<p>Your birthright is locked up inside this gift, your <strong>DYNAMIC NATURAL ABILITY/AUTHORITY/ATTRIBUTES</strong> comes from this gift that God placed inside you.</p>
+					<p>The agreement meter shows how much you agreed with all the Exhorter statements in the test.</p>
+				</td>
+			</tr>	
+		</table>	
+EOD;
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
 		
 		
 		
@@ -349,20 +374,16 @@ EOD;
 		$html = '';
 		
 		$linestyle = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '2,1', 'phase' => 0, 'color' => array(211, 211, 211));
-		// Line: Left-start, Top-start, Left-stop, Top-stop
-		$pdf->Line(1, 30, 200, 30, $linestyle);
-		$pdf->Line(15, 15, 15, 280, $linestyle);
-		$pdf->Line(115, 15, 115, 280, $linestyle);
-		$pdf->Line(120, 15, 120, 280, $linestyle);
-		$pdf->Line(195, 15, 195, 280, $linestyle);
+		//// Line: Left-start, Top-start, Left-stop, Top-stop
+		//$pdf->Line(1, 30, 200, 30, $linestyle);
+		//$pdf->Line(15, 15, 15, 280, $linestyle);
+		//$pdf->Line(115, 15, 115, 280, $linestyle);
+		//$pdf->Line(120, 15, 120, 280, $linestyle);
+		//$pdf->Line(195, 15, 195, 280, $linestyle);
 		
 		$pdf->SetXY(15, 30);
 		$pdf->Write(0, 'Hi XXXXXXXXXXXXX', '', 0, 'L', true, 0, false, false, 0);
 
-		//$y = $pdf->GetY();
-		//$pdf->SetY($y + 5);
-		
-		
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_HEREYOURESULTS	= JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS');
 		$COM_DNAGIFTS_REPORT_INTRO_P1		= JText::_('COM_DNAGIFTS_REPORT_INTRO_P1');
@@ -372,7 +393,7 @@ EOD;
 		$COM_DNAGIFTS_REPORT_THYOURGIFT		= JText::_('COM_DNAGIFTS_REPORT_THYOURGIFT');
 		
 		$html = <<<EOD
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
 			<tr>
 				<td width="350">
 					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_HEREYOURESULTS</p>
@@ -384,8 +405,8 @@ EOD;
 				
 				<table width="255" cellspacing="3" cellpadding="3" id="tblScores" style="border: 1px solid #c5c5c5;">
 					<tr style="background-color: #000000; color: #ffffff; text-align: center;">
-						<td width="75">$COM_DNAGIFTS_REPORT_THGIFT</td>
-						<td width="75">$COM_DNAGIFTS_REPORT_THSCORE</td>
+						<td width="75" >$COM_DNAGIFTS_REPORT_THGIFT</td>
+						<td width="75" >$COM_DNAGIFTS_REPORT_THSCORE</td>
 						<td>$COM_DNAGIFTS_REPORT_THYOURGIFT</td>
 					</tr>
 EOD;
@@ -402,13 +423,7 @@ EOD;
 				'</tr>';
 		endforeach;
 		
-		$html .= '</table></td></tr></table>';
-        
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
-		
-		$y = $pdf->GetY();
-		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
+		$html .= '</table></td></tr>';
 		
 		
 		// TEXT REPLACEMENT VARIABLES
@@ -419,16 +434,16 @@ EOD;
 		$COM_DNAGIFTS_REPORT_DNACHART_P3		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P3');
 		$COM_DNAGIFTS_REPORT_DNACHART_P4		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P4');
 		$COM_DNAGIFTS_REPORT_DNACHART_P5		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P5');
-		$primsecimg = '<img src="'.JURI::base(true).'/media/com_dnagifts/images/primary-secondary-'.JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG').'-2.png" />';
-		$html = <<<EOD
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+		$primsecimg = '<img width="234" height="35" src="'.JURI::base(true).'/media/com_dnagifts/images/primary-secondary-'.JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG').'-2.png" />';
+		$html .= <<<EOD
+			<tr><td colspan="3"></td></tr>
 			<tr>
 				<td colspan="3">
 					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_YOURLINEPROFILE</p>
 				</td>
 			</tr>
 			<tr>
-				<td width="350">
+				<td>
 					<table id="tblDNAChart">
 						<tr>
 							<td align="center">
@@ -443,8 +458,8 @@ EOD;
 						</tr>
 					</table>
 				</td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
+				<td>&nbsp;</td>
+				<td>
 					<p>$COM_DNAGIFTS_REPORT_DNACHART_P1</p>
 					<p>$COM_DNAGIFTS_REPORT_DNACHART_P2</p>
 					<p>$COM_DNAGIFTS_REPORT_DNACHART_P3</p>
@@ -452,23 +467,17 @@ EOD;
 					<p>$COM_DNAGIFTS_REPORT_DNACHART_P5</p>
 				</td>
 			</tr>	
-		</table>	
-EOD;
-
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
 		
-		$y = $pdf->GetY();
-		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
+EOD;
 
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_DNACOMP	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP');
 		$COM_DNAGIFTS_REPORT_DNACOMP_P1	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P1');
 		$COM_DNAGIFTS_REPORT_DNACOMP_P2	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P2');
-		$html = <<<EOD
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:10pt">
+		$html .= <<<EOD
+			<tr><td colspan="3">&nbsp;</td></tr>
 			<tr>
-				<td colspan="3"><p class="rptText16">$COM_DNAGIFTS_REPORT_DNACOMP</p></td>
+				<td colspan="3"><p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_DNACOMP</p></td>
 			</tr>
 			<tr>
 				<td>
@@ -480,16 +489,14 @@ EOD;
 					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P2</p>
 				</td>
 			</tr>
+		</table>
 EOD;
 
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
 		
-		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['piechart_div']), $x='', $y=$pdf->GetY() - 50, $w='', $h=75, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-		
-		$y = $pdf->GetY();
-		$pdf->Line(1, $y, 200, $y, $linestyle); // draw a horizontal line at the current position (height)
-				
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['piechart_div']), $x='', $y=$pdf->GetY() - 35, $w='', $h=75, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+					
 		
 		
         // Print text using writeHTMLCell()
@@ -597,6 +604,57 @@ EOD;
 			"&chdl=".$chartParams['legends'].
 			"&chem=".$primarybubble."|".$secondarybubble;
 		return $dnaChart;
+	}
+	
+	
+	public static function generateImageLineChart($dnaResults)
+	{
+		$chartdataArr = array();
+		$legendsArr = array();
+		$yLabels = array();
+		$max = 0;
+		foreach($dnaResults as $data) {
+			if ((int) $data['score'] > $max) {
+				$max = $data['score'];
+			}
+		}
+		
+		$max = (int) (ceil($max / 10) + 2) * 10;
+		$ygrid = ceil((100 / ($max - 10)) * 10);
+		$nextStep = 0;
+		for ($i=0; $i<$max/10; $i++) {
+			array_push($yLabels, $nextStep);
+			$nextStep += 10;
+		}
+		
+		for ($i=0; $i<7; $i++) {
+			$position = ReportsHelper::getResultsByPosition($dnaResults, $i);
+			array_push($chartdataArr, (int) $dnaResults[$position]['score']/ (int) ($max - 10) * 100);
+			array_push($legendsArr, $dnaResults[$position]['label']);
+		}
+		
+		$charttype = 'lxy';
+		$chartsize = '300x150';
+		
+		$dnaChart="https://chart.googleapis.com/chart".
+			"?cht=$charttype".
+			"&chs=$chartsize".
+			"&chd=t:0,17,34,51,68,85,100|".implode(",",$chartdataArr).
+			"&chxt=x,y".
+			"&chxl=0:|".implode("|",$legendsArr)."|1:|".implode("|",$yLabels).
+			"&chm=c,000000,0,-1,5".
+			"&chg=17,$ygrid,1,5";
+			
+		return $dnaChart;
+	}
+	
+	public static function getResultsByPosition($dnaResults, $position){
+		for ($i=0; $i<count($dnaResults); $i++) {
+			if ($dnaResults[$i]['position'] == $position) {
+				return $i;
+			}
+		}
+		return -1;
 	}
 	
 	public static function generateImagePieChart($dnaResults)

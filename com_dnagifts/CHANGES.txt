@@ -235,3 +235,9 @@
  - Added the Image Pie Chart to the MSIE PDF.
  - Removed the HTML for the hyperlink from the PDF header as it does not work.
  
+0.0.36 (2012/10/07)
+-------------------
+ - Implemented the pie chart on the non-MSIE PDF
+ - Made some styling changes
+ - Implemented the Pie chart and the line chart on the MSIE PDF
+ 

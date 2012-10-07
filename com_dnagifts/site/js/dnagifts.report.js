@@ -5,7 +5,7 @@ root.myNamespace.create('DnaGifts.report', {
 	intervals: {},
 	extractSVG: function(divID)
 	{
-		if (jQuery.browser.msie) {
+		if (!jQuery.browser.msie) {
 			return false;
 		}
 		var ns = DnaGifts.report;
@@ -102,7 +102,7 @@ Base.Helpers.bind_load(function () {
 	var ns = DnaGifts.report;
     jQuery.metadata.setType('attr','data');
 	setInterval(function(){jQuery("#notificationtab").fadeOut()}, 6000);
-    if (jQuery.browser.msie) {
+    if (!jQuery.browser.msie) {
 		ns.dispatchMSIEReport();
 	}
 });
@@ -128,6 +128,7 @@ function drawCharts() {
 		[dnaResults[6].label, dnaResults[6].score]
 	]);
 	var pieoptions = {
+		backgroundColor: 'transparent',
 		is3D: true,
 		slices: {
 			0:{color: dnaResults[0].redColor},

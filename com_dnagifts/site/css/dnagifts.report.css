@@ -71,7 +71,8 @@ table#tblScores th,
 table#tblScores td {
     border: none !important;
     font-weight: bold;
-    border-collapse: separate !important
+    border-collapse: separate !important;
+    padding: 3px !important;
 }
 
 table#tblScores thead th {
