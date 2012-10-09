@@ -317,9 +317,14 @@ EOD;
 		
 		//###################################################################################################################
 		
+		$dnaMaxScore = 60;
+		
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL');
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY');
+		$GIFT1_IMAGE_SRC						= JURI::base(true)."/media/com_dnagifts/images/exhorter.png";
+		$GIFT2_IMAGE_SRC						= JURI::base(true)."/media/com_dnagifts/images/exhorter-header.png";
+		$GAUGE1 								= ReportsHelper::generateGaugeChart($dnaMaxScore, $dnaResults, 6);
 		$html = <<<EOD
 		<br/><br/><br/>
 		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
@@ -336,14 +341,16 @@ EOD;
 			<tr>
 				<td width="350">
 					<p>Your Primary Primary flow comes from this gift.</p>
-					<div style="float:left; width: 140px; height: 200px;"><img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/exhorter.png" /></div>
-					<div style="float:left; width: 130px; height: 150px;margin-left: 50px">
-					
-					</div>
+					<table>
+						<tr>
+							<td><img src="$GIFT1_IMAGE_SRC" /></td>
+							<td><img src="$GAUGE1"></td>
+						</tr>
+					</table>
 				</td>
 				<td width="15">&nbsp;</td>
 				<td width="255">
-					<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/exhorter-header.png" />
+					<img src="$GIFT2_IMAGE_SRC" />
 					<p>Your birthright is locked up inside this gift, your <strong>DYNAMIC NATURAL ABILITY/AUTHORITY/ATTRIBUTES</strong> comes from this gift that God placed inside you.</p>
 					<p>The agreement meter shows how much you agreed with all the Exhorter statements in the test.</p>
 				</td>
@@ -648,6 +655,24 @@ EOD;
 		return $dnaChart;
 	}
 	
+	public static function generateGaugeChart($dnaMaxScore, $dnaResults, $position)
+	{
+		$position 	= ReportsHelper::getResultsByPosition($dnaResults, $position);
+		$REDCOLOR	= $dnaResults[$position]['redColor'];
+		$SCORE		= round((int) $dnaResults[$position]['score']/$dnaMaxScore*100);
+		$HEIGHT		= ReportsHelper::getGuageHeight($SCORE);
+		$dnaChart="https://chart.googleapis.com/chart".
+			"?chs=200x$HEIGHT".
+			"&cht=gom".
+			"&chd=t:$SCORE".
+			"&chco=FFFFFF,$REDCOLOR".
+			"&chxt=x,y".
+			"&chxl=0:|$SCORE|1:|weak|medium|strong".
+			"&chf=c,s,B1B1B1".
+			"&chtt=Gift+Strength+Gauge";
+		return $dnaChart;
+	}
+	
 	public static function getResultsByPosition($dnaResults, $position){
 		for ($i=0; $i<count($dnaResults); $i++) {
 			if ($dnaResults[$i]['position'] == $position) {
@@ -698,6 +723,15 @@ EOD;
 			
 		return $dnaChart;
 	}
+	
+	public static function getGuageHeight($score) {
+		$height = 130;
+		if ((int) $score >= 30 && (int) $score <= 60) {
+			$height = 140;
+		}
+		return $height;
+	}
+	
 	public static function emailReportPDF($userTestID)
 	{
 		$user = JFactory::getUser();

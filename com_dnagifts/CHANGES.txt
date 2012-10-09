@@ -241,3 +241,6 @@
  - Made some styling changes
  - Implemented the Pie chart and the line chart on the MSIE PDF
  
+0.0.37 (2012/10/08)
+-------------------
+ - Implemented the Primary Gift and 1st Gauge chart on the MSIE PDF
