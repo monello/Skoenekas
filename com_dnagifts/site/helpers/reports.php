@@ -140,7 +140,7 @@ class ReportsHelper
 		return array($documentname, $dnaResults);
 	}
 	
-	public static function generateReportMSIEPDF($displaytype, $userTestID)
+	public static function generateReportMSIEPDF($displaytype, $userTestID, $username)
 	{
 		$pdf =& ReportsHelper::documentSetup($userTestID);
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
@@ -154,15 +154,9 @@ class ReportsHelper
 		
 		// get html from template
 		$linestyle = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '2,1', 'phase' => 0, 'color' => array(211, 211, 211));
-		//// Line: Left-start, Top-start, Left-stop, Top-stop
-		//$pdf->Line(1, 30, 200, 30, $linestyle);
-		//$pdf->Line(15, 15, 15, 280, $linestyle);
-		//$pdf->Line(115, 15, 115, 280, $linestyle);
-		//$pdf->Line(120, 15, 120, 280, $linestyle);
-		//$pdf->Line(195, 15, 195, 280, $linestyle);
 		
 		$pdf->SetXY(15, 30);
-		$pdf->Write(0, 'Hi XXXXXXXXXXXXX', '', 0, 'L', true, 0, false, false, 0);
+		$pdf->Write(0, 'Hi '.$username, '', 0, 'L', true, 0, false, false, 0);
 
 		
 		// TEXT REPLACEMENT VARIABLES
@@ -292,7 +286,7 @@ EOD;
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_P1	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_P1');
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_P2	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_P2');
 		$html = <<<EOD
-		<br/><br/><br/>
+		<br/><br/><br/><br/>
 		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
 			<tr>
 				<td colspan="3">
@@ -320,13 +314,17 @@ EOD;
 		$dnaMaxScore = 60;
 		
 		// TEXT REPLACEMENT VARIABLES
+		$position								= 0;
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL');
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY');
-		$GIFT1_IMAGE_SRC						= JURI::base(true)."/media/com_dnagifts/images/exhorter.png";
-		$GIFT2_IMAGE_SRC						= JURI::base(true)."/media/com_dnagifts/images/exhorter-header.png";
-		$GAUGE1 								= ReportsHelper::generateGaugeChart($dnaMaxScore, $dnaResults, 6);
+		$PRIMARY_GIFT							= JText::_('COM_DNAGIFTS_PRIMARY_GIFT');
+		$GIFT1_TEXT								= ReportsHelper::getGiftDescription($dnaResults, $position);
+		$GIFT1_LABEL							= ReportsHelper::getGiftLabel($dnaResults, $position);
+		$GIFT1_CHARACTER_SRC					= ReportsHelper::getCharacterImg($dnaResults, $position);
+		$GIFT1_HEADER_SRC						= ReportsHelper::getHeaderImg($dnaResults, $position);
+		$GIFT1_GUAGE 							= ReportsHelper::generateGaugeChart($dnaMaxScore, $dnaResults, $position);
 		$html = <<<EOD
-		<br/><br/><br/>
+		<br/><br/>
 		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
 			<tr>
 				<td colspan="3">
@@ -335,24 +333,23 @@ EOD;
 			</tr>
 			<tr>
 				<td colspan="3">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY ?????????</p>
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY $GIFT1_LABEL</p>
 				</td>
 			</tr>
 			<tr>
 				<td width="350">
-					<p>Your Primary Primary flow comes from this gift.</p>
+					<p>$PRIMARY_GIFT</p>
 					<table>
 						<tr>
-							<td><img src="$GIFT1_IMAGE_SRC" /></td>
-							<td><img src="$GAUGE1"></td>
+							<td><img src="$GIFT1_CHARACTER_SRC" /></td>
+							<td><img src="$GIFT1_GUAGE"></td>
 						</tr>
 					</table>
 				</td>
 				<td width="15">&nbsp;</td>
 				<td width="255">
-					<img src="$GIFT2_IMAGE_SRC" />
-					<p>Your birthright is locked up inside this gift, your <strong>DYNAMIC NATURAL ABILITY/AUTHORITY/ATTRIBUTES</strong> comes from this gift that God placed inside you.</p>
-					<p>The agreement meter shows how much you agreed with all the Exhorter statements in the test.</p>
+					<img style="border: 1px solid black" src="$GIFT1_HEADER_SRC" />
+					$GIFT1_TEXT
 				</td>
 			</tr>	
 		</table>	
@@ -361,19 +358,81 @@ EOD;
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
 		
+		//-----------------------------------------------------------------------------------------------------------------
 		
+		// TEXT REPLACEMENT VARIABLES
+		$position								= 1;
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY');
+		$GIFT2_TEXT								= ReportsHelper::getGiftDescription($dnaResults, $position);
+		$GIFT2_CHARACTER_SRC					= ReportsHelper::getCharacterImg($dnaResults, $position);
+		$GIFT2_HEADER_SRC						= ReportsHelper::getHeaderImg($dnaResults, $position);
+		$GAUGE2 								= ReportsHelper::generateGaugeChart($dnaMaxScore, $dnaResults, $position);
+		$html = <<<EOD
+		<br/><br/>
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
+			<tr>
+				<td colspan="3">
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="350">
+					<table>
+						<tr>
+							<td><img src="$GIFT2_CHARACTER_SRC" /></td>
+							<td><img src="$GAUGE2"></td>
+						</tr>
+					</table>
+				</td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+					<img style="border: 1px solid black" src="$GIFT2_HEADER_SRC" />
+					$GIFT2_TEXT
+				</td>
+			</tr>	
+		</table>	
+EOD;
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
 		
+		//-----------------------------------------------------------------------------------------------------------------
 		
-		
-		
-		
-		//$pdf->writeHTML($html);
+		// TEXT REPLACEMENT VARIABLES
+		$position				= 2;
+		$GIFT3_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position);
+		$GIFT3_CHARACTER_SRC	= ReportsHelper::getCharacterImg($dnaResults, $position);
+		$GIFT3_HEADER_SRC		= ReportsHelper::getHeaderImg($dnaResults, $position);
+		$GAUGE3 				= ReportsHelper::generateGaugeChart($dnaMaxScore, $dnaResults, $position);
+		$html = <<<EOD
+		<br/><br/><br/><br/><br/>
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
+			<tr>
+				<td width="350">
+					<table>
+						<tr>
+							<td><img src="$GIFT3_CHARACTER_SRC" /></td>
+							<td><img src="$GAUGE3"></td>
+						</tr>
+					</table>
+				</td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+					<img style="border: 1px solid black" src="$GIFT3_HEADER_SRC" />
+					$GIFT3_TEXT
+				</td>
+			</tr>	
+		</table>	
+EOD;
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
 		
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
         $pdf->Output($filename, $displaytype);
 	}
 	
-	public static function generateReportPDF($displaytype, $svgData, $imgChartSRC, $userTestID)
+	public static function generateReportPDF($displaytype, $svgData, $imgChartSRC, $userTestID, $username)
 	{
 		$pdf =& ReportsHelper::documentSetup($userTestID);
 		
@@ -667,13 +726,54 @@ EOD;
 			"&chd=t:$SCORE".
 			"&chco=FFFFFF,$REDCOLOR".
 			"&chxt=x,y".
-			"&chxl=0:|$SCORE|1:|weak|medium|strong".
+			"&chxl=0:|$SCORE%|1:|weak|medium|strong".
 			"&chf=c,s,B1B1B1".
-			"&chtt=Gift+Strength+Gauge";
+			"&chtt=Gift+Strength";
 		return $dnaChart;
 	}
 	
-	public static function getResultsByPosition($dnaResults, $position){
+	public static function getGiftDescription($dnaResults, $position)
+	{
+		for ($i=0; $i<count($dnaResults); $i++) {
+			if ($dnaResults[$i]['position'] == $position) {
+				return JText::_($dnaResults[$i]['textToken']);
+			}
+		}
+		return '<p>Unable to find description, please contact the webmaster</p>';
+	}
+	
+	public static function getGiftLabel($dnaResults, $position)
+	{
+		for ($i=0; $i<count($dnaResults); $i++) {
+			if ($dnaResults[$i]['position'] == $position) {
+				return $dnaResults[$i]['label'];
+			}
+		}
+		return 'ERROR';
+	}
+	
+	public static function getCharacterImg($dnaResults, $position)
+	{
+		for ($i=0; $i<count($dnaResults); $i++) {
+			if ($dnaResults[$i]['position'] == $position) {
+				return JURI::base(true)."/media/com_dnagifts/images/".$dnaResults[$i]['characterImg'];
+			}
+		}
+		return 'ERROR';
+	}
+	
+	public static function getHeaderImg($dnaResults, $position)
+	{
+		for ($i=0; $i<count($dnaResults); $i++) {
+			if ($dnaResults[$i]['position'] == $position) {
+				return JURI::base(true)."/media/com_dnagifts/images/".$dnaResults[$i]['textImg'];
+			}
+		}
+		return 'ERROR';
+	}
+	
+	public static function getResultsByPosition($dnaResults, $position)
+	{
 		for ($i=0; $i<count($dnaResults); $i++) {
 			if ($dnaResults[$i]['position'] == $position) {
 				return $i;
