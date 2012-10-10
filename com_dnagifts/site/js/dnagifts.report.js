@@ -5,7 +5,7 @@ root.myNamespace.create('DnaGifts.report', {
 	intervals: {},
 	extractSVG: function(divID)
 	{
-		if (!jQuery.browser.msie) {
+		if (jQuery.browser.msie) {
 			return false;
 		}
 		var ns = DnaGifts.report;
@@ -62,8 +62,9 @@ root.myNamespace.create('DnaGifts.report', {
             },
 			success: function(json) {
 				if (json.success) {
+					jQuery("#notificationspinner").hide();
 					jQuery("#notificationtext").html(json.message);
-					jQuery("#notificationtab").show();
+					jQuery("#notificationtab").css('backgroundColor', '#9fff9f').show();
 					setInterval(function(){jQuery("#notificationtab").fadeOut()}, 3000);
 				}
 			}
@@ -82,8 +83,9 @@ root.myNamespace.create('DnaGifts.report', {
             },
 			success: function(json) {
 				if (json.success) {
+					jQuery("#notificationspinner").hide();
 					jQuery("#notificationtext").html(json.message);
-					jQuery("#notificationtab").show();
+					jQuery("#notificationtab").css('backgroundColor', '#9fff9f').show();
 					setInterval(function(){jQuery("#notificationtab").fadeOut()}, 3000);
 				}
 			}
@@ -102,7 +104,7 @@ Base.Helpers.bind_load(function () {
 	var ns = DnaGifts.report;
     jQuery.metadata.setType('attr','data');
 	setInterval(function(){jQuery("#notificationtab").fadeOut()}, 6000);
-    if (!jQuery.browser.msie) {
+    if (jQuery.browser.msie) {
 		ns.dispatchMSIEReport();
 	}
 });

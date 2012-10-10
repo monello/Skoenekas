@@ -249,3 +249,8 @@
 -------------------
  - Implemented the rest of the motivational flow elements for MSIE PDF
  - Made the variable dynamic for the MSIE PDF
+
+0.0.39 (2012/10/10)
+-------------------
+ - Tweaked the MSIE PDF
+ - Added the motivational flow chart to the Standard PDF

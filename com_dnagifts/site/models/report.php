@@ -19,7 +19,7 @@ class DnaGiftsModelReport extends JModel
 				'greenColor' => 'FF7F7F',
 				'characterImg' => 'perceiver.png',
 				'textImg' => 'perceiver-header.png',
-				'textToken' => 'COM_DNAGIFTS_PERCEIVER'
+				'textToken' => 'COM_DNAGIFTS_REPORT_PERCEIVER'
 			),
 			array(
 				'label'=> 'Servant',
@@ -31,7 +31,7 @@ class DnaGiftsModelReport extends JModel
 				'greenColor' =>'FFEAB8',
 				'characterImg' => 'servant.png',
 				'textImg' => 'servant-header.png',
-				'textToken' => 'COM_DNAGIFTS_SERVANT'
+				'textToken' => 'COM_DNAGIFTS_REPORT_SERVANT'
 			),
 			array(
 				'label' => 'Teacher',
@@ -43,7 +43,7 @@ class DnaGiftsModelReport extends JModel
 				'greenColor' =>'FFFCCD',
 				'characterImg' => 'teacher.png',
 				'textImg' => 'teacher-header.png',
-				'textToken' => 'COM_DNAGIFTS_TEACHER'
+				'textToken' => 'COM_DNAGIFTS_REPORT_TEACHER'
 			),
 			array(
 				'label' => 'Exhorter',
@@ -55,7 +55,7 @@ class DnaGiftsModelReport extends JModel
 				'greenColor' =>'BFFFBF',
 				'characterImg' => 'exhorter.png',
 				'textImg' => 'exhorter-header.png',
-				'textToken' => 'COM_DNAGIFTS_EXHORTER'
+				'textToken' => 'COM_DNAGIFTS_REPORT_EXHORTER'
 			),
 			array(
 				'label' => 'Giver',
@@ -67,7 +67,7 @@ class DnaGiftsModelReport extends JModel
 				'greenColor' =>'AEF5FF',
 				'characterImg' => 'giver.png',
 				'textImg' => 'giver-header.png',
-				'textToken' => 'COM_DNAGIFTS_GIVER'
+				'textToken' => 'COM_DNAGIFTS_REPORT_GIVER'
 			),
 			array(
 				'label' => 'Ruler',
@@ -79,7 +79,7 @@ class DnaGiftsModelReport extends JModel
 				'greenColor' =>'ADAAFF',
 				'characterImg' => 'ruler.png',
 				'textImg' => 'ruler-header.png',
-				'textToken' => 'COM_DNAGIFTS_RULER'
+				'textToken' => 'COM_DNAGIFTS_REPORT_RULER'
 			),
 			array(
 				'label' => 'Mercy',
@@ -91,7 +91,7 @@ class DnaGiftsModelReport extends JModel
 				'greenColor' =>'D9B4FF',
 				'characterImg' => 'mercy.png',
 				'textImg' => 'mercy-header.png',
-				'textToken' => 'COM_DNAGIFTS_MERCY'
+				'textToken' => 'COM_DNAGIFTS_REPORT_MERCY'
 			)
 		);
 		return $dnaResults;

@@ -10,7 +10,7 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 
 <div id="notificationcontainer">
   <div id="notificationtab">
-	<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/spinner16x16.gif">
+	<img id="notificationspinner" src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/spinner16x16.gif">
 	<span id="notificationtext"><?php echo JText::_('COM_DNAGIFTS_REPORT_PREPEMAIL'); ?></span>
   </div>
 </div>
@@ -34,8 +34,7 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 	<tr>
 		<td width="400">
 			<p class="rptText16"><?php echo JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS'); ?></p>
-			<p><?php echo JText::_('COM_DNAGIFTS_REPORT_INTRO_P1'); ?></p>
-			<p><?php echo JText::_('COM_DNAGIFTS_REPORT_INTRO_P2'); ?></p>
+			<?php echo JText::_('COM_DNAGIFTS_REPORT_INTRO'); ?>
 		</td>
 		<td width="20">&nbsp;</td>
 		<td width="250">
@@ -72,7 +71,7 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 			<table id="tblDNAChart">
 				<tr>
 					<td align="center">
-						<strong><?php echo JText::_('COM_DNAGIFTS_REPORT_DNACHART'); ?></strong>
+						<?php echo JText::_('COM_DNAGIFTS_REPORT_DNACHART_HEAD'); ?>
 					</td>
 				</tr>
 				<tr>
@@ -86,18 +85,14 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 		</td>
 		<td>&nbsp;</td>
 		<td>
-			<p><?php echo JText::_('COM_DNAGIFTS_REPORT_DNACHART_P1'); ?></p>
-			<p><?php echo JText::_('COM_DNAGIFTS_REPORT_DNACHART_P2'); ?></p>
-			<p><?php echo JText::_('COM_DNAGIFTS_REPORT_DNACHART_P3'); ?></p>
-			<p><?php echo JText::_('COM_DNAGIFTS_REPORT_DNACHART_P4'); ?></p>
-			<p><?php echo JText::_('COM_DNAGIFTS_REPORT_DNACHART_P5'); ?></p>
+			<?php echo JText::_('COM_DNAGIFTS_REPORT_DNACHART_TEXT'); ?>
 		</td>
 	</tr>
 	
 	<tr><td colspan="3"><hr class="sectionSeparator"/></td></tr>
 	
 	<tr>
-		<td colspan="3"><p class="rptText16"><?php echo JText::_('COM_DNAGIFTS_REPORT_DNACOMP'); ?></p></td>
+		<td colspan="3"><p class="rptText16"><?php echo JText::_('COM_DNAGIFTS_REPORT_DNACOMP_HEAD'); ?></p></td>
 	</tr>
 	<tr>
 		<td>
@@ -105,15 +100,14 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 		</td>
 		<td>&nbsp;</td>
 		<td>
-			<p><?php echo JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P1'); ?></p>
-			<p><?php echo JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P2'); ?></p>
+			<?php echo JText::_('COM_DNAGIFTS_REPORT_DNACOMP_TEXT'); ?>
 		</td>
 	</tr>
 	
 	<tr><td colspan="3"><hr class="sectionSeparator"/></td></tr>
 	
 	<tr>
-		<td colspan="3"><p class="rptText16"><?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW'); ?></p></td>
+		<td colspan="3"><p class="rptText16"><?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD'); ?></p></td>
 	</tr>
 	<tr>
 		<td>
@@ -121,8 +115,7 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 		</td>
 		<td>&nbsp;</td>
 		<td>
-			<p><?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_P1'); ?></p>
-			<p><?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_P2'); ?></p>
+			<?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT'); ?>
 		</td>
 	</tr>
 	
@@ -134,61 +127,61 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 			<p class="rptText16"><?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL'); ?></p>
 		</td>
 	</tr>
+	<?php $position = 0; ?>
 	<tr>
 		<td colspan="3">
-			<p class="rptText14"><?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY'); ?>???????????</p>
+			<p class="rptText14"><?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY'); ?><?php echo ReportsHelper::getGiftLabel($this->dnaResults, $position); ?></p>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<p>Your Primary Primary flow comes from this gift.</p>
-			<div style="float:left; width: 140px; height: 200px;"><img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/exhorter.png" /></div>
+			<p><?php JText::_('COM_DNAGIFTS_REPORT_PRIMARY_GIFT'); ?></p>
+			<div style="float:left; width: 140px; height: 200px;"><img src="<?php echo ReportsHelper::getCharacterImg($this->dnaResults, $position); ?>" /></div>
 			<div style="float:left; width: 130px; height: 150px;margin-left: 50px">
 				<div id="gauge1chart_div" class="gaugecontainer"></div>
 			</div>
 		</td>
 		<td>&nbsp;</td>
 		<td>
-			<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/exhorter-header.png" />
-			<p>Your birthright is locked up inside this gift, your <strong>DYNAMIC NATURAL ABILITY/AUTHORITY/ATTRIBUTES</strong> comes from this gift that God placed inside you.</p>
-			<p>The agreement meter shows how much you agreed with all the Exhorter statements in the test.</p>
+			<img src="<?php echo ReportsHelper::getHeaderImg($this->dnaResults, $position); ?>" />
+			<?php echo ReportsHelper::getGiftDescription($this->dnaResults, $position); ?>
 		</td>
 	</tr>
 	
 	<tr><td colspan="3">&nbsp;</td></tr>
 	
+	<?php $position += 1; ?>
 	<tr>
 		<td><p class="rptText14"><?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY'); ?></p></td>
 	</tr>
 	<tr>
 		<td>
-			<div style="float:left; width: 140px; height: 200px;"><img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/ruler.png" /></div>
+			<div style="float:left; width: 140px; height: 200px;"><img src="<?php echo ReportsHelper::getCharacterImg($this->dnaResults, $position); ?>" /></div>
 			<div style="float:left; width: 130px; height: 150px;margin-left: 50px">
 				<div id="gauge2chart_div" class="gaugecontainer"></div>
 			</div>
 		</td>
 		<td>&nbsp;</td>
 		<td>
-			<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/ruler-header.png" />
-			<p>Your birthright is locked up inside this gift, your <strong>DYNAMIC NATURAL ABILITY/AUTHORITY/ATTRIBUTES</strong> comes from this gift that God placed inside you.</p>
-			<p>The agreement meter shows how much you agreed with all the Exhorter statements in the test.</p>
+			<img src="<?php echo ReportsHelper::getHeaderImg($this->dnaResults, $position); ?>" />
+			<?php echo ReportsHelper::getGiftDescription($this->dnaResults, $position); ?>
 		</td>
 	</tr>
 	
 	<tr><td colspan="3">&nbsp;</td></tr>
 	
+	<?php $position += 1; ?>
 	<tr>
 		<td>
-			<div style="float:left; width: 140px; height: 200px;"><img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/giver.png" /></div>
+			<div style="float:left; width: 140px; height: 200px;"><img src="<?php echo ReportsHelper::getCharacterImg($this->dnaResults, $position); ?>" /></div>
 			<div style="float:left; width: 130px; height: 150px;margin-left: 50px">
 				<div id="gauge3chart_div" class="gaugecontainer"></div>
 			</div>
 		</td>
 		<td>&nbsp;</td>
 		<td>
-			<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/giver-header.png" />
-			<p>Your birthright is locked up inside this gift, your <strong>DYNAMIC NATURAL ABILITY/AUTHORITY/ATTRIBUTES</strong> comes from this gift that God placed inside you.</p>
-			<p>The agreement meter shows how much you agreed with all the Exhorter statements in the test.</p>
+			<img src="<?php echo ReportsHelper::getHeaderImg($this->dnaResults, $position); ?>" />
+			<?php echo ReportsHelper::getGiftDescription($this->dnaResults, $position); ?>
 		</td>
 	</tr>
 </table>

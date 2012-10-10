@@ -161,8 +161,7 @@ class ReportsHelper
 		
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_HEREYOURESULTS	= JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS');
-		$COM_DNAGIFTS_REPORT_INTRO_P1		= JText::_('COM_DNAGIFTS_REPORT_INTRO_P1');
-		$COM_DNAGIFTS_REPORT_INTRO_P2		= JText::_('COM_DNAGIFTS_REPORT_INTRO_P2');
+		$COM_DNAGIFTS_REPORT_INTRO			= JText::_('COM_DNAGIFTS_REPORT_INTRO');
 		$COM_DNAGIFTS_REPORT_THGIFT			= JText::_('COM_DNAGIFTS_REPORT_THGIFT');
 		$COM_DNAGIFTS_REPORT_THSCORE		= JText::_('COM_DNAGIFTS_REPORT_THSCORE');
 		$COM_DNAGIFTS_REPORT_THYOURGIFT		= JText::_('COM_DNAGIFTS_REPORT_THYOURGIFT');
@@ -172,8 +171,7 @@ class ReportsHelper
 			<tr>
 				<td width="350">
 					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_HEREYOURESULTS</p>
-					<p>$COM_DNAGIFTS_REPORT_INTRO_P1</p>
-					<p>$COM_DNAGIFTS_REPORT_INTRO_P2</p>
+					$COM_DNAGIFTS_REPORT_INTRO
 				</td>
 				<td width="15">&nbsp;</td>
 				<td width="255">
@@ -205,12 +203,8 @@ EOD;
 				
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_YOURLINEPROFILE	= JText::_('COM_DNAGIFTS_REPORT_YOURLINEPROFILE');
-		$COM_DNAGIFTS_REPORT_DNACHART			= JText::_('COM_DNAGIFTS_REPORT_DNACHART');
-		$COM_DNAGIFTS_REPORT_DNACHART_P1		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P1');
-		$COM_DNAGIFTS_REPORT_DNACHART_P2		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P2');
-		$COM_DNAGIFTS_REPORT_DNACHART_P3		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P3');
-		$COM_DNAGIFTS_REPORT_DNACHART_P4		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P4');
-		$COM_DNAGIFTS_REPORT_DNACHART_P5		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P5');
+		$COM_DNAGIFTS_REPORT_DNACHART_HEAD		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_HEAD');
+		$COM_DNAGIFTS_REPORT_DNACHART_TEXT		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_TEXT');
 		$primsecimg = '<img width="350" height="52" src="'.JURI::base(true).'/media/com_dnagifts/images/primary-secondary-'.JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG').'-2.png" />';
 		$html = <<<EOD
 		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
@@ -224,7 +218,7 @@ EOD;
 					<table id="tblDNAChart">
 						<tr>
 							<td align="center">
-								<strong>$COM_DNAGIFTS_REPORT_DNACHART</strong>
+								<strong>$COM_DNAGIFTS_REPORT_DNACHART_HEAD</strong>
 							</td>
 						</tr>
 						<tr>	
@@ -237,11 +231,7 @@ EOD;
 				</td>
 				<td width="15">&nbsp;</td>
 				<td width="255">
-					<p>$COM_DNAGIFTS_REPORT_DNACHART_P1</p>
-					<p>$COM_DNAGIFTS_REPORT_DNACHART_P2</p>
-					<p>$COM_DNAGIFTS_REPORT_DNACHART_P3</p>
-					<p>$COM_DNAGIFTS_REPORT_DNACHART_P4</p>
-					<p>$COM_DNAGIFTS_REPORT_DNACHART_P5</p>
+					$COM_DNAGIFTS_REPORT_DNACHART_TEXT
 				</td>
 			</tr>	
 		</table>	
@@ -253,14 +243,13 @@ EOD;
 		//###################################################################################################################
 		
 		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_DNACOMP	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP');
-		$COM_DNAGIFTS_REPORT_DNACOMP_P1	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P1');
-		$COM_DNAGIFTS_REPORT_DNACOMP_P1	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P2');
+		$COM_DNAGIFTS_REPORT_DNACOMP_HEAD	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_HEAD');
+		$COM_DNAGIFTS_REPORT_DNACOMP_TEXT	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_TEXT');
 		$html = <<<EOD
 		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
 			<tr>
 				<td colspan="3">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_DNACOMP</p>
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_DNACOMP_HEAD</p>
 				</td>
 			</tr>
 			<tr>
@@ -269,8 +258,7 @@ EOD;
 				</td>
 				<td width="15">&nbsp;</td>
 				<td width="255">
-					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P1</p>
-					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P1</p>
+					$COM_DNAGIFTS_REPORT_DNACOMP_TEXT
 				</td>
 			</tr>	
 		</table>	
@@ -282,15 +270,14 @@ EOD;
 		//###################################################################################################################
 		
 		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_MOTIFLOW		= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW');
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_P1	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_P1');
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_P2	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_P2');
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD');
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT');
 		$html = <<<EOD
 		<br/><br/><br/><br/>
 		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
 			<tr>
 				<td colspan="3">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW</p>
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD</p>
 				</td>
 			</tr>
 			<tr>
@@ -299,8 +286,7 @@ EOD;
 				</td>
 				<td width="15">&nbsp;</td>
 				<td width="255">
-					<p>$COM_DNAGIFTS_REPORT_MOTIFLOW_P1</p>
-					<p>$COM_DNAGIFTS_REPORT_MOTIFLOW_P2</p>
+					$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT
 				</td>
 			</tr>	
 		</table>	
@@ -317,7 +303,7 @@ EOD;
 		$position								= 0;
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL');
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY');
-		$PRIMARY_GIFT							= JText::_('COM_DNAGIFTS_PRIMARY_GIFT');
+		$COM_DNAGIFTS_REPORT_PRIMARY_GIFT		= JText::_('COM_DNAGIFTS_REPORT_PRIMARY_GIFT');
 		$GIFT1_TEXT								= ReportsHelper::getGiftDescription($dnaResults, $position);
 		$GIFT1_LABEL							= ReportsHelper::getGiftLabel($dnaResults, $position);
 		$GIFT1_CHARACTER_SRC					= ReportsHelper::getCharacterImg($dnaResults, $position);
@@ -338,7 +324,7 @@ EOD;
 			</tr>
 			<tr>
 				<td width="350">
-					<p>$PRIMARY_GIFT</p>
+					<p>$COM_DNAGIFTS_REPORT_PRIMARY_GIFT</p>
 					<table>
 						<tr>
 							<td><img src="$GIFT1_CHARACTER_SRC" /></td>
@@ -361,7 +347,7 @@ EOD;
 		//-----------------------------------------------------------------------------------------------------------------
 		
 		// TEXT REPLACEMENT VARIABLES
-		$position								= 1;
+		$position								+= 1;
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY');
 		$GIFT2_TEXT								= ReportsHelper::getGiftDescription($dnaResults, $position);
 		$GIFT2_CHARACTER_SRC					= ReportsHelper::getCharacterImg($dnaResults, $position);
@@ -399,7 +385,7 @@ EOD;
 		//-----------------------------------------------------------------------------------------------------------------
 		
 		// TEXT REPLACEMENT VARIABLES
-		$position				= 2;
+		$position				+= 1;
 		$GIFT3_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position);
 		$GIFT3_CHARACTER_SRC	= ReportsHelper::getCharacterImg($dnaResults, $position);
 		$GIFT3_HEADER_SRC		= ReportsHelper::getHeaderImg($dnaResults, $position);
@@ -440,20 +426,15 @@ EOD;
 		$html = '';
 		
 		$linestyle = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '2,1', 'phase' => 0, 'color' => array(211, 211, 211));
-		//// Line: Left-start, Top-start, Left-stop, Top-stop
-		//$pdf->Line(1, 30, 200, 30, $linestyle);
-		//$pdf->Line(15, 15, 15, 280, $linestyle);
-		//$pdf->Line(115, 15, 115, 280, $linestyle);
-		//$pdf->Line(120, 15, 120, 280, $linestyle);
-		//$pdf->Line(195, 15, 195, 280, $linestyle);
+		
+		// ######################################### PAGE 1 ##########################################################
 		
 		$pdf->SetXY(15, 30);
-		$pdf->Write(0, 'Hi XXXXXXXXXXXXX', '', 0, 'L', true, 0, false, false, 0);
+		$pdf->Write(0, 'Hi '.$username, '', 0, 'L', true, 0, false, false, 0);
 
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_HEREYOURESULTS	= JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS');
-		$COM_DNAGIFTS_REPORT_INTRO_P1		= JText::_('COM_DNAGIFTS_REPORT_INTRO_P1');
-		$COM_DNAGIFTS_REPORT_INTRO_P2		= JText::_('COM_DNAGIFTS_REPORT_INTRO_P2');
+		$COM_DNAGIFTS_REPORT_INTRO			= JText::_('COM_DNAGIFTS_REPORT_INTRO');
 		$COM_DNAGIFTS_REPORT_THGIFT			= JText::_('COM_DNAGIFTS_REPORT_THGIFT');
 		$COM_DNAGIFTS_REPORT_THSCORE		= JText::_('COM_DNAGIFTS_REPORT_THSCORE');
 		$COM_DNAGIFTS_REPORT_THYOURGIFT		= JText::_('COM_DNAGIFTS_REPORT_THYOURGIFT');
@@ -463,8 +444,7 @@ EOD;
 			<tr>
 				<td width="350">
 					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_HEREYOURESULTS</p>
-					<p>$COM_DNAGIFTS_REPORT_INTRO_P1</p>
-					<p>$COM_DNAGIFTS_REPORT_INTRO_P2</p>
+					$COM_DNAGIFTS_REPORT_INTRO
 				</td>
 				<td width="15">&nbsp;</td>
 				<td width="255">
@@ -494,12 +474,8 @@ EOD;
 		
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_YOURLINEPROFILE	= JText::_('COM_DNAGIFTS_REPORT_YOURLINEPROFILE');
-		$COM_DNAGIFTS_REPORT_DNACHART			= JText::_('COM_DNAGIFTS_REPORT_DNACHART');
-		$COM_DNAGIFTS_REPORT_DNACHART_P1		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P1');
-		$COM_DNAGIFTS_REPORT_DNACHART_P2		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P2');
-		$COM_DNAGIFTS_REPORT_DNACHART_P3		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P3');
-		$COM_DNAGIFTS_REPORT_DNACHART_P4		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P4');
-		$COM_DNAGIFTS_REPORT_DNACHART_P5		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_P5');
+		$COM_DNAGIFTS_REPORT_DNACHART_HEAD		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_HEAD');
+		$COM_DNAGIFTS_REPORT_DNACHART_TEXT		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_TEXT');
 		$primsecimg = '<img width="234" height="35" src="'.JURI::base(true).'/media/com_dnagifts/images/primary-secondary-'.JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG').'-2.png" />';
 		$html .= <<<EOD
 			<tr><td colspan="3"></td></tr>
@@ -513,7 +489,7 @@ EOD;
 					<table id="tblDNAChart">
 						<tr>
 							<td align="center">
-								<strong>$COM_DNAGIFTS_REPORT_DNACHART</strong>
+								$COM_DNAGIFTS_REPORT_DNACHART_HEAD
 							</td>
 						</tr>
 						<tr>	
@@ -526,33 +502,25 @@ EOD;
 				</td>
 				<td>&nbsp;</td>
 				<td>
-					<p>$COM_DNAGIFTS_REPORT_DNACHART_P1</p>
-					<p>$COM_DNAGIFTS_REPORT_DNACHART_P2</p>
-					<p>$COM_DNAGIFTS_REPORT_DNACHART_P3</p>
-					<p>$COM_DNAGIFTS_REPORT_DNACHART_P4</p>
-					<p>$COM_DNAGIFTS_REPORT_DNACHART_P5</p>
+					$COM_DNAGIFTS_REPORT_DNACHART_TEXT
 				</td>
 			</tr>	
 		
 EOD;
 
 		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_DNACOMP	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP');
-		$COM_DNAGIFTS_REPORT_DNACOMP_P1	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P1');
-		$COM_DNAGIFTS_REPORT_DNACOMP_P2	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_P2');
+		$COM_DNAGIFTS_REPORT_DNACOMP_HEAD	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_HEAD');
+		$COM_DNAGIFTS_REPORT_DNACOMP_TEXT	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_TEXT');
 		$html .= <<<EOD
 			<tr><td colspan="3">&nbsp;</td></tr>
 			<tr>
-				<td colspan="3"><p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_DNACOMP</p></td>
+				<td colspan="3"><p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_DNACOMP_HEAD</p></td>
 			</tr>
 			<tr>
-				<td>
-
-				</td>
+				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td>
-					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P1</p>
-					<p>$COM_DNAGIFTS_REPORT_DNACOMP_P2</p>
+					$COM_DNAGIFTS_REPORT_DNACOMP_TEXT
 				</td>
 			</tr>
 		</table>
@@ -562,22 +530,46 @@ EOD;
         $pdf->writeHTML($html);
 		
 		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['piechart_div']), $x='', $y=$pdf->GetY() - 35, $w='', $h=75, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-					
+	
+	
+		// ######################################### PAGE 2 ##########################################################
+		
+		$pdf->AddPage();
+		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD');
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT');
+		$html = <<<EOD
+		<br/><br/>
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
+			<tr>
+				<td colspan="3">
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="350" height="260">&nbsp;</td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+					$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT
+				</td>
+			</tr>	
+		</table>	
+EOD;
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['linechart_div']), $x=$pdf->GetX() + 1, $y=$pdf->GetY() - 80, $w='', $h=75, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 		
 		
-        // Print text using writeHTMLCell()
-        //$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='', $html, $border=0, $ln=1, $fill=0, $reseth=true, $align='', $autopadding=true);
-            
-    
-        // ---------------------------------------------------------
-        
-		//$pdf->Image($imgChartSRC, '', '', 100);
 		
-        // ---------------------------------------------------------
-        
-    	////$pdf->ImageSVG($file='@<svg width="400" height="300" style="overflow: hidden;"><defs id="defs"/><rect x="0" y="0" width="400" height="300" stroke="none" stroke-width="0" fill="#ffffff"/><g><text text-anchor="start" x="77" y="38.35" font-family="Arial" font-size="11" font-weight="bold" stroke="none" stroke-width="0" fill="#000000">How Much Pizza I Ate Last Night</text></g><g><rect x="248" y="58" width="76" height="83" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><rect x="248" y="58" width="76" height="11" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><text text-anchor="start" x="263" y="67.35" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#222222">Mushrooms</text></g><rect x="248" y="58" width="11" height="11" stroke="none" stroke-width="0" fill="#3366cc"/></g><g><rect x="248" y="76" width="76" height="11" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><text text-anchor="start" x="263" y="85.35" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#222222">Onions</text></g><rect x="248" y="76" width="11" height="11" stroke="none" stroke-width="0" fill="#dc3912"/></g><g><rect x="248" y="94" width="76" height="11" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><text text-anchor="start" x="263" y="103.35" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#222222">Olives</text></g><rect x="248" y="94" width="11" height="11" stroke="none" stroke-width="0" fill="#ff9900"/></g><g><rect x="248" y="112" width="76" height="11" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><text text-anchor="start" x="263" y="121.35" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#222222">Zucchini</text></g><rect x="248" y="112" width="11" height="11" stroke="none" stroke-width="0" fill="#109618"/></g><g><rect x="248" y="130" width="76" height="11" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"/><g><text text-anchor="start" x="263" y="139.35" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#222222">Pepperoni</text></g><rect x="248" y="130" width="11" height="11" stroke="none" stroke-width="0" fill="#990099"/></g></g><g><path d="M154,151L154,75A76,76,0,0,1,207.74011537017762,204.7401153701776L154,151A0,0,0,0,0,154,151" stroke="#ffffff" stroke-width="1" fill="#3366cc"/><text text-anchor="start" x="183.37241046222232" y="136.26323901017514" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">37.5%</text></g><g><path d="M154,151L78,151A76,76,0,0,1,154,75L154,151A0,0,0,0,0,154,151" stroke="#ffffff" stroke-width="1" fill="#990099"/><text text-anchor="start" x="105.37040213776933" y="117.22040213776936" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">25%</text></g><g><path d="M154,151L100.2598846298224,204.74011537017762A76,76,0,0,1,78,151L154,151A0,0,0,0,0,154,151" stroke="#ffffff" stroke-width="1" fill="#109618"/><text text-anchor="start" x="93.62758953777768" y="173.43676098982488" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">12.5%</text></g><g><path d="M154,151L154,227A76,76,0,0,1,100.2598846298224,204.74011537017762L154,151A0,0,0,0,0,154,151" stroke="#ffffff" stroke-width="1" fill="#ff9900"/><text text-anchor="start" x="118.28323932673234" y="203.65757780465376" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">12.5%</text></g><g><path d="M154,151L207.74011537017762,204.7401153701776A76,76,0,0,1,154,227L154,151A0,0,0,0,0,154,151" stroke="#ffffff" stroke-width="1" fill="#dc3912"/><text text-anchor="start" x="158.71676067326766" y="203.65757780465373" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">12.5%</text></g><g/></svg>', $x=30, $y=100, $w='', $h=100, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-        //$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['linechart_div']), $x='', $y='', $w='', $h=200, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-        //$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['piechart_div']), $x='', $y='', $w='', $h=100, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		
+		
+		$html = "THIS IS THE NEXT LINE";
+		$pdf->writeHTML($html);
+		
+		// ######################################### DONE ##########################################################
         
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
         $pdf->Output($filename, $displaytype);
