@@ -258,3 +258,16 @@
 0.1.00 (2012/10/13)
 -------------------
  - Completed the reports.
+ 
+0.1.01 (2012/10/13)
+-------------------
+ - Added the medium and light color fields for each gifting
+ - Updated the view and model and database
+ - Added upgrade SQL
+ 
+0.1.02 (2012/10/13)
+-------------------
+ - Added fields to manage text-token, character image and text image
+ - Updated the view and model and database
+ - Added upgrade SQL
+ 

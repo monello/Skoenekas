@@ -18,13 +18,13 @@ defined('_JEXEC') or die('Restricted Access');
 	<th style="text-align:left">
 		<?php echo JHtml::_('grid.sort', 'COM_DNAGIFTS_GIFTS_HEADING_DESCRRIPTION', 'description', $this->listDirn, $this->listOrder); ?>
 	</th>
-	<th width="5%" class="nowrap">
+	<th width="85px" class="nowrap">
 		<?php echo JHtml::_('grid.sort', 'COM_DNAGIFTS_GIFTS_HEADING_COLORHEX', 'color_hex', $this->listDirn, $this->listOrder); ?>
 	</th>
 	<th width="5%">
 		<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language', $this->listDirn, $this->listOrder); ?>
 	</th>
-	<th width="10%">
+	<th width="120px">
 		<?php echo JHtml::_('grid.sort', 'JDATE', 'created', $this->listDirn, $this->listOrder); ?>
 	</th>
 	<th width="10%">

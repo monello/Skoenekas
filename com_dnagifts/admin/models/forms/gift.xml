@@ -45,18 +45,66 @@
 			type="text"
 			label="COM_DNAGIFTS_GIFT_FIELD_COLORHEX_LABEL"
 			description="COM_DNAGIFTS_GIFT_FIELD_COLORHEX_DESC"
-			size="7"
+			size="8"
+			maxlength="7"
+			class="inputbox color {hash:true}"
+			default=""
+			required="true"
+		/>
+		
+		<field
+			name="color_hex_medium"
+			type="text"
+			label="COM_DNAGIFTS_GIFT_FIELD_COLORHEXMEDIUM_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_COLORHEXMEDIUM_DESC"
+			size="8"
+			maxlength="7"
+			class="inputbox color {hash:true}"
+			default=""
+			required="true"
+		/>
+		
+		<field
+			name="color_hex_light"
+			type="text"
+			label="COM_DNAGIFTS_GIFT_FIELD_COLORHEXLIGHT_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_COLORHEXLIGHT_DESC"
+			size="8"
+			maxlength="7"
+			class="inputbox color {hash:true}"
+			default=""
+			required="true"
+		/>
+		
+		
+		<field
+			name="character_image"
+			type="text"
+			label="COM_DNAGIFTS_GIFT_FIELD_CHARACTERIMAGE_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_CHARACTERIMAGE_DESC"
+			size="30"
 			class="inputbox"
 			default=""
 			required="true"
 		/>
 		
 		<field
-			name="color_rgb"
+			name="text_image"
 			type="text"
-			label="COM_DNAGIFTS_GIFT_FIELD_COLORRGB_LABEL"
-			description="COM_DNAGIFTS_GIFT_FIELD_COLORRGB_DESC"
-			size="20"
+			label="COM_DNAGIFTS_GIFT_FIELD_TEXTIMAGE_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_TEXTIMAGE_DESC"
+			size="30"
+			class="inputbox"
+			default=""
+			required="true"
+		/>
+		
+		<field
+			name="text_token"
+			type="text"
+			label="COM_DNAGIFTS_GIFT_FIELD_TEXTTOKEN_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_TEXTTOKEN_DESC"
+			size="60"
 			class="inputbox"
 			default=""
 			required="true"
