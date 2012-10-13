@@ -559,15 +559,107 @@ EOD;
 
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
-		
 		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['linechart_div']), $x=$pdf->GetX() + 1, $y=$pdf->GetY() - 80, $w='', $h=75, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 		
 		
-		
-		
-		
-		$html = "THIS IS THE NEXT LINE";
+		// TEXT REPLACEMENT VARIABLES
+		$position = 0;
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL');
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY');
+		$GIFT1_NAME								= ReportsHelper::getGiftLabel($dnaResults, $position);
+		$COM_DNAGIFTS_REPORT_PRIMARY_GIFT		= JText::_('COM_DNAGIFTS_REPORT_PRIMARY_GIFT');
+		$GIFT1_IMAGE_SRC						= ReportsHelper::getCharacterImg($dnaResults, $position);
+		$GIFT1_HEADER_IMAGE_SRC					= ReportsHelper::getHeaderImg($dnaResults, $position);
+		$GIFT1_TEXT								= ReportsHelper::getGiftDescription($dnaResults, $position);
+		$html = <<<EOD
+		<br/>
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
+			<tr>
+				<td colspan="3">
+					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL</p>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<p style="font-size: 12pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY $GIFT1_NAME</p>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<p>$COM_DNAGIFTS_REPORT_PRIMARY_GIFT</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="350"><img height="200" src="$GIFT1_IMAGE_SRC" /></td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+					<img src="$GIFT1_HEADER_IMAGE_SRC" />
+					$GIFT1_TEXT
+				</td>
+			</tr>	
+		</table>
+EOD;
+
 		$pdf->writeHTML($html);
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge1chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		
+		
+		// TEXT REPLACEMENT VARIABLES
+		$position += 1;
+		
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY');
+		$GIFT2_IMAGE_SRC						= ReportsHelper::getCharacterImg($dnaResults, $position);
+		$GIFT2_HEADER_IMAGE_SRC					= ReportsHelper::getHeaderImg($dnaResults, $position);
+		$GIFT2_TEXT								= ReportsHelper::getGiftDescription($dnaResults, $position);
+		$html = <<<EOD
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
+			<tr>
+				<td colspan="3">
+					<p style="font-size: 12pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="350"><img height="200" src="$GIFT2_IMAGE_SRC" /></td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+					<img src="$GIFT2_HEADER_IMAGE_SRC" />
+					$GIFT2_TEXT
+				</td>
+			</tr>	
+		</table>
+EOD;
+
+		$pdf->writeHTML($html);
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge2chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		
+		
+		// ######################################### PAGE 3 ##########################################################
+		
+		$pdf->AddPage();
+		
+		// TEXT REPLACEMENT VARIABLES
+		$position += 1;
+		
+		$GIFT3_IMAGE_SRC		= ReportsHelper::getCharacterImg($dnaResults, $position);
+		$GIFT3_HEADER_IMAGE_SRC	= ReportsHelper::getHeaderImg($dnaResults, $position);
+		$GIFT3_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position);
+		$html = <<<EOD
+		<br/><br/>
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
+			<tr>
+				<td width="350"><img height="200" src="$GIFT3_IMAGE_SRC" /></td>
+				<td width="15">&nbsp;</td>
+				<td width="255">
+					<img src="$GIFT3_HEADER_IMAGE_SRC" />
+					$GIFT3_TEXT
+				</td>
+			</tr>	
+		</table>
+EOD;
+		
+		$pdf->writeHTML($html);
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge3chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+
 		
 		// ######################################### DONE ##########################################################
         

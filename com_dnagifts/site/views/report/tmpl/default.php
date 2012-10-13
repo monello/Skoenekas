@@ -135,7 +135,7 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 	</tr>
 	<tr>
 		<td>
-			<p><?php JText::_('COM_DNAGIFTS_REPORT_PRIMARY_GIFT'); ?></p>
+			<p></p><?php echo JText::_('COM_DNAGIFTS_REPORT_PRIMARY_GIFT'); ?></p>
 			<div style="float:left; width: 140px; height: 200px;"><img src="<?php echo ReportsHelper::getCharacterImg($this->dnaResults, $position); ?>" /></div>
 			<div style="float:left; width: 130px; height: 150px;margin-left: 50px">
 				<div id="gauge1chart_div" class="gaugecontainer"></div>
