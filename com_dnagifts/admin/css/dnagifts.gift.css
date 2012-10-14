@@ -1,0 +1,4 @@
+ul.adminformlist {float: left; width: 580px;}
+div#imagesContainer {float: right;width: 250px;margin-right: 10px;}
+div#imagesContainer-characters {height:200px; width:250px; border: 1px solid black;padding: 5px}
+div#imagesContainer-text {height:80px; width:250px;border: 1px solid black;padding: 5px}
