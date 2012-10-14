@@ -113,7 +113,7 @@ class DnaGiftsModelQuestions extends JModelList
 		$query->from($db->quoteName('#__dnagifts_question').' AS a');
 		
 		// Join over the lst_gift
-		$query->select('g.code AS gift_code, g.name AS gift_name');
+		$query->select('g.code AS gift_code, g.name AS gift_name, g.color_hex as color_hex');
 		$query->join('LEFT', $db->quoteName('#__dnagifts_lst_gift').' AS g ON g.id = a.gift_id');
 		
 		// Filter by published state
@@ -151,6 +151,7 @@ class DnaGiftsModelQuestions extends JModelList
 		$orderCol = $this->state->get('list.ordering');
 		$orderDirn = $this->state->get('list.direction');
 		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
+		
 		return $query;
 	}
 	

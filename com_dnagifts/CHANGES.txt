@@ -276,4 +276,9 @@
  - Updated the management of Gift images, via Admin. Looping through images in directory
  - Added ajax updates for gift-image preview
  
+0.1.04 (2012/10/14)
+-------------------
+ - Added color patches to questions list (questions manager)
+ - Added color patches to questions list (test manager - test detail)
+ - Implemented some tooltips
  

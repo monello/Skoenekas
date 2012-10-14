@@ -153,6 +153,7 @@ root.myNamespace.create('DnaGifts.Test', {
                jQuery("#test-question-"+DnaGifts.Test.link_id).metadata().language = language;
                jQuery("#test-question-"+DnaGifts.Test.link_id).metadata().show_duration = show_duration;
                jQuery( "#edit-test-question" ).dialog( "close" );
+               var JTooltips = new Tips($$('.hasTip'), { maxTitleChars: 50, fixed: false}); 
             } else {
                alert("There was an error updating this question");
             }
@@ -231,6 +232,7 @@ root.myNamespace.create('DnaGifts.Test', {
                jQuery("#show_duration").attr("disabled", true);
                jQuery("#qlanguage option:first").attr("selected", true);
                jQuery("#show_duration").val('');
+               var JTooltips = new Tips($$('.hasTip'), { maxTitleChars: 50, fixed: false}); 
             } else {
                alert(json_data.error);
             }

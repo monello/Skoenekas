@@ -4,6 +4,7 @@ defined('_JEXEC') or die('Restricted Access');
 ?>
 <?php foreach($this->items as $i => $item):
 	$ordering	= ($this->listOrder == 'ordering');
+	$colorpatch = "<div style=\"display:inline; margin-right:5px; background-color: ".$item->color_hex."\">&nbsp;&nbsp;</div>";
 ?>
 	<tr class="row<?php echo $i % 2; ?>">
 		<td class="center">
@@ -13,15 +14,18 @@ defined('_JEXEC') or die('Restricted Access');
 			<?php echo JHtml::_('jgrid.published', $item->published, $i, 'questions.');?>
 		</td>
 		<td>
+			<?php echo $colorpatch; ?>
 			<a href="<?php echo JRoute::_('index.php?option=com_dnagifts&task=question.edit&id='.(int) $item->id); ?>"><?php echo $this->escape($item->question_code); ?></a>
 		</td>
 		<td>
 			<a href="<?php echo JRoute::_('index.php?option=com_dnagifts&task=question.edit&id='.(int) $item->id); ?>"><?php echo $this->escape($item->question_text); ?></a>
 		</td>
 		<td>
+			<?php echo $colorpatch; ?>
 			<?php echo $item->gift_code; ?>
 		</td>
 		<td>
+			<?php echo $colorpatch; ?>
 			<?php echo $item->gift_name; ?>
 		</td>
 		<td class="center">

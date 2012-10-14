@@ -83,6 +83,8 @@ class DnagiftsHelper
 		$query->from($db->quoteName('#__dnagifts_question').' AS a');
 		$query->select('b.id As id, b.ordering AS ordering');
 		$query->join('LEFT', $db->quoteName('#__dnagifts_lnk_test_question').' AS b ON b.question_id = a.id');
+		$query->select('g.code AS gift_code, g.name AS gift_name, g.color_hex as color_hex');
+		$query->join('LEFT', $db->quoteName('#__dnagifts_lst_gift').' AS g ON g.id = a.gift_id');
 		$query->where('b.test_id = '.$record_id);
 		$query->order('b.ordering');
 		

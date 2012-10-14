@@ -91,15 +91,22 @@ class DnaGiftsControllerTest extends JControllerForm
 		
 		// get button details
 		$query = $db->getQuery(true);
-		$query->select('question_text');
-		$query->from($db->quoteName('#__dnagifts_question'));
-		$query->where('id = '. (int) $question_id);
+		$query->select('a.question_text as question_text, a.question_code as question_code');
+		$query->from($db->quoteName('#__dnagifts_question').' AS a');
+		$query->select('g.code AS gift_code, g.name AS gift_name, g.color_hex as color_hex');
+		$query->join('LEFT', $db->quoteName('#__dnagifts_lst_gift').' AS g ON g.id = a.gift_id');
+		$query->where('a.id = '. (int) $question_id);
 		$db->setQuery($query);
 		$data = $db->loadObject();
 		
-		$text = DnagiftsHelper::addEllipsis($data->question_text,30);
+		$gift_name		= $data->gift_name;
+		$color_hex		= $data->color_hex;
+		$gift_code		= $data->gift_code;
+		$question_code	= $data->question_code;
+		$colorpatch 	= "<div class=\"hasTip\" title=\"Gifting::This question is linked to ".$gift_name."\" style=\"display:inline; margin-right:5px; color:black; background-color: ".$color_hex."\">&nbsp;".$gift_code."&nbsp;</div>";
+		$text 			= DnagiftsHelper::addEllipsis($data->question_text,30);
 		
-		echo json_encode(array("success" => true,"text" => $text));
+		echo json_encode(array("success" => true,"text" => $colorpatch.$question_code.": ".$text));
 	}
 	
 	public function saveNewTestButton() {
@@ -187,33 +194,42 @@ class DnaGiftsControllerTest extends JControllerForm
 		}
 		$link_id = $db->insertid();
 		
-		// get button details
+		// get question details
 		$query = $db->getQuery(true);
-		$query->select('id, question_code, question_text, language');
-		$query->from($db->quoteName('#__dnagifts_question'));
-		$query->where('id = '. (int) $question_id);
-		$query->order('ordering');
+		$query->select('a.id as id, a.question_code as question_code, a.question_text as question_text, a.language as language');
+		$query->from($db->quoteName('#__dnagifts_question'). 'AS a');
+		
+		$query->select('g.code AS gift_code, g.name AS gift_name, g.color_hex as color_hex');
+		$query->join('LEFT', $db->quoteName('#__dnagifts_lst_gift').' AS g ON g.id = a.gift_id');
+		
+		$query->where('a.id = '. (int) $question_id);
+		$query->order('a.ordering');
 		$db->setQuery($query);
 		$data = $db->loadObject();
 		
-		$question_text = $data->question_text;
-		$language = $data->language;
+		$question_text	= $data->question_text;
+		$question_code	= $data->question_code;
+		$language 		= $data->language;
+		$gift_name		= $data->gift_name;
+		$color_hex		= $data->color_hex;
+		$gift_code		= $data->gift_code;
+		$colorpatch 	= "<div class=\"hasTip\" title=\"Gifting::This question is linked to ".$gift_name."\"style=\"display:inline; margin-right:5px; color:black; background-color: ".$color_hex."\">&nbsp;".$gift_code."&nbsp;</div>";
 		
 		$html = '<li id="test-question-'.$link_id.'" data="{link_id: \''.$link_id.'\', test_id: \''.$test_id.'\', question_id: \''.$question_id.'\', language: \''.$language.'\', show_duration: '.$show_duration.'}" class="ui-state-default">'.
 			'<div class="questionDetailsContainer">'.
-				'<a class="ui-icon ui-icon-arrowthick-2-n-s " title="Click and drag Question to new position" href="#" style="float:left">Drag Question</a>'.
-				'<div class="testQuestionText">'.DnagiftsHelper::addEllipsis($question_text,30).'</div>'.
+				'<a class="ui-icon ui-icon-arrowthick-2-n-s hasTip" title="Drag and Drop::Click and drag Question to new position" href="#" style="float:left">Drag Question</a>'.
+				'<div class="testQuestionText">'.$colorpatch.$question_code.": ".DnagiftsHelper::addEllipsis($question_text,30).'</div>'.
 				'<div class="testQuestionLanguage"> ('.$language.')</div>'.
 				'<div class="testShowDuration"> ('.$show_duration.' sec)</div>'.
 			'</div>'.
 			'<div class="actionQuestionsContainer">'.
-				'<a class="ui-icon ui-icon-arrowthickstop-1-s actionBtn toBottomBtn" title="To Bottom" href="#" style="float:right">To Bottom</a>'.
-				'<a class="ui-icon ui-icon-arrowthick-1-s actionBtn downOneBtn" title="Down One" href="#" style="float:right">Down One</a>'.
-				'<a class="ui-icon ui-icon-arrowthick-1-n actionBtn upOneBtn" title="Up One" href="#" style="float:right">Up One</a>'.
-				'<a class="ui-icon ui-icon-arrowthickstop-1-n actionBtn toTopBtn" title="To Top" href="#" style="float:right">To Top</a>'.
+				'<a class="ui-icon ui-icon-arrowthickstop-1-s actionBtn toBottomBtn hasTip" title="Quick Move::Question to bottom of list" href="#" style="float:right">To Bottom</a>'.
+				'<a class="ui-icon ui-icon-arrowthick-1-s actionBtn downOneBtn hasTip" title="Quick Move::Question down one position" href="#" style="float:right">Down One</a>'.
+				'<a class="ui-icon ui-icon-arrowthick-1-n actionBtn upOneBtn hasTip" title="Quick Move::Question up one position" href="#" style="float:right">Up One</a>'.
+				'<a class="ui-icon ui-icon-arrowthickstop-1-n actionBtn toTopBtn hasTip" title="Quick Move::Question to top of list" href="#" style="float:right">To Top</a>'.
 				'<strong class="actionButtonSpacer">&nbsp;</strong>'.
-				'<a class="ui-icon ui-icon-close actionBtn goDeleteBtn" title="Delete" href="#" style="float:right">Delete</a>'.
-				'<a class="ui-icon ui-icon-pencil actionBtn goEditBtn" title="Edit" href="#" style="float:right">Edit</a>'.
+				'<a class="ui-icon ui-icon-close actionBtn goDeleteBtn hasTip" title="Action::Click to Delete question" href="#" style="float:right">Delete</a>'.
+				'<a class="ui-icon ui-icon-pencil actionBtn goEditBtn hasTip" title="Action::Click to Edit question" href="#" style="float:right">Edit</a>'.
 			'</div></li>';
 		
 		echo json_encode(array("success" => true, "html" => $html));

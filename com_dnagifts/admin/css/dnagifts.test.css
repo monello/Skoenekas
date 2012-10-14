@@ -6,7 +6,7 @@
 .testShowDuration { display: inline; font-size: 8pt; width: 20px;}
 .testQuestionText, .testButtonText { display: inline; max-width: 350px; overflow: hidden; white-space:nowrap;}
 .actionButtonSpacer { float:right; width:20px; }
-.questionDetailsContainer, .buttonDetailsContainer { display: inline; float:left; width: 60%; min-width: 200px; overflow: hidden; }
+.questionDetailsContainer, .buttonDetailsContainer { display: inline; float:left; width: 370px; min-width: 200px; overflow: hidden; }
 .actionQuestionsContainer, .actionButtonsContainer { display: inline; float:right; width: 120px; }
 
 fieldset.panelform table#tdTestConfig td label {
