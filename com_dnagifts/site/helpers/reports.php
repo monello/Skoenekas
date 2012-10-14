@@ -840,7 +840,7 @@ EOD;
 	{
 		for ($i=0; $i<count($dnaResults); $i++) {
 			if ($dnaResults[$i]['position'] == $position) {
-				return JURI::base(true)."/media/com_dnagifts/images/".$dnaResults[$i]['characterImg'];
+				return JURI::base(true)."/media/com_dnagifts/images/characters/".$dnaResults[$i]['characterImg'];
 			}
 		}
 		return 'ERROR';
@@ -850,7 +850,7 @@ EOD;
 	{
 		for ($i=0; $i<count($dnaResults); $i++) {
 			if ($dnaResults[$i]['position'] == $position) {
-				return JURI::base(true)."/media/com_dnagifts/images/".$dnaResults[$i]['textImg'];
+				return JURI::base(true)."/media/com_dnagifts/images/text/".$dnaResults[$i]['textImg'];
 			}
 		}
 		return 'ERROR';

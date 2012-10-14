@@ -18,7 +18,7 @@ class DnaGiftsModelReport extends JModel
 				'yellowColor'=> 'FF6262',
 				'greenColor' => 'FF7F7F',
 				'characterImg' => 'perceiver.png',
-				'textImg' => 'perceiver-header.png',
+				'textImg' => 'perceiver.png',
 				'textToken' => 'COM_DNAGIFTS_REPORT_PERCEIVER'
 			),
 			array(
@@ -30,7 +30,7 @@ class DnaGiftsModelReport extends JModel
 				'yellowColor'=> 'FFCC99',
 				'greenColor' =>'FFEAB8',
 				'characterImg' => 'servant.png',
-				'textImg' => 'servant-header.png',
+				'textImg' => 'servant.png',
 				'textToken' => 'COM_DNAGIFTS_REPORT_SERVANT'
 			),
 			array(
@@ -42,7 +42,7 @@ class DnaGiftsModelReport extends JModel
 				'yellowColor'=> 'FFFF99',
 				'greenColor' =>'FFFCCD',
 				'characterImg' => 'teacher.png',
-				'textImg' => 'teacher-header.png',
+				'textImg' => 'teacher.png',
 				'textToken' => 'COM_DNAGIFTS_REPORT_TEACHER'
 			),
 			array(
@@ -54,7 +54,7 @@ class DnaGiftsModelReport extends JModel
 				'yellowColor'=> '99CC99',
 				'greenColor' =>'BFFFBF',
 				'characterImg' => 'exhorter.png',
-				'textImg' => 'exhorter-header.png',
+				'textImg' => 'exhorter.png',
 				'textToken' => 'COM_DNAGIFTS_REPORT_EXHORTER'
 			),
 			array(
@@ -66,7 +66,7 @@ class DnaGiftsModelReport extends JModel
 				'yellowColor'=> '66CCCC',
 				'greenColor' =>'AEF5FF',
 				'characterImg' => 'giver.png',
-				'textImg' => 'giver-header.png',
+				'textImg' => 'giver.png',
 				'textToken' => 'COM_DNAGIFTS_REPORT_GIVER'
 			),
 			array(
@@ -78,7 +78,7 @@ class DnaGiftsModelReport extends JModel
 				'yellowColor'=> '6666CC',
 				'greenColor' =>'ADAAFF',
 				'characterImg' => 'ruler.png',
-				'textImg' => 'ruler-header.png',
+				'textImg' => 'ruler.png',
 				'textToken' => 'COM_DNAGIFTS_REPORT_RULER'
 			),
 			array(
@@ -90,7 +90,7 @@ class DnaGiftsModelReport extends JModel
 				'yellowColor'=> '9966CC',
 				'greenColor' =>'D9B4FF',
 				'characterImg' => 'mercy.png',
-				'textImg' => 'mercy-header.png',
+				'textImg' => 'mercy.png',
 				'textToken' => 'COM_DNAGIFTS_REPORT_MERCY'
 			)
 		);

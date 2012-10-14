@@ -78,23 +78,19 @@
 		
 		
 		<field
-			name="character_image"
-			type="text"
+			name="characters_image"
+			type="GiftCharacterImage"
 			label="COM_DNAGIFTS_GIFT_FIELD_CHARACTERIMAGE_LABEL"
 			description="COM_DNAGIFTS_GIFT_FIELD_CHARACTERIMAGE_DESC"
-			size="30"
-			class="inputbox"
 			default=""
 			required="true"
 		/>
 		
 		<field
 			name="text_image"
-			type="text"
+			type="GiftTextImage"
 			label="COM_DNAGIFTS_GIFT_FIELD_TEXTIMAGE_LABEL"
 			description="COM_DNAGIFTS_GIFT_FIELD_TEXTIMAGE_DESC"
-			size="30"
-			class="inputbox"
 			default=""
 			required="true"
 		/>

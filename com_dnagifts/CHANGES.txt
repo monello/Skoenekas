@@ -271,3 +271,9 @@
  - Updated the view and model and database
  - Added upgrade SQL
  
+0.1.03 (2012/10/14)
+-------------------
+ - Updated the management of Gift images, via Admin. Looping through images in directory
+ - Added ajax updates for gift-image preview
+ 
+ 

@@ -10,6 +10,25 @@ defined('_JEXEC') or die;
  */
 class DnagiftsHelper
 {
+	public static function getGiftImages($type)
+	{
+		$options	= array();
+		$options[]	= JHtml::_('select.option', '', '- select image -');
+		$directory = implode(DS, array(JPATH_ROOT,"media","com_dnagifts","images",$type));
+		$pattern = '/\.(gif|png|jpg)$/i';
+		if ($handle = opendir($directory)) {
+			while (false !== ($file = readdir($handle))) {
+				if ( !preg_match($pattern, $file) ){
+					continue;
+				}
+				$options[] = JHtml::_('select.option', $file, $file);
+			}
+			closedir($handle);
+		}
+		
+		return $options;
+	}
+	
 	public static function getLanguageOptions()
 	{
 		// Build the active state filter options.

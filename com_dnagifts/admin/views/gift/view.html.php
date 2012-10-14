@@ -35,6 +35,9 @@ class DnaGiftsViewGift extends JView
  
 		// Display the template
 		parent::display($tpl);
+		
+		// Set the document
+		$this->setDocument();
 	}
  
 	/**
@@ -55,5 +58,31 @@ class DnaGiftsViewGift extends JView
 		
 		JToolBarHelper::divider();
 		JToolBarHelper::cancel('gift.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
+	}
+	
+	/**
+	 * Method to set up the document properties
+	 *
+	 * @return void
+	 */
+	protected function setDocument() 
+	{
+		$document = JFactory::getDocument();
+		
+		// Stylesheets
+		$document->addStyleSheet(JURI::base(true).'/components/com_dnagifts/css/dnagifts.gift.css');
+		
+		// Javascripts
+		// - JQuery
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/jquery-1.7.2.min.js');
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/jquery.noconflict.js');
+		
+		// - Other
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/Namespace.min.js');
+		
+		// - DNA Gifts
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/dnagifts.base.js');
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/dnagifts.init.js');
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/dnagifts.gift.js');
 	}
 }
