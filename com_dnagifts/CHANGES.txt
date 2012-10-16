@@ -287,3 +287,10 @@
  - Tied up the report and the real test results
  - add to make many code enhancement, but still need to fix the bug around dnaMaxScore in the DNA chart
  
+0.1.06 (2012/10/16)
+------------------
+ - updated the dna chart range calculations
+ - updated the data plotting on the dna chart
+ - updated the y-bar value increments and plotting
+ - updated the grid positions
+ 

@@ -698,22 +698,29 @@ EOD;
 			'secondaryDatapoint'	=> $secondaryDatapoint
 		);
 		
-		//'0|10|20|30|40|50|60'
 		$scoreline = array();
-		for($i=0; $i<=$dnaMaxScore+10;$i+=10) {
-			$scoreline[] = $i;
+		$x_increments = $dnaMaxScore / 4;
+		for($i=0; $i<=$dnaMaxScore;$i+=$x_increments) {
+			$scoreline[] = round($i,1);
+		}
+		
+		$giftcount = 7;
+		$y_spacing = array();
+		$y_muliplier = $dnaMaxScore / ($giftcount + 1);
+		for($i=1; $i<=$giftcount + 2;$i++) {
+			$y_spacing[] = $y_muliplier * $i;
 		}
 		
 		$charttype = 'lxy';
 		$chartsize = '400x300';
-		$chartdata = 't:7,15,23,30,38,46,53|'.$chartParams['chartdata'];
+		$chartdata = 't:'.implode(',',$y_spacing).'|'.$chartParams['chartdata'];
 		$chartscale = '0,'.$dnaMaxScore;
 		$linestyle = '1';
 		$visibleaxes = 'x,x,y'; // (x,y,t,b) (x-axis, y-axis, top, bottom)
 		$axeslabels = '0:| |'.$chartParams['axeslabelsAbbr'].
 			'| |1:| |'.$chartParams['axeslabelsScores'].
 			'| |2:|'.implode('|',$scoreline);
-		$chartgrid = '100.0,25.0';
+		$chartgrid = '100.0,33.3';
 		$chartfill = 'c,ls,0,FFFFFF,0.07,'.$chartParams['chartfillArr'][0].
 			',0.12,'.$chartParams['chartfillArr'][1].
 			',0.13,'.$chartParams['chartfillArr'][2].
@@ -979,9 +986,9 @@ EOD;
 	public static function getDnaMaxScore($user_test_id)
 	{
 		$db = JFactory::getDbo();
-		$query = $db->getQuery(true);
 		
 		// get the test id
+		$query = $db->getQuery(true);
 		$query->select('test_id');
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
 		$query->where('id = '. (int) $user_test_id);
@@ -990,6 +997,7 @@ EOD;
 		
 		// Get the maximum times a category/gift is repeated in a test
 		// - questions are linked to categories/gifts
+		$query = $db->getQuery(true);
 		$query->select('COUNT(c.code) AS maximum');
 		$query->from($db->quoteName('#__dnagifts_lnk_test_question').' AS a');
 		$query->join('LEFT', $db->quoteName('#__dnagifts_question').' AS b ON a.question_id = b.id');
@@ -1001,6 +1009,7 @@ EOD;
 		$maximum = $db->loadResult();
 		
 		// Get the score of the button with the highest score used in the test
+		$query = $db->getQuery(true);
 		$query->select('MAX(b.score) AS highscore');
 		$query->from($db->quoteName('#__dnagifts_lnk_test_buttonset').' AS a');
 		$query->join('LEFT', $db->quoteName('#__dnagifts_option_button').' AS b ON a.button_id = b.id');
