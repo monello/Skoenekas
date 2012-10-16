@@ -26,7 +26,7 @@ class DnaGiftsModelTest extends JModel
 			$tmpdata = array(
 				'id' => $test->question_id,
 				'duration' => $test->show_duration,
-		    'question' => $test->question_text,
+				'question' => $test->question_text,
 				'hint' => $test->question_hint,
 				'catid' => $test->gift_id
 			);

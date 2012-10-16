@@ -282,3 +282,8 @@
  - Added color patches to questions list (test manager - test detail)
  - Implemented some tooltips
  
+0.1.05 (2012/10/15)
+------------------
+ - Tied up the report and the real test results
+ - add to make many code enhancement, but still need to fix the bug around dnaMaxScore in the DNA chart
+ 

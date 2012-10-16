@@ -56,7 +56,7 @@ root.myNamespace.create('DnaGifts.report', {
             type: "POST",
             url: url,
             data: {
-				userTestID: 1,
+				userTestID: userTestID,
                 svgData: ns.chartSVG,
 				imgChartSRC: jQuery("table#tblDNAChart img:first").attr("src")
             },
@@ -79,7 +79,7 @@ root.myNamespace.create('DnaGifts.report', {
             type: "POST",
             url: url,
             data: {
-				userTestID: 1
+				userTestID: userTestID
             },
 			success: function(json) {
 				if (json.success) {

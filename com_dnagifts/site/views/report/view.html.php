@@ -12,17 +12,37 @@ JLoader::register('ReportsHelper', JPATH_COMPONENT.'/helpers/reports.php');
 class DnaGiftsViewReport extends JView
 {
 	public function display($tpl = null) 
-	{	
+	{
+		$user = JFactory::getUser();
+		if (!$user->get("id")) {
+			$app = JFactory::getApplication()->redirect('/');
+			return false;
+		}
+		
 		$model		= $this->getModel();
 		$app		= JFactory::getApplication();
 	    $params    	= $app->getParams();
     	$dispatcher	= JDispatcher::getInstance();
 		
-		$test_user_id = 1; //mrl: provide real test_user_id
+		$test_id 	= JRequest::getVar('id');
+		if (!$test_id) 
+		{
+			JError::raiseError(500, implode('<br />', array("Invalid Request :: Missing test_id")));
+			return false;
+		}
 		
+		$test_user_id = ReportsHelper::getTestUserId($test_id);
+		if (!$test_user_id) 
+		{
+			JError::raiseError(500, implode('<br />', array("Invalid Request :: Test ID does not match user")));
+			return false;
+		}
+		
+		$this->assignRef( 'dnaMaxScore', ReportsHelper::getDnaMaxScore($test_user_id) );
 		$this->assignRef( 'user', JFactory::getUser() );
+		$this->assignRef( 'userTestID', $test_user_id );
 		$this->assignRef( 'dnaResults', $model->getResultsObject($test_user_id));
-		$this->assignRef( 'dnaChartSrc', ReportsHelper::generateDNAChart($this->dnaResults) );
+		$this->assignRef( 'dnaChartSrc', ReportsHelper::generateDNAChart($this->dnaResults, $test_user_id) );
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) 
@@ -36,14 +56,9 @@ class DnaGiftsViewReport extends JView
 		{
 			return $html;
 		}
-
+		
 		echo $html;
-		
-		/*DnagiftsHelper::generatepdf('Morne Louw', 'DNA Gifts - Report',
-				'Test Results', 'DNA Gifts, Free Test',
-				'results001', $html, 'I');
-		*/
-		
+
 		// Set the document
 		$this->setDocument();
 	}

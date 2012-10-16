@@ -8,19 +8,6 @@ defined('_JEXEC') or die;
  * @subpackage	com_dnagifts
  * @since		1.6
  */
-
-//require_once(JPATH_ROOT.DS.'tcpdf'.DS.'config/lang/eng.php');
-//require_once(JPATH_ROOT.DS.'tcpdf'.DS.'tcpdf.php');
-
-//// Extra header voor background color
-//class MYPDF extends TCPDF {
-//	//Page header public
-//	function Header() {
-//		// Background color
-//		$this->Rect(0,0,210,297,'F','',$fill_color = array(255, 170, 96));
-//	}
-//}
- 
 class ReportsHelper
 {
 	public static function &documentSetup($userTestID)
@@ -146,7 +133,7 @@ class ReportsHelper
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
 		
 		// prepare the image charts
-		$dnaChartSrc		= ReportsHelper::generateDNAChart($dnaResults);
+		$dnaChartSrc		= ReportsHelper::generateDNAChart($dnaResults, $userTestID);
 		$dnaPieChartSrc		= ReportsHelper::generateImagePieChart($dnaResults);
 		$dnaLineChartSrc	= ReportsHelper::generateImageLineChart($dnaResults);
 		
@@ -297,7 +284,7 @@ EOD;
 		
 		//###################################################################################################################
 		
-		$dnaMaxScore = 60;
+		$dnaMaxScore = ReportsHelper::getDnaMaxScore($userTestID);
 		
 		// TEXT REPLACEMENT VARIABLES
 		$position								= 0;
@@ -667,7 +654,7 @@ EOD;
         $pdf->Output($filename, $displaytype);
 	}
 	
-	public static function generateDNAChart($dnaResults)
+	public static function generateDNAChart($dnaResults, $userTestID)
 	{
 		$chartdataArr = array();
 		$seriescolorsArr = array();
@@ -678,6 +665,8 @@ EOD;
 		$legendsArr = array();
 		$primaryDatapoint = 0;
 		$secondaryDatapoint = 0;
+		
+		$dnaMaxScore = ReportsHelper::getDnaMaxScore($userTestID);
 		
 		$cntr = 0;
 		foreach($dnaResults as $data) {
@@ -709,15 +698,21 @@ EOD;
 			'secondaryDatapoint'	=> $secondaryDatapoint
 		);
 		
+		//'0|10|20|30|40|50|60'
+		$scoreline = array();
+		for($i=0; $i<=$dnaMaxScore+10;$i+=10) {
+			$scoreline[] = $i;
+		}
+		
 		$charttype = 'lxy';
 		$chartsize = '400x300';
 		$chartdata = 't:7,15,23,30,38,46,53|'.$chartParams['chartdata'];
-		$chartscale = '0,60';
+		$chartscale = '0,'.$dnaMaxScore;
 		$linestyle = '1';
 		$visibleaxes = 'x,x,y'; // (x,y,t,b) (x-axis, y-axis, top, bottom)
 		$axeslabels = '0:| |'.$chartParams['axeslabelsAbbr'].
 			'| |1:| |'.$chartParams['axeslabelsScores'].
-			'| |2:|0|10|20|30|40|50|60';
+			'| |2:|'.implode('|',$scoreline);
 		$chartgrid = '100.0,25.0';
 		$chartfill = 'c,ls,0,FFFFFF,0.07,'.$chartParams['chartfillArr'][0].
 			',0.12,'.$chartParams['chartfillArr'][1].
@@ -955,5 +950,67 @@ EOD;
         
         # Send once you have set all of your options
         $mailer->send();
+	}
+	
+	public static function getTestUserId($test_id)
+	{
+		if (!$test_id) {
+			return false;
+		}
+		
+		$user = JFactory::getUser();
+		if (!$user->get("id")) {
+			return false;
+		}
+		
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+        $query->select('id');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
+		$query->where('user_id = '.$user->get("id"));
+		$query->where('test_id = '.$test_id);
+        $db->setQuery($query);
+		if (!$result = $db->loadObject()) {
+			return false;
+		}
+		
+		return $result->id;
+	}
+	public static function getDnaMaxScore($user_test_id)
+	{
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		// get the test id
+		$query->select('test_id');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
+		$query->where('id = '. (int) $user_test_id);
+		$db->setQuery($query);
+		$test_id = $db->loadResult();
+		
+		// Get the maximum times a category/gift is repeated in a test
+		// - questions are linked to categories/gifts
+		$query->select('COUNT(c.code) AS maximum');
+		$query->from($db->quoteName('#__dnagifts_lnk_test_question').' AS a');
+		$query->join('LEFT', $db->quoteName('#__dnagifts_question').' AS b ON a.question_id = b.id');
+		$query->join('LEFT', $db->quoteName('#__dnagifts_lst_gift').' AS c ON b.gift_id = c.id');
+		$query->where('a.test_id = '. (int) $test_id);
+		$query->group('c.id');
+		$query->order('maximum DESC');
+		$db->setQuery($query, 0, 1);
+		$maximum = $db->loadResult();
+		
+		// Get the score of the button with the highest score used in the test
+		$query->select('MAX(b.score) AS highscore');
+		$query->from($db->quoteName('#__dnagifts_lnk_test_buttonset').' AS a');
+		$query->join('LEFT', $db->quoteName('#__dnagifts_option_button').' AS b ON a.button_id = b.id');
+		$query->where('a.test_id = '. (int) $test_id);
+		$db->setQuery($query, 0, 1);
+		$high_score = $db->loadResult();
+		
+		// Calculate the max score
+		$dnaMaxScore = (int) $maximum * (int) $high_score;
+		
+		return $dnaMaxScore;
 	}
 }

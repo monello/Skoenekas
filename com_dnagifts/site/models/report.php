@@ -7,93 +7,62 @@ jimport('joomla.application.component.model');
 
 class DnaGiftsModelReport extends JModel
 {
+	
+	public function makeSortFunction($field)
+	{
+		$code = "return strnatcmp(\$a['$field'], \$b['$field']);";
+		return create_function('$a,$b', $code);
+	}
+	
 	public function getResultsObject($test_user_id) {
-		$dnaResults = array(
-			array(
-				'label' => 'Perceiver',
-				'abbr'=> 'P',
-				'score'=> 23,
-				'position'=> 3,
-				'redColor'=> 'FF0000',
-				'yellowColor'=> 'FF6262',
-				'greenColor' => 'FF7F7F',
-				'characterImg' => 'perceiver.png',
-				'textImg' => 'perceiver.png',
-				'textToken' => 'COM_DNAGIFTS_REPORT_PERCEIVER'
-			),
-			array(
-				'label'=> 'Servant',
-				'abbr'=> 'S',
-				'score'=> 18,
-				'position'=> 5,
-				'redColor'=> 'FFC000',
-				'yellowColor'=> 'FFCC99',
-				'greenColor' =>'FFEAB8',
-				'characterImg' => 'servant.png',
-				'textImg' => 'servant.png',
-				'textToken' => 'COM_DNAGIFTS_REPORT_SERVANT'
-			),
-			array(
-				'label' => 'Teacher',
-				'abbr'=> 'T',
-				'score'=> 16,
-				'position'=> 6,
-				'redColor'=> 'FFFF00',
-				'yellowColor'=> 'FFFF99',
-				'greenColor' =>'FFFCCD',
-				'characterImg' => 'teacher.png',
-				'textImg' => 'teacher.png',
-				'textToken' => 'COM_DNAGIFTS_REPORT_TEACHER'
-			),
-			array(
-				'label' => 'Exhorter',
-				'abbr'=> 'E',
-				'score'=> 49,
-				'position'=> 0,
-				'redColor'=> '00B050',
-				'yellowColor'=> '99CC99',
-				'greenColor' =>'BFFFBF',
-				'characterImg' => 'exhorter.png',
-				'textImg' => 'exhorter.png',
-				'textToken' => 'COM_DNAGIFTS_REPORT_EXHORTER'
-			),
-			array(
-				'label' => 'Giver',
-				'abbr'=> 'G',
-				'score'=> 35,
-				'position'=> 2,
-				'redColor'=> '538ED5',
-				'yellowColor'=> '66CCCC',
-				'greenColor' =>'AEF5FF',
-				'characterImg' => 'giver.png',
-				'textImg' => 'giver.png',
-				'textToken' => 'COM_DNAGIFTS_REPORT_GIVER'
-			),
-			array(
-				'label' => 'Ruler',
-				'abbr'=> 'R',
-				'score'=> 40,
-				'position'=> 1,
-				'redColor'=> '333391',
-				'yellowColor'=> '6666CC',
-				'greenColor' =>'ADAAFF',
-				'characterImg' => 'ruler.png',
-				'textImg' => 'ruler.png',
-				'textToken' => 'COM_DNAGIFTS_REPORT_RULER'
-			),
-			array(
-				'label' => 'Mercy',
-				'abbr'=> 'M',
-				'score'=> 19,
-				'position'=> 4,
-				'redColor'=> '990099',
-				'yellowColor'=> '9966CC',
-				'greenColor' =>'D9B4FF',
-				'characterImg' => 'mercy.png',
-				'textImg' => 'mercy.png',
-				'textToken' => 'COM_DNAGIFTS_REPORT_MERCY'
-			)
-		);
+		
+		// loop through all the answers
+		// use the view "ccblm_dnagifts_testquestions_and_answers"
+		//	- where test_user_id is matched
+		//	- order by gift_id
+		$db = $this->getDbo();
+		
+		$query1 = $db->getQuery(true);
+		$giftObj = array();
+		$query1->select('*');
+		$query1->from($db->quoteName('#__dnagifts_lst_gift'));
+		$db->setQuery($query1);
+		$giftdata = $db->loadObjectList();
+		foreach($giftdata as $i => $gift) {
+			$giftObj[$gift->id] = $gift;
+		}
+		
+		$query = $db->getQuery(true);
+		$query->select('gift_id, sum(answer_score) as total_score');
+		$query->from($db->quoteName('#__dnagifts_testquestions_and_answers'));
+		$query->where($db->quoteName('lnk_user_test_id') . " = " . $db->quote($test_user_id));
+		$query->group($db->quoteName('gift_id'));
+		$query->order($db->getEscaped('total_score DESC'));
+		$db->setQuery($query);
+		$data = $db->loadObjectList();
+		
+		$dnaResults = array();
+		foreach($data as $position => $result) {
+			$gift_id = $result->gift_id;
+			$hash = '/\#/';
+			$dnaResults[] = array(
+				'ordering' => $giftObj[$gift_id]->ordering,
+				'label' => $giftObj[$gift_id]->name,
+				'abbr'=> $giftObj[$gift_id]->code,
+				'score'=> (int) $result->total_score,
+				'position'=> (int) $position,
+				'redColor'=> preg_replace($hash, '', $giftObj[$gift_id]->color_hex),
+				'yellowColor'=> preg_replace($hash, '', $giftObj[$gift_id]->color_hex_medium),
+				'greenColor' => preg_replace($hash, '', $giftObj[$gift_id]->color_hex_light),
+				'characterImg' => $giftObj[$gift_id]->characters_image,
+				'textImg' => $giftObj[$gift_id]->text_image,
+				'textToken' => $giftObj[$gift_id]->text_token
+			);
+		}
+		
+		$compare = $this->makeSortFunction('ordering');
+		usort($dnaResults, $compare);
+		
 		return $dnaResults;
 	}
 

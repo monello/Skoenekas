@@ -17,8 +17,9 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 
 <script type="text/javascript">
 	var dnaChartCount = 5;
-	var dnaMaxScore = 60;
-	var dnaResults = <?php echo json_encode($this->dnaResults)?>;
+	var dnaMaxScore = <?php echo $this->dnaMaxScore; ?>;
+	var userTestID = <?php echo $this->userTestID; ?>;
+	var dnaResults = <?php echo json_encode($this->dnaResults); ?>;
 	var dnaReportCopy = {
 		'motivationalflow': "<?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_CHARTHEAD'); ?>"
 	};
