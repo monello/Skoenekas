@@ -5,7 +5,7 @@ JHtml::_('behavior.tooltip');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_dnagifts&layout=edit&id='.(int) $this->item->id); ?>"
       method="post" name="adminForm" id="test-form">
-	<div class="width-60 fltlft">
+	<div class="testDetails fltlft">
 		<fieldset class="adminform">
 			<legend><?php echo JText::_( 'COM_DNAGIFTS_TEST_LEGEND_DETAILS' ); ?></legend>
 			<ul class="adminformlist">
@@ -20,7 +20,7 @@ JHtml::_('behavior.tooltip');
 			</ul>
 		</fieldset>
 	</div>
-	<div class="width-40 fltrt">
+	<div class="testConfig fltlft">
 		<?php echo JHtml::_('sliders.start', 'weblink-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 		<?php echo $this->loadTemplate('config'); ?>
 		<?php echo $this->loadTemplate('buttons'); ?>

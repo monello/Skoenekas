@@ -822,7 +822,8 @@ EOD;
 	{
 		for ($i=0; $i<count($dnaResults); $i++) {
 			if ($dnaResults[$i]['position'] == $position) {
-				return JText::_($dnaResults[$i]['textToken']);
+				$token = $dnaResults[$i]['textToken']."_POSITION_" . ((int) $position + 1);
+				return JText::_($token)."<br/>";
 			}
 		}
 		return '<p>Unable to find description, please contact the webmaster</p>';

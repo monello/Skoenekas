@@ -38,7 +38,7 @@
 			maxlength="255"
 			class="inputbox"
 			default=""
-			required="true"
+			required="false"
 		/>
 		
 		<field name="question_reason"

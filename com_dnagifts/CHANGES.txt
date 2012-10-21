@@ -294,3 +294,13 @@
  - updated the y-bar value increments and plotting
  - updated the grid positions
  
+0.1.07 (2012/10/18 - 21)
+------------------
+ - updated the test edit form styling to make element fit beter.
+ - updated the column widths of the questions list.
+ - moved the qeuestion id column to 3rd position in question management list
+ - remove the "required" constraint from the question edit form
+ - updated the preview image src to include site install folder, for in case such a folder is applicable.
+ - Hid the language selector
+ - Implemented the gift copy-by-results-position text
+ - Fixed the "download previous reports" section

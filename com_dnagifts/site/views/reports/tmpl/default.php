@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted access');
     <tr>
       <td><?php echo $report->started_datetime; ?></td>
       <td><?php echo $report->test_name; ?></td>
-      <td><a href="<?php echo JURI::base(true).'/components/com_dnagifts/store/<?php echo $report->report_name; ?>'; ?>"><?php echo str_replace("\s","%20",$report->report_name); ?></a></td>
+      <td><a href="<?php echo JURI::base(true); ?>/index.php?option=com_dnagifts&task=reports.dlpdf&f=<?php echo str_replace("\s","\%20",$report->report_name) ?>"><?php echo str_replace("\s","%20",$report->report_name) ;?></a></td>
     </tr>
     <?php endforeach; ?>
   </tbody>

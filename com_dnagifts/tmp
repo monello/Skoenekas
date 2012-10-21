@@ -1,0 +1,9 @@
+    function dlpdf() {
+        $f = JRequest::getVar('f');
+        $filename = JPATH_COMPONENT."/store/".str_replace("\s","%20",$f);
+        header('Content-disposition: attachment; filename=Filename.pdf');
+        $doc =& JFactory::getDocument();
+        $doc->setMimeEncoding('application/pdf');
+        readfile($filename);
+    }
+}

@@ -23,11 +23,11 @@ JHtml::_('behavior.tooltip');
 		
 	<div id="imagesContainer">
 		<div id="imagesContainer-characters">
-			<img src="/media/com_dnagifts/images/characters/<?php echo $this->item->characters_image; ?>" alt="Please select an image from the 'Character Image' select list on the left"/>
+			<img src="<?php echo JURI::root(true); ?>$/media/com_dnagifts/images/characters/<?php echo $this->item->characters_image; ?>" alt="Please select an image from the 'Character Image' select list on the left"/>
 		</div>
 		<p>Character Image</p>
 		<div id="imagesContainer-text">
-			<img src="/media/com_dnagifts/images/text/<?php echo $this->item->text_image; ?>" alt="Please select an image from the 'Text Image' select list on the left"/>
+			<img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/text/<?php echo $this->item->text_image; ?>" alt="Please select an image from the 'Text Image' select list on the left"/>
 		</div>
 		<p>Text Image</p>
 		<?php echo JText::_('COM_DNAGIFTS_CLEARFLOAT'); ?>

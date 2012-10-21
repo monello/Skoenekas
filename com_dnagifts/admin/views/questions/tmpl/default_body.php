@@ -13,6 +13,9 @@ defined('_JEXEC') or die('Restricted Access');
 		<td class="center">
 			<?php echo JHtml::_('jgrid.published', $item->published, $i, 'questions.');?>
 		</td>
+		<td class="center">
+			<?php echo (int) $item->id; ?>
+		</td>
 		<td>
 			<?php echo $colorpatch; ?>
 			<a href="<?php echo JRoute::_('index.php?option=com_dnagifts&task=question.edit&id='.(int) $item->id); ?>"><?php echo $this->escape($item->question_code); ?></a>
@@ -47,10 +50,6 @@ defined('_JEXEC') or die('Restricted Access');
 			<?php endif; ?>
 			<?php $disabled = $this->saveOrder ?  '' : 'disabled="disabled"'; ?>
 			<input type="text" name="order[]" size="5" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" />
-		</td>
-		
-		<td class="center">
-			<?php echo (int) $item->id; ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
