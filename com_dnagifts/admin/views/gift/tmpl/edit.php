@@ -4,7 +4,7 @@ defined('_JEXEC') or die('Restricted access');
 JHtml::_('behavior.tooltip');
 ?>
 <script type="text/javascript">
-	var juri = '<?php echo JURI::root(true); ?>';
+	var juri = '<?php echo JURI::root(true); ?>/administrator';
 </script>
 <form action="<?php echo JRoute::_('index.php?option=com_dnagifts&layout=edit&id='.(int) $this->item->id); ?>"
       method="post" name="adminForm" id="gift-form">

@@ -22,7 +22,7 @@ class DnaGiftsViewReports extends JView
 		
 		if (count($this->reports) <= 0){
 			$app = JFactory::getApplication();
-			$app->redirect('/index.php?option=com_dnagifts');
+			$app->redirect(JURI::base(true).'/index.php?option=com_dnagifts');
 		}
 		
 		// Display the template

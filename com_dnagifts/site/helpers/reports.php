@@ -121,6 +121,7 @@ class ReportsHelper
 		$query->update('#__dnagifts_lnk_user_tests');
 		$query->set('report_name = '.$db->quote($documentname));
 		$query->where('id = ' . (int) $userTestID);
+		
 		$db->setQuery($query);
 		$db->query();
 		

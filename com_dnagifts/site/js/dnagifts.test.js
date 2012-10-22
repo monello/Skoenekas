@@ -104,7 +104,7 @@ root.myNamespace.create('DnaGifts.test', {
         jQuery("#dnaProgressBar").fadeOut(1500);
         
         // kick off some ajax to increment the Completed-counter for this test
-        var url='index.php?option=com_dnagifts&format=json&task=test.logTestComplete';
+        var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.logTestComplete';
         jQuery.ajax({
             type: "POST",
             url: url,
@@ -137,7 +137,7 @@ root.myNamespace.create('DnaGifts.test', {
         ns.nextQuestion();
         jQuery(".dnaPlayButton").hide();
         jQuery("#dnaInteractions").show();
-        var url='index.php?option=com_dnagifts&format=json&task=test.logUserTest';
+        var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.logUserTest';
         jQuery.ajax({
             type: "POST",
             url: url,
@@ -224,7 +224,7 @@ root.myNamespace.create('DnaGifts.test', {
         surveydata[ns.currQuestion].answer = answer;
         
         // now we send it to the database too.
-        var url='index.php?option=com_dnagifts&format=json&task=test.saveAnswer';
+        var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.saveAnswer';
         jQuery.ajax({
             type: "POST",
             url: url,

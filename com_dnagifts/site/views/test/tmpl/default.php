@@ -15,8 +15,8 @@ if ($this->progress['inprogress']) {
 <div id="notificationcontainer">
   <div id="notificationtab" style="display: none"></div>
 </div>
-
 <script type="text/javascript">
+var juri = '<?php echo JURI::root(true); ?>';
 var surveyconfig = <?php echo $this->testconfig; ?>;
 var surveydata = <?php echo $this->surveydata; ?>;
 var user_test_id = <?php echo $this->user_test_id; ?>;

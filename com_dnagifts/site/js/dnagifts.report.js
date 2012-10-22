@@ -51,7 +51,7 @@ root.myNamespace.create('DnaGifts.report', {
 	{
 		var ns = DnaGifts.report;
 		
-		var url='index.php?option=com_dnagifts&format=json&task=report.dispatchReport';
+		var url=juri+'/index.php?option=com_dnagifts&format=json&task=report.dispatchReport';
         jQuery.ajax({
             type: "POST",
             url: url,
@@ -74,7 +74,7 @@ root.myNamespace.create('DnaGifts.report', {
 	{
 		var ns = DnaGifts.report;
 		
-		var url='index.php?option=com_dnagifts&format=json&task=report.dispatchMSIEReport';
+		var url=juri+'/index.php?option=com_dnagifts&format=json&task=report.dispatchMSIEReport';
         jQuery.ajax({
             type: "POST",
             url: url,

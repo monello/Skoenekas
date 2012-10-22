@@ -10,6 +10,9 @@ $this->listDirn	= $this->escape($this->state->get('list.direction'));
 $this->saveOrder	= $this->listOrder == 'ordering';
 
 ?>
+<script type="text/javascript">
+	var juri = '<?php echo JURI::root(true); ?>/administrator';
+</script>
 <form action="<?php echo JRoute::_('index.php?option=com_dnagifts'); ?>" method="post" name="adminForm" id="adminForm">
 	<?php echo $this->loadTemplate('filterbar');?>
 	<table class="adminlist">

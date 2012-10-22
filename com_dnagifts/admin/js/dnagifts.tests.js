@@ -5,7 +5,7 @@ root.myNamespace.create('DnaGifts.Test', {
       
       jQuery("#button_id"+edit).attr("disabled",true);
       
-      var url='index.php?option=com_dnagifts&format=json&task=test.getButtonsByLanguage';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.getButtonsByLanguage';
       var language = jQuery("#language"+edit).val();
       var test_id = help.getRecordID("test-form");
       
@@ -46,7 +46,7 @@ root.myNamespace.create('DnaGifts.Test', {
       jQuery("#show_duration"+edit).attr("disabled",true);
       jQuery("#show_duration"+edit).val();
       
-      var url='index.php?option=com_dnagifts&format=json&task=test.getQuestionsByLanguage';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.getQuestionsByLanguage';
       var language = jQuery("#qlanguage"+edit).val();
       var test_id = help.getRecordID("test-form");
       
@@ -94,7 +94,7 @@ root.myNamespace.create('DnaGifts.Test', {
          return false;
       }
       
-      var url='index.php?option=com_dnagifts&format=json&task=test.updateTestButton';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.updateTestButton';
       jQuery.ajax({
          type: "POST",
          url: url,
@@ -134,7 +134,7 @@ root.myNamespace.create('DnaGifts.Test', {
          return false;
       }
       
-      var url='index.php?option=com_dnagifts&format=json&task=test.updateTestQuestion';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.updateTestQuestion';
       jQuery.ajax({
          type: "POST",
          url: url,
@@ -177,7 +177,7 @@ root.myNamespace.create('DnaGifts.Test', {
          alert("Please select a Button");
          return false;
       }
-      var url='index.php?option=com_dnagifts&format=json&task=test.saveNewTestButton';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.saveNewTestButton';
       jQuery.ajax({
          type: "POST",
          url: url,
@@ -214,7 +214,7 @@ root.myNamespace.create('DnaGifts.Test', {
          alert("Please select a Question");
          return false;
       }
-      var url='index.php?option=com_dnagifts&format=json&task=test.saveNewTestQuestion';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.saveNewTestQuestion';
       jQuery.ajax({
          type: "POST",
          url: url,
@@ -262,7 +262,7 @@ root.myNamespace.create('DnaGifts.Test', {
       
       jQuery(this).parent().parent().remove();
      
-      var url='index.php?option=com_dnagifts&format=json&task=test.deleteTestButton';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.deleteTestButton';
       jQuery.ajax({
          type: "POST",
          url: url,
@@ -288,7 +288,7 @@ root.myNamespace.create('DnaGifts.Test', {
       
       jQuery(this).parent().parent().remove();
      
-      var url='index.php?option=com_dnagifts&format=json&task=test.deleteTestQuestion';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.deleteTestQuestion';
       jQuery.ajax({
          type: "POST",
          url: url,
@@ -390,7 +390,7 @@ root.myNamespace.create('DnaGifts.Test', {
    updateButtonOrdering: function(){
       var ns = DnaGifts.Test;
       var list = ns.getButtonsOrder();
-      var url='index.php?option=com_dnagifts&format=json&task=test.reorderTestButtons';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.reorderTestButtons';
       jQuery.ajax({
          type: "POST",
          url: url,
@@ -407,7 +407,7 @@ root.myNamespace.create('DnaGifts.Test', {
    updateQuestionOrdering: function(){
       var ns = DnaGifts.Test;
       var list = ns.getQuestionsOrder();
-      var url='index.php?option=com_dnagifts&format=json&task=test.reorderTestQuestions';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.reorderTestQuestions';
       jQuery.ajax({
          type: "POST",
          url: url,
@@ -421,7 +421,7 @@ root.myNamespace.create('DnaGifts.Test', {
       jQuery("#svUseTiming").hide();
       jQuery("#spUseTiming").show();
       
-      var url='index.php?option=com_dnagifts&format=json&task=test.saveUseTiming';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.saveUseTiming';
       jQuery.ajax({
          type: "POST",
          url: url,
@@ -445,7 +445,7 @@ root.myNamespace.create('DnaGifts.Test', {
       jQuery("#svDefaultDuration").hide();
       jQuery("#spDefaultDuration").show();
       
-      var url='index.php?option=com_dnagifts&format=json&task=test.saveDefaultDuration';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.saveDefaultDuration';
       jQuery.ajax({
          type: "POST",
          url: url,
@@ -469,7 +469,7 @@ root.myNamespace.create('DnaGifts.Test', {
       jQuery("#svTestDuration").hide();
       jQuery("#spTestDuration").show();
       
-      var url='index.php?option=com_dnagifts&format=json&task=test.saveTestDuration';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.saveTestDuration';
       jQuery.ajax({
          type: "POST",
          url: url,
@@ -493,7 +493,7 @@ root.myNamespace.create('DnaGifts.Test', {
       jQuery("#svShowProgressbar").hide();
       jQuery("#spShowProgressbar").show();
       
-      var url='index.php?option=com_dnagifts&format=json&task=test.saveShowProgressbar';
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.saveShowProgressbar';
       jQuery.ajax({
          type: "POST",
          url: url,

@@ -304,3 +304,11 @@
  - Hid the language selector
  - Implemented the gift copy-by-results-position text
  - Fixed the "download previous reports" section
+
+ 0.1.08 (2012/10/22)
+ -------------------
+  - Fixed links to the media folder (to include joomla-install-folder)
+  - added the juri variable to all templates
+  - implemented the use of juri in all ajax calls (JS side)
+  - Added the banner image used in the PDF report, this fixed a string of related bugs
+  

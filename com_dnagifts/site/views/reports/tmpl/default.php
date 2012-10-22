@@ -2,6 +2,9 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 ?>
+<script type="text/javascript">
+	var juri = '<?php echo JURI::root(true); ?>';
+</script>
 <div id="dnaReportSpace">
 
 <h2><?php echo JText::_('COM_DNAGIFTS_REPORTS_HEADER'); ?></h2>
@@ -27,5 +30,5 @@ defined('_JEXEC') or die('Restricted access');
 </div>
 
 <div id="postTestHome">
-  <a href="<?php echo JURI::base() ?>"><?php echo jText::_('COM_DNAGIFTS_TEST_HOMEPAGE'); ?></a>
+  <a href="<?php echo JURI::base() ?>"><h2><img src="<?php echo JURI::base() ?>/media/com_dnagifts/images/icon-home.png"/> <?php echo jText::_('COM_DNAGIFTS_TEST_HOMEPAGE'); ?></h2></a>
 </div>

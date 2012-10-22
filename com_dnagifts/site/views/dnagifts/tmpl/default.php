@@ -8,7 +8,11 @@ JHtml::_('behavior.tooltip');
 
 $this->isLoggedIn = DnaGiftsHelper::authenticate();
 $this->hasPretestInfo = DnagiftsHelper::hasPretestInfo();
-
+?>
+<script type="text/javascript">
+	var juri = '<?php echo JURI::root(true); ?>';
+</script>
+<?php
 echo '<div id="dnaTestSpace">';
 //echo '<span class="testlanguage">'.JText::_('COM_DNAGIFTS_TESTLANGUAGE').'</span>';
 //echo DnaGiftsHelper::loadLanguageSwitch();

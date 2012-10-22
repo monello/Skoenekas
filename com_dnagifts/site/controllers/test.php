@@ -17,6 +17,7 @@ JLoader::register('DnaGiftsHelper', JPATH_COMPONENT.'/helpers/dnagifts.php');
  */
 class DnaGiftsControllerTest extends JControllerForm
 {
+  /*
   public function pdf()
   {
     DnagiftsHelper::generatepdf('Morne Louw', $title='DNA Gifts - Report',
@@ -57,12 +58,21 @@ class DnaGiftsControllerTest extends JControllerForm
   }
   
 	public function abspath() {
-		echo JURI::root();	
+		echo "JURI::root(): ".JURI::root();	
 		echo "<br/>";
-		echo getcwd();
+    	echo "JURI::root(true): ".JURI::root(true);	
+		echo "<br/>";
+		echo "getcwd(): ".getcwd();
 		echo "<br/>";
 		echo "DS: ".DS;
 		echo "<br/>";
-		echo JPATH_SITE;
+		echo "JPATH_SITE: ".JPATH_SITE;
+    	echo "<br/>";
+		echo "JURI::base(): ".JURI::base();
+    	echo "<br/>";
+		echo "JURI::base(true): ".JURI::base(true);
+		echo "<br/>";
+	    echo "JRoute::_('index.php?option=com_dnagifts&view=tests'): ".JRoute::_('index.php?option=com_dnagifts&view=tests');
 	}
+	*/
 }

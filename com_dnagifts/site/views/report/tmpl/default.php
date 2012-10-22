@@ -7,7 +7,9 @@ JHtml::_('behavior.tooltip');
 $this->isLoggedIn = DnaGiftsHelper::authenticate();
 
 ?>
-
+<script type="text/javascript">
+	var juri = '<?php echo JURI::root(true); ?>';
+</script>
 <div id="notificationcontainer">
   <div id="notificationtab">
 	<img id="notificationspinner" src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/spinner16x16.gif">

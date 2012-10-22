@@ -116,6 +116,6 @@ class DnaGiftsControllerTest extends JControllerForm
 	$query->where('id = ' . (int) $test_id);
 	$db->setQuery($query);
 	$db->query();
-	echo json_encode(array("success" => true, "message" => jText::_('COM_DNAGIFTS_TEST_PROCESSING')));
+	echo json_encode(array("success" => true, "message" => '<img src="'.JURI::root(true).'/media/com_dnagifts/images/spinner16x16.gif" />'.jText::_('COM_DNAGIFTS_TEST_PROCESSING')));
   }
 }
