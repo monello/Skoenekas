@@ -960,31 +960,6 @@ EOD;
         # Send once you have set all of your options
         $mailer->send();
 	}
-	
-	public static function getTestUserId($test_id)
-	{
-		if (!$test_id) {
-			return false;
-		}
-		
-		$user = JFactory::getUser();
-		if (!$user->get("id")) {
-			return false;
-		}
-		
-		$db = JFactory::getDbo();
-		$query = $db->getQuery(true);
-        $query->select('id');
-		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
-		$query->where('user_id = '.$user->get("id"));
-		$query->where('test_id = '.$test_id);
-        $db->setQuery($query);
-		if (!$result = $db->loadObject()) {
-			return false;
-		}
-		
-		return $result->id;
-	}
 	public static function getDnaMaxScore($user_test_id)
 	{
 		$db = JFactory::getDbo();

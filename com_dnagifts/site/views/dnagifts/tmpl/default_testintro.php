@@ -66,7 +66,9 @@ $activeTests = $model->getAllActiveTests();
                 class="hasTip"><?php echo $progress['percent']; ?>%</span>
             </a>
           <?php else: ?>
-            <?php if ((int) $progress['percent'] >= 100): ?>
+            <?php 
+            if ((int) $progress['percent'] >= 100): 
+            ?>
               <img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/tinycheck.png"
                 height="16px"
                 width="16px"

@@ -305,10 +305,19 @@
  - Implemented the gift copy-by-results-position text
  - Fixed the "download previous reports" section
 
- 0.1.08 (2012/10/22)
- -------------------
-  - Fixed links to the media folder (to include joomla-install-folder)
-  - added the juri variable to all templates
-  - implemented the use of juri in all ajax calls (JS side)
-  - Added the banner image used in the PDF report, this fixed a string of related bugs
+0.1.08 (2012/10/22)
+-------------------
+ - Fixed links to the media folder (to include joomla-install-folder)
+ - added the juri variable to all templates
+ - implemented the use of juri in all ajax calls (JS side)
+ - Added the banner image used in the PDF report, this fixed a string of related bugs
   
+0.1.09 (2012/12/30)
+-------------------
+ - Removed the "$" character from the gift edit form - Character image SRC
+ - Fixed the "Get test_id" query, it was extracting the id instead of test_id   
+ - Fixed the double spinner problem in the English test-complete notification
+ - Changed the left-padding of the test interactions div from 100px to 10% to improve the adaptability to content width
+ - Removed duplicate (and broken) getUserTestID function from helpers->reports and updated references to use dnagifts->getUserTestID
+ - Fixed pretest redirect problem.
+ 

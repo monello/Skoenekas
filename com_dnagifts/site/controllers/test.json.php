@@ -33,13 +33,15 @@ class DnaGiftsControllerTest extends JControllerForm
 	
 	$answer_id = $db->insertid();
 	
-	// Calculate test progress
+	// Get test_id
 	$query = "
-		SELECT id
+		SELECT test_id
 			FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
 			WHERE id = ".$db->quote($user_test_id);
 	$db->setQuery($query);
 	$test_id = $db->loadResult();
+	
+	// Calculate test progress
 	$progress = DnaGiftsHelper::getUserProgress($user_test_id, $test_id);
 	
 	// Update the progress
@@ -116,6 +118,6 @@ class DnaGiftsControllerTest extends JControllerForm
 	$query->where('id = ' . (int) $test_id);
 	$db->setQuery($query);
 	$db->query();
-	echo json_encode(array("success" => true, "message" => '<img src="'.JURI::root(true).'/media/com_dnagifts/images/spinner16x16.gif" />'.jText::_('COM_DNAGIFTS_TEST_PROCESSING')));
+	echo json_encode(array("success" => true, "message" => '<img src="'.JURI::root(true).'/media/com_dnagifts/images/spinner16x16.gif" /> '.jText::_('COM_DNAGIFTS_TEST_PROCESSING')));
   }
 }

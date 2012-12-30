@@ -312,7 +312,7 @@ class DnagiftsHelper
 
 	//$pdf->Image(<IMAGE URL>, <left>, <top>, <width>);
 //	$pdf->Image('http://chart.apis.google.com/chart?cht=ls&chd=t:1366,1459,2534,2551,2589&chco=76A4FB&chls=2.0,0.0,0.0&chxt=x&chxl=0:|19|20|21|22|23&chs=600x150&chds=1366,2589', 50, 150, 100);
-//	$pdf->Image('http://chart.apis.google.com/chart?cht=bvg&chs=200×125&chd=s:hello,world&chco=cc0000,00aa00', '', '', 100);
+//	$pdf->Image('http://chart.apis.google.com/chart?cht=bvg&chs=200ï¿½125&chd=s:hello,world&chco=cc0000,00aa00', '', '', 100);
     
     // ---------------------------------------------------------
     

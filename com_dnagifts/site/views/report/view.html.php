@@ -5,6 +5,7 @@ defined('_JEXEC') or die('Restricted access');
 // import Joomla view library
 jimport('joomla.application.component.view');
 JLoader::register('ReportsHelper', JPATH_COMPONENT.'/helpers/reports.php');
+JLoader::register('DnagiftsHelper', JPATH_COMPONENT.'/helpers/dnagifts.php');
  
 /**
  * HTML View class for the DnaGifts Component
@@ -31,7 +32,7 @@ class DnaGiftsViewReport extends JView
 			return false;
 		}
 		
-		$test_user_id = ReportsHelper::getTestUserId($test_id);
+		$test_user_id = DnagiftsHelper::getUserTestID($test_id);
 		if (!$test_user_id) 
 		{
 			JError::raiseError(500, implode('<br />', array("Invalid Request :: Test ID does not match user")));

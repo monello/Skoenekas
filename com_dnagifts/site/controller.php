@@ -35,7 +35,7 @@ class DnaGiftsController extends JControllerForm
     // check if ok and display appropriate message.  This can also have a redirect if desired.
     if ($saveditem) {
       $lang_code = DnagiftsHelper::getCurrentLanguageCode();
-      $app->redirect('/index.php/'.$lang_code.'/?Itemid='.$data['menuid']);
+      $app->redirect(JURI::base(true).'/index.php/'.$lang_code.'/?Itemid='.$data['menuid']);
     }
     return true;
   }
