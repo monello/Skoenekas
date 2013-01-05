@@ -321,3 +321,9 @@
  - Removed duplicate (and broken) getUserTestID function from helpers->reports and updated references to use dnagifts->getUserTestID
  - Fixed pretest redirect problem.
  
+0.1.10 (2013/01/05)
+-------------------
+ - Updated the SQL install files (just in case the need ever arises to re-install the component on Live)
+ - Updated the language file from Live
+ - Updated the images from Live
+ 
