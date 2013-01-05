@@ -326,4 +326,6 @@
  - Updated the SQL install files (just in case the need ever arises to re-install the component on Live)
  - Updated the language file from Live
  - Updated the images from Live
+ - Resized the character images to fit 200 x 200 pixels (added white background to make PDF work)
+ - Resized the text images to fit 222px wide 70px high (added white background to make PDF work)
  
