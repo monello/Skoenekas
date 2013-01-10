@@ -96,17 +96,6 @@
 		/>
 		
 		<field
-			name="text_token"
-			type="text"
-			label="COM_DNAGIFTS_GIFT_FIELD_TEXTTOKEN_LABEL"
-			description="COM_DNAGIFTS_GIFT_FIELD_TEXTTOKEN_DESC"
-			size="60"
-			class="inputbox"
-			default=""
-			required="true"
-		/>
-		
-		<field
 			name="language"
 			type="list"
 			label="COM_DNAGIFTS_GIFT_FIELD_LANGUAGE_LABEL"
@@ -163,6 +152,82 @@
 			<option
 				value="-2">JTRASHED</option>
 		</field>
+		
+		<field
+			name="tag_line"
+			type="text"
+			label="COM_DNAGIFTS_GIFT_FIELD_TAGLINE_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_TAGLINE_DESC"
+			size="100"
+			maxlength="255"
+			class="inputbox"
+			default=""
+			required="false"
+		/>
+		
+		<field name="position1_html"
+			type="editor"
+      theme="simple"
+			buttons="false"
+			class="inputbox"
+			filter="JComponentHelper::filterText"
+			label="COM_DNAGIFTS_GIFT_FIELD_POSITION1HTML_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_POSITION1HTML_DESC"
+			/>
+		
+		<field name="position2_html"
+			type="editor"
+			buttons="false"
+			class="inputbox"
+			filter="JComponentHelper::filterText"
+			label="COM_DNAGIFTS_GIFT_FIELD_POSITION2HTML_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_POSITION2HTML_DESC"
+			/>
+			
+		<field name="position3_html"
+			type="editor"
+			buttons="false"
+			class="inputbox"
+			filter="JComponentHelper::filterText"
+			label="COM_DNAGIFTS_GIFT_FIELD_POSITION3HTML_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_POSITION3HTML_DESC"
+			/>
+			
+		<field name="position4_html"
+			type="editor"
+			buttons="false"
+			class="inputbox"
+			filter="JComponentHelper::filterText"
+			label="COM_DNAGIFTS_GIFT_FIELD_POSITION4HTML_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_POSITION4HTML_DESC"
+			/>
+			
+		<field name="position5_html"
+			type="editor"
+			buttons="false"
+			class="inputbox"
+			filter="JComponentHelper::filterText"
+			label="COM_DNAGIFTS_GIFT_FIELD_POSITION5HTML_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_POSITION5HTML_DESC"
+			/>
+			
+		<field name="position6_html"
+			type="editor"
+			buttons="false"
+			class="inputbox"
+			filter="JComponentHelper::filterText"
+			label="COM_DNAGIFTS_GIFT_FIELD_POSITION6HTML_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_POSITION6HTML_DESC"
+			/>
+			
+		<field name="position7_html"
+			type="editor"
+			buttons="false"
+			class="inputbox"
+			filter="JComponentHelper::filterText"
+			label="COM_DNAGIFTS_GIFT_FIELD_POSITION7HTML_LABEL"
+			description="COM_DNAGIFTS_GIFT_FIELD_POSITION7HTML_DESC"
+			/>
 		
 	</fieldset>
 </form>

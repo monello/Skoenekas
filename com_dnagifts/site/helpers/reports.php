@@ -823,8 +823,11 @@ EOD;
 	{
 		for ($i=0; $i<count($dnaResults); $i++) {
 			if ($dnaResults[$i]['position'] == $position) {
-				$token = $dnaResults[$i]['textToken']."_POSITION_" . ((int) $position + 1);
-				return JText::_($token)."<br/>";
+				$giftDesc = $dnaResults[$i]['position' . ((int) $position + 1) . 'Html'];
+				if (strlen($giftDesc) < 8) {
+					$giftDesc = "Description not available";
+				}
+				return $giftDesc;
 			}
 		}
 		return '<p>Unable to find description, please contact the webmaster</p>';

@@ -329,3 +329,15 @@
  - Resized the character images to fit 200 x 200 pixels (added white background to make PDF work)
  - Resized the text images to fit 222px wide 70px high (added white background to make PDF work)
  
+0.1.11 (2012/01/10)
+-------------------
+ - Replaced all the text tokens for database field to cover the text per gift position
+ - Updated the database
+ - Updated the admin side
+ - Updated the html report
+ - Updated the PDF report
+ - Added a tag line field to the the gifts form
+ - Added the tag line to the database
+ - Updated the html report to incorporate the tag-line
+ - Updated the PDF report to incorporate the tag-line
+ 

@@ -56,7 +56,14 @@ class DnaGiftsModelReport extends JModel
 				'greenColor' => preg_replace($hash, '', $giftObj[$gift_id]->color_hex_light),
 				'characterImg' => $giftObj[$gift_id]->characters_image,
 				'textImg' => $giftObj[$gift_id]->text_image,
-				'textToken' => $giftObj[$gift_id]->text_token
+				'tagLine' => $giftObj[$gift_id]->tag_line,
+				'position1Html' => $giftObj[$gift_id]->position1_html,
+				'position2Html' => $giftObj[$gift_id]->position2_html,
+				'position3Html' => $giftObj[$gift_id]->position3_html,
+				'position4Html' => $giftObj[$gift_id]->position4_html,
+				'position5Html' => $giftObj[$gift_id]->position5_html,
+				'position6Html' => $giftObj[$gift_id]->position6_html,
+				'position7Html' => $giftObj[$gift_id]->position7_html
 			);
 		}
 		
