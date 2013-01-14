@@ -341,3 +341,8 @@
  - Updated the html report to incorporate the tag-line
  - Updated the PDF report to incorporate the tag-line
  
+0.1.12 (2012/01/14)
+-------------------
+- Added the Service gifts (HTML) (Still have issues with PDF)
+- Fixed the position of the play and load buttons in MSIE
+ 

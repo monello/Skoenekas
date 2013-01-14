@@ -648,6 +648,36 @@ EOD;
 		$pdf->writeHTML($html);
 		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge3chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 
+		// ################### Service Gifts ###################### 
+		// TEXT REPLACEMENT VARIABLES
+		$position += 1;
+
+		$GIFT4_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position);
+		$GIFT5_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position+1);
+		$GIFT6_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position+2);
+		$GIFT7_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position+3);
+		$html = <<<EOD
+		<br/><br/>
+		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
+			<tr>
+				<td width="150px">&nbsp;</td>
+				<td>$GIFT4_TEXT</td>
+				
+				<td width="150px">&nbsp;</td>
+				<td>$GIFT5_TEXT</td>
+			</tr>
+			<tr>
+				<td width="150px">&nbsp;</td>
+				<td>$GIFT6_TEXT</td>
+				
+				<td width="150px">&nbsp;</td>
+				<td>$GIFT7_TEXT</td>
+			</tr>	
+		</table>	
+EOD;
+		
+		$pdf->writeHTML($html);
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge4chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 		
 		// ######################################### DONE ##########################################################
         

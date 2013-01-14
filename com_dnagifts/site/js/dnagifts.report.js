@@ -50,7 +50,7 @@ root.myNamespace.create('DnaGifts.report', {
 	dispatchReport: function()
 	{
 		var ns = DnaGifts.report;
-		
+		console.log(ns.chartSVG);
 		var url=juri+'/index.php?option=com_dnagifts&format=json&task=report.dispatchReport';
         jQuery.ajax({
             type: "POST",
@@ -61,6 +61,7 @@ root.myNamespace.create('DnaGifts.report', {
 				imgChartSRC: jQuery("table#tblDNAChart img:first").attr("src")
             },
 			success: function(json) {
+				console.log(ns.chartSVG);
 				if (json.success) {
 					jQuery("#notificationspinner").hide();
 					jQuery("#notificationtext").html(json.message);
@@ -177,7 +178,8 @@ function drawCharts() {
 	
 	/*************************************************************************/
 	// - GAUGES
-	var gaugelist = ['gauge1chart_div','gauge2chart_div','gauge3chart_div']
+	var gaugelist = ['gauge1chart_div','gauge2chart_div','gauge3chart_div', 'gauge4chart_div', 
+					'gauge5chart_div', 'gauge6chart_div', 'gauge7chart_div']
 	for (var i=0;i<gaugelist.length;i++){
 		var position = getResultsByPosition(i);
 		drawDnaGaugechart(

@@ -187,6 +187,57 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 			<?php echo ReportsHelper::getGiftDescription($this->dnaResults, $position); ?>
 		</td>
 	</tr>
+	
+	<!-- RXTRA GUAGES -->
+	<tr><td colspan="3">&nbsp;</td></tr>
+	<tr>
+		<td><p class="rptText14"><?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SERVICE'); ?></p></td>
+	</tr>
+	<?php $position += 1; ?>
+	<tr>
+		<td colspan="3">
+			
+			<table id="tblServiceGifts" width="100%" cellpadding="0" cellspacing="0">
+				<tr>
+					<td width="150px">
+						<div style="float:left; width: 130px; height: 150px;margin-left: 10px">
+							<div id="gauge4chart_div" class="gaugecontainer"></div>
+						</div>
+					</td>
+					<td>
+						<?php echo ReportsHelper::getGiftDescription($this->dnaResults, $position); ?>
+					</td>
+					<td width="150px">
+						<div style="float:left; width: 130px; height: 150px;margin-left: 10px">
+							<div id="gauge5chart_div" class="gaugecontainer"></div>
+						</div>
+					</td>
+					<td>
+						<?php echo ReportsHelper::getGiftDescription($this->dnaResults, $position+1); ?>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div style="float:left; width: 130px; height: 150px;margin-left: 10px">
+							<div id="gauge6chart_div" class="gaugecontainer"></div>
+						</div>
+					</td>
+					<td>
+						<?php echo ReportsHelper::getGiftDescription($this->dnaResults, $position+2); ?>
+					</td>
+					<td>
+						<div style="float:left; width: 130px; height: 150px;margin-left: 10px">
+							<div id="gauge7chart_div" class="gaugecontainer"></div>
+						</div>
+					</td>
+					<td>
+						<?php echo ReportsHelper::getGiftDescription($this->dnaResults, $position+3); ?>
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
 </table>
 
 <!--

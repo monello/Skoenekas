@@ -111,3 +111,7 @@ div.gaugecontainer table tr,
 div.gaugecontainer table tr td {
     border: none !important;
 }
+
+table#tblServiceGifts {
+	border: none !important;
+}
