@@ -50,7 +50,6 @@ root.myNamespace.create('DnaGifts.report', {
 	dispatchReport: function()
 	{
 		var ns = DnaGifts.report;
-		console.log(ns.chartSVG);
 		var url=juri+'/index.php?option=com_dnagifts&format=json&task=report.dispatchReport';
         jQuery.ajax({
             type: "POST",
@@ -61,7 +60,6 @@ root.myNamespace.create('DnaGifts.report', {
 				imgChartSRC: jQuery("table#tblDNAChart img:first").attr("src")
             },
 			success: function(json) {
-				console.log(ns.chartSVG);
 				if (json.success) {
 					jQuery("#notificationspinner").hide();
 					jQuery("#notificationtext").html(json.message);

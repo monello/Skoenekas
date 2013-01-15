@@ -18,7 +18,7 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 </div>
 
 <script type="text/javascript">
-	var dnaChartCount = 5;
+	var dnaChartCount = 9;
 	var dnaMaxScore = <?php echo $this->dnaMaxScore; ?>;
 	var userTestID = <?php echo $this->userTestID; ?>;
 	var dnaResults = <?php echo json_encode($this->dnaResults); ?>;

@@ -589,8 +589,10 @@ EOD;
 EOD;
 
 		$pdf->writeHTML($html);
-		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge1chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 		
+		$gauge1chart_svg = ReportsHelper::getGaugeSVG($userTestID, $dnaResults, $position);
+		//$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge1chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge1chart_svg), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 		
 		// TEXT REPLACEMENT VARIABLES
 		$position += 1;
@@ -618,7 +620,9 @@ EOD;
 EOD;
 
 		$pdf->writeHTML($html);
-		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge2chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		$gauge2chart_svg = ReportsHelper::getGaugeSVG($userTestID, $dnaResults, $position);
+		//$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge2chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge2chart_svg), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 		
 		
 		// ######################################### PAGE 3 ##########################################################
@@ -646,7 +650,9 @@ EOD;
 EOD;
 		
 		$pdf->writeHTML($html);
-		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge3chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		$gauge3chart_svg = ReportsHelper::getGaugeSVG($userTestID, $dnaResults, $position);
+		//$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge3chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge3chart_svg), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 
 		// ################### Service Gifts ###################### 
 		// TEXT REPLACEMENT VARIABLES
@@ -677,7 +683,9 @@ EOD;
 EOD;
 		
 		$pdf->writeHTML($html);
-		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge4chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		$gauge4chart_svg = ReportsHelper::getGaugeSVG($userTestID, $dnaResults, $position);
+		//$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge4chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		//$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge4chart_svg), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 		
 		// ######################################### DONE ##########################################################
         
@@ -868,6 +876,35 @@ EOD;
 		for ($i=0; $i<count($dnaResults); $i++) {
 			if ($dnaResults[$i]['position'] == $position) {
 				return $dnaResults[$i]['label'];
+			}
+		}
+		return 'ERROR';
+	}
+	
+	public static function getGaugeSVG($userTestID, $dnaResults, $position)
+	{
+		$db = JFactory::getDbo();
+		$dnaMaxScore = ReportsHelper::getDnaMaxScore($userTestID);
+		for ($i=0; $i<count($dnaResults); $i++) {
+			if ($dnaResults[$i]['position'] == $position) {
+				$score = $dnaResults[$i]['score'];
+				$target_id = round($score/$dnaMaxScore*100);
+				
+				$query = $db->getQuery(true);
+				$query->select('svg');
+				$query->from($db->quoteName('#__dnagifts_guages_svg'));
+				$query->where('id = '. (int) $target_id);
+				$db->setQuery($query);
+				$data = $db->loadObject();
+				$svg = $data->svg;
+				
+				$svg = preg_replace('/DNASCORETEXT/', $target_id, $svg);
+				$svg = preg_replace('/DNAGAUGELABEL/', $dnaResults[$i]['label'], $svg);
+				$svg = preg_replace('/DNALIGHTCOLOUR/', "#".$dnaResults[$i]['greenColor'], $svg);
+				$svg = preg_replace('/DNAMEDIUMCOLOUR/', "#".$dnaResults[$i]['yellowColor'], $svg);
+				$svg = preg_replace('/DNADARKCOLOUR/', "#".$dnaResults[$i]['redColor'], $svg);
+				
+				return $svg;
 			}
 		}
 		return 'ERROR';

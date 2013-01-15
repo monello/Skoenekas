@@ -346,3 +346,6 @@
 - Added the Service gifts (HTML) (Still have issues with PDF)
 - Fixed the position of the play and load buttons in MSIE
  
+0.1.13 (2012/01/15)
+-------------------
+ - Implemented the pre-generated SVG guages
