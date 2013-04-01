@@ -47,6 +47,9 @@ div#postTestHome a h2:hover {
 .rptText14{
     font-size: 14pt;
 }
+.rptText12{
+    font-size: 12pt;
+}
 
 table#tblReportSection,
 table#tblReportSection tr,
@@ -63,9 +66,10 @@ table#tblReportSection td p {
 
 
 /*  score table styling */
-table#tblScores {
+div#dnaReportWrapper table#tblReportSection tbody tr td table#tblScores {
     border: 1px solid #c5c5c5 !important;
-    border-collapse: separate !important
+    border-collapse: separate !important;
+    border-spacing: 2px !important;
 }
 table#tblScores th,
 table#tblScores td {
@@ -101,9 +105,13 @@ table#tblDNAChart tr td {
 }
 
 hr.sectionSeparator {
-    margin: 20px auto;
-    border: 1px dashed #999;
-    width: 70%;
+	display: block;
+	height: 11px;
+	width: 900px;
+    background: transparent url(../../../media/com_dnagifts/images/seperator900x11.jpg) 0 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
 }
 
 div.gaugecontainer table,
@@ -114,4 +122,26 @@ div.gaugecontainer table tr td {
 
 table#tblServiceGifts {
 	border: none !important;
+}
+
+.reportHeading {
+	color:#999;
+	font-weight: bold;
+}
+
+div#dnaReportWrapper {
+	background-color: #fff;
+	margin-bottom: 80px;
+}
+
+a#buyBtn {
+	display: block;
+	position: relative;
+	background: transparent url(../../../media/com_dnagifts/images/buy_book2.jpg) 0 0;
+	width: 150px;
+	height: 112px;
+}
+
+a#buyBtn:hover {
+	background: transparent url(../../../media/com_dnagifts/images/buy_book2.jpg) -0 -112px !important;
 }

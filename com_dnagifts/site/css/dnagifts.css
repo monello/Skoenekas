@@ -11,7 +11,7 @@ span.testlanguage {
 }
 div#btl {
   display: inline;
-  width: 200px;
+  width: 170px;
   float: right;
 }
 
@@ -113,4 +113,26 @@ div#dnaTestSpace textarea {
 }
 div#btl div#module-in-profile div.module > div {
   display: none;
+}
+
+/* facebook login overrides */
+div#dnaTestSpace form#login-form {
+	float: right;
+	padding: 0 0 0 16px;
+	position: relative;
+    top: 2px;
+}
+div#dnaTestSpace form#login-form ul {
+	list-style-type:none;
+	padding:0px;
+	margin:0px;
+}
+
+
+div#dnaTestSpace div.custom_or {
+	float: right; 
+	font-size: 16px; 
+	position: relative; 
+	top: -8px;
+	margin-left: 20px;
 }

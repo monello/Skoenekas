@@ -1,6 +1,30 @@
 <?php
 defined('_JEXEC') or die;
 
+require(JPATH_ROOT.DS.'tcpdf'.DS.'config/lang/eng.php');
+require(JPATH_ROOT.DS.'tcpdf'.DS.'tcpdf.php');
+
+class MYPDF extends TCPDF {
+    //Page header
+    public function Header() {
+        $image_file = K_PATH_IMAGES.JText::_( 'COM_DNAGIFTS_PDF_BANNERIMAGE' );
+        $this->Image($image_file, 15, 10, 180, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+    }
+	
+	// Page footer
+    public function Footer() {
+        // Position at 15 mm from bottom
+        $this->SetY(-15);
+        // Set font
+        $this->SetFont('helvetica', 'I', 8);
+        // Footer Text
+        $html = JText::_( 'COM_DNAGIFTS_PDF_FOOTERTEXT_P1' ).'<a href="'.JURI::root().'purchase">'.
+			JText::_( 'COM_DNAGIFTS_PDF_FOOTERTEXT_P2' ).'</a> '.
+			JText::_( 'COM_DNAGIFTS_PDF_FOOTERTEXT_P3' );
+        $this->writeHTML($html);
+    }
+}
+
 /**
  * Banners component helper.
  *
@@ -16,22 +40,15 @@ class ReportsHelper
         $title              = JText::_( 'COM_DNAGIFTS_PDF_TITLE' );
 		$subject            = JText::_( 'COM_DNAGIFTS_PDF_SUBJECT' );
         $keywords           = JText::_( 'COM_DNAGIFTS_PDF_KEYWORDS' );
-        $bannerImage        = JText::_( 'COM_DNAGIFTS_PDF_BANNERIMAGE' );
-        $bannerTitle        = JText::_( 'COM_DNAGIFTS_PDF_BANNERTITLE' );
-        $bannerText         = JText::_( 'COM_DNAGIFTS_PDF_BANNERTEXT' );
-        $bannerImageWidth   = 100;
         
-		require_once(JPATH_ROOT.DS.'tcpdf'.DS.'config/lang/eng.php');
-		require_once(JPATH_ROOT.DS.'tcpdf'.DS.'tcpdf.php');
-		
 		// Generate the PDF
         @ob_end_clean();
 
 		// ----------------- document setup ---------------------
 		
 		// create new PDF document
-		//$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        //$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         
         // set document information
         $pdf->SetAuthor($author);
@@ -40,7 +57,7 @@ class ReportsHelper
         $pdf->SetKeywords($keywords);
         
         // set default header data
-        $pdf->SetHeaderData($bannerImage, $bannerImageWidth, $bannerTitle, $bannerText);
+        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
 		
 		// set header and footer fonts
         $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -50,7 +67,8 @@ class ReportsHelper
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         
         //set margins
-        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        //$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        $pdf->SetMargins(PDF_MARGIN_LEFT, 50, PDF_MARGIN_RIGHT);
         $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
         $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
         
@@ -61,6 +79,7 @@ class ReportsHelper
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
         
         //set some language-dependent strings
+        global $l;
         $pdf->setLanguageArray($l);
         
         // set default font subsetting mode
@@ -71,7 +90,7 @@ class ReportsHelper
         // print standard ASCII chars, you can use core fonts like
         // helvetica or times to reduce file size.
         $pdf->SetFont('dejavusans', '', 14, '', true);
-        
+
         // Add a page
         // This method has several options, check the source code documentation for more information.
         $pdf->AddPage();
@@ -410,285 +429,10 @@ EOD;
 	{
 		$pdf =& ReportsHelper::documentSetup($userTestID);
 		
+		
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
 		$html = '';
 		
-		$linestyle = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '2,1', 'phase' => 0, 'color' => array(211, 211, 211));
-		
-		// ######################################### PAGE 1 ##########################################################
-		
-		$pdf->SetXY(15, 30);
-		$pdf->Write(0, 'Hi '.$username, '', 0, 'L', true, 0, false, false, 0);
-
-		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_HEREYOURESULTS	= JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS');
-		$COM_DNAGIFTS_REPORT_INTRO			= JText::_('COM_DNAGIFTS_REPORT_INTRO');
-		$COM_DNAGIFTS_REPORT_THGIFT			= JText::_('COM_DNAGIFTS_REPORT_THGIFT');
-		$COM_DNAGIFTS_REPORT_THSCORE		= JText::_('COM_DNAGIFTS_REPORT_THSCORE');
-		$COM_DNAGIFTS_REPORT_THYOURGIFT		= JText::_('COM_DNAGIFTS_REPORT_THYOURGIFT');
-		
-		$html = <<<EOD
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td width="350">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_HEREYOURESULTS</p>
-					$COM_DNAGIFTS_REPORT_INTRO
-				</td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-				
-				<table width="255" cellspacing="3" cellpadding="3" id="tblScores" style="border: 1px solid #c5c5c5;">
-					<tr style="background-color: #000000; color: #ffffff; text-align: center;">
-						<td width="75" >$COM_DNAGIFTS_REPORT_THGIFT</td>
-						<td width="75" >$COM_DNAGIFTS_REPORT_THSCORE</td>
-						<td>$COM_DNAGIFTS_REPORT_THYOURGIFT</td>
-					</tr>
-EOD;
-
-		foreach($dnaResults as $data):
-			$tdcolor = '';
-			if ( in_array($data['abbr'], array('R','M')) ):
-				$tdcolor = 'color: #ffffff;';
-			endif;
-			$html .= '<tr style="text-align: center; color: #333333; background-color: #'.$data['redColor'].';">'.
-					'<td style="'.$tdcolor.'">'.$data['abbr'].'</td>'.
-					'<td style="background-color: LightGrey;">'.$data['score'].'</td>'.
-					'<td style="text-align: left;'.$tdcolor.'">'.$data['label'].'</td>'.
-				'</tr>';
-		endforeach;
-		
-		$html .= '</table></td></tr>';
-		
-		
-		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_YOURLINEPROFILE	= JText::_('COM_DNAGIFTS_REPORT_YOURLINEPROFILE');
-		$COM_DNAGIFTS_REPORT_DNACHART_HEAD		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_HEAD');
-		$COM_DNAGIFTS_REPORT_DNACHART_TEXT		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_TEXT');
-		$primsecimg = '<img width="234" height="35" src="'.JURI::base(true).'/media/com_dnagifts/images/primary-secondary-'.JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG').'-2.png" />';
-		$html .= <<<EOD
-			<tr><td colspan="3"></td></tr>
-			<tr>
-				<td colspan="3">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_YOURLINEPROFILE</p>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table id="tblDNAChart">
-						<tr>
-							<td align="center">
-								$COM_DNAGIFTS_REPORT_DNACHART_HEAD
-							</td>
-						</tr>
-						<tr>	
-							<td>
-								<img src="$imgChartSRC" />
-								$primsecimg
-							</td>
-						</tr>
-					</table>
-				</td>
-				<td>&nbsp;</td>
-				<td>
-					$COM_DNAGIFTS_REPORT_DNACHART_TEXT
-				</td>
-			</tr>	
-		
-EOD;
-
-		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_DNACOMP_HEAD	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_HEAD');
-		$COM_DNAGIFTS_REPORT_DNACOMP_TEXT	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_TEXT');
-		$html .= <<<EOD
-			<tr><td colspan="3">&nbsp;</td></tr>
-			<tr>
-				<td colspan="3"><p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_DNACOMP_HEAD</p></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>
-					$COM_DNAGIFTS_REPORT_DNACOMP_TEXT
-				</td>
-			</tr>
-		</table>
-EOD;
-
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
-		
-		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['piechart_div']), $x='', $y=$pdf->GetY() - 35, $w='', $h=75, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-	
-	
-		// ######################################### PAGE 2 ##########################################################
-		
-		$pdf->AddPage();
-		
-		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD');
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT');
-		$html = <<<EOD
-		<br/><br/>
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td colspan="3">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD</p>
-				</td>
-			</tr>
-			<tr>
-				<td width="350" height="260">&nbsp;</td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-					$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT
-				</td>
-			</tr>	
-		</table>	
-EOD;
-
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
-		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['linechart_div']), $x=$pdf->GetX() + 1, $y=$pdf->GetY() - 80, $w='', $h=75, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-		
-		
-		// TEXT REPLACEMENT VARIABLES
-		$position = 0;
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL');
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY');
-		$GIFT1_NAME								= ReportsHelper::getGiftLabel($dnaResults, $position);
-		$COM_DNAGIFTS_REPORT_PRIMARY_GIFT		= JText::_('COM_DNAGIFTS_REPORT_PRIMARY_GIFT');
-		$GIFT1_IMAGE_SRC						= ReportsHelper::getCharacterImg($dnaResults, $position);
-		$GIFT1_HEADER_IMAGE_SRC					= ReportsHelper::getHeaderImg($dnaResults, $position);
-		$GIFT1_TEXT								= ReportsHelper::getGiftDescription($dnaResults, $position);
-		$html = <<<EOD
-		<br/>
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td colspan="3">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL</p>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<p style="font-size: 12pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY $GIFT1_NAME</p>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<p>$COM_DNAGIFTS_REPORT_PRIMARY_GIFT</p>
-				</td>
-			</tr>
-			<tr>
-				<td width="350"><img height="200" src="$GIFT1_IMAGE_SRC" /></td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-					<img src="$GIFT1_HEADER_IMAGE_SRC" />
-					$GIFT1_TEXT
-				</td>
-			</tr>	
-		</table>
-EOD;
-
-		$pdf->writeHTML($html);
-		
-		$gauge1chart_svg = ReportsHelper::getGaugeSVG($userTestID, $dnaResults, $position);
-		//$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge1chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge1chart_svg), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-		
-		// TEXT REPLACEMENT VARIABLES
-		$position += 1;
-		
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY');
-		$GIFT2_IMAGE_SRC						= ReportsHelper::getCharacterImg($dnaResults, $position);
-		$GIFT2_HEADER_IMAGE_SRC					= ReportsHelper::getHeaderImg($dnaResults, $position);
-		$GIFT2_TEXT								= ReportsHelper::getGiftDescription($dnaResults, $position);
-		$html = <<<EOD
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td colspan="3">
-					<p style="font-size: 12pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY</p>
-				</td>
-			</tr>
-			<tr>
-				<td width="350"><img height="200" src="$GIFT2_IMAGE_SRC" /></td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-					<img src="$GIFT2_HEADER_IMAGE_SRC" />
-					$GIFT2_TEXT
-				</td>
-			</tr>	
-		</table>
-EOD;
-
-		$pdf->writeHTML($html);
-		$gauge2chart_svg = ReportsHelper::getGaugeSVG($userTestID, $dnaResults, $position);
-		//$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge2chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge2chart_svg), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-		
-		
-		// ######################################### PAGE 3 ##########################################################
-		
-		$pdf->AddPage();
-		
-		// TEXT REPLACEMENT VARIABLES
-		$position += 1;
-		
-		$GIFT3_IMAGE_SRC		= ReportsHelper::getCharacterImg($dnaResults, $position);
-		$GIFT3_HEADER_IMAGE_SRC	= ReportsHelper::getHeaderImg($dnaResults, $position);
-		$GIFT3_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position);
-		$html = <<<EOD
-		<br/><br/>
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td width="350"><img height="200" src="$GIFT3_IMAGE_SRC" /></td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-					<img src="$GIFT3_HEADER_IMAGE_SRC" />
-					$GIFT3_TEXT
-				</td>
-			</tr>	
-		</table>
-EOD;
-		
-		$pdf->writeHTML($html);
-		$gauge3chart_svg = ReportsHelper::getGaugeSVG($userTestID, $dnaResults, $position);
-		//$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge3chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge3chart_svg), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-
-		// ################### Service Gifts ###################### 
-		// TEXT REPLACEMENT VARIABLES
-		$position += 1;
-
-		$GIFT4_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position);
-		$GIFT5_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position+1);
-		$GIFT6_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position+2);
-		$GIFT7_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position+3);
-		$html = <<<EOD
-		<br/><br/>
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td width="150px">&nbsp;</td>
-				<td>$GIFT4_TEXT</td>
-				
-				<td width="150px">&nbsp;</td>
-				<td>$GIFT5_TEXT</td>
-			</tr>
-			<tr>
-				<td width="150px">&nbsp;</td>
-				<td>$GIFT6_TEXT</td>
-				
-				<td width="150px">&nbsp;</td>
-				<td>$GIFT7_TEXT</td>
-			</tr>	
-		</table>	
-EOD;
-		
-		$pdf->writeHTML($html);
-		$gauge4chart_svg = ReportsHelper::getGaugeSVG($userTestID, $dnaResults, $position);
-		//$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['gauge4chart_div']), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-		//$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge4chart_svg), $x=$pdf->GetX() + 65, $y=$pdf->GetY() - 60, $w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-		
-		// ######################################### DONE ##########################################################
-        
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
         $pdf->Output($filename, $displaytype);
 	}
@@ -1006,7 +750,10 @@ EOD;
 		
         $subject = JText::_( 'COM_DNAGIFTS_REPORT_EMAILSUBJECT' ); 
         $body = JText::_( 'COM_DNAGIFTS_REPORT_EMAILMESSAGE' ); 
-        $to = $user->get("email"); //louw.morne@gmail.com";
+        
+        $to = $user->get("email");
+		//$to = "louw.morne@gmail.com";
+		
         $from = array('no-reply@dnagifts,co.za', JText::_( 'COM_DNAGIFTS_PDF_AUTHOR' ));
         
         # Invoke JMail Class

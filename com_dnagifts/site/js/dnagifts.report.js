@@ -176,8 +176,9 @@ function drawCharts() {
 	
 	/*************************************************************************/
 	// - GAUGES
-	var gaugelist = ['gauge1chart_div','gauge2chart_div','gauge3chart_div', 'gauge4chart_div', 
-					'gauge5chart_div', 'gauge6chart_div', 'gauge7chart_div']
+	/*var gaugelist = ['gauge1chart_div','gauge2chart_div','gauge3chart_div', 'gauge4chart_div', 
+					'gauge5chart_div', 'gauge6chart_div', 'gauge7chart_div']*/
+	var gaugelist = ['gauge1chart_div','gauge2chart_div','gauge3chart_div'];
 	for (var i=0;i<gaugelist.length;i++){
 		var position = getResultsByPosition(i);
 		drawDnaGaugechart(

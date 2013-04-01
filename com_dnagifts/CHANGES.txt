@@ -349,3 +349,10 @@
 0.1.13 (2012/01/15)
 -------------------
  - Implemented the pre-generated SVG guages
+ 
+0.1.14 (2012/03/31)
+-------------------
+ - Added the "Connect with Facebook" plugin and related updates to code
+ - Updated the PDF and report
+ - Not done yet - PDF upgrades to be continued
+ 
