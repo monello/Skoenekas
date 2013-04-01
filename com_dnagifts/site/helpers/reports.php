@@ -89,7 +89,7 @@ class ReportsHelper
         // dejavusans is a UTF-8 Unicode font, if you only need to
         // print standard ASCII chars, you can use core fonts like
         // helvetica or times to reduce file size.
-        $pdf->SetFont('dejavusans', '', 14, '', true);
+        $pdf->SetFont('dejavusans', '', 10, '', true);
 
         // Add a page
         // This method has several options, check the source code documentation for more information.
@@ -427,11 +427,69 @@ EOD;
 	
 	public static function generateReportPDF($displaytype, $svgData, $imgChartSRC, $userTestID, $username)
 	{
+		
+		$column1_left = 15;
+		$column2_left = 107;
+		
 		$pdf =& ReportsHelper::documentSetup($userTestID);
 		
 		
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
-		$html = '';
+		
+		// ######################################### PAGE 1 ##########################################################
+		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_HEREYOURESULTS		= JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS');
+		$COM_DNAGIFTS_REPORT_INTRO				= JText::_('COM_DNAGIFTS_REPORT_INTRO');
+		$COM_DNAGIFTS_REPORT_THGIFT				= JText::_('COM_DNAGIFTS_REPORT_THGIFT');
+		$COM_DNAGIFTS_REPORT_THSCORE			= JText::_('COM_DNAGIFTS_REPORT_THSCORE');
+		$COM_DNAGIFTS_REPORT_THYOURGIFT			= JText::_('COM_DNAGIFTS_REPORT_THYOURGIFT');
+		$COM_DNAGIFTS_REPORT_SCORINGTABLEHEADER	= JText::_('COM_DNAGIFTS_REPORT_SCORINGTABLEHEADER');
+		
+		$pdf->SetXY($column1_left, 50);
+		$pdf->SetFont('', 'B', 12, '', true);
+		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_SCORINGTABLEHEADER, '', 0, 'L', true, 0, false, false, 0);
+		
+		$pdf->SetXY($column2_left, 50);
+		$pdf->SetFont('', '', 10, '', true);
+		$pdf->SetTextColor(0, 0, 0); // RGB - Black
+		$pdf->Write(0, 'Hi '.$username, '', 0, 'L', true, 0, false, false, 0);
+		
+		$html = <<<EOD
+		<table border="0" width="910" cellspacing="3" cellpadding="0" style="font-size:8pt;border: 1px solid #c5c5c5;">
+			<tr>
+				<td width="305">
+				
+				<table width="255" cellspacing="3" cellpadding="3" id="tblScores" style="border: 1px solid #c5c5c5;">
+					<tr style="background-color: #000000; color: #ffffff; text-align: center;">
+						<td width="75" >$COM_DNAGIFTS_REPORT_THGIFT</td>
+						<td width="75" >$COM_DNAGIFTS_REPORT_THSCORE</td>
+						<td>$COM_DNAGIFTS_REPORT_THYOURGIFT</td>
+					</tr>
+EOD;
+
+		foreach($dnaResults as $data):
+			$tdcolor = '';
+			if ( in_array($data['abbr'], array('R','M')) ):
+				$tdcolor = 'color: #ffffff;';
+			endif;
+			$html .= '<tr style="text-align: center; color: #333333; background-color: #'.$data['redColor'].';">'.
+					'<td style="'.$tdcolor.'">'.$data['abbr'].'</td>'.
+					'<td style="background-color: LightGrey;">'.$data['score'].'</td>'.
+					'<td style="text-align: left;'.$tdcolor.'">'.$data['label'].'</td>'.
+				'</tr>';
+		endforeach;
+		
+		$html .= '</table></td>';
+		$html .= '<td width="15" style="border: 1px solid #c5c5c5;">&nbsp;</td><td><p style="font-size: 10pt">'.$COM_DNAGIFTS_REPORT_HEREYOURESULTS.'</p>'.$COM_DNAGIFTS_REPORT_INTRO.'</td>';		
+		$html .= '</tr></table>';
+		
+		
+		
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
 		
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
         $pdf->Output($filename, $displaytype);
