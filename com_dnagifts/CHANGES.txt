@@ -355,4 +355,8 @@
  - Added the "Connect with Facebook" plugin and related updates to code
  - Updated the PDF and report
  - Not done yet - PDF upgrades to be continued
- 
+
+0.1.15 (2013/04/01)
+-------------------
+ - Improved PDF report 
+ - Not done yet - PDF upgrades to be continued
