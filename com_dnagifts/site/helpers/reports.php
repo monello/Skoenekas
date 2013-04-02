@@ -438,13 +438,24 @@ EOD;
 		
 		// ######################################### PAGE 1 ##########################################################
 		
+		ReportsHelper::generatePDF_Section1($pdf, $column1_left, $column2_left, $dnaResults, $username);
+		
+		ReportsHelper::reportSeperator($pdf);
+		
+		ReportsHelper::generatePDF_Section2($pdf, $column1_left, $column2_left, $imgChartSRC);
+		
+		ReportsHelper::reportSeperator($pdf);
+		
+		// ######## FINALIZE DOCUMENT #########
+		$filename = ReportsHelper::getFilename($displaytype, $documentname);
+        $pdf->Output($filename, $displaytype);
+	}
+	
+	public static function generatePDF_Section1($pdf, $column1_left, $column2_left, $dnaResults, $username)
+	{
 		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_HEREYOURESULTS		= JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS');
-		$COM_DNAGIFTS_REPORT_INTRO				= JText::_('COM_DNAGIFTS_REPORT_INTRO');
-		$COM_DNAGIFTS_REPORT_THGIFT				= JText::_('COM_DNAGIFTS_REPORT_THGIFT');
-		$COM_DNAGIFTS_REPORT_THSCORE			= JText::_('COM_DNAGIFTS_REPORT_THSCORE');
-		$COM_DNAGIFTS_REPORT_THYOURGIFT			= JText::_('COM_DNAGIFTS_REPORT_THYOURGIFT');
 		$COM_DNAGIFTS_REPORT_SCORINGTABLEHEADER	= JText::_('COM_DNAGIFTS_REPORT_SCORINGTABLEHEADER');
+		$COM_DNAGIFTS_REPORT_INTRO	= ReportsHelper::generatePDF_ReportIntroHeader();
 		
 		$pdf->SetXY($column1_left, 50);
 		$pdf->SetFont('', 'B', 12, '', true);
@@ -456,43 +467,119 @@ EOD;
 		$pdf->SetTextColor(0, 0, 0); // RGB - Black
 		$pdf->Write(0, 'Hi '.$username, '', 0, 'L', true, 0, false, false, 0);
 		
-		$html = <<<EOD
-		<table border="0" width="910" cellspacing="3" cellpadding="0" style="font-size:8pt;border: 1px solid #c5c5c5;">
+		$html = '<table border="0" width="910" cellspacing="3" cellpadding="0" style="font-size:8pt;">
+			<tr>
+				<td width="305">';
+		
+		$html .= ReportsHelper::generatePDF_DNAScoringTable($dnaResults);	
+		
+		$html .= '</td>
+				<td width="15">&nbsp;</td>
+				<td><p>'.$COM_DNAGIFTS_REPORT_INTRO.'</p></td>		
+			</tr>
+		</table>';
+		
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+	}
+	
+	public static function generatePDF_Section2($pdf, $column1_left, $column2_left, $imgChartSRC)
+	{
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_YOURLINEPROFILE		= JText::_('COM_DNAGIFTS_REPORT_YOURLINEPROFILE');
+		$COM_DNAGIFTS_REPORT_YOURLINEPROFILE_INTERP	= JText::_('COM_DNAGIFTS_REPORT_YOURLINEPROFILE_INTERP');
+		$COM_DNAGIFTS_REPORT_DNACHART_HEAD			= JText::_('COM_DNAGIFTS_REPORT_DNACHART_HEAD');
+		$COM_DNAGIFTS_REPORT_DNACHART_TEXT			= JText::_('COM_DNAGIFTS_REPORT_DNACHART_TEXT');
+		$primsecimg = '<img width="234" height="35" src="'.JURI::base(true).'/media/com_dnagifts/images/primary-secondary-'.JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG').'-2.png" />';
+		
+		$y = $pdf->GetY() + 7;
+		
+		$pdf->SetXY($column1_left, $y);
+		$pdf->SetFont('', 'B', 12, '', true);
+		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_YOURLINEPROFILE, '', 0, 'L', true, 0, false, false, 0);
+		
+		$pdf->SetXY($column2_left, $y);
+		$pdf->SetFont('', '', 10, '', true);
+		$pdf->SetTextColor(0, 0, 0); // RGB - Black
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_YOURLINEPROFILE_INTERP, '', 0, 'L', true, 0, false, false, 0);
+		
+		$html = '<table border="0" width="910" cellspacing="3" cellpadding="0" style="font-size:8pt;">
 			<tr>
 				<td width="305">
 				
-				<table width="255" cellspacing="3" cellpadding="3" id="tblScores" style="border: 1px solid #c5c5c5;">
+					<table id="tblDNAChart">
+						<tr>
+							<td align="center">'.
+								$COM_DNAGIFTS_REPORT_DNACHART_HEAD
+							.'</td>
+						</tr>
+						<tr>	
+							<td>
+								<img src="'.$imgChartSRC.'" />'.
+								$primsecimg
+							.'</td>
+						</tr>
+					</table>
+		
+				</td>
+				<td width="15">&nbsp;</td>
+				<td><p>'.$COM_DNAGIFTS_REPORT_DNACHART_TEXT.'</p></td>		
+			</tr>
+		</table>';
+
+		
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+	}
+	
+	public static function generatePDF_ReportIntroHeader()
+	{
+		return JText::_('COM_DNAGIFTS_REPORT_INTRO_P1').
+			'<br/><br/><strong>'.JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS').'</strong><br/>'.
+			JText::_('COM_DNAGIFTS_REPORT_INTRO_P2');
+	}
+	
+	public static function generatePDF_DNAScoringTable($dnaResults) 
+	{
+		$COM_DNAGIFTS_REPORT_THGIFT				= JText::_('COM_DNAGIFTS_REPORT_THGIFT');
+		$COM_DNAGIFTS_REPORT_THSCORE			= JText::_('COM_DNAGIFTS_REPORT_THSCORE');
+		$COM_DNAGIFTS_REPORT_THYOURGIFT			= JText::_('COM_DNAGIFTS_REPORT_THYOURGIFT');
+		
+		$html = '<table width="255" cellspacing="3" cellpadding="3" id="tblScores" style="border: 1px solid #c5c5c5;">
 					<tr style="background-color: #000000; color: #ffffff; text-align: center;">
-						<td width="75" >$COM_DNAGIFTS_REPORT_THGIFT</td>
-						<td width="75" >$COM_DNAGIFTS_REPORT_THSCORE</td>
-						<td>$COM_DNAGIFTS_REPORT_THYOURGIFT</td>
-					</tr>
-EOD;
+						<td width="75" >'.$COM_DNAGIFTS_REPORT_THGIFT.'</td>
+						<td width="75" >'.$COM_DNAGIFTS_REPORT_THSCORE.'</td>
+						<td>'.$COM_DNAGIFTS_REPORT_THYOURGIFT.'</td>
+					</tr>';
 
 		foreach($dnaResults as $data):
 			$tdcolor = '';
 			if ( in_array($data['abbr'], array('R','M')) ):
 				$tdcolor = 'color: #ffffff;';
 			endif;
-			$html .= '<tr style="text-align: center; color: #333333; background-color: #'.$data['redColor'].';">'.
-					'<td style="'.$tdcolor.'">'.$data['abbr'].'</td>'.
-					'<td style="background-color: LightGrey;">'.$data['score'].'</td>'.
-					'<td style="text-align: left;'.$tdcolor.'">'.$data['label'].'</td>'.
-				'</tr>';
+			$html .= '<tr style="text-align: center; color: #333333; background-color: #'.$data['redColor'].';">
+					<td style="'.$tdcolor.'">'.$data['abbr'].'</td>
+					<td style="background-color: LightGrey;">'.$data['score'].'</td>
+					<td style="text-align: left;'.$tdcolor.'">'.$data['label'].'</td>
+				</tr>';
 		endforeach;
 		
-		$html .= '</table></td>';
-		$html .= '<td width="15" style="border: 1px solid #c5c5c5;">&nbsp;</td><td><p style="font-size: 10pt">'.$COM_DNAGIFTS_REPORT_HEREYOURESULTS.'</p>'.$COM_DNAGIFTS_REPORT_INTRO.'</td>';		
-		$html .= '</tr></table>';
+		$html .= '</table>';
 		
-		
-		
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
-		
-		
-		$filename = ReportsHelper::getFilename($displaytype, $documentname);
-        $pdf->Output($filename, $displaytype);
+		return $html;
+	}
+
+	public static function reportSeperator($pdf) 
+	{
+		$image_file = JPATH_SITE.'/media/com_dnagifts/images/seperator900x11.jpg';
+		$x = 15;
+		$y = $pdf->GetY() + 2;
+		$width = 180;
+		$height = '';
+		$imagetype = 'JPG';
+		$pdf->Image($image_file, $x, $y, $width, $height, $imagetype, 
+			'', 'T', false, 300, '', false, false, 0, false, false, false);
 	}
 	
 	public static function generateDNAChart($dnaResults, $userTestID)

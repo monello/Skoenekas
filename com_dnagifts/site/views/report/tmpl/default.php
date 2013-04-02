@@ -66,9 +66,13 @@ $first_name = $name1st[0];
 			</td>
 			<td>&nbsp;</td>
 			<td>
+				<p>
 				<?php echo JText::_('COM_DNAGIFTS_REPORT_INTRO_P1'); ?>
-				<p class="rptText12"><strong><?php echo JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS'); ?></strong></p>
+				<br/><br/>
+				<span class="rptText12"><strong><?php echo JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS'); ?></strong></span>
+				<br/>
 				<?php echo JText::_('COM_DNAGIFTS_REPORT_INTRO_P2'); ?>
+				</p>
 			</td>
 		</tr>
 		

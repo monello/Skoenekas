@@ -360,3 +360,10 @@
 -------------------
  - Improved PDF report 
  - Not done yet - PDF upgrades to be continued
+ 
+0.1.16 (2013/04/02)
+-------------------
+ - Improved PDF report some more
+ - Started refactoring some of the PDF code to be reused in the MSIE PDF generator
+ - Not done yet - PDF upgrades to be continued
+
