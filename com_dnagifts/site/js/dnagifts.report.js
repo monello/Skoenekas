@@ -22,7 +22,7 @@ root.myNamespace.create('DnaGifts.report', {
 		if (!svg && jQuery("#"+divID+" svg:first")) {
 			svg = jQuery("#"+divID+" svg:first").parent().html();
 		}
-		
+
 		if (!svg)
 			return false;
 		clearInterval(ns.intervals[divID]);
@@ -144,6 +144,11 @@ function drawCharts() {
 		legend: {position: 'right', alignment: 'center'}
 	};
 	var piedivID = 'piechart_div';
+	ns.chartContainer[piedivID] = document.getElementById(piedivID);
+	var piechart = new google.visualization.PieChart(document.getElementById(piedivID));
+	piechart.draw(piedata, pieoptions);
+	
+	piedivID = 'piechart_div_hidden';
 	ns.chartContainer[piedivID] = document.getElementById(piedivID);
 	var piechart = new google.visualization.PieChart(document.getElementById(piedivID));
 	google.visualization.events.addListener(piechart, 'ready', function(){ns.extractSVG(piedivID)});

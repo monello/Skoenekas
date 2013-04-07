@@ -367,3 +367,6 @@
  - Started refactoring some of the PDF code to be reused in the MSIE PDF generator
  - Not done yet - PDF upgrades to be continued
 
+0.1.17 (2013/04/07)
+-------------------
+- Finished the non-MSIE PDF report

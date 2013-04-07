@@ -120,7 +120,7 @@ div#dnaTestSpace form#login-form {
 	float: right;
 	padding: 0 0 0 16px;
 	position: relative;
-    top: 2px;
+    top: -15px;
 }
 div#dnaTestSpace form#login-form ul {
 	list-style-type:none;

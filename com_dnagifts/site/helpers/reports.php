@@ -446,6 +446,38 @@ EOD;
 		
 		ReportsHelper::reportSeperator($pdf);
 		
+		ReportsHelper::generatePDF_Section3($pdf, $column1_left, $column2_left, $svgData, false);
+		
+		// ######################################### PAGE 2 ##########################################################
+		
+		$pdf->AddPage();
+		
+		ReportsHelper::generatePDF_Section4($pdf, $column1_left, $column2_left, $svgData, false);
+		
+		ReportsHelper::reportSeperator($pdf,8);
+		
+		ReportsHelper::generatePDF_Section5($pdf, $column1_left, $dnaResults, $svgData, $userTestID, false);
+		
+		// ######################################### PAGE 3 ##########################################################
+		
+		$pdf->AddPage();
+		
+		ReportsHelper::generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID, false);
+		
+		ReportsHelper::reportSeperator($pdf);
+		
+		ReportsHelper::generatePDF_Section7($pdf, $column1_left, $dnaResults, $svgData, $userTestID, false);
+		
+		// ######################################### PAGE 4 ##########################################################
+		
+		$pdf->AddPage();
+		
+		ReportsHelper::generatePDF_Section8($pdf, $column1_left);
+		
+		ReportsHelper::reportSeperator($pdf);
+		
+		ReportsHelper::generatePDF_Section9($pdf, $column1_left);
+		
 		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
         $pdf->Output($filename, $displaytype);
@@ -533,6 +565,373 @@ EOD;
         $pdf->writeHTML($html);
 	}
 	
+	public static function generatePDF_Section3($pdf, $column1_left, $column2_left, $svgData, $is_MSIE)
+	{
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_DNACOMP_HEAD	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_HEAD');
+		$COM_DNAGIFTS_REPORT_DNACOMP_INTERP	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_INTERP');
+		$COM_DNAGIFTS_REPORT_DNACOMP_TEXT	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_TEXT');
+		
+		$y = $pdf->GetY() + 7;
+		
+		$pdf->SetXY($column1_left, $y);
+		$pdf->SetFont('', 'B', 12, '', true);
+		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_DNACOMP_HEAD, '', 0, 'L', true, 0, false, false, 0);
+		
+		$pdf->SetXY($column2_left, $y);
+		$pdf->SetFont('', '', 10, '', true);
+		$pdf->SetTextColor(0, 0, 0); // RGB - Black
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_DNACOMP_INTERP, '', 0, 'L', true, 0, false, false, 0);
+		
+		$y = $pdf->GetY() + 3;
+		$x = $pdf->GetX() - 7;
+		
+		$html = '<table border="0" width="910" cellspacing="3" cellpadding="0" style="font-size:8pt;">
+			<tr>
+				<td width="305">&nbsp;</td>
+				<td width="15">&nbsp;</td>
+				<td><p>'.$COM_DNAGIFTS_REPORT_DNACOMP_TEXT.'</p></td>		
+			</tr>
+		</table>';
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
+		if ($is_MSIE) {
+			// add MSIE code later
+		} else {
+			$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['piechart_div_hidden']), $x, $y, 
+					   $w='', $h=50, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		}
+	}
+	
+	public static function generatePDF_Section4($pdf, $column1_left, $column2_left, $svgData, $is_MSIE)
+	{
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD		= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD');
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_INTERP	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_INTERP_PDF');
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT		= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT');
+		
+		$y = $pdf->GetY();
+		
+		$pdf->SetXY($column1_left, $y);
+		$pdf->SetFont('', 'B', 12, '', true);
+		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD, '', 0, 'L', true, 0, false, false, 0);
+		
+		$pdf->SetXY($column2_left, $y);
+		$pdf->SetFont('', '', 10, '', true);
+		$pdf->SetTextColor(0, 0, 0); // RGB - Black
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_MOTIFLOW_INTERP, '', 0, 'L', true, 0, false, false, 0);
+		
+		$y = $pdf->GetY();
+		$x = $pdf->GetX();
+		
+		$html = '<table border="0" width="910" cellspacing="3" cellpadding="0" style="font-size:8pt">
+			<tr>
+				<td width="305">&nbsp;</td>
+				<td width="15">&nbsp;</td>
+				<td><p>'.$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT.'</p></td>		
+			</tr>
+		</table>';
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
+		if ($is_MSIE) {
+			// add MSIE code later
+		} else {
+			$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['linechart_div']), $x, $y, 
+				$w='', $h=65, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		}
+	}
+	
+	public static function generatePDF_Section5($pdf, $column1_left, $dnaResults, $svgData, $userTestID, $is_MSIE)
+	{
+		$position = 0;
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY');;
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT		= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT');
+		$HEADIMG_SRC 		= ReportsHelper::getHeaderImg($dnaResults, $position);
+		$MANIMG_SRC 		= ReportsHelper::getCharacterImg($dnaResults, $position);
+		$STRENGTHMETER 		= JText::_('COM_DNAGIFTS_STRENGTHMETER');
+		$GIFT_DESC 			= ReportsHelper::getGiftDescription($dnaResults, $position);
+		$gauge1chart_svg 	= ReportsHelper::getGaugeSVG($userTestID, $dnaResults, $position);
+		
+		$y = $pdf->GetY() + 10;
+		
+		$pdf->SetXY($column1_left, $y);
+		$pdf->SetFont('', 'B', 12, '', true);
+		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY, '', 0, 'L', true, 0, false, false, 0);
+		$pdf->SetTextColor(0, 0, 0); // RGB - Black
+		$pdf->SetFont('', '', 8, '', true);
+		
+		$y = $pdf->GetY();
+		$x = $pdf->GetX();
+		
+		$html = '<table border="0" width="910" cellspacing="3" cellpadding="0">
+			<tr>
+				<td width="305">	
+					<img src="'.$HEADIMG_SRC.'"/><br/>
+					<img src="'.$MANIMG_SRC.'" />
+					<p>'.$STRENGTHMETER.'</p>
+				</td>
+				<td width="15">&nbsp;</td>
+				<td>'.$GIFT_DESC.'</td>		
+			</tr>
+		</table>';
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
+		if ($is_MSIE) {
+			// add MSIE code later
+		} else {
+			$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge1chart_svg), $x, $y + 95, 
+				$w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		}
+	}
+
+	public static function generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID, $is_MSIE)
+	{
+		$first_name 		= ReportsHelper::extractFirstName();
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY = strtoupper($first_name).'ABCDEFG'.JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY');
+		$COM_DNAGIFTS_2NDDNAGIFT = JText::_('COM_DNAGIFTS_2NDDNAGIFT');
+		$COM_DNAGIFTS_3RDDNAGIFT = JText::_('COM_DNAGIFTS_3RDDNAGIFT');
+		$HEADIMG2_SRC 		= ReportsHelper::getHeaderImg($dnaResults, 1);;
+		$MANIMG2_SRC 		= ReportsHelper::getCharacterImg($dnaResults, 1);
+		$HEADIMG3_SRC 		= ReportsHelper::getHeaderImg($dnaResults, 2);;
+		$MANIMG3_SRC 		= ReportsHelper::getCharacterImg($dnaResults, 2);
+		$STRENGTHMETER 		= JText::_('COM_DNAGIFTS_STRENGTHMETER');
+		$gauge2chart_svg 	= ReportsHelper::getGaugeSVG($userTestID, $dnaResults, 1);
+		$gauge3chart_svg 	= ReportsHelper::getGaugeSVG($userTestID, $dnaResults, 2);
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY_SUMMARY = JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY_SUMMARY');
+		
+		$y = $pdf->GetY();
+		
+		$pdf->SetXY($column1_left, $y);
+		$pdf->SetFont('', 'B', 12, '', true);
+		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY, '', 0, 'L', true, 0, false, false, 0);
+		$pdf->SetTextColor(0, 0, 0); // RGB - Black
+		$pdf->SetFont('', '', 8, '', true);
+		
+		$y = $pdf->GetY();
+		$x = $pdf->GetX();
+		
+		$html = '<table border="0" width="910" cellspacing="3" cellpadding="0">
+			<tr>
+				<td width="305">
+					<span style="font-size:12pt;font-weight:bold;color:#999">'.$COM_DNAGIFTS_2NDDNAGIFT.'</span><br/>
+					<img src="'.$HEADIMG2_SRC.'"/><br/>
+					<img src="'.$MANIMG2_SRC.'" />
+					<p>'.$STRENGTHMETER.'</p>
+					<img height="110px" width="110px" src="'.JPATH_SITE.'/media/com_dnagifts/images/spacer10x10.jpg" />
+				</td>
+				<td width="15">&nbsp;</td>
+				<td>
+					<span style="font-size:12pt;font-weight:bold;color:#999">'.$COM_DNAGIFTS_3RDDNAGIFT.'</span><br/>
+					<img src="'.$HEADIMG3_SRC.'"/><br/>
+					<img src="'.$MANIMG3_SRC.'" />
+					<p>'.$STRENGTHMETER.'</p>
+					<img height="110px" width="110px" src="'.JPATH_SITE.'/media/com_dnagifts/images/spacer10x10.jpg" />
+				</td>		
+			</tr>
+			<tr>
+				<td colspan="3">'.$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY_SUMMARY.'</td>
+			</tr>
+		</table>';
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
+		if ($is_MSIE) {
+			// add MSIE code later
+		} else {
+			$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge2chart_svg), $x, $y + 97, 
+				$w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+			$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge3chart_svg), $x + $column2_left - 15, $y + 97, 
+				$w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+		}
+	}
+	
+	public static function generatePDF_Section7($pdf, $column1_left, $dnaResults, $svgData, $userTestID, $is_MSIE)
+	{
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_SERVICE = JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SERVICE');
+		$COM_DNAGIFTS_4THDNAGIFT = JText::_('COM_DNAGIFTS_4THDNAGIFT');
+		$COM_DNAGIFTS_5THDNAGIFT = JText::_('COM_DNAGIFTS_5THDNAGIFT');
+		$COM_DNAGIFTS_6THDNAGIFT = JText::_('COM_DNAGIFTS_6THDNAGIFT');
+		$COM_DNAGIFTS_7THDNAGIFT = JText::_('COM_DNAGIFTS_7THDNAGIFT');
+		$MANIMG4_SRC 			 = ReportsHelper::getCharacterImg($dnaResults, 3);
+		$MANIMG5_SRC 			 = ReportsHelper::getCharacterImg($dnaResults, 4);
+		$MANIMG6_SRC 			 = ReportsHelper::getCharacterImg($dnaResults, 5);
+		$MANIMG7_SRC 			 = ReportsHelper::getCharacterImg($dnaResults, 6);
+		$COM_DNAGIFTS_VALLEYLACKMOTIVATION = JText::_('COM_DNAGIFTS_VALLEYLACKMOTIVATION');
+		
+		$y = $pdf->GetY() + 10;
+		
+		$pdf->SetXY($column1_left, $y);
+		$pdf->SetFont('', 'B', 12, '', true);
+		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_MOTIFLOW_SERVICE, '', 0, 'L', true, 0, false, false, 0);
+		$pdf->SetTextColor(0, 0, 0); // RGB - Black
+		$pdf->SetFont('', '', 8, '', true);
+		
+		$html = '<table border="0" width="650" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="25%">
+					<span style="font-size:12pt;font-weight:bold;color:#999">'.$COM_DNAGIFTS_4THDNAGIFT.'</span><br/>
+					<img height="155px" src="'.$MANIMG4_SRC.'" />
+				</td>
+				<td width="25%">
+					<span style="font-size:12pt;font-weight:bold;color:#999">'.$COM_DNAGIFTS_5THDNAGIFT.'</span><br/>
+					<img height="155px" src="'.$MANIMG5_SRC.'" />
+				</td>
+				<td width="25%">
+					<span style="font-size:12pt;font-weight:bold;color:#999">'.$COM_DNAGIFTS_6THDNAGIFT.'</span><br/>
+					<img height="155px" src="'.$MANIMG6_SRC.'" />
+				</td>
+				<td width="25%">
+					<span style="font-size:12pt;font-weight:bold;color:#999">'.$COM_DNAGIFTS_7THDNAGIFT.'</span><br/>
+					<img height="155px" src="'.$MANIMG7_SRC.'" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+				<td colspan="2" style="background-color: #999; color:#fff; text-align: center;font-size:10pt">
+					'.$COM_DNAGIFTS_VALLEYLACKMOTIVATION.'
+				</td>
+			</tr>
+		</table>';
+
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);	
+	}
+
+	public static function generatePDF_Section8($pdf, $column1_left)
+	{
+		$first_name = ReportsHelper::extractFirstName();
+		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_DESIGNEDFORPURPOSE = JText::_('COM_DNAGIFTS_REPORT_DESIGNEDFORPURPOSE');
+		$HEADER = strtoupper($first_name).JText::_('COM_DNAGIFTS_REPORT_PURPOSE_HEADER');
+		$P1 = JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P1').strtoupper($first_name).' '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P2');
+		$P2 = $first_name.' '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P3');
+		$P3 = JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P4').' '.$first_name.'. '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P5');
+		$P4 = $first_name.' '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P6');
+		
+		$y = $pdf->GetY();
+		
+		$pdf->SetXY($column1_left, $y);
+		$pdf->SetFont('', 'B', 12, '', true);
+		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_DESIGNEDFORPURPOSE, '', 0, 'L', true, 0, false, false, 0);
+		$pdf->SetTextColor(0, 0, 0); // RGB - Black
+		$pdf->SetFont('', '', 8, '', true);
+		
+		$pdf->SetXY($column1_left, $pdf->GetY()+5);
+		
+		$html = '<table border="0" cellpadding="0" cellspacing="0" width="1000">
+					<tr>
+						<td width="90px">
+							<img src="'.JURI::base(true).'/media/com_dnagifts/images/lego_blocks.jpg" height="350px" />
+						</td>
+						<td>
+							<p><strong>'.$HEADER.'</strong></p>
+							<p>'.$P1.'</p>
+							<p>'.$P2.'</p> 
+							<p>'.$P3.'</p>
+							<p>'.$P4.'</p>
+							<img src="'.JURI::base(true).'/media/com_dnagifts/images/dna_jesus.jpg" width="700px" />
+						</td>
+					</tr>
+				</table>';
+				
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+	}
+
+	public static function generatePDF_Section9($pdf, $column1_left)
+	{
+		$first_name = ReportsHelper::extractFirstName();
+		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_PURCHASETODAY = JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY');
+		
+		$y = $pdf->GetY() + 10;
+		
+		$pdf->SetXY($column1_left, $y);
+		$pdf->SetFont('', 'B', 12, '', true);
+		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_PURCHASETODAY, '', 0, 'L', true, 0, false, false, 0);
+		$pdf->SetTextColor(0, 0, 0); // RGB - Black
+		$pdf->SetFont('', '', 8, '', true);
+		
+		$pdf->SetXY($column1_left, $pdf->GetY()+5);
+		
+		$html = '<table border="0" cellpadding="0" cellspacing="0" width="910">
+					<tr>
+						<td width="120">
+							<img src="'.JURI::base(true).'/media/com_dnagifts/images/dna_book.jpg" width="100px" />
+						</td>
+						<td>
+							<p style="font-size:10pt"><strong>'.JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY').'</strong></p>
+							<p>'.JText::_('COM_DNAGIFTS_REPORT_BOOKDETAILS').'</p>
+						</td>
+						<td width="100">
+							<a id="buyBtn" href="'.JURI::root().'purchase">
+								<img src="'.JURI::base(true).'/media/com_dnagifts/images/buy_book.jpg" width="100px"/>
+							</a>
+						</td>
+					</tr>
+				</table>';
+				
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
+		// TEXT REPLACEMENT VARIABLES
+		$COM_DNAGIFTS_REPORT_ABOUTAUTHOR = JText::_('COM_DNAGIFTS_REPORT_ABOUTAUTHOR');
+		
+		$y = $pdf->GetY();
+		
+		$pdf->SetXY($column1_left, $y);
+		$pdf->SetFont('', 'B', 12, '', true);
+		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
+		$pdf->Write(0, $COM_DNAGIFTS_REPORT_ABOUTAUTHOR, '', 0, 'L', true, 0, false, false, 0);
+		$pdf->SetTextColor(0, 0, 0); // RGB - Black
+		$pdf->SetFont('', '', 8, '', true);
+		
+		$pdf->SetXY($column1_left, $pdf->GetY());
+		
+		$html = '<table border="0" cellpadding="0" cellspacing="0" width="910">
+					<tr>
+						<td width="120">
+							<img src="'.JURI::base(true).'/media/com_dnagifts/images/juan_nel.jpg" width="100px" />
+						</td>
+						<td>
+							<p>'.JText::_('COM_DNAGIFTS_REPORT_AUTHORDETAILS').'</p>
+							<p>'.JText::_('COM_DNAGIFTS_REPORT_MOREINFO').'</p>
+						</td>
+					</tr>
+				</table>';
+				
+		// Print text using writeHTML()
+        $pdf->writeHTML($html);
+		
+	}
+	
+	public static function extractFirstName()
+	{
+		$user = JFactory::getUser();
+		$user_id = $user->get("id");
+		$name1st=explode(" ",$user->name);
+		return $name1st[0];
+	}
+	
 	public static function generatePDF_ReportIntroHeader()
 	{
 		return JText::_('COM_DNAGIFTS_REPORT_INTRO_P1').
@@ -570,11 +969,11 @@ EOD;
 		return $html;
 	}
 
-	public static function reportSeperator($pdf) 
+	public static function reportSeperator($pdf, $yPlus=0) 
 	{
 		$image_file = JPATH_SITE.'/media/com_dnagifts/images/seperator900x11.jpg';
 		$x = 15;
-		$y = $pdf->GetY() + 2;
+		$y = $pdf->GetY() + $yPlus;
 		$width = 180;
 		$height = '';
 		$imagetype = 'JPG';
@@ -685,7 +1084,6 @@ EOD;
 			"&chem=".$primarybubble."|".$secondarybubble;
 		return $dnaChart;
 	}
-	
 	
 	public static function generateImageLineChart($dnaResults)
 	{
@@ -922,6 +1320,7 @@ EOD;
         # Send once you have set all of your options
         $mailer->send();
 	}
+	
 	public static function getDnaMaxScore($user_test_id)
 	{
 		$db = JFactory::getDbo();

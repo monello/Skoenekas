@@ -122,6 +122,9 @@ $first_name = $name1st[0];
 		<tr>
 			<td>
 				<div id="piechart_div" style="width: 400px; height: 300px;"></div>
+				<div id="picont" style="position:absolute;left: -1000px;">
+					<div id="piechart_div_hidden" style="width: 400px; height: 210px;"></div>
+				</div>
 			</td>
 			<td>&nbsp;</td>
 			<td>
@@ -304,7 +307,7 @@ $first_name = $name1st[0];
 							<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/dna_book.jpg" width="150px" height="198px" />
 						</td>
 						<td>
-							<p class="rptText12"><strong><?php echo JText::_('COM_DNAGIFTS_REPORT_PURPOSE_HEADER'); ?></strong></p>
+							<p class="rptText12"><strong><?php echo JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY'); ?></strong></p>
 							<p><?php echo JText::_('COM_DNAGIFTS_REPORT_BOOKDETAILS'); ?></p>
 						</td>
 						<td>
@@ -331,7 +334,6 @@ $first_name = $name1st[0];
 							<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/juan_nel.jpg" width="150px" height="204px" />
 						</td>
 						<td>
-							<p class="rptText12"><strong><?php echo JText::_('COM_DNAGIFTS_REPORT_PURPOSE_HEADER'); ?></strong></p>
 							<p><?php echo JText::_('COM_DNAGIFTS_REPORT_AUTHORDETAILS'); ?></p>
 						</td>
 					</tr>
