@@ -14,7 +14,7 @@ class DnaGiftsControllerReport extends JControllerForm
 {
     public function dispatchReport()
 	{
-		$displaytype	= 'F'; //use 'F' for emailing not 'E' as I want to save a real file to a folder and attache that to the email
+		$displaytype	= 'F'; //use 'F' for emailing not 'E' as I want to save a real file to a folder and attached that to the email
         $svgData		= $_POST['svgData'];
         $userTestID		= $_POST['userTestID'];
 		$imgChartSRC	= $_POST['imgChartSRC'];
@@ -25,7 +25,7 @@ class DnaGiftsControllerReport extends JControllerForm
 	}
 	public function dispatchMSIEReport()
 	{
-		$displaytype	= 'F'; //use 'F' for emailing not 'E' as I want to save a real file to a folder and attache that to the email
+		$displaytype	= 'F'; //use 'F' for emailing not 'E' as I want to save a real file to a folder and attached that to the email
         $userTestID		= $_POST['userTestID'];
 		$user 			= JFactory::getUser();
 		ReportsHelper::generateReportMSIEPDF($displaytype, $userTestID, $user->name);

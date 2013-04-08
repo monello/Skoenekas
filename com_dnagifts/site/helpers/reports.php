@@ -149,285 +149,68 @@ class ReportsHelper
 	
 	public static function generateReportMSIEPDF($displaytype, $userTestID, $username)
 	{
+		$column1_left = 15;
+		$column2_left = 107;
+		
 		$pdf =& ReportsHelper::documentSetup($userTestID);
+		
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
 		
 		// prepare the image charts
-		$dnaChartSrc		= ReportsHelper::generateDNAChart($dnaResults, $userTestID);
+		$imgChartSRC		= ReportsHelper::generateDNAChart($dnaResults, $userTestID);
 		$dnaPieChartSrc		= ReportsHelper::generateImagePieChart($dnaResults);
 		$dnaLineChartSrc	= ReportsHelper::generateImageLineChart($dnaResults);
 		
-		$html = '';
+		// ######################################### PAGE 1 ##########################################################
 		
-		// get html from template
-		$linestyle = array('width' => 0.1, 'cap' => 'butt', 'join' => 'miter', 'dash' => '2,1', 'phase' => 0, 'color' => array(211, 211, 211));
+		ReportsHelper::generatePDF_Section1($pdf, $column1_left, $column2_left, $dnaResults, $username);
 		
-		$pdf->SetXY(15, 30);
-		$pdf->Write(0, 'Hi '.$username, '', 0, 'L', true, 0, false, false, 0);
-
+		ReportsHelper::reportSeperator($pdf);
 		
-		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_HEREYOURESULTS	= JText::_('COM_DNAGIFTS_REPORT_HEREYOURESULTS');
-		$COM_DNAGIFTS_REPORT_INTRO			= JText::_('COM_DNAGIFTS_REPORT_INTRO');
-		$COM_DNAGIFTS_REPORT_THGIFT			= JText::_('COM_DNAGIFTS_REPORT_THGIFT');
-		$COM_DNAGIFTS_REPORT_THSCORE		= JText::_('COM_DNAGIFTS_REPORT_THSCORE');
-		$COM_DNAGIFTS_REPORT_THYOURGIFT		= JText::_('COM_DNAGIFTS_REPORT_THYOURGIFT');
+		ReportsHelper::generatePDF_Section2($pdf, $column1_left, $column2_left, $imgChartSRC);
 		
-		$html = <<<EOD
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td width="350">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_HEREYOURESULTS</p>
-					$COM_DNAGIFTS_REPORT_INTRO
-				</td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-				
-				<table width="255" cellspacing="3" cellpadding="3" id="tblScores" style="border: 1px solid #c5c5c5;">
-					<tr style="background-color: #000000; color: #ffffff; text-align: center;">
-						<td width="75">$COM_DNAGIFTS_REPORT_THGIFT</td>
-						<td width="75">$COM_DNAGIFTS_REPORT_THSCORE</td>
-						<td>$COM_DNAGIFTS_REPORT_THYOURGIFT</td>
-					</tr>
-EOD;
-
-		foreach($dnaResults as $data):
-			$tdcolor = '';
-			if ( in_array($data['abbr'], array('R','M')) ):
-				$tdcolor = 'color: #ffffff;';
-			endif;
-			$html .= '<tr style="text-align: center; color: #333333; background-color: #'.$data['redColor'].';">'.
-					'<td style="'.$tdcolor.'">'.$data['abbr'].'</td>'.
-					'<td style="background-color: LightGrey;">'.$data['score'].'</td>'.
-					'<td style="text-align: left;'.$tdcolor.'">'.$data['label'].'</td>'.
-				'</tr>';
-		endforeach;
+		ReportsHelper::reportSeperator($pdf);
 		
-		$html .= '</table></td></tr></table>';
-        
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
-				
-		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_YOURLINEPROFILE	= JText::_('COM_DNAGIFTS_REPORT_YOURLINEPROFILE');
-		$COM_DNAGIFTS_REPORT_DNACHART_HEAD		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_HEAD');
-		$COM_DNAGIFTS_REPORT_DNACHART_TEXT		= JText::_('COM_DNAGIFTS_REPORT_DNACHART_TEXT');
-		$primsecimg = '<img width="350" height="52" src="'.JURI::base(true).'/media/com_dnagifts/images/primary-secondary-'.JText::_('COM_DNAGIFTS_REPORT_DNACHART_PRIMSECIMG').'-2.png" />';
-		$html = <<<EOD
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td colspan="3">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_YOURLINEPROFILE</p>
-				</td>
-			</tr>
-			<tr>
-				<td width="350">
-					<table id="tblDNAChart">
-						<tr>
-							<td align="center">
-								<strong>$COM_DNAGIFTS_REPORT_DNACHART_HEAD</strong>
-							</td>
-						</tr>
-						<tr>	
-							<td>
-								<img src="$dnaChartSrc" />
-								$primsecimg
-							</td>
-						</tr>
-					</table>
-				</td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-					$COM_DNAGIFTS_REPORT_DNACHART_TEXT
-				</td>
-			</tr>	
-		</table>	
-EOD;
-
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
-
-		//###################################################################################################################
+		ReportsHelper::generatePDF_Section3($pdf, $column1_left, $column2_left, $dnaPieChartSrc, true);
 		
-		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_DNACOMP_HEAD	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_HEAD');
-		$COM_DNAGIFTS_REPORT_DNACOMP_TEXT	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_TEXT');
-		$html = <<<EOD
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td colspan="3">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_DNACOMP_HEAD</p>
-				</td>
-			</tr>
-			<tr>
-				<td width="350">
-					<img src="$dnaPieChartSrc" />
-				</td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-					$COM_DNAGIFTS_REPORT_DNACOMP_TEXT
-				</td>
-			</tr>	
-		</table>	
-EOD;
-
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
 		
-		//###################################################################################################################
+		// ######################################### PAGE 2 ##########################################################
 		
-		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD');
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT');
-		$html = <<<EOD
-		<br/><br/><br/><br/>
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td colspan="3">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_HEAD</p>
-				</td>
-			</tr>
-			<tr>
-				<td width="350">
-					<img src="$dnaLineChartSrc" />
-				</td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-					$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT
-				</td>
-			</tr>	
-		</table>	
-EOD;
-
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
+		$pdf->AddPage();
 		
-		//###################################################################################################################
+		ReportsHelper::generatePDF_Section4($pdf, $column1_left, $column2_left, $dnaLineChartSrc, true);
 		
-		$dnaMaxScore = ReportsHelper::getDnaMaxScore($userTestID);
+		ReportsHelper::reportSeperator($pdf,8);
 		
-		// TEXT REPLACEMENT VARIABLES
-		$position								= 0;
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL');
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY');
-		$COM_DNAGIFTS_REPORT_PRIMARY_GIFT		= JText::_('COM_DNAGIFTS_REPORT_PRIMARY_GIFT');
-		$GIFT1_TEXT								= ReportsHelper::getGiftDescription($dnaResults, $position);
-		$GIFT1_LABEL							= ReportsHelper::getGiftLabel($dnaResults, $position);
-		$GIFT1_CHARACTER_SRC					= ReportsHelper::getCharacterImg($dnaResults, $position);
-		$GIFT1_HEADER_SRC						= ReportsHelper::getHeaderImg($dnaResults, $position);
-		$GIFT1_GUAGE 							= ReportsHelper::generateGaugeChart($dnaMaxScore, $dnaResults, $position);
-		$html = <<<EOD
-		<br/><br/>
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td colspan="3">
-					<p style="font-size: 16pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_DETAIL</p>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY $GIFT1_LABEL</p>
-				</td>
-			</tr>
-			<tr>
-				<td width="350">
-					<p>$COM_DNAGIFTS_REPORT_PRIMARY_GIFT</p>
-					<table>
-						<tr>
-							<td><img src="$GIFT1_CHARACTER_SRC" /></td>
-							<td><img src="$GIFT1_GUAGE"></td>
-						</tr>
-					</table>
-				</td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-					<img style="border: 1px solid black" src="$GIFT1_HEADER_SRC" />
-					$GIFT1_TEXT
-				</td>
-			</tr>	
-		</table>	
-EOD;
-
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
+		ReportsHelper::generatePDF_Section5($pdf, $column1_left, $dnaResults, $userTestID);
 		
-		//-----------------------------------------------------------------------------------------------------------------
+		// ######################################### PAGE 3 ##########################################################
 		
-		// TEXT REPLACEMENT VARIABLES
-		$position								+= 1;
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY');
-		$GIFT2_TEXT								= ReportsHelper::getGiftDescription($dnaResults, $position);
-		$GIFT2_CHARACTER_SRC					= ReportsHelper::getCharacterImg($dnaResults, $position);
-		$GIFT2_HEADER_SRC						= ReportsHelper::getHeaderImg($dnaResults, $position);
-		$GAUGE2 								= ReportsHelper::generateGaugeChart($dnaMaxScore, $dnaResults, $position);
-		$html = <<<EOD
-		<br/><br/>
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td colspan="3">
-					<p style="font-size: 14pt">$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY</p>
-				</td>
-			</tr>
-			<tr>
-				<td width="350">
-					<table>
-						<tr>
-							<td><img src="$GIFT2_CHARACTER_SRC" /></td>
-							<td><img src="$GAUGE2"></td>
-						</tr>
-					</table>
-				</td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-					<img style="border: 1px solid black" src="$GIFT2_HEADER_SRC" />
-					$GIFT2_TEXT
-				</td>
-			</tr>	
-		</table>	
-EOD;
-
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
+		$pdf->AddPage();
 		
-		//-----------------------------------------------------------------------------------------------------------------
+		ReportsHelper::generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID);
 		
-		// TEXT REPLACEMENT VARIABLES
-		$position				+= 1;
-		$GIFT3_TEXT				= ReportsHelper::getGiftDescription($dnaResults, $position);
-		$GIFT3_CHARACTER_SRC	= ReportsHelper::getCharacterImg($dnaResults, $position);
-		$GIFT3_HEADER_SRC		= ReportsHelper::getHeaderImg($dnaResults, $position);
-		$GAUGE3 				= ReportsHelper::generateGaugeChart($dnaMaxScore, $dnaResults, $position);
-		$html = <<<EOD
-		<br/><br/><br/><br/><br/>
-		<table border="0" width="620" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td width="350">
-					<table>
-						<tr>
-							<td><img src="$GIFT3_CHARACTER_SRC" /></td>
-							<td><img src="$GAUGE3"></td>
-						</tr>
-					</table>
-				</td>
-				<td width="15">&nbsp;</td>
-				<td width="255">
-					<img style="border: 1px solid black" src="$GIFT3_HEADER_SRC" />
-					$GIFT3_TEXT
-				</td>
-			</tr>	
-		</table>	
-EOD;
-
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
+		ReportsHelper::reportSeperator($pdf);
 		
+		ReportsHelper::generatePDF_Section7($pdf, $column1_left, $dnaResults, $svgData, $userTestID);
+		
+		// ######################################### PAGE 4 ##########################################################
+		
+		$pdf->AddPage();
+		
+		ReportsHelper::generatePDF_Section8($pdf, $column1_left);
+		
+		ReportsHelper::reportSeperator($pdf);
+		
+		ReportsHelper::generatePDF_Section9($pdf, $column1_left);
+		
+		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
         $pdf->Output($filename, $displaytype);
 	}
 	
 	public static function generateReportPDF($displaytype, $svgData, $imgChartSRC, $userTestID, $username)
 	{
-		
 		$column1_left = 15;
 		$column2_left = 107;
 		
@@ -456,17 +239,17 @@ EOD;
 		
 		ReportsHelper::reportSeperator($pdf,8);
 		
-		ReportsHelper::generatePDF_Section5($pdf, $column1_left, $dnaResults, $svgData, $userTestID, false);
+		ReportsHelper::generatePDF_Section5($pdf, $column1_left, $dnaResults, $userTestID);
 		
 		// ######################################### PAGE 3 ##########################################################
 		
 		$pdf->AddPage();
 		
-		ReportsHelper::generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID, false);
+		ReportsHelper::generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID);
 		
 		ReportsHelper::reportSeperator($pdf);
 		
-		ReportsHelper::generatePDF_Section7($pdf, $column1_left, $dnaResults, $svgData, $userTestID, false);
+		ReportsHelper::generatePDF_Section7($pdf, $column1_left, $dnaResults, $svgData, $userTestID);
 		
 		// ######################################### PAGE 4 ##########################################################
 		
@@ -589,7 +372,15 @@ EOD;
 		
 		$html = '<table border="0" width="910" cellspacing="3" cellpadding="0" style="font-size:8pt;">
 			<tr>
-				<td width="305">&nbsp;</td>
+				<td width="305">';
+		
+		if ($is_MSIE) {
+			$html .= '<img src="'.$svgData.'" />';
+		} else {
+			$html .= "&nbsp;";	
+		}
+		
+		$html .= '		</td>
 				<td width="15">&nbsp;</td>
 				<td><p>'.$COM_DNAGIFTS_REPORT_DNACOMP_TEXT.'</p></td>		
 			</tr>
@@ -598,9 +389,7 @@ EOD;
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
 		
-		if ($is_MSIE) {
-			// add MSIE code later
-		} else {
+		if (!$is_MSIE) {
 			$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['piechart_div_hidden']), $x, $y, 
 					   $w='', $h=50, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 		}
@@ -630,7 +419,16 @@ EOD;
 		
 		$html = '<table border="0" width="910" cellspacing="3" cellpadding="0" style="font-size:8pt">
 			<tr>
-				<td width="305">&nbsp;</td>
+				<td width="305">';
+		
+		if ($is_MSIE) {
+			$html .= '<img src="'.$svgData.'" />';
+		} else {
+			$html .= "&nbsp;";	
+		}
+		
+		$html .= '		</td>
+		
 				<td width="15">&nbsp;</td>
 				<td><p>'.$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT.'</p></td>		
 			</tr>
@@ -639,17 +437,16 @@ EOD;
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
 		
-		if ($is_MSIE) {
-			// add MSIE code later
-		} else {
+		if (!$is_MSIE) {
 			$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['linechart_div']), $x, $y, 
 				$w='', $h=65, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 		}
 	}
 	
-	public static function generatePDF_Section5($pdf, $column1_left, $dnaResults, $svgData, $userTestID, $is_MSIE)
+	public static function generatePDF_Section5($pdf, $column1_left, $dnaResults, $userTestID)
 	{
 		$position = 0;
+
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY	= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_PRIMARY');;
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT		= JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT');
@@ -686,15 +483,11 @@ EOD;
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
 		
-		if ($is_MSIE) {
-			// add MSIE code later
-		} else {
-			$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge1chart_svg), $x, $y + 95, 
-				$w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-		}
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge1chart_svg), $x, $y + 95, 
+			$w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 	}
 
-	public static function generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID, $is_MSIE)
+	public static function generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID)
 	{
 		$first_name 		= ReportsHelper::extractFirstName();
 		// TEXT REPLACEMENT VARIABLES
@@ -748,17 +541,13 @@ EOD;
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
 		
-		if ($is_MSIE) {
-			// add MSIE code later
-		} else {
-			$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge2chart_svg), $x, $y + 97, 
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge2chart_svg), $x, $y + 97, 
 				$w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-			$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge3chart_svg), $x + $column2_left - 15, $y + 97, 
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge3chart_svg), $x + $column2_left - 15, $y + 97, 
 				$w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
-		}
 	}
 	
-	public static function generatePDF_Section7($pdf, $column1_left, $dnaResults, $svgData, $userTestID, $is_MSIE)
+	public static function generatePDF_Section7($pdf, $column1_left, $dnaResults, $svgData, $userTestID)
 	{
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_SERVICE = JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SERVICE');

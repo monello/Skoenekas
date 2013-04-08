@@ -370,3 +370,7 @@
 0.1.17 (2013/04/07)
 -------------------
 - Finished the non-MSIE PDF report
+
+0.1.18 (2012/04/08)
+-------------------
+- Finally completed MSIE and non-MSIE PDF reports
