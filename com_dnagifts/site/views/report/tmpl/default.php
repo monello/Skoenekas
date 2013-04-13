@@ -6,8 +6,7 @@ JHtml::_('behavior.tooltip');
 
 $this->isLoggedIn = DnaGiftsHelper::authenticate();
 
-$name1st=explode(" ",$this->user->name);
-$first_name = $name1st[0];
+$first_name 		= ReportsHelper::extractFirstName();
 
 ?>
 <script type="text/javascript">
@@ -28,6 +27,7 @@ $first_name = $name1st[0];
 	var dnaReportCopy = {
 		'motivationalflow': "<?php echo JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_CHARTHEAD'); ?>"
 	};
+	var first_name = '<?php echo $first_name; ?>';
 </script>
 <div id="dnaReportWrapper">
 	<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/banner1-900px.png" style="margin-bottom: 30px" width="900px" height="189px" />

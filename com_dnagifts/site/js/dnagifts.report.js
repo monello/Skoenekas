@@ -232,3 +232,80 @@ function getResultsByPosition(position){
 	}
 	return -1;
 }
+
+
+/* AUTO POST TO FACEBOOK */
+
+
+// Additional JS functions here
+window.fbAsyncInit = function() {
+	FB.init({
+		appId      : '454481387902401', // App ID
+		channelUrl : '//www.dnagifts.co.za/dna/fb/channel.html', // Channel File
+		status     : true, // check login status
+		cookie     : true, // enable cookies to allow the server to access the session
+		xfbml      : true  // parse XFBML
+	});
+	
+	FB.getLoginStatus(function(response) {
+		  if (response.status === 'connected') {
+	        autoPostToFeed(response.authResponse);
+	      } else if (response.status === 'not_authorized') {
+	        login();
+	      } else {
+	        login();
+	      }
+	});
+
+};
+  
+function login() {
+    FB.login(function(response) {
+    	if (response.authResponse) {
+            autoPostToFeed(response.authResponse);
+        } else {
+        	return false;
+        }
+    }, {scope: 'email,publish_stream'});
+}
+  
+function autoPostToFeed(authResponse) {
+	var dnachart = jQuery("#tblDNAChart tbody tr td img").attr('src');
+	var giftname = dnaResults[0].label;
+	var aOrAn = getAorAn();
+	var data = {
+	  link: 'http://www.dnagifts.co.za/dna/',
+	  picture: dnachart,
+	  name: 'The DNA Gifts Test',
+	  caption: 'Do the DNA Gifts Test',
+	  description: first_name+' has just done the Dynamic Natural Ability Test from DNA Gifts. The test shows that '+
+	  	first_name+' is '+aOrAn+' '+giftname+'. Click here to discover your unique DNA gift blend and life purpose'
+	};
+	
+	FB.api('/me/feed', 'post', data, function(response) {
+		/*if (!response || response.error) {
+	   		console.log('Error occured');
+	    } else {
+	    	console.log('Post ID: ' + response.id);
+	    }*/
+	});
+}
+
+function getAorAn() {
+	var vowels = ['a','e','i','o','u'];
+	var letter = dnaResults[0].label.substring(0,1);
+	var result = "a";
+	if (vowels.indexOf(letter.toLowerCase()) >= 0)
+		result = "an";
+	return result;
+}
+
+// Load the SDK Asynchronously
+(function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+}(document));
+ 
