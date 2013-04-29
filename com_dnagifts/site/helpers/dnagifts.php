@@ -99,6 +99,7 @@ class DnagiftsHelper
 				FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
 				WHERE ".$db->nameQuote('session_id')." = ".$db->quote($session_id)."
 				AND ".$db->nameQuote('test_id')." = ".$db->quote($test_id);
+		
 		$db->setQuery($query);
 		
 		// Check for a database error.
@@ -109,7 +110,7 @@ class DnagiftsHelper
 		if ($test_user_id = $db->loadResult()) {
 			return $test_user_id;
 		} else {
-			return 'undefined';
+			return null;
 		}
 	}
 	

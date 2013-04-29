@@ -382,4 +382,14 @@
 
 0.1.20 (2012/04/13)
 -------------------
-- Finally got all the facebook integration to work 
+- Finally got all the facebook integration to work
+
+0.1.21 (2012/04/14)
+-------------------
+- Added the HTML template to the email
+
+0.1.22 (2012/04/29)
+-------------------
+- Fixed a bug that caused the test to start at seemingly arbitrary questions instead of the first question
+  This then had a knock-on effect to the rest of the test procedures.
+  

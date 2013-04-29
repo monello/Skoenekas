@@ -29,6 +29,7 @@ $first_name 		= ReportsHelper::extractFirstName();
 	};
 	var first_name = '<?php echo $first_name; ?>';
 </script>
+<div id="fb-root"></div>
 <div id="dnaReportWrapper">
 	<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/banner1-900px.png" style="margin-bottom: 30px" width="900px" height="189px" />
 	<table id="tblReportSection" width="900" cellpadding="0" cellspacing="0">

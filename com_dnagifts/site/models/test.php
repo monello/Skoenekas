@@ -14,13 +14,13 @@ class DnaGiftsModelTest extends JModel
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 		
+		$survey_data = array();
+		
 		$query->select('*');
 		$query->from($db->quoteName('#__dnagifts_list_testquestions'));
 		$query->where($db->quoteName('test_id') . " = " . $db->quote($test_id));
 		$db->setQuery($query);
 		$data = $db->loadObjectList();
-		
-		$survey_data = array();
 		
 		foreach($data as $i => $test) {
 			$tmpdata = array(
@@ -31,6 +31,10 @@ class DnaGiftsModelTest extends JModel
 				'catid' => $test->gift_id
 			);
 			$survey_data[] = $tmpdata;
+		}
+		
+		if (!$user_test_id) {
+			return json_encode($survey_data);
 		}
 		
 		$query = $db->getQuery(true);

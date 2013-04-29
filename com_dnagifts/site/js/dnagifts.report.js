@@ -274,7 +274,7 @@ function autoPostToFeed(authResponse) {
 	var giftname = dnaResults[0].label;
 	var aOrAn = getAorAn();
 	var data = {
-	  link: 'http://www.dnagifts.co.za/dna/',
+	  link: 'http://www.dnagifts.co.za/',
 	  picture: dnachart,
 	  name: 'The DNA Gifts Test',
 	  caption: 'Do the DNA Gifts Test',

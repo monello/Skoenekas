@@ -1081,7 +1081,8 @@ class ReportsHelper
 		$filename = JPATH_SITE.DS."components".DS."com_dnagifts".DS."store".DS.$result->report_name;
 		
         $subject = JText::_( 'COM_DNAGIFTS_REPORT_EMAILSUBJECT' ); 
-        $body = JText::_( 'COM_DNAGIFTS_REPORT_EMAILMESSAGE' ); 
+        //$body = JText::_( 'COM_DNAGIFTS_REPORT_EMAILMESSAGE' );
+		$body = ReportsHelper::getEmailBody();
         
         $to = $user->get("email");
 		//$to = "louw.morne@gmail.com";
@@ -1108,6 +1109,25 @@ class ReportsHelper
         
         # Send once you have set all of your options
         $mailer->send();
+	}
+	
+	public static function getEmailBody()
+	{
+		$template_id = 9;
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+        $query->select('stylesheet, body');
+		$query->from($db->quoteName('#__acymailing_template'));
+		$query->where('tempid = '.$template_id);
+        $db->setQuery($query);
+        $result = $db->loadObject();
+		
+		$html = '<html><head><style>'.$result->stylesheet.'</style></head><body>'.
+				$result->body.'</body></html>';
+		
+		$pattern = '/\{subtag\:name\}/i';
+		$replacement = ReportsHelper::extractFirstName();
+		return preg_replace($pattern, $replacement, $html);
 	}
 	
 	public static function getDnaMaxScore($user_test_id)

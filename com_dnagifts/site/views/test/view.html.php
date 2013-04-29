@@ -23,9 +23,9 @@ class DnaGiftsViewTest extends JView
 		$model 				= $this->getModel();
 		$buttons			= $model->getTestButtons( $test_id );
 		$config 			= $model->getTestConfig( $test_id );
-		$user_test_id = DnaGiftsHelper::getUserTestID( $test_id );
+		$user_test_id 		= DnaGiftsHelper::getUserTestID( $test_id );
 		$data 				= $model->getTestData( $test_id, $user_test_id );
-		$progress 		= DnagiftsHelper::getUserProgress( $user_test_id, $test_id );
+		$progress 			= DnagiftsHelper::getUserProgress( $user_test_id, $test_id );
 		
 		$buttonwidth  = 120;
 		if (count($buttons)) {
