@@ -534,30 +534,30 @@ Base.Helpers.bind_load(function () {
    });
 		 jQuery(".sortable").disableSelection();
    
-   jQuery(".actionBtn").live("mouseover", function(){ jQuery(this).addClass("ui-state-hover"); })
-   jQuery(".actionBtn").live("mouseout", function(){ jQuery(this).removeClass("ui-state-hover"); })
+   jQuery(document).on( "mouseover", ".actionBtn", function(){ jQuery(this).addClass("ui-state-hover"); })
+   jQuery(document).on( "mouseout", ".actionBtn", function(){ jQuery(this).removeClass("ui-state-hover"); })
    
    jQuery("#saveNewButton").bind("click", ns.saveNewButton);
    jQuery("#saveNewQuestion").bind("click", ns.saveNewQuestion);
    
    // activate the Test-Button actions
-   jQuery('#select_buttons .toTopBtn').live( "click", function() {ns.reorderButton(this, "top")} );
-   jQuery('#select_buttons .upOneBtn').live( "click", function() {ns.reorderButton(this, "up")} );
-   jQuery('#select_buttons .downOneBtn').live( "click", function() {ns.reorderButton(this, "down")} );
-   jQuery('#select_buttons .toBottomBtn').live( "click", function() {ns.reorderButton(this, "bottom")} );
-   jQuery('#select_buttons .goDeleteBtn').live("click", ns.goDeleteButton);
-   jQuery('#select_buttons .goEditBtn').live("click", function() {
+   jQuery(document).on( "click", '#select_buttons .toTopBtn', function() {ns.reorderButton(this, "top")} );
+   jQuery(document).on( "click", '#select_buttons .upOneBtn', function() {ns.reorderButton(this, "up")} );
+   jQuery(document).on( "click", '#select_buttons .downOneBtn', function() {ns.reorderButton(this, "down")} );
+   jQuery(document).on( "click", '#select_buttons .toBottomBtn', function() {ns.reorderButton(this, "bottom")} );
+   jQuery(document).on( "click", '#select_buttons .goDeleteBtn', ns.goDeleteButton);
+   jQuery(document).on( "click", '#select_buttons .goEditBtn', function() {
       DnaGifts.Test.link_id = jQuery(this).parent().parent().metadata().link_id;
       DnaGifts.Test.button_id = jQuery(this).parent().parent().metadata().button_id;
       jQuery( "#edit-test-button" ).dialog( "open" );
     });
    
-   jQuery('#select_questions .toTopBtn').live( "click", function() {ns.reorderQuestion(this, "top")} );
-   jQuery('#select_questions .upOneBtn').live( "click", function() {ns.reorderQuestion(this, "up")} );
-   jQuery('#select_questions .downOneBtn').live( "click", function() {ns.reorderQuestion(this, "down")} );
-   jQuery('#select_questions .toBottomBtn').live( "click", function() {ns.reorderQuestion(this, "bottom")} );
-   jQuery('#select_questions .goDeleteBtn').live("click", ns.goDeleteQuestion);
-   jQuery('#select_questions .goEditBtn').live("click", function() {
+   jQuery(document).on( "click", '#select_questions .toTopBtn', function() {ns.reorderQuestion(this, "top")} );
+   jQuery(document).on( "click", '#select_questions .upOneBtn', function() {ns.reorderQuestion(this, "up")} );
+   jQuery(document).on( "click", '#select_questions .downOneBtn', function() {ns.reorderQuestion(this, "down")} );
+   jQuery(document).on( "click", '#select_questions .toBottomBtn', function() {ns.reorderQuestion(this, "bottom")} );
+   jQuery(document).on( "click", '#select_questions .goDeleteBtn', ns.goDeleteQuestion);
+   jQuery(document).on( "click", '#select_questions .goEditBtn', function() {
       DnaGifts.Test.link_id = jQuery(this).parent().parent().metadata().link_id;
       DnaGifts.Test.question_id = jQuery(this).parent().parent().metadata().question_id;
       jQuery( "#edit-test-question" ).dialog( "open" );

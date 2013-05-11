@@ -5,7 +5,8 @@ root.myNamespace.create('DnaGifts.report', {
 	intervals: {},
 	extractSVG: function(divID)
 	{
-		if (jQuery.browser.msie) {
+		//if (jQuery.browser.msie) {
+		if (BrowserDetect.browser == 'Explorer') {
 			return false;
 		}
 		var ns = DnaGifts.report;
@@ -103,19 +104,9 @@ Base.Helpers.bind_load(function () {
 	var ns = DnaGifts.report;
     jQuery.metadata.setType('attr','data');
 	setInterval(function(){jQuery("#notificationtab").fadeOut()}, 6000);
-    if (jQuery.browser.msie) {
+    if (BrowserDetect.browser == 'Explorer') {
 		ns.dispatchMSIEReport();
 	}
-  
-  var dnachart = jQuery("#tblDNAChart tbody tr td img").attr('src');
-  console.log(dnachart);
-  
-	/*
-	if (!fbSuccess) {
-		console.log("forcing window.fbAsyncInit");
-		window.fbAsyncInit();
-	}
-	*/
 });
 
 

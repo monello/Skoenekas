@@ -401,3 +401,10 @@
 -------------------
 - changed the post-to-fb code from JS API to PHP API
 
+0.1.25 (2012/05/11)
+-------------------
+- Upgraded Jquery to version 1.9.1
+- Upgraded Jquery UI to version 1.10.03
+- Upgraded related code instances. Some functions did not exist anymore ex. .live()
+- Replaced jquery.browser with new browser detection code.
+
