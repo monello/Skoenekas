@@ -393,3 +393,11 @@
 - Fixed a bug that caused the test to start at seemingly arbitrary questions instead of the first question
   This then had a knock-on effect to the rest of the test procedures.
   
+0.1.23 (2012/05/05)
+-------------------
+- Fixed the Post-to-FB to post the the correct Gift Name.
+
+0.1.24 (2012/05/11)
+-------------------
+- changed the post-to-fb code from JS API to PHP API
+

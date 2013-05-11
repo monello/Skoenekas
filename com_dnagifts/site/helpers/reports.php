@@ -112,6 +112,26 @@ class ReportsHelper
         return $filename;
 	}
 	
+  public static function uniqueDNAChartFilename($userTestID)
+	{
+		$user = JFactory::getUser();
+		$user_id = $user->get("id");
+		
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+    $query->select('test_id, started_datetime');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
+		$query->where('id = '.$userTestID);
+    $db->setQuery($query);
+    $result = $db->loadObject();
+		
+    $timeblah = array('-',':',' ');
+    $timestamp = str_replace($timeblah, "", $result->started_datetime);
+		$documentname = 'dnachart_'.$user_id."-".$timestamp."-".$result->test_id;
+		
+		return $documentname;
+	}
+  
 	public static function prepareData($userTestID)
 	{
 		$documentname       = JText::_( 'COM_DNAGIFTS_PDF_FILENAME' );

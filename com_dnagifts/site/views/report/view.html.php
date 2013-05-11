@@ -62,7 +62,7 @@ class DnaGiftsViewReport extends JView
 
 		// Set the document
 		$this->setDocument();
-	}
+  }
 	
 	protected function setDocument() 
 	{

@@ -19,7 +19,7 @@ if ($this->progress['inprogress']) {
 var juri = '<?php echo JURI::root(true); ?>';
 var surveyconfig = <?php echo $this->testconfig; ?>;
 var surveydata = <?php echo $this->surveydata; ?>;
-var user_test_id = <?php echo $user_test_id ? $this->user_test_id : 'undefined'; ?>;
+var user_test_id = <?php echo $this->user_test_id ? $this->user_test_id : 'undefined'; ?>;
 var reporting_url = '<?php echo JURI::base(); ?>index.php?option=com_dnagifts&view=report&id=';
 </script>
 

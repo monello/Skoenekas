@@ -352,6 +352,27 @@ $first_name 		= ReportsHelper::extractFirstName();
 	</table>
 </div>
 
-
+<?php 
+	require_once JPATH_ROOT.DS.'components'.DS.'com_jfbconnect'.DS.'libraries'.DS.'facebook.php';
+    $userMapModel = new JFBConnectModelUserMap();
+    $userMapModel->getData($this->user->id);
+    $accessToken = $userMapModel->_data->access_token;
+    
+    $jfbcLibrary = JFBConnectFacebookLibrary::getInstance();
+    $giftname = ReportsHelper::getGiftLabel($this->dnaResults, 0);
+    $aOrAn = 'a';
+    $post['message'] = 'My DNA Gift was just revealed, what it yours?';
+    $post['link'] = 'http://www.dnagifts.co.za/';
+    $post['name'] = 'The DNA Gifts Test';
+    $post['caption'] = 'DO THE FREE  DNA GIFTS TEST';
+    $post['picture'] = $this->dnaChartSrc;
+    $post['description'] = $first_name.' has just done the FREE DNA Gifts test. This Test reveals your Dynamic Natural Ability. '.
+                           $first_name.' has the Dynamic Natural Ability of '.$aOrAn.' '.$giftname.
+                           '. Click here to discover your DNA and unlock your life purpose.';
+    $post['access_token'] = $accessToken;
+    if ($jfbcLibrary->getMappedFbUserId()) { // Check if there is a Facebook user logged in
+      $jfbcLibrary->setFacebookMessage($post);
+    }
+?>
 
 
