@@ -8,13 +8,11 @@
 
 0.0.3 (2012/08/13)
 ------------------
-* Also see Git Log
  - Added the use_timing field to the dnagifts_test table
  - Fixed the bugs that was not updating the metadata tags when managing buttons and questions
  
 0.0.4 (2012/08/13)
 ------------------
-* Also see Git Log
  - Added the default_duration field to the dnagifts_test table
  - Added the test_duration field to the dnagifts_test table
  - Added the show_progressbar field to the dnagifts_test table
@@ -23,7 +21,6 @@
  
 0.0.5 (2012/08/14)
 ------------------
-* Also see Git Log
  - Implemented the dnagifts_count_testquestions view to use in the test pick table on the Front-end
  - Updated the test-pick table to show the test duration, question count and the "do the test" buttons 
  - Fixed the save new test-button link to add the created_by and published fields
@@ -37,7 +34,6 @@
 
 0.0.6 (2012/08/16)
 ------------------
-* Also see Git Log
  - Added the mysql view to list all the test questions
  - Added the mysql view to list all the test buttons (options/answers)
  - Pulled through real data
@@ -46,7 +42,6 @@
 
 0.0.7  (2012/08/18)
 ------------------
-* Also see Git Log
  - Finally able to do a test from front to back.
  - Made some minor UX updates like tooltips to explain buttons and questions. 
  - User can do the same test muliple times, but not during the same session.
@@ -61,18 +56,15 @@
  
 0.0.9 (2012/08/19)
 -----------------
-* Also see Git Log
  - Added the progress field to the user-test table, for easier progress calculations
  
 0.0.10 (2012/08/19)
 -----------------
-* Also see Git Log
  - Dropped the progress field from the user-test table and it is beter to calculate it on-the-fly
  - Implemented the progress checks and related UX updates in the test-selection screen
  
 0.0.11 (2012/08/19 b)
 -----------------
-* Also see Git Log
  - Fixed some issues around session based progress checking. User cannot do the same test during the same session
  - added the view ccblm_dnagifts_testquestions_and_answers to ease the extraction of test data
  - Fixed a few bugs and now the test loads the questions form where the user was last time, when he left the test halfway
@@ -343,8 +335,8 @@
  
 0.1.12 (2012/01/14)
 -------------------
-- Added the Service gifts (HTML) (Still have issues with PDF)
-- Fixed the position of the play and load buttons in MSIE
+ - Added the Service gifts (HTML) (Still have issues with PDF)
+ - Fixed the position of the play and load buttons in MSIE
  
 0.1.13 (2012/01/15)
 -------------------
@@ -369,42 +361,45 @@
 
 0.1.17 (2013/04/07)
 -------------------
-- Finished the non-MSIE PDF report
+ - Finished the non-MSIE PDF report
 
 0.1.18 (2012/04/08)
 -------------------
-- Finally completed MSIE and non-MSIE PDF reports
-
+ - Finally completed MSIE and non-MSIE PDF reports
 
 0.1.19 (2012/04/12)
 -------------------
-- Remove the facebook login button position override from dngifts.css
+ - Remove the facebook login button position override from dngifts.css
 
 0.1.20 (2012/04/13)
 -------------------
-- Finally got all the facebook integration to work
+ - Finally got all the facebook integration to work
 
 0.1.21 (2012/04/14)
 -------------------
-- Added the HTML template to the email
+ - Added the HTML template to the email
 
 0.1.22 (2012/04/29)
 -------------------
-- Fixed a bug that caused the test to start at seemingly arbitrary questions instead of the first question
+ - Fixed a bug that caused the test to start at seemingly arbitrary questions instead of the first question
   This then had a knock-on effect to the rest of the test procedures.
   
 0.1.23 (2012/05/05)
 -------------------
-- Fixed the Post-to-FB to post the the correct Gift Name.
+ - Fixed the Post-to-FB to post the the correct Gift Name.
 
 0.1.24 (2012/05/11)
 -------------------
-- changed the post-to-fb code from JS API to PHP API
+ - changed the post-to-fb code from JS API to PHP API
 
 0.1.25 (2012/05/11)
 -------------------
-- Upgraded Jquery to version 1.9.1
-- Upgraded Jquery UI to version 1.10.03
-- Upgraded related code instances. Some functions did not exist anymore ex. .live()
-- Replaced jquery.browser with new browser detection code.
+ - Upgraded Jquery to version 1.9.1
+ - Upgraded Jquery UI to version 1.10.03
+ - Upgraded related code instances. Some functions did not exist anymore ex. .live()
+ - Replaced jquery.browser with new browser detection code.
+
+0.1.26 (2012/05/12)
+-------------------
+ - Added the AutoSuggest functionality to the Pretest form
 

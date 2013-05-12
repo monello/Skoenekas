@@ -164,5 +164,47 @@ class DnaGiftsModelDnaGifts extends JModelForm
 		return $db->loadResult();
 	}
 	
+	public function getAutoSuggestData() {
+		$db = $this->getDbo();
+		
+		// Get the Church List
+		$query = $db->getQuery(true);
+		$query->select('church_name');
+		$query->from($db->quoteName('#__dnagifts_churchlist'));
+		$db->setQuery($query);
+		$churchList = $db->loadResultArray();
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		// Get the City List
+		$query = $db->getQuery(true);
+		$query->select('your_city');
+		$query->from($db->quoteName('#__dnagifts_citylist'));
+		$db->setQuery($query);
+		$cityList = $db->loadResultArray();
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		// Get the Pastor List
+		$query = $db->getQuery(true);
+		$query->select('pastor_reverend');
+		$query->from($db->quoteName('#__dnagifts_pastorlist'));
+		$db->setQuery($query);
+		$pastorList = $db->loadResultArray();
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		$autoSuggestData = array(
+			'churchList' => $churchList,
+			'pastorList' => $pastorList,
+			'cityList' => $cityList
+		);
+		
+		return $autoSuggestData;
+	}
+	
 }
  

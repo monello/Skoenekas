@@ -64,10 +64,20 @@ class DnaGiftsViewTest extends JView
 		$document->addStyleSheet(JURI::base(true).'/components/com_dnagifts/css/dnagifts.test.css');
 		
 		// Javascripts
-		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.effects.core.min.js');
+		// - JQuery - UI
+		// -- Core
+		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.core.min.js');
 		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.widget.min.js');
+		
+		// -- Interactions
+		
+		// -- Widgets
 		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.progressbar.min.js');
+		
+		// - Other
 		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/jquery.countdown.min.js');
+		
+		// - DNA Gifts
 		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/dnagifts.test.countdown.js');
 		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/dnagifts.test.js');
 	}

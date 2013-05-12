@@ -92,7 +92,6 @@ class DnaGiftsViewTest extends JView
 		// -- Widgets
 		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/ui/jquery.ui.dialog.min.js');
 		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/ui/jquery.ui.button.min.js');
-		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/ui/jquery.ui.autocomplete.min.js');
 		
 		// - Other
 		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/Namespace.min.js');
