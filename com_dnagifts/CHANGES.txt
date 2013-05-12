@@ -403,3 +403,8 @@
 -------------------
  - Added the AutoSuggest functionality to the Pretest form
 
+0.1.27 (2012/05/12)
+-------------------
+ - Added the "aOrAn" functionto the Reports Helper class
+ - Added the first pre-test question into the main test sequence
+ 

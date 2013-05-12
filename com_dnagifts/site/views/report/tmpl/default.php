@@ -363,7 +363,7 @@ $first_name 		= ReportsHelper::extractFirstName();
 	    
 	    $jfbcLibrary = JFBConnectFacebookLibrary::getInstance();
 	    $giftname = ReportsHelper::getGiftLabel($this->dnaResults, 0);
-	    $aOrAn = 'a';
+	    $aOrAn = ReportsHelper::aOrAn($giftname);
 	    $post['message'] = 'My DNA Gift was just revealed, what it yours?';
 	    $post['link'] = 'http://www.dnagifts.co.za/';
 	    $post['name'] = 'The DNA Gifts Test';

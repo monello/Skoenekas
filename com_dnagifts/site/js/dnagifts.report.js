@@ -52,14 +52,14 @@ root.myNamespace.create('DnaGifts.report', {
 	{
 		var ns = DnaGifts.report;
 		var url=juri+'/index.php?option=com_dnagifts&format=json&task=report.dispatchReport';
-        jQuery.ajax({
-            type: "POST",
-            url: url,
-            data: {
+    jQuery.ajax({
+      type: "POST",
+      url: url,
+      data: {
 				userTestID: userTestID,
-                svgData: ns.chartSVG,
+        svgData: ns.chartSVG,
 				imgChartSRC: jQuery("table#tblDNAChart img:first").attr("src")
-            },
+      },
 			success: function(json) {
 				if (json.success) {
 					jQuery("#notificationspinner").hide();
@@ -68,7 +68,7 @@ root.myNamespace.create('DnaGifts.report', {
 					setInterval(function(){jQuery("#notificationtab").fadeOut()}, 3000);
 				}
 			}
-        });
+    });
 	},
 	dispatchMSIEReport: function()
 	{

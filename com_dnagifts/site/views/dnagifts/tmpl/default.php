@@ -7,7 +7,6 @@ JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.tooltip');
 
 $this->isLoggedIn = DnaGiftsHelper::authenticate();
-$this->hasPretestInfo = DnagiftsHelper::hasPretestInfo();
 ?>
 <script type="text/javascript">
 	var juri = '<?php echo JURI::root(true); ?>';
@@ -23,9 +22,11 @@ if (!$this->isLoggedIn[0]) { return; }
 
 echo JText::_('COM_DNAGIFTS_CLEARFLOAT');
 
+/*
 // Pretest Form
 echo $this->loadTemplate('pretest');
 if (!$this->hasPretestInfo) { return; }
+*/
 
 // Test Intro
 echo $this->loadTemplate('testintro');

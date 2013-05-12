@@ -37,6 +37,24 @@ root.myNamespace.create('DnaGifts.test', {
     is_paused: false,
     is_stopped: false,
     currQuestion: undefined,
+    passPretestQuestion: false,
+    nextPretest: 1,
+    timeForPretestQuestion: function()
+    {
+    	var ns = DnaGifts.test;
+    	if (ns.passPretestQuestion) {
+        	ns.passPretestQuestion = false;
+        	return false;
+        }
+    	
+    	if (hasPretestInfo == 0 && ns.currQuestion && ns.currQuestion > 0) {
+        	if (ns.currQuestion % 10 == 0) {
+        		ns.passPretestQuestion = true;  		
+        		return true;
+        	}
+        }
+        return false;
+    },
     nextQuestion: function()
     {
         var ns = DnaGifts.test;
@@ -58,8 +76,14 @@ root.myNamespace.create('DnaGifts.test', {
         }
         jQuery("#dnaCountdown").hide();
         jQuery("#dnaMessages").html('<em style="color: #ff8000">'+ns.translate('nextQuestionLoading')+'</em>').show();
-        
+             
         ns.clearPreviousQuestion();
+        
+        if(ns.timeForPretestQuestion()) {
+        	ns.placeNextPretestQuestion();
+        	return false;
+        }
+        
         ns.currQuestion = ns.fetchNextQuestion();
         
         if (!ns.currQuestion && ns.currQuestion !== 0) {
@@ -189,11 +213,29 @@ root.myNamespace.create('DnaGifts.test', {
         });
         return nextquestion;
     },
+    placeNextPretestQuestion: function()
+    {
+      var ns = DnaGifts.test;
+  		var url=juri+'/index.php?option=com_dnagifts&format=json&task=dnagifts.getQ'+ns.nextPretest;
+      jQuery.ajax({
+        type: "POST",
+        url: url,
+  			success: function(json) {
+  				if (json.success) {
+  					jQuery("#dnaQuestionText").html(json.questionText);
+            jQuery("#dnaButtonsBar table:first").hide();
+            jQuery(json.buttons).appendTo("#dnaButtonsBar");
+          	jQuery("#dnaLoadingDiv").hide();
+            jQuery("#dnaQuestionText").show();
+            jQuery("#dnaMessages").hide();
+  				}
+  			}
+      });
+    },
     placeNextQuestion: function()
     {
         // this function updates the UI and adds the new question to the screen
         jQuery("#dnaQuestionText").html(surveydata[this.currQuestion].question);
-        
         this.updateProgress();
     },
     updateProgress: function()
@@ -244,6 +286,28 @@ root.myNamespace.create('DnaGifts.test', {
         ns.nextQuestion();
         return false;
     },
+    savePretestQuestion: function()
+    {
+      var ns = DnaGifts.test;
+      
+      // this function will save the answer to the JS object
+      var answr = jQuery(this).metadata().answer;
+      
+      // now we send it to the database too.
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=dnagifts.saveQ'+ns.nextPretest;
+      ns.nextPretest++;
+      jQuery.ajax({
+            type: "POST",
+            url: url,
+            data: {answer: answr}
+        });
+      
+      // ... and attempt to load the next question
+      jQuery("#pretestquestiontable").remove();
+      jQuery("#dnaButtonsBar table:first").show();
+      ns.nextQuestion();
+      return false;
+    },
     countQuestions: function()
     {
         var counts = {total: 0, done: 0, togo: 0};
@@ -290,8 +354,29 @@ root.myNamespace.create('DnaGifts.test', {
         if(parseInt(surveyconfig.use_timing)) {
             nsCD.createCountDown(7, this.autoPassQuestion);
         }
+        
+        /*
+		// autocomplete setups
+		if (autoSuggestData) {
+			jQuery( "#jform_church_name" ).autocomplete({ source: autoSuggestData.churchList });
+			jQuery( "#jform_pastor_reverend" ).autocomplete({ source: autoSuggestData.pastorList });
+			jQuery( "#jform_your_city" ).autocomplete({ source: autoSuggestData.cityList });
+	  	}
+	  	*/
     }
 });
+
+root.myNamespace.create('DnaGifts.pretestQuestions', {
+  question1: {},
+  question2: {},
+  question3: {},
+  question4: {},
+  question5: {},
+  question6: {},
+  question7: {},
+});
+
+
 
 /**
 * Queue the functions below into the load_array, to be called from the init function
@@ -306,4 +391,5 @@ Base.Helpers.bind_load(function () {
     jQuery("#dnaPassButton").bind("click", ns.autoPassQuestion);
     jQuery(".btnAnswer").bind("click", ns.saveAnswer);
     jQuery("#progressbar").progressbar({ value: 0 });
+    jQuery(document).on("click", ".pretestbutton", ns.savePretestQuestion);
 });

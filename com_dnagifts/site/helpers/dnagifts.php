@@ -87,6 +87,23 @@ class DnagiftsHelper
 		return($db->loadResult());
 	}
 	
+  public static function hasPretestID($userid)
+	{
+		$db = JFactory::getDBO();
+		$query = "
+			SELECT id
+				FROM ".$db->nameQuote('#__dnagifts_pretest_info')."
+				WHERE ".$db->nameQuote('user_id')." = ".$db->quote($userid).";
+			";
+		$db->setQuery($query);
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		return($db->loadResult());
+	}
+  
 	public static function getUserTestID($test_id = 0)
 	{
 		$session_id = DnagiftsHelper::getSessionID();

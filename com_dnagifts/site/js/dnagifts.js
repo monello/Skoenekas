@@ -24,10 +24,4 @@ Base.Helpers.bind_load(function () {
   	if (jQuery("#jform_church_name").val() || jQuery("#jform_pastor_reverend").val()) {
 	    jQuery("#extrachurchinfo").show();
   	}
-  
-	// autocomplete setups
-	jQuery( "#jform_church_name" ).autocomplete({ source: autoSuggestData.churchList });
-	jQuery( "#jform_pastor_reverend" ).autocomplete({ source: autoSuggestData.pastorList });
-	jQuery( "#jform_your_city" ).autocomplete({ source: autoSuggestData.cityList });
-  
 });

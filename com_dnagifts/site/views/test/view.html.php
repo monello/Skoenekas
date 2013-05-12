@@ -39,6 +39,7 @@ class DnaGiftsViewTest extends JView
 		$this->assignRef( 'testconfig', $config );
 		$this->assignRef( 'buttonwidth', $buttonwidth );
 		$this->assignRef( 'progress', $progress );
+		$this->assignRef( 'autoSuggestData', $model->getAutoSuggestData() );
 		
 		// Display the template
 		parent::display();
@@ -68,11 +69,14 @@ class DnaGiftsViewTest extends JView
 		// -- Core
 		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.core.min.js');
 		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.widget.min.js');
+		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.position.min.js');
 		
 		// -- Interactions
 		
 		// -- Widgets
 		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.progressbar.min.js');
+		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.autocomplete.min.js');
+		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/ui/jquery.ui.menu.min.js');
 		
 		// - Other
 		$document->addScript(JURI::base(true).'/administrator/components/com_dnagifts/js/jquery.countdown.min.js');

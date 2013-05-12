@@ -6,14 +6,6 @@ if ($this->hasPretestInfo) { return; }
 
 $user = JFactory::getUser();
 ?>
-<script>
-	var autoSuggestData = {
-		churchList: <?php echo json_encode($this->autoSuggestData['churchList']); ?>,
-    	pastorList: <?php echo json_encode($this->autoSuggestData['pastorList']); ?>,
-    	cityList: <?php echo json_encode($this->autoSuggestData['cityList']); ?>
-  	};
-</script>
-
 <?php echo JText::_('COM_DNAGIFTS_PRETEST_HEAD'); ?>
 <p><?php
   echo JText::_('COM_DNAGIFTS_PRETEST_WELCOME');

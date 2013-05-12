@@ -2,6 +2,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 JHtml::_('behavior.tooltip');
+$this->hasPretestInfo = DnagiftsHelper::hasPretestInfo();
 
 if ($this->progress['inprogress']) {
   $playmessage = 'COM_DNAGIFTS_TEST_CONTINUEMESSAGE';
@@ -16,11 +17,17 @@ if ($this->progress['inprogress']) {
   <div id="notificationtab" style="display: none"></div>
 </div>
 <script type="text/javascript">
-var juri = '<?php echo JURI::root(true); ?>';
-var surveyconfig = <?php echo $this->testconfig; ?>;
-var surveydata = <?php echo $this->surveydata; ?>;
-var user_test_id = <?php echo $this->user_test_id ? $this->user_test_id : 'undefined'; ?>;
-var reporting_url = '<?php echo JURI::base(); ?>index.php?option=com_dnagifts&view=report&id=';
+	var juri = '<?php echo JURI::root(true); ?>';
+	var surveyconfig = <?php echo $this->testconfig; ?>;
+	var surveydata = <?php echo $this->surveydata; ?>;
+	var user_test_id = <?php echo $this->user_test_id ? $this->user_test_id : 'undefined'; ?>;
+	var reporting_url = '<?php echo JURI::base(); ?>index.php?option=com_dnagifts&view=report&id=';
+	var autoSuggestData = {
+		churchList: <?php echo json_encode($this->autoSuggestData['churchList']); ?>,
+    	pastorList: <?php echo json_encode($this->autoSuggestData['pastorList']); ?>,
+    	cityList: <?php echo json_encode($this->autoSuggestData['cityList']); ?>
+  	};
+  	var hasPretestInfo = <?php echo $this->hasPretestInfo; ?>;
 </script>
 
 <div id="dnaTestSpace" data="{userlanguage: '<?php echo DnagiftsHelper::getCurrentLanguageCode(); ?>'}">

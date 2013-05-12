@@ -34,6 +34,17 @@ class MYPDF extends TCPDF {
  */
 class ReportsHelper
 {
+	public static function aOrAn($string)
+	{
+		$vowels = array('a','e','i','o','u');
+		$letter = strtolower(substr($tring, 0, 1));
+		$result = 'a';
+		if (in_array($letter, $vowels)) {
+		    $result = 'an';
+		}
+		return $result;
+	}
+	
 	public static function &documentSetup($userTestID)
 	{
 		$author             = JText::_( 'COM_DNAGIFTS_PDF_AUTHOR' );
