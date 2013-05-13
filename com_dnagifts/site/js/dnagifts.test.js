@@ -215,6 +215,10 @@ root.myNamespace.create('DnaGifts.test', {
     },
     placeNextPretestQuestion: function()
     {
+      Base.countdown.is_paused = true;
+      Base.countdown.show_pausecount = false;
+      jQuery("#dnaMessages").hide();
+      
       var ns = DnaGifts.test;
   		var url=juri+'/index.php?option=com_dnagifts&format=json&task=dnagifts.getQ'+ns.nextPretest;
       jQuery.ajax({
@@ -305,6 +309,11 @@ root.myNamespace.create('DnaGifts.test', {
       // ... and attempt to load the next question
       jQuery("#pretestquestiontable").remove();
       jQuery("#dnaButtonsBar table:first").show();
+      
+      jQuery("#dnaMessages").show();
+      Base.countdown.is_paused = false;
+      Base.countdown.show_pausecount = true;
+      
       ns.nextQuestion();
       return false;
     },

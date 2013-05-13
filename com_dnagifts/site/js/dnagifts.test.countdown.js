@@ -23,6 +23,7 @@ root.myNamespace.create('Base.countdown', {
     duration: undefined,
     togo: 7,
     is_paused: false,
+    show_pausecount: true,
     createCountDown: function(duration, callback)
     {
         Base.countdown.duration = (parseInt(duration)) ? parseInt(duration) : parseInt(surveyconfig.default_duration); 
@@ -40,8 +41,10 @@ root.myNamespace.create('Base.countdown', {
         ss = ns.togo > 1 ? 's' : '';
         if (ns.running) {
             if (ns.is_paused) {
-                jQuery('#dnaMessages').html('<em style="color:#ff8000">' + ns.translate("pause") + ' ' + ns.togo + ' ' + ns.translate("second") + ss+'</em>').show();
-                jQuery('#dnaCountdown').hide()
+                jQuery('#dnaMessages').html('<em style="color:#ff8000">' + ns.translate("pause") + ' ' + ns.togo + ' ' + ns.translate("second") + ss+'</em>');
+                if (ns.show_pausecount)
+                  jQuery('#dnaMessages').show();
+                jQuery('#dnaCountdown').hide();
             }
             else
                 jQuery('#dnaCountdown').html(ns.translate("just") + ' <span style="font-size: 14pt;font-weight:bold;">' + ns.togo + '</span> ' + ns.translate("second") + ss + ' ' + ns.translate("togo")).show();

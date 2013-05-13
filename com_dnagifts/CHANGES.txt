@@ -321,7 +321,7 @@
  - Resized the character images to fit 200 x 200 pixels (added white background to make PDF work)
  - Resized the text images to fit 222px wide 70px high (added white background to make PDF work)
  
-0.1.11 (2012/01/10)
+0.1.11 (2013/01/10)
 -------------------
  - Replaced all the text tokens for database field to cover the text per gift position
  - Updated the database
@@ -333,16 +333,16 @@
  - Updated the html report to incorporate the tag-line
  - Updated the PDF report to incorporate the tag-line
  
-0.1.12 (2012/01/14)
+0.1.12 (2013/01/14)
 -------------------
  - Added the Service gifts (HTML) (Still have issues with PDF)
  - Fixed the position of the play and load buttons in MSIE
  
-0.1.13 (2012/01/15)
+0.1.13 (2013/01/15)
 -------------------
  - Implemented the pre-generated SVG guages
  
-0.1.14 (2012/03/31)
+0.1.14 (2013/03/31)
 -------------------
  - Added the "Connect with Facebook" plugin and related updates to code
  - Updated the PDF and report
@@ -363,36 +363,36 @@
 -------------------
  - Finished the non-MSIE PDF report
 
-0.1.18 (2012/04/08)
+0.1.18 (2013/04/08)
 -------------------
  - Finally completed MSIE and non-MSIE PDF reports
 
-0.1.19 (2012/04/12)
+0.1.19 (2013/04/12)
 -------------------
  - Remove the facebook login button position override from dngifts.css
 
-0.1.20 (2012/04/13)
+0.1.20 (2013/04/13)
 -------------------
  - Finally got all the facebook integration to work
 
-0.1.21 (2012/04/14)
+0.1.21 (2013/04/14)
 -------------------
  - Added the HTML template to the email
 
-0.1.22 (2012/04/29)
+0.1.22 (2013/04/29)
 -------------------
  - Fixed a bug that caused the test to start at seemingly arbitrary questions instead of the first question
   This then had a knock-on effect to the rest of the test procedures.
   
-0.1.23 (2012/05/05)
+0.1.23 (2013/05/05)
 -------------------
  - Fixed the Post-to-FB to post the the correct Gift Name.
 
-0.1.24 (2012/05/11)
+0.1.24 (2013/05/11)
 -------------------
  - changed the post-to-fb code from JS API to PHP API
 
-0.1.25 (2012/05/11)
+0.1.25 (2013/05/11)
 -------------------
  - Upgraded Jquery to version 1.9.1
  - Upgraded Jquery UI to version 1.10.03
@@ -405,6 +405,10 @@
 
 0.1.27 (2012/05/12)
 -------------------
- - Added the "aOrAn" functionto the Reports Helper class
+ - Added the "aOrAn" function to the Reports Helper class
  - Added the first pre-test question into the main test sequence
+ 
+  (2013/05/13)
+-------------------
+ - Plugged away a bit more at integrating the intro questions into the main test.
  
