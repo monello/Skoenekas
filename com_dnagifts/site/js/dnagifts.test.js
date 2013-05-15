@@ -301,7 +301,7 @@ root.myNamespace.create('DnaGifts.test', {
 });
 
 root.myNamespace.create('DnaGifts.pretest', {
-    console.log("REMEMBER TO FILL THIS complete-flag FROM THE REAL DATA FROM THE DATABASE ON LOADING THE PAGE");
+    flight_checks_done: false,
     intro_questions: {
       1: {required: true, complete: false, has_children: false},
       2: {required: true, complete: false, has_children: true, children: [3,4]},
@@ -312,10 +312,47 @@ root.myNamespace.create('DnaGifts.pretest', {
       7: {required: true, complete: false, has_children: false}
     },
     passPretestQuestion: false,
+    doPreFlightChecks: function()
+    {
+      var nsP = DnaGifts.pretest;
+      if (nsP.flight_checks_done)
+        return true;
+        
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=dnagifts.checks';
+      jQuery.ajax({
+        type: "POST",
+        url: url,
+        async: false,
+  			success: function(json) {
+  				if (json.success) {
+            nsP.flight_checks_done = true;
+            if (!json.data)
+              return true;
+            
+            jQuery.each(json.data, function(idx, qinfo) {
+              if (typeof qinfo == "number")  {
+                nsP.setComplete(qinfo, true);
+              } else {
+                nsP.setComplete(qinfo[0], true);
+                nsP.makeChildrenRequired(qinfo[0], qinfo[1]);
+              }
+            });
+            return true;
+  				}
+  			}
+      });
+      return true;
+    },
     timeForPretestQuestion: function()
     {
       var ns = DnaGifts.test;
     	var nsP = DnaGifts.pretest;
+      
+      if (!nsP.countRemaining())
+        return false;
+      
+      nsP.doPreFlightChecks();
+      
     	if (nsP.passPretestQuestion) {
         nsP.passPretestQuestion = false;
         return false;
@@ -347,7 +384,7 @@ root.myNamespace.create('DnaGifts.pretest', {
         url: url,
   			success: function(json) {
   				if (json.success) {
-  					jQuery("#dnaQuestionText").html(json.questionText);
+  					jQuery("#dnaQuestionText").html(json.label + '<br/>' + json.questionText);
             jQuery("#dnaButtonsBar table:first").hide();
             jQuery(json.buttons).appendTo("#dnaButtonsBar");
           	jQuery("#dnaLoadingDiv").hide();
@@ -360,6 +397,10 @@ root.myNamespace.create('DnaGifts.pretest', {
     copyTextAnswer: function()
     {
       jQuery(".pretestbutton").metadata().answer = jQuery("#textfield").val();
+    },
+    copySelectedOption: function()
+    {
+      jQuery(".pretestbutton").metadata().answer = jQuery("select#textfield").filter(':selected').val();
     },
     attachAutoSuggest: function(field) 
     {
@@ -465,6 +506,7 @@ root.myNamespace.create('DnaGifts.pretest', {
       var nsP = DnaGifts.pretest;
       if (!nsP.intro_questions[qNum].has_children)
         return false;
+      
       jQuery.each(nsP.intro_questions[qNum].children, function(idx, question_number){
         nsP.setRequired(question_number, true);
       });

@@ -64,6 +64,58 @@ class DnagiftsHelper
 		}
 	}
 	
+  public static function pretestFlightChecks()
+	{
+		$user = JFactory::getUser();
+		
+		if (!$user) {
+			return 0;
+		}
+		$data = Null;
+		$db = JFactory::getDBO();
+		$query = "SELECT * FROM ".$db->nameQuote('#__dnagifts_pretest_info')." WHERE ".$db->nameQuote('user_id')." = ".$db->quote($user->get("id")).";";
+    $db->setQuery($query);
+    $data = $db->loadObject();
+    
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+    if (!$data) {
+      return False;
+    }
+    
+    $checks = array();
+    if ($data->is_christian !== Null) {
+      $checks[] = 1;
+    }
+    
+    if ($data->in_church !== Null && $data->in_church > -1) {
+      $checks[] = array(2, $data->in_church);
+      if ($data->church_name !== Null) {
+        $checks[] = 3;
+      }
+      if ($data->pastor_reverend !== Null) {
+        $checks[] = 4;
+      }
+    }
+    
+    if ($data->your_city !== Null) {
+      $checks[] = 5;
+    }
+    
+    if ($data->your_country !== Null) {
+      $checks[] = 6;
+    }
+    
+    if ($data->believe_divine !== Null) {
+      $checks[] = 7;
+    }
+    
+    return $checks;
+	}
+  
 	public static function hasPretestInfo()
 	{
 		$user = JFactory::getUser();

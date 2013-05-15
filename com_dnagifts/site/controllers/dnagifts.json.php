@@ -12,6 +12,14 @@ JLoader::register('DnaGiftsHelper', JPATH_COMPONENT.'/helpers/dnagifts.php');
  */
 class DnaGiftsControllerDnaGifts extends JControllerForm
 {
+  public function checks()
+  {
+    echo json_encode(array(
+      "success" => true, 
+      "data"    => DnagiftsHelper::pretestFlightChecks()
+    ));
+  }
+
   /***************************************************************************** QUESTION 1 ************************************************************************************************************/
   public function getQ1()
 	{
@@ -66,10 +74,10 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
     ));
 	}
 	
-  /***************************************************************************** QUESTION 2 ************************************************************************************************************/
+  /***************************************************************************** QUESTION 3 ************************************************************************************************************/
   public function getQ3()
 	{
-		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_CHURCHNAME_LABEL');
+		$label = '';
     $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_CHURCHNAME_LABEL');
     
     $buttons = '<table id="pretestquestiontable" height="100%" width="100%">
@@ -87,7 +95,6 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
         </tbody>
       </table>
       <script type="text/javascript">
-        console.log("Preparing text field");
         DnaGifts.pretest.attachAutoSuggest("church_name");
         jQuery("#textfield").bind("blur", DnaGifts.pretest.copyTextAnswer);
       </script>
@@ -101,7 +108,7 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
     ));
 	}
 	
-  /***************************************************************************** QUESTION 3 ************************************************************************************************************/
+  /***************************************************************************** QUESTION 4 ************************************************************************************************************/
   public function getQ4()
 	{
 		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_PASTORREVEREND_LABEL');
@@ -122,7 +129,6 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
         </tbody>
       </table>
       <script type="text/javascript">
-        console.log("Preparing text field");
         DnaGifts.pretest.attachAutoSuggest("pastor_reverend");
         jQuery("#textfield").bind("blur", DnaGifts.pretest.copyTextAnswer);
       </script>
@@ -136,8 +142,102 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
     ));
 	}
   
+  /***************************************************************************** QUESTION 5 ************************************************************************************************************/
+  public function getQ5()
+	{
+		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_YOURCITY_LABEL');
+    $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_YOURCITY_DESC');
+    
+    $buttons = '<table id="pretestquestiontable" height="100%" width="100%">
+        <tbody>
+          <tr id="trButtons">
+                      <td align="center" width="50%">
+                        <div class="dnaAnswerButton" style="display: block;">
+                        <input id="textfield" name="your_city" type="text"size="50" maxlength="50" class="text ui-widget-content ui-corner-all" style="height:20px"/>
+                        </div>
+                      </td>
+                      <td align="center" width="50%">
+                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'your_city\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
+                      </td>
+                    </tr>
+        </tbody>
+      </table>
+      <script type="text/javascript">
+        DnaGifts.pretest.attachAutoSuggest("your_city");
+        jQuery("#textfield").bind("blur", DnaGifts.pretest.copyTextAnswer);
+      </script>
+      ';
+		
+    echo json_encode(array(
+      "success"       => true, 
+      "label"         => $label,
+      "questionText"  => $questionText,
+      "buttons"       => $buttons
+    ));
+	}
   
+  /***************************************************************************** QUESTION 6 ************************************************************************************************************/
+  public function getQ6()
+	{
+		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_YOURCOUNTRY_LABEL');
+    $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_YOURCOUNTRY_DESC');
+    $options_html = '';
+    foreach ( DnaGiftsHelper::getCountryOptions() as $row ) {
+      $options_html = $options_html .'<option value="'.$row->value.'">'.$row->text.'</option>';
+    }
+    
+    $buttons = '<table id="pretestquestiontable" height="100%" width="100%">
+        <tbody>
+          <tr id="trButtons">
+                      <td align="center" width="50%">
+                        <div class="dnaAnswerButton" style="display: block;">
+                        <select id="textfield">' . $options_html . '</select></div>
+                      </td>
+                      <td align="center" width="50%">
+                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'my_country\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
+                      </td>
+                    </tr>
+        </tbody>
+      </table>
+      <script type="text/javascript">
+        jQuery("#country").bind("change", DnaGifts.pretest.copySelectedOption);
+      </script>
+      ';
+		
+    echo json_encode(array(
+      "success"       => true, 
+      "label"         => $label,
+      "questionText"  => $questionText,
+      "buttons"       => $buttons
+    ));
+	}
   
+  /***************************************************************************** QUESTION 7 ************************************************************************************************************/
+  public function getQ7()
+	{
+		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_DIVINE_LABEL');
+    $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_DIVINE_DESC');
+    
+    $buttons = '<table id="pretestquestiontable" height="100%" width="100%">
+        <tbody>
+          <tr id="trButtons">
+                      <td align="center" width="50%">
+                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 1, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Yes</a></div>
+                      </td>
+                      <td align="center" width="50%">
+                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">No</a></div>
+                      </td>
+                    </tr>
+        </tbody>
+      </table>';
+		
+    echo json_encode(array(
+      "success"       => true, 
+      "label"         => $label,
+      "questionText"  => $questionText,
+      "buttons"       => $buttons
+    ));
+	}
   
   
   /****************************************************************************************************************************************************************************************************/
