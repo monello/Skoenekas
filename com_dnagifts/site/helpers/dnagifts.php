@@ -71,20 +71,34 @@ class DnagiftsHelper
 		if (!$user) {
 			return 0;
 		}
-		
+		$data = Null;
 		$db = JFactory::getDBO();
-		$query = "
-			SELECT COUNT(*)
-				FROM ".$db->nameQuote('#__dnagifts_pretest_info')."
-				WHERE ".$db->nameQuote('user_id')." = ".$db->quote($user->get("id")).";
-			";
-		$db->setQuery($query);
+		$query = "SELECT * FROM ".$db->nameQuote('#__dnagifts_pretest_info')." WHERE ".$db->nameQuote('user_id')." = ".$db->quote($user->get("id")).";";
+    $db->setQuery($query);
+    $data = $db->loadObject();
+    
 		// Check for a database error.
 		if ($db->getErrorNum()) {
 			JError::raiseWarning(500, $db->getErrorMsg());
 		}
 		
-		return($db->loadResult());
+    if (!$data) {
+      return 0;
+    }
+    
+    if ($data->is_christian === Null || $data->in_church === Null || $data->in_church < 0 || 
+        $data->your_city === Null || $data->your_country === Null || $data->believe_divine === Null)
+    {
+      return 0;
+    }
+    
+    if ($data->in_church == 1) {
+      if ($data->church_name === Null || $data->pastor_reverend === Null) {
+        return 0;
+      }
+    }
+    
+    return 1;
 	}
 	
   public static function hasPretestID($userid)

@@ -24,10 +24,10 @@ if ($this->progress['inprogress']) {
 	var reporting_url = '<?php echo JURI::base(); ?>index.php?option=com_dnagifts&view=report&id=';
 	var autoSuggestData = {
 		churchList: <?php echo json_encode($this->autoSuggestData['churchList']); ?>,
-    	pastorList: <?php echo json_encode($this->autoSuggestData['pastorList']); ?>,
-    	cityList: <?php echo json_encode($this->autoSuggestData['cityList']); ?>
-  	};
-  	var hasPretestInfo = <?php echo $this->hasPretestInfo; ?>;
+    pastorList: <?php echo json_encode($this->autoSuggestData['pastorList']); ?>,
+    cityList: <?php echo json_encode($this->autoSuggestData['cityList']); ?>
+  };
+  var hasPretestInfo = <?php echo $this->hasPretestInfo; ?>;
 </script>
 
 <div id="dnaTestSpace" data="{userlanguage: '<?php echo DnagiftsHelper::getCurrentLanguageCode(); ?>'}">

@@ -37,28 +37,11 @@ root.myNamespace.create('DnaGifts.test', {
     is_paused: false,
     is_stopped: false,
     currQuestion: undefined,
-    passPretestQuestion: false,
-    nextPretest: 1,
-    timeForPretestQuestion: function()
-    {
-    	var ns = DnaGifts.test;
-    	if (ns.passPretestQuestion) {
-        	ns.passPretestQuestion = false;
-        	return false;
-        }
-    	
-    	if (hasPretestInfo == 0 && ns.currQuestion && ns.currQuestion > 0) {
-        	if (ns.currQuestion % 10 == 0) {
-        		ns.passPretestQuestion = true;  		
-        		return true;
-        	}
-        }
-        return false;
-    },
     nextQuestion: function()
     {
         var ns = DnaGifts.test;
         var nsCD = Base.countdown;
+        var nsP = DnaGifts.pretest;
         
         if (ns.is_stopped)
             return false;
@@ -79,8 +62,8 @@ root.myNamespace.create('DnaGifts.test', {
              
         ns.clearPreviousQuestion();
         
-        if(ns.timeForPretestQuestion()) {
-        	ns.placeNextPretestQuestion();
+        if(nsP.timeForPretestQuestion()) {
+        	nsP.placeNextPretestQuestion();
         	return false;
         }
         
@@ -108,7 +91,7 @@ root.myNamespace.create('DnaGifts.test', {
                 jQuery("#dnaCountdown").show();
                 jQuery("#pauseTestContainer").show();
             }
-        }, 500);
+        }, 300);
         
         return true;
     },
@@ -213,29 +196,6 @@ root.myNamespace.create('DnaGifts.test', {
         });
         return nextquestion;
     },
-    placeNextPretestQuestion: function()
-    {
-      Base.countdown.is_paused = true;
-      Base.countdown.show_pausecount = false;
-      jQuery("#dnaMessages").hide();
-      
-      var ns = DnaGifts.test;
-  		var url=juri+'/index.php?option=com_dnagifts&format=json&task=dnagifts.getQ'+ns.nextPretest;
-      jQuery.ajax({
-        type: "POST",
-        url: url,
-  			success: function(json) {
-  				if (json.success) {
-  					jQuery("#dnaQuestionText").html(json.questionText);
-            jQuery("#dnaButtonsBar table:first").hide();
-            jQuery(json.buttons).appendTo("#dnaButtonsBar");
-          	jQuery("#dnaLoadingDiv").hide();
-            jQuery("#dnaQuestionText").show();
-            jQuery("#dnaMessages").hide();
-  				}
-  			}
-      });
-    },
     placeNextQuestion: function()
     {
         // this function updates the UI and adds the new question to the screen
@@ -262,6 +222,11 @@ root.myNamespace.create('DnaGifts.test', {
             ns.executePlay();
         }
         
+        ns.clearPreviousQuestion();
+        jQuery(".dnaPauseDivider").hide();
+        jQuery("#dnaPauseButton").hide();
+        jQuery("#dnaPassButton").hide();
+        
         ns.is_stopped = true;
         jQuery('#dnaCountdown').countdown('pause').hide();
         
@@ -278,44 +243,15 @@ root.myNamespace.create('DnaGifts.test', {
                 user_test_id: user_test_id,
                 question_id: ns.question_id,
                 score: answer
-            }
+            },
+            async: false
         });
         
         // ... and attempt to load the next question
         ns.is_stopped = false;
         jQuery('#dnaCountdown').countdown('resume').show();
-        jQuery(".dnaPauseDivider").hide();
-        jQuery("#dnaPauseButton").hide();
-        jQuery("#dnaPassButton").hide();
         ns.nextQuestion();
         return false;
-    },
-    savePretestQuestion: function()
-    {
-      var ns = DnaGifts.test;
-      
-      // this function will save the answer to the JS object
-      var answr = jQuery(this).metadata().answer;
-      
-      // now we send it to the database too.
-      var url=juri+'/index.php?option=com_dnagifts&format=json&task=dnagifts.saveQ'+ns.nextPretest;
-      ns.nextPretest++;
-      jQuery.ajax({
-            type: "POST",
-            url: url,
-            data: {answer: answr}
-        });
-      
-      // ... and attempt to load the next question
-      jQuery("#pretestquestiontable").remove();
-      jQuery("#dnaButtonsBar table:first").show();
-      
-      jQuery("#dnaMessages").show();
-      Base.countdown.is_paused = false;
-      Base.countdown.show_pausecount = true;
-      
-      ns.nextQuestion();
-      return false;
     },
     countQuestions: function()
     {
@@ -329,7 +265,6 @@ root.myNamespace.create('DnaGifts.test', {
         counts.progress = Math.round(counts.done / counts.total * 100);
         return counts;
     },
-    
     autoPassQuestion: function()
     {
         var ns = DnaGifts.test;
@@ -339,12 +274,10 @@ root.myNamespace.create('DnaGifts.test', {
         ns.requeueQuestion();
         ns.nextQuestion();
     },
-    
     requeueQuestion: function()
     {
         surveydata.push(surveydata.splice(DnaGifts.test.currQuestion,1)[0]);
     },
-    
     pauseTest: function()
     {
         jQuery("#dnaPauseButton").hide();
@@ -364,25 +297,179 @@ root.myNamespace.create('DnaGifts.test', {
             nsCD.createCountDown(7, this.autoPassQuestion);
         }
         
-        /*
-		// autocomplete setups
-		if (autoSuggestData) {
-			jQuery( "#jform_church_name" ).autocomplete({ source: autoSuggestData.churchList });
-			jQuery( "#jform_pastor_reverend" ).autocomplete({ source: autoSuggestData.pastorList });
-			jQuery( "#jform_your_city" ).autocomplete({ source: autoSuggestData.cityList });
-	  	}
-	  	*/
     }
 });
 
-root.myNamespace.create('DnaGifts.pretestQuestions', {
-  question1: {},
-  question2: {},
-  question3: {},
-  question4: {},
-  question5: {},
-  question6: {},
-  question7: {},
+root.myNamespace.create('DnaGifts.pretest', {
+    console.log("REMEMBER TO FILL THIS complete-flag FROM THE REAL DATA FROM THE DATABASE ON LOADING THE PAGE");
+    intro_questions: {
+      1: {required: true, complete: false, has_children: false},
+      2: {required: true, complete: false, has_children: true, children: [3,4]},
+      3: {required: false, complete: false, has_children: false},
+      4: {required: false, complete: false, has_children: false},
+      5: {required: true, complete: false, has_children: false},
+      6: {required: true, complete: false, has_children: false},
+      7: {required: true, complete: false, has_children: false}
+    },
+    passPretestQuestion: false,
+    timeForPretestQuestion: function()
+    {
+      var ns = DnaGifts.test;
+    	var nsP = DnaGifts.pretest;
+    	if (nsP.passPretestQuestion) {
+        nsP.passPretestQuestion = false;
+        return false;
+      }
+    	
+    	if (hasPretestInfo == 0 && ns.currQuestion && ns.currQuestion > 0) {
+        if (ns.currQuestion % 7 == 0) {
+          nsP.passPretestQuestion = true;  		
+          return true;
+        }
+      }
+      return false;
+    },
+    placeNextPretestQuestion: function()
+    {
+      var nsP = DnaGifts.pretest;
+      Base.countdown.is_paused = true;
+      Base.countdown.show_pausecount = false;
+      jQuery("#dnaMessages").hide();
+      
+      var nextPretest = nsP.getNextIntroQuestion();
+      if (!nextPretest) 
+        return false;
+        
+      var nsP = DnaGifts.pretest;
+  		var url=juri+'/index.php?option=com_dnagifts&format=json&task=dnagifts.getQ'+nextPretest;
+      jQuery.ajax({
+        type: "POST",
+        url: url,
+  			success: function(json) {
+  				if (json.success) {
+  					jQuery("#dnaQuestionText").html(json.questionText);
+            jQuery("#dnaButtonsBar table:first").hide();
+            jQuery(json.buttons).appendTo("#dnaButtonsBar");
+          	jQuery("#dnaLoadingDiv").hide();
+            jQuery("#dnaQuestionText").show();
+            jQuery("#dnaMessages").hide();
+  				}
+  			}
+      });
+    },
+    copyTextAnswer: function()
+    {
+      jQuery(".pretestbutton").metadata().answer = jQuery("#textfield").val();
+    },
+    attachAutoSuggest: function(field) 
+    {
+    	// autocomplete setups
+      if (autoSuggestData) {
+        switch (field) 
+        {
+          case "church_name":
+            jQuery( "#textfield" ).autocomplete({ source: autoSuggestData.churchList });
+            break;
+          case "pastor_reverend":
+            jQuery( "#textfield" ).autocomplete({ source: autoSuggestData.pastorList });
+            break;
+          case "your_city":
+            jQuery( "#textfield" ).autocomplete({ source: autoSuggestData.cityList });
+            break;
+          default:
+            return true;
+        }
+	  	}
+    },
+    savePretestQuestion: function()
+    {
+      var ns = DnaGifts.test;
+    	var nsP = DnaGifts.pretest;
+      
+      // this function will save the answer to the JS object
+      var answr = jQuery(this).metadata().answer;
+      var fld = jQuery(this).metadata().field;
+      
+      // now we send it to the database too.
+      var currPretest = nsP.getNextIntroQuestion();
+      if (!currPretest) 
+        return false;
+      
+      nsP.setComplete(currPretest, true);
+      nsP.makeChildrenRequired(currPretest, answr);
+      
+      var url=juri+'/index.php?option=com_dnagifts&format=json&task=dnagifts.saveAnswer';
+      jQuery.ajax({
+        type: "POST",
+        url: url,
+        data: {answer: answr, field: fld},
+        async: false
+      });
+      
+      // ... and attempt to load the next question
+      jQuery("#pretestquestiontable").remove();
+      jQuery("#dnaButtonsBar table:first").show();
+      
+      jQuery("#dnaMessages").show();
+      Base.countdown.is_paused = false;
+      Base.countdown.show_pausecount = true;
+      
+      ns.nextQuestion();
+      return false;
+    },
+    countRequired: function() 
+    {
+    	var nsP = DnaGifts.pretest;
+      var howmany = 0;
+      jQuery.each(nsP.intro_questions, function(qNum, attribs) {
+        if (attribs.required)
+          howmany++;
+      });
+      return howmany;
+    },
+    setRequired: function(qNum, status) 
+    {
+      var nsP = DnaGifts.pretest;
+      nsP.intro_questions[qNum].required = status;
+    },
+    setComplete: function(qNum, status) 
+    {
+      var nsP = DnaGifts.pretest;
+      nsP.intro_questions[qNum].complete = status;
+    },
+    countRemaining : function() 
+    {
+      var nsP = DnaGifts.pretest;
+      var howmany = 0;
+      jQuery.each(nsP.intro_questions, function(qNum, attribs) {
+        if (attribs.required && !attribs.complete)
+          howmany++;
+      });
+      return howmany;
+    },
+    getNextIntroQuestion: function() 
+    {
+      var nsP = DnaGifts.pretest;
+      for (var qNum = 1; qNum <= 7; qNum++) {
+        var question = nsP.intro_questions[qNum];
+        if (question.required && !question.complete)
+          return qNum;
+      }
+      return false;
+    },
+    makeChildrenRequired: function(qNum, answer) 
+    {
+      if (!answer)
+        return false;
+        
+      var nsP = DnaGifts.pretest;
+      if (!nsP.intro_questions[qNum].has_children)
+        return false;
+      jQuery.each(nsP.intro_questions[qNum].children, function(idx, question_number){
+        nsP.setRequired(question_number, true);
+      });
+    }
+    
 });
 
 
@@ -392,6 +479,7 @@ root.myNamespace.create('DnaGifts.pretestQuestions', {
 */
 Base.Helpers.bind_load(function () {
     var ns = DnaGifts.test;
+    var nsP = DnaGifts.pretest;
     jQuery.metadata.setType('attr','data');
     ns.language = jQuery("#dnaTestSpace").metadata().userlanguage;
     ns.onload_functions();
@@ -400,5 +488,5 @@ Base.Helpers.bind_load(function () {
     jQuery("#dnaPassButton").bind("click", ns.autoPassQuestion);
     jQuery(".btnAnswer").bind("click", ns.saveAnswer);
     jQuery("#progressbar").progressbar({ value: 0 });
-    jQuery(document).on("click", ".pretestbutton", ns.savePretestQuestion);
+    jQuery(document).on("click", ".pretestbutton", nsP.savePretestQuestion);
 });
