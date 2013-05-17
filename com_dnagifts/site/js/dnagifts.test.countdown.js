@@ -1,6 +1,6 @@
 root.myNamespace.create('Base.countdown', {
     language: 'af',
-    running: false,
+    running: true,
     translations: {
       af: {
         pause: "Wag in",
@@ -37,22 +37,20 @@ root.myNamespace.create('Base.countdown', {
     },
     watchCountDown: function(periods) {
         var ns = Base.countdown;
+        if (!ns.running)
+          return true;
+          
         ns.togo = periods[6];
         ss = ns.togo > 1 ? 's' : '';
-        if (ns.running) {
-            if (ns.is_paused) {
-                jQuery('#dnaMessages').html('<em style="color:#ff8000">' + ns.translate("pause") + ' ' + ns.togo + ' ' + ns.translate("second") + ss+'</em>');
-                if (ns.show_pausecount)
-                  jQuery('#dnaMessages').show();
-                jQuery('#dnaCountdown').hide();
-            }
-            else
-                jQuery('#dnaCountdown').html(ns.translate("just") + ' <span style="font-size: 14pt;font-weight:bold;">' + ns.togo + '</span> ' + ns.translate("second") + ss + ' ' + ns.translate("togo")).show();
-            jQuery("#dnaInteractions").show();
-        } else {
-            jQuery('#dnaCountdown').html('&nbsp;');
-            ns.running = true;
+        if (ns.is_paused) {
+            jQuery('#dnaMessages').html('<em style="color:#ff8000">' + ns.translate("pause") + ' ' + ns.togo + ' ' + ns.translate("second") + ss+'</em>');
+            if (ns.show_pausecount)
+              jQuery('#dnaMessages').show();
+            jQuery('#dnaCountdown').hide();
         }
+        else
+            jQuery('#dnaCountdown').html(ns.translate("just") + ' <span style="font-size: 14pt;font-weight:bold;">' + ns.togo + '</span> ' + ns.translate("second") + ss + ' ' + ns.translate("togo")).show();
+        jQuery("#dnaInteractions").show();
         
         return true;
     }

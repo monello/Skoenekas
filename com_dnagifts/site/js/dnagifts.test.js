@@ -36,15 +36,18 @@ root.myNamespace.create('DnaGifts.test', {
     },
     is_paused: false,
     is_stopped: false,
-    currQuestion: undefined,
+    currQuestion: 0,
     nextQuestion: function()
     {
         var ns = DnaGifts.test;
         var nsCD = Base.countdown;
         var nsP = DnaGifts.pretest;
         
+        jQuery(".tip-wrap").hide();
+        
         if (ns.is_stopped)
             return false;
+            
         if (nsCD.is_paused) {
             if (ns.is_paused)
                 ns.executePause();
@@ -63,11 +66,9 @@ root.myNamespace.create('DnaGifts.test', {
         ns.clearPreviousQuestion();
         
         if(nsP.timeForPretestQuestion()) {
-        	nsP.placeNextPretestQuestion();
+          nsP.placeNextPretestQuestion();
         	return false;
         }
-        
-        ns.currQuestion = ns.fetchNextQuestion();
         
         if (!ns.currQuestion && ns.currQuestion !== 0) {
             ns.testComplete();
@@ -98,7 +99,6 @@ root.myNamespace.create('DnaGifts.test', {
     testComplete: function()
     {
         var ns = DnaGifts.test;
-        ns.updateProgress();
         if (parseInt(surveyconfig.use_timing))
             jQuery("#dnaCountdown").countdown("pause");
         ns.is_stopped = true;
@@ -138,6 +138,7 @@ root.myNamespace.create('DnaGifts.test', {
     {
         var ns = DnaGifts.test;
         var nsCD = Base.countdown;
+        ns.updateProgress();
         ns.is_paused = false;
         nsCD.is_paused = false;
         jQuery("#dnaPauseDiv").hide();
@@ -174,39 +175,23 @@ root.myNamespace.create('DnaGifts.test', {
     },
     showNextQuestion: function()
     {
+        jQuery("#pretestquestiondiv").remove();
         jQuery("#dnaLoadingDiv").hide();
         jQuery("#dnaQuestionText").show();
         jQuery(".dnaAnswerButton").show();
-        jQuery("#dnaButtonsBar").show();
-    },
-    fetchNextQuestion: function()
-    {
-        var ns = DnaGifts.test;
-        var nsCD = Base.countdown;
-        var nextquestion = undefined;
-        ns.question_id = undefined;
-        jQuery.each(surveydata, function(index, elem) {
-            if (!elem.answer && elem.answer !== 0) {
-                nextquestion = index;
-                ns.question_id = elem.id;
-                nsCD.duration = (parseInt(elem.duration)) ? parseInt(elem.duration) : parseInt(surveyconfig.default_duration);
-                return false;
-            }
-            return true;
-        });
-        return nextquestion;
+        jQuery("#dnaButtonsBar, #dnaButtonsBar table:first").show();
     },
     placeNextQuestion: function()
     {
         // this function updates the UI and adds the new question to the screen
         jQuery("#dnaQuestionText").html(surveydata[this.currQuestion].question);
-        this.updateProgress();
     },
     updateProgress: function()
     {
         var ns = DnaGifts.test;
         var counts = this.countQuestions();
         var ssdone = counts.done != 1 ? ns.translate('questions') : ns.translate('question');
+        ns.currQuestion = counts.done;
         var sstogo = counts.togo != 1 ? ns.translate('questions') : ns.translate('question');
         jQuery("#progressbar").progressbar("value", counts.progress);
         jQuery("#progresspercent").text(ns.translate("thetestis")+" "+counts.progress+"% "+ns.translate('complete'));
@@ -247,6 +232,8 @@ root.myNamespace.create('DnaGifts.test', {
             async: false
         });
         
+        ns.updateProgress();
+        
         // ... and attempt to load the next question
         ns.is_stopped = false;
         jQuery('#dnaCountdown').countdown('resume').show();
@@ -256,9 +243,9 @@ root.myNamespace.create('DnaGifts.test', {
     countQuestions: function()
     {
         var counts = {total: 0, done: 0, togo: 0};
-        jQuery.each(surveydata, function(index) {
+        jQuery.each(surveydata, function(index, elem) {
             counts.total++
-            if (surveydata[index].answer || surveydata[index].answer === 0)
+            if (elem.answer || elem.answer === 0)
                 counts.done++;
         });
         counts.togo = counts.total - counts.done;
@@ -294,13 +281,14 @@ root.myNamespace.create('DnaGifts.test', {
         jQuery("#dnaPauseButton").hide();
         jQuery(".dnaPauseDivider").hide();
         if(parseInt(surveyconfig.use_timing)) {
-            nsCD.createCountDown(7, this.autoPassQuestion);
+            nsCD.createCountDown(surveyconfig.default_duration, this.autoPassQuestion);
         }
         
     }
 });
 
 root.myNamespace.create('DnaGifts.pretest', {
+    positions_log: [],
     flight_checks_done: false,
     intro_questions: {
       1: {required: true, complete: false, has_children: false},
@@ -348,7 +336,7 @@ root.myNamespace.create('DnaGifts.pretest', {
       var ns = DnaGifts.test;
     	var nsP = DnaGifts.pretest;
       
-      if (!nsP.countRemaining())
+      if (!nsP.countRemaining() || jQuery.inArray(ns.currQuestion, nsP.positions_log) > -1 )
         return false;
       
       nsP.doPreFlightChecks();
@@ -358,9 +346,10 @@ root.myNamespace.create('DnaGifts.pretest', {
         return false;
       }
     	
-    	if (hasPretestInfo == 0 && ns.currQuestion && ns.currQuestion > 0) {
+      if (hasPretestInfo == 0 && ns.currQuestion && ns.currQuestion > 0) {
         if (ns.currQuestion % 7 == 0) {
-          nsP.passPretestQuestion = true;  		
+          nsP.passPretestQuestion = true;
+          nsP.positions_log.push(ns.currQuestion);
           return true;
         }
       }
@@ -371,12 +360,17 @@ root.myNamespace.create('DnaGifts.pretest', {
       var nsP = DnaGifts.pretest;
       Base.countdown.is_paused = true;
       Base.countdown.show_pausecount = false;
+      Base.countdown.is_running = false;
       jQuery("#dnaMessages").hide();
+      DnaGifts.test.is_stopped = true;
       
       var nextPretest = nsP.getNextIntroQuestion();
       if (!nextPretest) 
         return false;
-        
+      
+      // make sure any previous preset fields are deleted
+      jQuery("#pretestquestiondiv").remove();
+      
       var nsP = DnaGifts.pretest;
   		var url=juri+'/index.php?option=com_dnagifts&format=json&task=dnagifts.getQ'+nextPretest;
       jQuery.ajax({
@@ -400,7 +394,7 @@ root.myNamespace.create('DnaGifts.pretest', {
     },
     copySelectedOption: function()
     {
-      jQuery(".pretestbutton").metadata().answer = jQuery("select#textfield").filter(':selected').val();
+      jQuery(".pretestbutton").metadata().answer = jQuery("select#textfield").val();
     },
     attachAutoSuggest: function(field) 
     {
@@ -448,12 +442,14 @@ root.myNamespace.create('DnaGifts.pretest', {
       });
       
       // ... and attempt to load the next question
-      jQuery("#pretestquestiontable").remove();
+      jQuery("#pretestquestiondiv").remove();
       jQuery("#dnaButtonsBar table:first").show();
       
       jQuery("#dnaMessages").show();
       Base.countdown.is_paused = false;
       Base.countdown.show_pausecount = true;
+      Base.countdown.is_running = true;
+      DnaGifts.test.is_stopped = false;
       
       ns.nextQuestion();
       return false;

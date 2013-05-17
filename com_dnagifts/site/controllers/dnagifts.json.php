@@ -26,18 +26,18 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
 		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_ISCHRISTIAN_LABEL');
     $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_ISCHRISTIAN_DESC');
     
-    $buttons = '<table id="pretestquestiontable" height="100%" width="100%">
+    $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>
           <tr id="trButtons">
-                      <td align="center" width="50%">
+                      <td align="center">
                         <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 1, field: \'is_christian\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Yes</a></div>
                       </td>
-                      <td align="center" width="50%">
+                      <td align="center">
                         <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'is_christian\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">No</a></div>
                       </td>
                     </tr>
         </tbody>
-      </table>';
+      </table></div>';
 		
     echo json_encode(array(
       "success"       => true, 
@@ -53,18 +53,18 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
 		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_INCHURCH_LABEL');
     $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_INCHURCH_DESC');
     
-    $buttons = '<table id="pretestquestiontable" height="100%" width="100%">
+    $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">>
         <tbody>
           <tr id="trButtons">
-                      <td align="center" width="50%">
+                      <td align="center">
                         <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 1, field: \'in_church\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Yes</a></div>
                       </td>
-                      <td align="center" width="50%">
+                      <td align="center">
                         <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'in_church\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">No</a></div>
                       </td>
                     </tr>
         </tbody>
-      </table>';
+      </table></div>';
 		
     echo json_encode(array(
       "success"       => true, 
@@ -80,15 +80,15 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
 		$label = '';
     $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_CHURCHNAME_LABEL');
     
-    $buttons = '<table id="pretestquestiontable" height="100%" width="100%">
+    $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>
           <tr id="trButtons">
-                      <td align="center" width="50%">
+                      <td align="center" width="75%">
                         <div class="dnaAnswerButton" style="display: block;">
                         <input id="textfield" name="church_name" type="text"size="50" maxlength="50" class="text ui-widget-content ui-corner-all" style="height:20px"/>
                         </div>
                       </td>
-                      <td align="center" width="50%">
+                      <td align="center" width="25%">
                         <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'church_name\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
                       </td>
                     </tr>
@@ -98,7 +98,7 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
         DnaGifts.pretest.attachAutoSuggest("church_name");
         jQuery("#textfield").bind("blur", DnaGifts.pretest.copyTextAnswer);
       </script>
-      ';
+      </div>';
 		
     echo json_encode(array(
       "success"       => true, 
@@ -114,15 +114,15 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
 		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_PASTORREVEREND_LABEL');
     $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_PASTORREVEREND_DESC');
     
-    $buttons = '<table id="pretestquestiontable" height="100%" width="100%">
+    $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>
           <tr id="trButtons">
-                      <td align="center" width="50%">
+                      <td align="center" width="75%">
                         <div class="dnaAnswerButton" style="display: block;">
                         <input id="textfield" name="pastor_reverend" type="text"size="50" maxlength="50" class="text ui-widget-content ui-corner-all" style="height:20px"/>
                         </div>
                       </td>
-                      <td align="center" width="50%">
+                      <td align="center" width="25%">
                         <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'pastor_reverend\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
                       </td>
                     </tr>
@@ -132,6 +132,7 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
         DnaGifts.pretest.attachAutoSuggest("pastor_reverend");
         jQuery("#textfield").bind("blur", DnaGifts.pretest.copyTextAnswer);
       </script>
+      </div>
       ';
 		
     echo json_encode(array(
@@ -148,15 +149,15 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
 		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_YOURCITY_LABEL');
     $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_YOURCITY_DESC');
     
-    $buttons = '<table id="pretestquestiontable" height="100%" width="100%">
+    $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>
           <tr id="trButtons">
-                      <td align="center" width="50%">
+                      <td align="center" width="75%">
                         <div class="dnaAnswerButton" style="display: block;">
                         <input id="textfield" name="your_city" type="text"size="50" maxlength="50" class="text ui-widget-content ui-corner-all" style="height:20px"/>
                         </div>
                       </td>
-                      <td align="center" width="50%">
+                      <td align="center" width="25%">
                         <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'your_city\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
                       </td>
                     </tr>
@@ -166,6 +167,7 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
         DnaGifts.pretest.attachAutoSuggest("your_city");
         jQuery("#textfield").bind("blur", DnaGifts.pretest.copyTextAnswer);
       </script>
+      </div>
       ';
 		
     echo json_encode(array(
@@ -186,22 +188,23 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
       $options_html = $options_html .'<option value="'.$row->value.'">'.$row->text.'</option>';
     }
     
-    $buttons = '<table id="pretestquestiontable" height="100%" width="100%">
+    $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>
           <tr id="trButtons">
-                      <td align="center" width="50%">
+                      <td align="center" width="75%">
                         <div class="dnaAnswerButton" style="display: block;">
                         <select id="textfield">' . $options_html . '</select></div>
                       </td>
-                      <td align="center" width="50%">
-                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'my_country\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
+                      <td align="center" width="25%">
+                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'your_country\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
                       </td>
                     </tr>
         </tbody>
       </table>
       <script type="text/javascript">
-        jQuery("#country").bind("change", DnaGifts.pretest.copySelectedOption);
+        jQuery("#textfield").bind("change", DnaGifts.pretest.copySelectedOption);
       </script>
+      </div>
       ';
 		
     echo json_encode(array(
@@ -218,18 +221,18 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
 		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_DIVINE_LABEL');
     $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_DIVINE_DESC');
     
-    $buttons = '<table id="pretestquestiontable" height="100%" width="100%">
+    $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>
           <tr id="trButtons">
-                      <td align="center" width="50%">
+                      <td align="center">
                         <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 1, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Yes</a></div>
                       </td>
-                      <td align="center" width="50%">
+                      <td align="center">
                         <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">No</a></div>
                       </td>
                     </tr>
         </tbody>
-      </table>';
+      </table></div>';
 		
     echo json_encode(array(
       "success"       => true, 
