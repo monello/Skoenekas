@@ -273,6 +273,7 @@ class DnagiftsHelper
 			AND ".$db->nameQuote('test_id')." = ".$db->quote($test_id);
 			
 		$db->setQuery($query);
+		
 		$progress['answers'] = $db->loadResult();
 		
 		// get percentage complete

@@ -26,6 +26,7 @@ class DnaGiftsViewReport extends JView
     	$dispatcher	= JDispatcher::getInstance();
 		
 		$test_id 	= JRequest::getVar('id');
+		
 		if (!$test_id) 
 		{
 			JError::raiseError(500, implode('<br />', array("Invalid Request :: Missing test_id")));
@@ -33,12 +34,12 @@ class DnaGiftsViewReport extends JView
 		}
 		
 		$test_user_id = DnagiftsHelper::getUserTestID($test_id);
+		
 		if (!$test_user_id) 
 		{
 			JError::raiseError(500, implode('<br />', array("Invalid Request :: Test ID does not match user")));
 			return false;
 		}
-		
 		$this->assignRef( 'dnaMaxScore', ReportsHelper::getDnaMaxScore($test_user_id) );
 		$this->assignRef( 'user', JFactory::getUser() );
 		$this->assignRef( 'userTestID', $test_user_id );
@@ -53,6 +54,7 @@ class DnaGiftsViewReport extends JView
 		}
 		
 		$html = $this->loadTemplate($tpl);
+		
 		if ($html instanceof Exception)
 		{
 			return $html;

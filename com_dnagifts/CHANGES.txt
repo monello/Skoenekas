@@ -419,3 +419,9 @@
    (2013/05/15)
 -------------------
  - Almost there...
+ 
+ 0.2.0 (2013/05/18)
+ ------------------
+  - Done migrating the test-intro question to the main test
+  - This is version 1 minus a few nice-to-haves
+  

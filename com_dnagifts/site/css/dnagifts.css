@@ -55,8 +55,9 @@ form#adminForm .formelm fieldset {
 
 img.introanimation {
   float: left;
-  border: 3px solid black;
+  border: 1px solid lightslategrey;
   margin: 0 10px 0px 0;
+  padding-top: 5px;
 }
 
 table#introtable,

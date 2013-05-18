@@ -26,8 +26,8 @@ root.myNamespace.create('Base.countdown', {
     show_pausecount: true,
     createCountDown: function(duration, callback)
     {
-        Base.countdown.duration = (parseInt(duration)) ? parseInt(duration) : parseInt(surveyconfig.default_duration); 
-        jQuery('#dnaCountdown').countdown({until: this.shortly, onExpiry: callback, onTick: this.watchCountDown}); 
+		Base.countdown.duration = (parseInt(duration)) ? parseInt(duration) : parseInt(surveyconfig.default_duration); 
+		jQuery('#dnaCountdown').countdown({until: this.shortly, onExpiry: callback, onTick: this.watchCountDown}); 
     },
     startCountDown: function()
     {
@@ -42,6 +42,9 @@ root.myNamespace.create('Base.countdown', {
           
         ns.togo = periods[6];
         ss = ns.togo > 1 ? 's' : '';
+		if (ns.togo < 1)
+			return true;
+			
         if (ns.is_paused) {
             jQuery('#dnaMessages').html('<em style="color:#ff8000">' + ns.translate("pause") + ' ' + ns.togo + ' ' + ns.translate("second") + ss+'</em>');
             if (ns.show_pausecount)

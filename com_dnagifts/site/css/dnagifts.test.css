@@ -13,6 +13,7 @@ div#dnaCountdown, div#dnaMessages {
   float: left;
   width: 180px;
   padding-left: 10px;
+  display: none;
 }
 div#Messages {
   padding-top: 5px;
@@ -23,9 +24,10 @@ div#dnaCountdown span {
 
 div#dnaInteractions{
   float: left;
-  width: 170px;
+  width: 180px;
   padding-top: 5px;
   margin-left: 4%;
+  display: none;
 }
 
 div#dnaProgress {

@@ -53,7 +53,7 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
 		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_INCHURCH_LABEL');
     $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_INCHURCH_DESC');
     
-    $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">>
+    $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>
           <tr id="trButtons">
                       <td align="center">
@@ -94,10 +94,6 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
                     </tr>
         </tbody>
       </table>
-      <script type="text/javascript">
-        DnaGifts.pretest.attachAutoSuggest("church_name");
-        jQuery("#textfield").bind("blur", DnaGifts.pretest.copyTextAnswer);
-      </script>
       </div>';
 		
     echo json_encode(array(
@@ -117,21 +113,17 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
     $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>
           <tr id="trButtons">
-                      <td align="center" width="75%">
-                        <div class="dnaAnswerButton" style="display: block;">
-                        <input id="textfield" name="pastor_reverend" type="text"size="50" maxlength="50" class="text ui-widget-content ui-corner-all" style="height:20px"/>
-                        </div>
-                      </td>
-                      <td align="center" width="25%">
-                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'pastor_reverend\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
-                      </td>
-                    </tr>
+            <td align="center" width="75%">
+              <div class="dnaAnswerButton" style="display: block;">
+              <input id="textfield" name="pastor_reverend" type="text"size="50" maxlength="50" class="text ui-widget-content ui-corner-all" style="height:20px"/>
+              </div>
+            </td>
+            <td align="center" width="25%">
+              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'pastor_reverend\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
+            </td>
+          </tr>
         </tbody>
       </table>
-      <script type="text/javascript">
-        DnaGifts.pretest.attachAutoSuggest("pastor_reverend");
-        jQuery("#textfield").bind("blur", DnaGifts.pretest.copyTextAnswer);
-      </script>
       </div>
       ';
 		
@@ -152,21 +144,17 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
     $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>
           <tr id="trButtons">
-                      <td align="center" width="75%">
-                        <div class="dnaAnswerButton" style="display: block;">
-                        <input id="textfield" name="your_city" type="text"size="50" maxlength="50" class="text ui-widget-content ui-corner-all" style="height:20px"/>
-                        </div>
-                      </td>
-                      <td align="center" width="25%">
-                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'your_city\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
-                      </td>
-                    </tr>
+            <td align="center" width="75%">
+              <div class="dnaAnswerButton" style="display: block;">
+              <input id="textfield" name="your_city" type="text"size="50" maxlength="50" class="text ui-widget-content ui-corner-all" style="height:20px"/>
+              </div>
+            </td>
+            <td align="center" width="25%">
+              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'your_city\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
+            </td>
+          </tr>
         </tbody>
       </table>
-      <script type="text/javascript">
-        DnaGifts.pretest.attachAutoSuggest("your_city");
-        jQuery("#textfield").bind("blur", DnaGifts.pretest.copyTextAnswer);
-      </script>
       </div>
       ';
 		
@@ -191,19 +179,16 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
     $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>
           <tr id="trButtons">
-                      <td align="center" width="75%">
-                        <div class="dnaAnswerButton" style="display: block;">
-                        <select id="textfield">' . $options_html . '</select></div>
-                      </td>
-                      <td align="center" width="25%">
-                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'your_country\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
-                      </td>
-                    </tr>
+            <td align="center" width="75%">
+              <div class="dnaAnswerButton" style="display: block;">
+              <select id="textfield" name="your_country">' . $options_html . '</select></div>
+            </td>
+            <td align="center" width="25%">
+              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'your_country\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
+            </td>
+          </tr>
         </tbody>
       </table>
-      <script type="text/javascript">
-        jQuery("#textfield").bind("change", DnaGifts.pretest.copySelectedOption);
-      </script>
       </div>
       ';
 		
@@ -224,13 +209,13 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
     $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>
           <tr id="trButtons">
-                      <td align="center">
-                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 1, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Yes</a></div>
-                      </td>
-                      <td align="center">
-                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">No</a></div>
-                      </td>
-                    </tr>
+            <td align="center">
+              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 1, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Yes</a></div>
+            </td>
+            <td align="center">
+              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">No</a></div>
+            </td>
+          </tr>
         </tbody>
       </table></div>';
 		

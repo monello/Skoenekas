@@ -45,7 +45,7 @@ $activeTests = $model->getAllActiveTests();
       <?php foreach($activeTests as $i => $test): ?>
       <?php
         $user_test_id = DnagiftsHelper::getUserTestID( $test->test_id );
-        $progress		  = DnagiftsHelper::getUserProgress( $user_test_id, $test->test_id );
+        $progress = DnagiftsHelper::getUserProgress( $user_test_id, $test->test_id );
       ?>
       <tr valign="top">
         <td><?php echo $test->test_description; ?></td>
