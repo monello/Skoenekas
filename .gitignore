@@ -16,7 +16,7 @@ local.properties
 .settings/
 .loadpath
 .kpf
-.zip
+*.zip
 
 # External tool builders
 .externalToolBuilders/
@@ -101,7 +101,6 @@ publish
 # Others
 [Bb]in
 [Oo]bj
-sql
 TestResults
 *.Cache
 ClientBin
