@@ -214,7 +214,8 @@ root.myNamespace.create('DnaGifts.test', {
 		else
 			ns.currQuestion = counts.done;
         var sstogo = counts.togo != 1 ? ns.translate('questions') : ns.translate('question');
-        jQuery("#progressbar").progressbar("value", counts.progress);
+        //jQuery("#progressbar").progressbar("value", counts.progress);
+		jQuery("#progressbar").progressbar({ value: counts.progress });
         jQuery("#progresspercent").text(ns.translate("thetestis")+" "+counts.progress+"% "+ns.translate('complete'));
         jQuery("#dnaProgress").html(
             counts.done + " " + ssdone + " " + ns.translate('completed')+" | " +

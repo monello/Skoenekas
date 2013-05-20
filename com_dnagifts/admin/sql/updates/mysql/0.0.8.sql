@@ -1,0 +1,1 @@
+ALTER TABLE `#__dnagifts_lnk_user_tests` ADD `session_id` VARCHAR( 200 ) NOT NULL COMMENT 'user''s logged in session id' AFTER `id` ;
