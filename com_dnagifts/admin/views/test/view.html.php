@@ -76,7 +76,9 @@ class DnaGiftsViewTest extends JView
 		// Javascripts
 		// - JQuery
 		//$document->addScript(JURI::base(true).'/components/com_dnagifts/js/jquery-1.7.2.min.js');
-		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/jquery-1.9.0.min.js');
+		//$document->addScript(JURI::base(true).'/components/com_dnagifts/js/jquery-1.9.0.min.js');
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/jquery-1.9.1.min.js');
+		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/jquery-migrate-1.2.1.min.js');
 		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/jquery.noconflict.js');
 		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/jquery.metadata.js');
 		$document->addScript(JURI::base(true).'/components/com_dnagifts/js/jquery.watermark.min.js');
