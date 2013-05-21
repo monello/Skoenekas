@@ -1,5 +1,5 @@
 <?php
-// No direct access to this file
+// No direct access to this file xxxx
 defined('_JEXEC') or die('Restricted access');
  
 // import Joomla controller library
