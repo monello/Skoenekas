@@ -428,4 +428,11 @@
 0.2.01 (2013/05/20)
 ------------------
   - Upgraded JQuery
+
+0.2.02 (2013/05/21)
+-------------------
+  - Implemented camel casing on the text-intro questions;
+  - Updated the tooltip styling
+  - Updated the pick-test-table border styling
+  - Upgraded the jquery.countdown library to version 1.6.2
   

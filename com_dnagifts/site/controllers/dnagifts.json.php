@@ -259,7 +259,7 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
       if (gettype($answer) == "integer") {
         $query->set($field.'  = '.(int) $answer);
       } else {
-        $query->set($field.'  = '.$db->quote($answer));
+		$query->set($field.'  = '.$db->quote($this->camelCaseSentence($answer)));
       }
       $query->where('id = ' . (int) $id);
     }
@@ -273,6 +273,12 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
     echo json_encode(array("success" => true, "answer" => $answer));
 	}
   
-  
+	protected function camelCaseSentence($input) {
+		$strlist = array();
+        foreach ( explode(" ", strtolower($input)) as $word ) {
+            $strlist[] = ucfirst($word);
+        }
+        return implode(" ", $strlist);
+	}
   
 }

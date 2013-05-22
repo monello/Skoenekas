@@ -3,6 +3,12 @@ body .tip {
   background: #0078FF url(../../../media/com_dnagifts/images/gradient.png) repeat-x 0 -100px;
   border: 1px solid #B4B4B4;
   color: white;
+  padding: 5px !important;
+}
+
+body .tip-wrap {
+	border: 0px !important;
+	padding: 0px !important;
 }
 
 div#notificationcontainer{

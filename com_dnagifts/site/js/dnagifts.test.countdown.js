@@ -33,10 +33,10 @@ root.myNamespace.create('Base.countdown', {
     {
         this.shortly = new Date(); 
         this.shortly.setSeconds(this.shortly.getSeconds() + Base.countdown.duration); 
-        jQuery('#dnaCountdown').countdown('change', {until: this.shortly}); 
+        jQuery('#dnaCountdown').countdown('option', {until: this.shortly}); 
     },
     watchCountDown: function(periods) {
-        var ns = Base.countdown;
+		var ns = Base.countdown;
         if (!ns.running)
           return true;
           

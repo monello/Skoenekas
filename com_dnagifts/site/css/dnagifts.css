@@ -102,6 +102,11 @@ table#picktesttable td p {
   margin: 0;
 }
 
+table#picktesttable tr,
+table#picktesttable td {
+	border: 1px solid #DDDDDD;
+}
+
 div#dnaTestSpace h2 {
   color: #00386D;
   text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.7);
