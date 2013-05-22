@@ -49,16 +49,15 @@ class DnaGiftsControllerTest extends JControllerForm
 	public function updateTestButton() {
 		$link_id = JRequest::getCmd('link_id');
 		$button_id = JRequest::getCmd('button_id');
-		$show_duration = JRequest::getCmd('show_duration', 0);
 		
 		$db = JFactory::getDbo();
 		
 		$query = $db->getQuery(true);
 		$query->update('#__dnagifts_lnk_test_buttonset');
 		$query->set('button_id = ' . (int) $button_id);
-		$query->set('show_duration = ' . (int) $show_duration);
 		$query->where('id = ' . (int) $link_id);
 		$db->setQuery($query);
+		
 		$db->query();
 		
 		// get button details
