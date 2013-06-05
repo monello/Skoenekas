@@ -56,7 +56,7 @@ form#adminForm .formelm fieldset {
 img.introanimation {
   float: left;
   border: 1px solid lightslategrey;
-  margin: 0 10px 0px 0;
+  margin: 16px 10px 0px 0;
   padding-top: 5px;
 }
 
@@ -145,4 +145,9 @@ div#dnaTestSpace div.logout-button {
 	position:relative;
 	top:23px;
 	margin-left:15px
+}
+
+h2#h2welcometotest {
+	padding-top: 0px !important;
+	margin-top: 0px !important;
 }

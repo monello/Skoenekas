@@ -439,3 +439,8 @@
  0.2.03 (2013/05/23)
  -------------------
   - fixed the test-button management. Select list status updates
+  
+ 0.2.04 (2013/06/05)
+ -------------------
+  - Tidied up the test landing page styling around the login buttons.
+  

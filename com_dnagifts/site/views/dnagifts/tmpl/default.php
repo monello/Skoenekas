@@ -20,8 +20,6 @@ echo '<div id="dnaTestSpace">';
 echo $this->loadTemplate('auth');
 if (!$this->isLoggedIn[0]) { return; }
 
-echo JText::_('COM_DNAGIFTS_CLEARFLOAT');
-
 /*
 // Pretest Form
 echo $this->loadTemplate('pretest');
