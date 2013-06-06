@@ -444,3 +444,7 @@
  -------------------
   - Tidied up the test landing page styling around the login buttons.
   
+ 0.2.05 (2013/06/06)
+ -------------------
+  - Added the additional info to the reports.
+  - Fixed the Facebook SCLogin button layout as the new version used new HTML.

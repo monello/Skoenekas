@@ -34,6 +34,34 @@ class MYPDF extends TCPDF {
  */
 class ReportsHelper
 {
+	public static function additionalInfo($type='') 
+	{
+		$html = '';
+		$html .= '
+
+			<h3>ATTEND THE DNA SEMINAR IN DURBANVILLE</h3>
+			<p>The BE Thyself seminar runs over four week every month on Thursday evenings from 19:00 - 21:00.<br/>
+			The BE THYSELF Seminar is not a normal monotonous type of event, it is an interactive animation, video, 
+			props, lighting and media experience together with life changing insight to help discover who you really 
+			are. The normal duration of a seminar is 8 hours over 4 weeks. The DNA Seminar is presented to people who 
+			want to discover their God-given gift.</p>
+			<a href="'.JURI::root().'events"><img src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png" align="right"/></a>
+			<h3>THE BE THYSELF SEMINAR IS EXCELLENT FOR</h3>
+			<ul>
+				<li>Team Dynamics</li>
+				<li>Church Dynamics</li>
+				<li>Corporate Dynamics</li>
+				<li>Engaged couples</li>
+				<li>Personal Leadership development</li>
+			</li>
+			
+			<p>Click <a href="'.JURI::root().'events">here</a> to view the course outline and register online for the seminar.</p>
+			You can also host a seminar at your church, para-church organization or company.</p> 
+
+		';
+		return $html;
+	}
+	
 	public static function aOrAn($string)
 	{
 		$vowels = array('a','e','i','o','u');
@@ -123,7 +151,7 @@ class ReportsHelper
         return $filename;
 	}
 	
-  public static function uniqueDNAChartFilename($userTestID)
+	public static function uniqueDNAChartFilename($userTestID)
 	{
 		$user = JFactory::getUser();
 		$user_id = $user->get("id");
@@ -235,6 +263,10 @@ class ReportsHelper
 		
 		ReportsHelper::generatePDF_Section9($pdf, $column1_left);
 		
+		$pdf->AddPage();
+		$additionalhtml = ReportsHelper::additionalInfo();
+        $pdf->writeHTML($additionalhtml);
+		
 		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
         $pdf->Output($filename, $displaytype);
@@ -291,6 +323,10 @@ class ReportsHelper
 		ReportsHelper::reportSeperator($pdf);
 		
 		ReportsHelper::generatePDF_Section9($pdf, $column1_left);
+		
+		$pdf->AddPage();
+		$additionalhtml = ReportsHelper::additionalInfo();
+        $pdf->writeHTML($additionalhtml);
 		
 		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
@@ -788,7 +824,7 @@ class ReportsHelper
 		
 		return $html;
 	}
-
+	
 	public static function reportSeperator($pdf, $yPlus=0) 
 	{
 		$image_file = JPATH_SITE.'/media/com_dnagifts/images/seperator900x11.jpg';

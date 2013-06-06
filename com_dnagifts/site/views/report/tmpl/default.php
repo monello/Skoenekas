@@ -349,6 +349,14 @@ $first_name 		= ReportsHelper::extractFirstName();
 			</td>
 		</tr>
 		
+		<?php 
+		$additionalhtml =  ReportsHelper::additionalInfo(); 
+		if ($additionalhtml):
+			echo '<tr><td colspan="3">';
+			echo $additionalhtml;
+			echo '</td></tr>';
+		endif; ?>
+		
 	</table>
 </div>
 

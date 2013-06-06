@@ -40,11 +40,12 @@ class DnaGiftsViewReport extends JView
 			JError::raiseError(500, implode('<br />', array("Invalid Request :: Test ID does not match user")));
 			return false;
 		}
+		
 		$this->assignRef( 'dnaMaxScore', ReportsHelper::getDnaMaxScore($test_user_id) );
 		$this->assignRef( 'user', JFactory::getUser() );
 		$this->assignRef( 'userTestID', $test_user_id );
 		$this->assignRef( 'dnaResults', $model->getResultsObject($test_user_id));
-		$this->assignRef( 'dnaChartSrc', ReportsHelper::generateDNAChart($this->dnaResults, $test_user_id) );
+		$this->assignRef( 'dnaChartSrc', ReportsHelper::generateDNAChart($this->dnaResults, $test_user_id));
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) 

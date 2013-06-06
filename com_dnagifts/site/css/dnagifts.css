@@ -140,10 +140,13 @@ div#dnaTestSpace div.custom_or {
 	top: -8px;
 	margin-left: 20px;
 }
-div#dnaTestSpace div.logout-button {
+div#dnaTestSpace div.sclogin{
+	float: right;
+}
+div#dnaTestSpace div.sclogout-button {
 	float:right;
 	position:relative;
-	top:23px;
+	top:3px;
 	margin-left:15px
 }
 
