@@ -448,3 +448,8 @@
  -------------------
   - Added the additional info to the reports.
   - Fixed the Facebook SCLogin button layout as the new version used new HTML.
+  
+ 0.2.06 (2013/06/12)
+ -------------------
+  - Updated the uninstall SQL
+  
