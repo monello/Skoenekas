@@ -10,7 +10,7 @@
 	<copyright>Copyright Info</copyright>
 	<license>License Info</license>
 	<!--  The version string is recorded in the components table -->
-	<version>0.2.05</version>
+	<version>0.2.07</version>
 	<!-- The description is optional and defaults to the name -->
 	<description>COM_DNAGIFTS_DESCRIPTION</description>
 		
@@ -62,23 +62,24 @@
 				Note that all & must be escaped to &amp; for the file to be valid
 				XML and be parsed by the installer
 			-->
+			<menu link="option=com_dnagifts" view="tests" img="/media/com_dnagifts/images/Tests-16x16.png"
+									alt="DNAGifts/Test">COM_DNAGIFTS_TESTS</menu>
+			<menu link="option=com_dnagifts&amp;view=questions" view="questions" img="/media/com_dnagifts/images/Options-16x16.png"
+									alt="DNAGifts/Questions">COM_DNAGIFTS_QUESTIONS</menu>
+			<menu link="option=com_dnagifts&amp;view=gifts" view="gifts" img="/media/com_dnagifts/images/gift-16x16.png"
+									alt="DNAGifts/Gifts">COM_DNAGIFTS_GIFTS</menu>
+			<menu link="option=com_dnagifts&amp;view=answers" view="answers" img="/media/com_dnagifts/images/answers-16x16.png"
+									alt="DNA Gifts/Mange Answers">COM_DNAGIFTS_ANSWERS</menu>
 			<!--
-			<menu link="option=com_dnagifts" view="tests" img="../media/com_dnagifts/images/Tests-16x16.png"
-									alt="DNAGifts/Test">com_dnagifts_submenu_tests</menu>
-			<menu link="option=com_dnagifts&amp;view=questions" view="questions" img="../media/com_dnagifts/images/Options-16x16.png"
-									alt="DNAGifts/Questions">com_dnagifts_submenu_questions</menu>
-			<menu link="option=com_dnagifts&amp;view=gifts" view="gifts" img="../media/com_dnagifts/images/Gift-16x16.png"
-									alt="DNAGifts/Gifts">com_dnagifts_submenu_gifts</menu>
-			-->
 			<menu link="option=com_dnagifts" view="tests" img="class:dnagifts16x16-test"
 									alt="DNA Gifts/Manage Tests">com_dnagifts_tests</menu>
 			<menu link="option=com_dnagifts&amp;view=questions" view="questions" img="class:dnagifts16x16-question"
 									alt="DNA Gifts/Manage Questions">com_dnagifts_questions</menu>
 			<menu link="option=com_dnagifts&amp;view=gifts" view="gifts" img="class:dnagifts16x16-gift"
 									alt="DNA Gifts/Mange Gifts">com_dnagifts_gifts</menu>
-		 <menu link="option=com_dnagifts&amp;view=answers" view="answers" img="class:dnagifts16x16-answer"
+			<menu link="option=com_dnagifts&amp;view=answers" view="answers" img="class:dnagifts16x16-answer"
 									alt="DNA Gifts/Mange Answers">com_dnagifts_answers</menu>
-			
+			-->
 		</submenu>
 		<!-- Administration Main File Copy Section -->
 		<!-- Note the folder attribute: This attribute describes the folder

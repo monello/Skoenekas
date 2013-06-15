@@ -452,4 +452,8 @@
  0.2.06 (2013/06/12)
  -------------------
   - Updated the uninstall SQL
+ 
+ 0.2.07 (2013/06/15)
+ -------------------
+  - Fixed the Administrator Sub-menu icons and text
   
