@@ -457,3 +457,8 @@
  -------------------
   - Fixed the Administrator Sub-menu icons and text
   
+ 0.2.08 (2013/06/15)
+ -------------------
+  - Updated the Administrator Main icon for this component
+  - Added the Reporting Section
+  
