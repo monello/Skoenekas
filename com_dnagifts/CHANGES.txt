@@ -458,3 +458,8 @@
   - Fixed the Administrator Sub-menu icons and text
   
  ++++++++++++++ Created Languages Branch ++++++++++++++
+ 
+ 0.2.09 (2013/06/24)
+ -------------------
+  - Re-enabled multi langauge support
+  
