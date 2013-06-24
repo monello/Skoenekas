@@ -463,4 +463,5 @@
  -------------------
   - Re-enabled multi langauge support
   - Updated Test Intro page Layout
+  - Updated the Afrikaans Language File
  
