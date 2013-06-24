@@ -462,4 +462,5 @@
  0.2.09 (2013/06/24)
  -------------------
   - Re-enabled multi langauge support
-  
+  - Updated Test Intro page Layout
+ 
