@@ -278,12 +278,6 @@ class DnagiftsHelper
 			$vName == 'answers'
 		);
 		
-		JSubMenuHelper::addEntry(
-			JText::_('COM_DNAGIFTS_REPORTING'),
-			'index.php?option=com_dnagifts&view=reports',
-			$vName == 'reports'
-		);
-		
 		// set some global property
 		$document = JFactory::getDocument();
 		
@@ -295,9 +289,7 @@ class DnagiftsHelper
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/gift-16x16.png);}');
 		$document->addStyleDeclaration('.icon-16-dnagifts16x16-answer ' .
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/answers-16x16.png);}');
-		$document->addStyleDeclaration('.icon-16-dnagifts16x16-report ' .
-		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/reports-16x16.png);}');
-
+		
 		$document->addStyleDeclaration('.icon-48-dnatests48x48 ' .
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/Tests-48x48.png);}');
 		$document->addStyleDeclaration('.icon-48-dnagifts48x48 ' .
@@ -306,8 +298,6 @@ class DnagiftsHelper
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/Options-48x48.png);}');
 		$document->addStyleDeclaration('.icon-48-dnaanswers48x48 ' .
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/answers-48x48.png);}');
-		$document->addStyleDeclaration('.icon-48-dnareports48x48 ' .
-		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/reports-48x48.png);}');
 		
 		$document->addStyleDeclaration('.colorpatch {float: right; display: inline; height: 15px; width: 30px;}');
 	}
