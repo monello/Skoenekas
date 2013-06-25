@@ -154,3 +154,21 @@ h2#h2welcometotest {
 	padding-top: 0px !important;
 	margin-top: 0px !important;
 }
+
+div#mrlLanguageDiv {
+	float: left;
+	margin-top: 6px;
+}
+div#mrlLanguageDiv button {
+	background: url("/components/com_virtuemart/assets/images/vmgeneral/backgrounds.png") repeat-x scroll 0 -160px #E8E8E8;
+	border: 1px solid #00A000;
+	border-radius: 4px 4px 4px 4px;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 12px;
+	letter-spacing: 1px;
+	padding: 7px 12px 5px;
+	text-align: center;
+	text-decoration: none;
+}

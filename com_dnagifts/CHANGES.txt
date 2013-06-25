@@ -465,3 +465,8 @@
   - Updated Test Intro page Layout
   - Updated the Afrikaans Language File
  
+0.2.10 (2013/06/25)
+-------------------
+ - Changed the test language switcher to a button
+ - Made various language file updates.
+ 
