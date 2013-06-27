@@ -5,7 +5,6 @@ JHtml::_('behavior.tooltip');
 $model = $this->getModel('dnagifts');
 
 ?>
-<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_HEAD'); ?>
 
 <table width="100%" id="introtable"><tbody>
   <tr>

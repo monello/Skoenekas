@@ -462,3 +462,16 @@
   - Updated the Administrator Main icon for this component
   - Added the Reporting Section
   
+++++++++++++++ Created Languages Branch ++++++++++++++
+ 
+ 0.2.09 (2013/06/24)
+ -------------------
+  - Re-enabled multi langauge support
+  - Updated Test Intro page Layout
+  - Updated the Afrikaans Language File
+ 
+ 0.2.10 (2013/06/25)
+ -------------------
+  - Changed the test language switcher to a button
+  - Made various language file updates.
+ 
