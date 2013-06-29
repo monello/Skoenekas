@@ -465,8 +465,16 @@
   - Updated Test Intro page Layout
   - Updated the Afrikaans Language File
  
-0.2.10 (2013/06/25)
--------------------
- - Changed the test language switcher to a button
- - Made various language file updates.
+ 0.2.10 (2013/06/25)
+ -------------------
+  - Changed the test language switcher to a button
+  - Made various language file updates.
+ 
+ 0.2.11 (2013/06/29)
+ -------------------
+  - Replaced Juan's photo in the reports
+  - Changed the back button the "previous tests" page
+  - Updated the buy and seminar links in the reports.
+  - Added functionality to ensure PDF reports are only emailed once per test.
+  - Added Afrikaans tests
  

@@ -45,7 +45,7 @@ class ReportsHelper
 			props, lighting and media experience together with life changing insight to help discover who you really 
 			are. The normal duration of a seminar is 8 hours over 4 weeks. The DNA Seminar is presented to people who 
 			want to discover their God-given gift.</p>
-			<a href="'.JURI::root().'events"><img src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png" align="right"/></a>
+			<a href="'.JURI::root().'events/be-thyself-seminar"><img src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png" align="right"/></a>
 			<h3>THE BE THYSELF SEMINAR IS EXCELLENT FOR</h3>
 			<ul>
 				<li>Team Dynamics</li>
@@ -55,7 +55,7 @@ class ReportsHelper
 				<li>Personal Leadership development</li>
 			</li>
 			
-			<p>Click <a href="'.JURI::root().'events">here</a> to view the course outline and register online for the seminar.</p>
+			<p>Click <a href="'.JURI::root().'events/be-thyself-seminar">here</a> to view the course outline and register online for the seminar.</p>
 			You can also host a seminar at your church, para-church organization or company.</p> 
 
 		';
@@ -732,14 +732,16 @@ class ReportsHelper
 		$html = '<table border="0" cellpadding="0" cellspacing="0" width="910">
 					<tr>
 						<td width="120">
-							<img src="'.JURI::base(true).'/media/com_dnagifts/images/dna_book.jpg" width="100px" />
+							<a href="'.JURI::root().'purchase/purpose-life/the-dna-gifts-book-1-detail">
+								<img src="'.JURI::base(true).'/media/com_dnagifts/images/dna_book.jpg" width="100px" />
+							</a>
 						</td>
 						<td>
 							<p style="font-size:10pt"><strong>'.JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY').'</strong></p>
 							<p>'.JText::_('COM_DNAGIFTS_REPORT_BOOKDETAILS').'</p>
 						</td>
 						<td width="100">
-							<a id="buyBtn" href="'.JURI::root().'purchase">
+							<a id="buyBtn" href="'.JURI::root().'purchase/purpose-life/the-dna-gifts-book-1-detail">
 								<img src="'.JURI::base(true).'/media/com_dnagifts/images/buy_book.jpg" width="100px"/>
 							</a>
 						</td>
@@ -1139,11 +1141,15 @@ class ReportsHelper
 		
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-        $query->select('test_id, started_datetime, report_name');
+        $query->select('test_id, started_datetime, report_name, date_sent');
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
 		$query->where('id = '.$userTestID);
         $db->setQuery($query);
         $result = $db->loadObject();
+		
+		if ($result->date_sent) {
+			return;
+		}
 		
 		$filename = JPATH_SITE.DS."components".DS."com_dnagifts".DS."store".DS.$result->report_name;
 		
@@ -1176,6 +1182,15 @@ class ReportsHelper
         
         # Send once you have set all of your options
         $mailer->send();
+		
+		// Log the report name in next to the user-test record
+		$query = $db->getQuery(true);
+		$query->update('#__dnagifts_lnk_user_tests');
+		$query->set('date_sent = NOW()');
+		$query->where('id = ' . (int) $userTestID);
+		
+		$db->setQuery($query);
+		$db->query();
 	}
 	
 	public static function getEmailBody()

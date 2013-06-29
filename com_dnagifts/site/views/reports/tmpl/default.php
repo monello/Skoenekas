@@ -30,5 +30,5 @@ defined('_JEXEC') or die('Restricted access');
 </div>
 
 <div id="postTestHome">
-  <a href="<?php echo JURI::base() ?>"><h2><img src="<?php echo JURI::base() ?>/media/com_dnagifts/images/icon-home.png"/> <?php echo jText::_('COM_DNAGIFTS_TEST_HOMEPAGE'); ?></h2></a>
+  <a href="<?php echo JURI::base() ?>free-test-en"><h2><?php echo jText::_('COM_DNAGIFTS_TEST_BACKBUTTON'); ?></h2></a>
 </div>

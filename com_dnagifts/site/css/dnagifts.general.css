@@ -1,8 +1,8 @@
 /****** tool tips override ***/
 body .tip {
-  background: #0078FF url(../../../media/com_dnagifts/images/gradient.png) repeat-x 0 -100px;
+  /*background: #0078FF url(../../../media/com_dnagifts/images/gradient.png) repeat-x 0 -100px;*/
   border: 1px solid #B4B4B4;
-  color: white;
+  color: black;
   padding: 5px !important;
 }
 

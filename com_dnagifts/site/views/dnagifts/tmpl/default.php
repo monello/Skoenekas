@@ -13,10 +13,9 @@ $this->isLoggedIn = DnaGiftsHelper::authenticate();
 </script>
 <?php
 echo '<div id="dnaTestSpace">';
-echo JText::_('COM_DNAGIFTS_TESTINTRO_HEAD');
 
-echo JText::_('COM_DNAGIFTS_TESTLANGUAGE');
-/*echo '<span class="testlanguage">'.JText::_('COM_DNAGIFTS_TESTLANGUAGE').'</span>';
+/*echo JText::_('COM_DNAGIFTS_TESTLANGUAGE');
+echo '<span class="testlanguage">'.JText::_('COM_DNAGIFTS_TESTLANGUAGE').'</span>';
 echo DnaGiftsHelper::loadLanguageSwitch();*/
 
 // Login & Register buttons

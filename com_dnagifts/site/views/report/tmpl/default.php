@@ -305,14 +305,16 @@ $first_name 		= ReportsHelper::extractFirstName();
 				<table border="0" cellpadding="0" cellspacing="0" width="100%" style="border:0 !important">
 					<tr>
 						<td width="165px">
-							<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/dna_book.jpg" width="150px" height="198px" />
+							<a href="'.JURI::root().'purchase/purpose-life/the-dna-gifts-book-1-detail">
+								<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/dna_book.jpg" width="150px" height="198px" />
+							</a>
 						</td>
 						<td>
 							<p class="rptText12"><strong><?php echo JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY'); ?></strong></p>
 							<p><?php echo JText::_('COM_DNAGIFTS_REPORT_BOOKDETAILS'); ?></p>
 						</td>
 						<td>
-							<a id="buyBtn" href="<?php echo JURI::root(); ?>purchase">
+							<a id="buyBtn" href="<?php echo JURI::root(); ?>purchase/purpose-life/the-dna-gifts-book-1-detail">
 								<!--<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/buy_book.jpg" width="150px" height="112px" style="margin-top:80px"/>-->
 							</a>
 						</td>

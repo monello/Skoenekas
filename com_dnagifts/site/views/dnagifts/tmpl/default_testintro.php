@@ -5,12 +5,10 @@ JHtml::_('behavior.tooltip');
 $model = $this->getModel('dnagifts');
 
 ?>
-
+<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_HEAD'); ?>
+<iframe width="400" height="225" src="//www.youtube.com/embed/cLwXtjuOwAU" frameborder="0" allowfullscreen style="float: left; margin-right:35px; margin-bottom:20px"></iframe>
+<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_BLURB'); ?>
 <table width="100%" id="introtable"><tbody>
-  <tr>
-    <td valign="top"><img src="<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_ANIMATION_PATH'); ?>" class="introanimation"/></td>
-    <td><?php echo JText::_('COM_DNAGIFTS_TESTINTRO_BLURB'); ?></td>
-  </tr>
 
 <?php if ((int) DnagiftsHelper::hasCompletedTests() > 0): ?>
   <tr>

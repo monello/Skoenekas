@@ -128,7 +128,7 @@ INSERT INTO `#__dnagifts_question` (`id`, `question_code`, `question_text`, `que
 (339, 'QE338', 'Ek steur my nie daaraan as ek uitgeput voel nie, ek hou aan.', NULL, NULL, NULL, 9, 'Afrikaans', 338, 42, NULL, '2013-06-25 10:54:08', 1);
 
 INSERT INTO `#__dnagifts_test` (`id`, `test_name`, `version`, `test_description`, `test_reason`, `use_timing`, `default_duration`, `test_duration`, `show_progressbar`, `language`, `ordering`, `hits`, `complete`, `created_by`, `created_by_alias`, `created`, `published`) VALUES
-(5, 'Afrikaanse Toets', '1', 'Afrikaanse Toets', 'Afrikaanse Toets', 1, 0, 20, 1, 'English', 0, 0, 0, 42, NULL, '2013-06-24 23:58:56', 1);
+(5, 'Afrikaanse Toets', '1', 'Afrikaanse Toets', '<h5><img src="images/icons/South-Africa-Flag-256.png" border="0" alt="" width="51" height="35" />    DNA GIFTS  "AFRIKAANSE TOETS"</h5><p>Hierdie Afrikaanse toets sal jou \'n akkurate begrip gee van jou DNS Gawe. Neem asseblief kennis dat hierdie toets ongeveer 17 minute sal duur. Daar is geen tyd beperkings op die stellings nie. Moet asseblief nie oor die stellings nadink nie, maar beantwoord dit volgens jou eerste natuurlike reaksie op die vraag. Daar is geen regte of verkeerde antwoorde nie. Die akkuraatheid van die uitslag word algeheel deur u eerlikheid en openheid bepaal. Begin met die reis om jouself te leer ken en geniet dit.</p><h5><span style="color: #ff0000;">NEEM ASB KENNIS DAT DIE DNS VERSLAG WAT JY GAAN ONTVANG IN ENGELS GAAN WEES</span></h5>', 1, 0, 20, 1, 'English', 0, 0, 0, 42, NULL, '2013-06-24 23:58:56', 1);
 
 INSERT INTO `#__dnagifts_lnk_test_question` (`test_id`, `question_id`, `show_duration`,`ordering`,`created_by`,`published`) VALUES 
 (5,214,0,1,42,1),
@@ -257,3 +257,10 @@ INSERT INTO `#__dnagifts_lnk_test_question` (`test_id`, `question_id`, `show_dur
 (5,337,0,124,42,1),
 (5,338,0,125,42,1),
 (5,339,0,126,42,1);
+
+INSERT INTO `#__dnagifts_lnk_test_buttonset` (`id`, `test_id`, `button_id`, `ordering`) VALUES
+(23, 5, 7, 1),
+(24, 5, 8, 2),
+(25, 5, 9, 3),
+(27, 5, 11, 4),
+(28, 5, 12, 5);
