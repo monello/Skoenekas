@@ -1,14 +1,23 @@
 /****** tool tips override ***/
 body .tip {
-  /*background: #0078FF url(../../../media/com_dnagifts/images/gradient.png) repeat-x 0 -100px;*/
-  border: 1px solid #B4B4B4;
   color: black;
   padding: 5px !important;
 }
 
 body .tip-wrap {
+	border: 1px solid #B4B4B4;
+	border-radius: 4px 4px 4px 4px !important;
 	border: 0px !important;
 	padding: 0px !important;
+	background: linear-gradient(#75A003 -50%, #ffffff 100%);
+	-ms-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+	-webkit-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+body .tip-title {
+	background-image: none;
 }
 
 div#notificationcontainer{

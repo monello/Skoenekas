@@ -477,4 +477,9 @@
   - Updated the buy and seminar links in the reports.
   - Added functionality to ensure PDF reports are only emailed once per test.
   - Added Afrikaans tests
+
+ 0.2.12 (2013/06/30)
+ -------------------
+  - added auto-scrolling to the test pages
+  - Improved tooltip styling
  

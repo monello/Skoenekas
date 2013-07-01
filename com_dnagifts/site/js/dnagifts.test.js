@@ -304,6 +304,7 @@ root.myNamespace.create('DnaGifts.test', {
 		if(parseInt(surveyconfig.use_timing)) {
 			nsCD.createCountDown(surveyconfig.default_duration, this.autoPassQuestion);
         }
+		jQuery("html, body").animate({ scrollTop: jQuery('#dnaTestSpace').offset().top }, 1000);
     }
 });
 
