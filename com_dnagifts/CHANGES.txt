@@ -483,3 +483,8 @@
   - added auto-scrolling to the test pages
   - Improved tooltip styling
  
+ 0.2.13 (2013/07/02)
+ -------------------
+  - updated the reverend question copy.
+  - Also started implementing the embedded images in the HTML emails
+  

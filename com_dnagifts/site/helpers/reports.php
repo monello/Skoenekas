@@ -1202,14 +1202,123 @@ class ReportsHelper
 		$query->from($db->quoteName('#__acymailing_template'));
 		$query->where('tempid = '.$template_id);
         $db->setQuery($query);
-        $result = $db->loadObject();
+        $result		 = $db->loadObject();
 		
-		$html = '<html><head><style>'.$result->stylesheet.'</style></head><body>'.
-				$result->body.'</body></html>';
-		
-		$pattern = '/\{subtag\:name\}/i';
+		$html 		 = '<html><head><style>'.$result->stylesheet.'</style></head><body>'.
+						$result->body.'</body></html>';
+						
+		$pattern 	 = '/\{subtag\:name\}/i';
 		$replacement = ReportsHelper::extractFirstName();
-		return preg_replace($pattern, $replacement, $html);
+		$html 		 = preg_replace($pattern, $replacement, $html);
+		
+		$images 	 = ReportsHelper::extractEmailImages($html);
+		$html 		 = ReportsHelper::srcToCid($html, $images);
+		
+		return ReportsHelper::generateMultiPartBody($html, $images);
+	}
+	
+	public static function srcToCid($html, $images)
+	{
+		// replace image src's with CIDs
+		foreach($images as $image) {
+			$html = preg_replace('/'.$image[0].'/', $image[2], $html);
+		}
+	}
+	
+	public static function generateMultiPartBody($html, $images)
+	{
+		$boundary1 = "BOUNDARY1_".md5(mt_rand());
+		$boundary2 = "BOUNDARY2_".md5(mt_rand());
+		
+		$embedded_images = '';
+		foreach($images as $image) {
+			$embedded_images .= 
+			"--{$boundary2}\n" .
+			"Content-Transfer-Encoding: base64\n".
+			"Content-Type: image/".$image[4].";\n".
+			" name=\"".$image[1]."\"\n".
+			"Content-ID: <{".$image[2]."}>\n".
+			"Content-Disposition: inline;\n".
+			" filename=\"".$image[1]."\"\n\n".
+			$image[3]."\n";
+		}
+		
+		$final_html = " boundary=\"{$boundary1}\"\r\n".
+		"This is a multi-part message in MIME format.\n" .
+		"--{$boundary1}\n" .
+
+		"Content-Type: text/plain; charset=\"UTF-8\"\n" .
+		"Content-Transfer-Encoding: 8bit\n\n" .
+
+		"This is an HTML email\n\n" .
+		"--{$boundary1}\n" .
+
+		"Content-Type: multipart/related;\n" .
+		" boundary=\"{$boundary2}\"\n\n" .
+		"--{$boundary2}\n" .
+
+		"Content-Type: text/html; charset=\"UTF-8\"\n" .
+		"Content-Transfer-Encoding: 8bit\n\n" .
+
+		$html."\n\n" .
+		
+		$embedded_images.
+		
+		"--{$boundary2}--\n\n".
+		"--{$boundary1}--";
+		
+		return $final_html;
+	}
+	
+	public static function extractEmailImages($page)
+	{
+		$doc = new DOMDocument(); 
+		$doc->loadHTML($page);
+		$images = $doc->getElementsByTagName('img'); 
+		$data = array();
+		foreach($images as $image) {
+			$src 	 = $image->getAttribute('src');
+			$igname  = ReportsHelper::extractImageName($src);
+			$ext	 = ReportsHelper::extractImageExtention($imgname);
+			$path 	 = ReportsHelper::imgSrcToPath($src);
+			$cid 	 = ReportsHelper::generateCID();
+			$encoded = ReportsHelper::encodeImage($path);
+			
+			$data[]  = array($src, $imgname, $cid, $encoded, $ext);
+		}
+		return $data;
+	}
+	
+	public static function generateCID()
+	{
+		return "IMAGE_".md5(mt_rand());
+	}
+	
+	public static function imgSrcToPath($src)
+	{
+		preg_match("/(\/images\/).+/", $src, $matches);
+		return $_SERVER['DOCUMENT_ROOT'].$matches[0];
+	}
+	
+	public static function extractImageExtention($imgname)
+	{
+		$extArr = preg_split('/\./', $imgname);
+		return $extArr[-1];
+	}
+	
+	public static function extractImageName($src)
+	{
+		$srcArr = preg_split('/\//', $src);
+		return $srcArr[-1];
+	}
+	
+	public static function encodeImage($path)
+	{
+		$file_size 	= filesize($path);
+		$handle 	= fopen($path, "r");
+		$imagedat 	= fread($handle, $file_size);
+		fclose($handle);
+		return chunk_split(base64_encode($imagedat));
 	}
 	
 	public static function getDnaMaxScore($user_test_id)
