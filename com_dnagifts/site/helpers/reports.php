@@ -1155,8 +1155,8 @@ class ReportsHelper
 		
         $subject = JText::_( 'COM_DNAGIFTS_REPORT_EMAILSUBJECT' ); 
         //$body = JText::_( 'COM_DNAGIFTS_REPORT_EMAILMESSAGE' );
-		$body = ReportsHelper::getEmailBody();
-        
+		list($body, $images) = ReportsHelper::getEmailBodyAndImages();
+		
         $to = $user->get("email");
 		//$to = "louw.morne@gmail.com";
 		
@@ -1170,16 +1170,21 @@ class ReportsHelper
          
         # Add a recipient -- this can be a single address (string) or an array of addresses
         $mailer->addRecipient($to);
-         
-        $mailer->setSubject($subject);
+		
+		$mailer->setSubject($subject);
         $mailer->setBody($body);
-         
-        # If you would like to send as HTML, include this line; otherwise, leave it out
-        $mailer->isHTML();
         
+		# If you would like to send as HTML, include this line; otherwise, leave it out
+        $mailer->isHTML(true);
+		$mailer->Encoding = 'base64';
+        // embed images
+		foreach($images as $image) {
+			$mailer->AddEmbeddedImage($image[3], $image[2], $image[1], 'base64', $image[5]);
+        }
+		
         //$attachment = JPATH_SITE."/README.txt";
         $mailer->addAttachment($filename);
-        
+				
         # Send once you have set all of your options
         $mailer->send();
 		
@@ -1193,7 +1198,7 @@ class ReportsHelper
 		$db->query();
 	}
 	
-	public static function getEmailBody()
+	public static function getEmailBodyAndImages()
 	{
 		$template_id = 9;
 		$db = JFactory::getDbo();
@@ -1210,64 +1215,19 @@ class ReportsHelper
 		$pattern 	 = '/\{subtag\:name\}/i';
 		$replacement = ReportsHelper::extractFirstName();
 		$html 		 = preg_replace($pattern, $replacement, $html);
-		
 		$images 	 = ReportsHelper::extractEmailImages($html);
 		$html 		 = ReportsHelper::srcToCid($html, $images);
 		
-		return ReportsHelper::generateMultiPartBody($html, $images);
+		return array($html,$images);
 	}
 	
 	public static function srcToCid($html, $images)
 	{
 		// replace image src's with CIDs
 		foreach($images as $image) {
-			$html = preg_replace('/'.$image[0].'/', $image[2], $html);
+			$html = preg_replace("/".preg_quote($image[0],'/')."/Ui", "cid:".$image[2], $html, 1);
 		}
-	}
-	
-	public static function generateMultiPartBody($html, $images)
-	{
-		$boundary1 = "BOUNDARY1_".md5(mt_rand());
-		$boundary2 = "BOUNDARY2_".md5(mt_rand());
-		
-		$embedded_images = '';
-		foreach($images as $image) {
-			$embedded_images .= 
-			"--{$boundary2}\n" .
-			"Content-Transfer-Encoding: base64\n".
-			"Content-Type: image/".$image[4].";\n".
-			" name=\"".$image[1]."\"\n".
-			"Content-ID: <{".$image[2]."}>\n".
-			"Content-Disposition: inline;\n".
-			" filename=\"".$image[1]."\"\n\n".
-			$image[3]."\n";
-		}
-		
-		$final_html = " boundary=\"{$boundary1}\"\r\n".
-		"This is a multi-part message in MIME format.\n" .
-		"--{$boundary1}\n" .
-
-		"Content-Type: text/plain; charset=\"UTF-8\"\n" .
-		"Content-Transfer-Encoding: 8bit\n\n" .
-
-		"This is an HTML email\n\n" .
-		"--{$boundary1}\n" .
-
-		"Content-Type: multipart/related;\n" .
-		" boundary=\"{$boundary2}\"\n\n" .
-		"--{$boundary2}\n" .
-
-		"Content-Type: text/html; charset=\"UTF-8\"\n" .
-		"Content-Transfer-Encoding: 8bit\n\n" .
-
-		$html."\n\n" .
-		
-		$embedded_images.
-		
-		"--{$boundary2}--\n\n".
-		"--{$boundary1}--";
-		
-		return $final_html;
+		return $html;
 	}
 	
 	public static function extractEmailImages($page)
@@ -1277,16 +1237,29 @@ class ReportsHelper
 		$images = $doc->getElementsByTagName('img'); 
 		$data = array();
 		foreach($images as $image) {
-			$src 	 = $image->getAttribute('src');
-			$igname  = ReportsHelper::extractImageName($src);
-			$ext	 = ReportsHelper::extractImageExtention($imgname);
-			$path 	 = ReportsHelper::imgSrcToPath($src);
-			$cid 	 = ReportsHelper::generateCID();
-			$encoded = ReportsHelper::encodeImage($path);
+			$src 	 	= $image->getAttribute('src');
+			$imgname 	= ReportsHelper::extractImageName($src);
+			$ext	 	= ReportsHelper::extractImageExtention($imgname);
+			$mimeType  	= ReportsHelper::getImageMimeType($ext);
+			$path 		= ReportsHelper::imgSrcToPath($src);
+			$cid 	 	= ReportsHelper::generateCID();
 			
-			$data[]  = array($src, $imgname, $cid, $encoded, $ext);
+			$data[]  	= array($src, $imgname, $cid, $path, $ext, $mimeType);
 		}
 		return $data;
+	}
+	
+	public static function getImageMimeType($ext) 
+	{
+		$mimetypes = array('bmp'   =>  'image/bmp',
+							'gif'   =>  'image/gif',
+							'jpeg'  =>  'image/jpeg',
+							'jpg'   =>  'image/jpeg',
+							'jpe'   =>  'image/jpeg',
+							'png'   =>  'image/png',
+							'tiff'  =>  'image/tiff',
+							'tif'   =>  'image/tiff');
+		return $mimetypes[$ext];
 	}
 	
 	public static function generateCID()
@@ -1302,23 +1275,12 @@ class ReportsHelper
 	
 	public static function extractImageExtention($imgname)
 	{
-		$extArr = preg_split('/\./', $imgname);
-		return $extArr[-1];
+		return  strtolower(array_pop(explode('.', $imgname)));
 	}
 	
 	public static function extractImageName($src)
 	{
-		$srcArr = preg_split('/\//', $src);
-		return $srcArr[-1];
-	}
-	
-	public static function encodeImage($path)
-	{
-		$file_size 	= filesize($path);
-		$handle 	= fopen($path, "r");
-		$imagedat 	= fread($handle, $file_size);
-		fclose($handle);
-		return chunk_split(base64_encode($imagedat));
+		return  array_pop(explode('/', $src));
 	}
 	
 	public static function getDnaMaxScore($user_test_id)

@@ -488,3 +488,7 @@
   - updated the reverend question copy.
   - Also started implementing the embedded images in the HTML emails
   
+ 0.2.14 (2013/07/03)
+ -------------------
+  - Embedded images completed - all works fine, but a error is still rendered in the console.
+  

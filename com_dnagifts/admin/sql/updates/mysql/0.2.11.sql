@@ -156,4 +156,4 @@ INSERT INTO `#__dnagifts_lnk_test_buttonset` (`id`, `test_id`, `button_id`, `ord
 (37, 7, 11, 4),
 (38, 7, 12, 5);
 
-ALTER TABLE `#__dnagifts_lnk_user_tests` ADD `date_sent` DATETIME NOT NULL;
+ALTER TABLE `#__dnagifts_lnk_user_tests` ADD `date_sent` DATETIME;
