@@ -1147,9 +1147,11 @@ class ReportsHelper
         $db->setQuery($query);
         $result = $db->loadObject();
 		
+		/*
 		if ($result->date_sent) {
 			return;
 		}
+		*/
 		
 		$filename = JPATH_SITE.DS."components".DS."com_dnagifts".DS."store".DS.$result->report_name;
 		
@@ -1251,14 +1253,14 @@ class ReportsHelper
 	
 	public static function getImageMimeType($ext) 
 	{
-		$mimetypes = array('bmp'   =>  'image/bmp',
+		$mimetypes = array( 'bmp'   =>  'image/bmp',
 							'gif'   =>  'image/gif',
 							'jpeg'  =>  'image/jpeg',
 							'jpg'   =>  'image/jpeg',
 							'jpe'   =>  'image/jpeg',
 							'png'   =>  'image/png',
 							'tiff'  =>  'image/tiff',
-							'tif'   =>  'image/tiff');
+							'tif'   =>  'image/tiff' );
 		return $mimetypes[$ext];
 	}
 	
@@ -1269,8 +1271,11 @@ class ReportsHelper
 	
 	public static function imgSrcToPath($src)
 	{
-		preg_match("/(\/images\/).+/", $src, $matches);
-		return $_SERVER['DOCUMENT_ROOT'].$matches[0];
+		if (substr( $src, 0, 7 ) === "http://") {
+			preg_match("/(\/images\/).+/", $src, $matches);
+			return $_SERVER['DOCUMENT_ROOT'].$matches[0];
+		}
+		return $_SERVER['DOCUMENT_ROOT'].'/'.$src;
 	}
 	
 	public static function extractImageExtention($imgname)

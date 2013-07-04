@@ -492,3 +492,7 @@
  -------------------
   - Embedded images completed - all works fine, but a error is still rendered in the console.
   
+ 0.2.15 (2013/07/04)
+ -------------------
+  - Fixed Auto-Suggest bug
+  
