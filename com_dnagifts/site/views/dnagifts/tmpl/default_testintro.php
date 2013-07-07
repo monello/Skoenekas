@@ -6,7 +6,14 @@ $model = $this->getModel('dnagifts');
 
 ?>
 <?php echo JText::_('COM_DNAGIFTS_TESTINTRO_HEAD'); ?>
-<iframe width="400" height="225" src="//www.youtube.com/embed/cLwXtjuOwAU" frameborder="0" allowfullscreen style="float: left; margin-right:35px; margin-bottom:20px"></iframe>
+<!--<iframe width="400" height="225" src="//www.youtube.com/embed/cLwXtjuOwAU" frameborder="0" allowfullscreen style="float: left; margin-right:35px; margin-bottom:20px"></iframe> -->
+	<object width="400" height="300" 
+		classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" 
+		codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0"
+		style="float: left; margin-right:35px; margin-bottom:20px">
+		<param name="SRC" value="<?php echo JURI::root(true); ?>/media/com_dnagifts/swf/1.swf">
+		<embed src="<?php echo JURI::root(true); ?>/media/com_dnagifts/swf/1.swf" width="400" height="300"></embed>
+	</object>
 <?php echo JText::_('COM_DNAGIFTS_TESTINTRO_BLURB'); ?>
 <table width="100%" id="introtable"><tbody>
 

@@ -168,9 +168,9 @@ function drawCharts() {
         title: dnaReportCopy.motivationalflow,
 		series: {0:{color: '000000', visibleInLegend: false}},
 		pointSize: 3,
-		height: 300,
+		height: 255,
 		width: 400,
-		chartArea: { left: 20, top: 20, width: 350, height: 230},
+		chartArea: { left: 20, top: 20, width: 350, height: 180},
 		hAxis: {slantedText: true, slantedTextAngle: 90, gridlines: {color: '#333', count: 4}}
 	};
 

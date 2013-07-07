@@ -145,3 +145,30 @@ a#buyBtn {
 a#buyBtn:hover {
 	background: transparent url(../../../media/com_dnagifts/images/buy_book2.jpg) -0 -112px !important;
 }
+
+span#line-auth,
+span#line-strength,
+span#line-valley {
+	display: block;
+    float: left;
+    font-size: 8pt;
+    font-weight: bold;
+	padding: 2px;
+}
+
+span#line-auth {
+    background-color: black;
+    color: white;
+    margin-left: 22px;
+}
+
+span#line-strength {
+	background-color: darkgrey;
+	margin-left: 1px;
+}
+span#line-valley {
+	background-color: lightgrey;
+	text-align: center;
+    width: 140px;
+	margin-left: 99px;
+}

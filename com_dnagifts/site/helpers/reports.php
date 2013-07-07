@@ -239,7 +239,7 @@ class ReportsHelper
 		
 		ReportsHelper::generatePDF_Section4($pdf, $column1_left, $column2_left, $dnaLineChartSrc, true);
 		
-		ReportsHelper::reportSeperator($pdf,8);
+		ReportsHelper::reportSeperator($pdf);
 		
 		ReportsHelper::generatePDF_Section5($pdf, $column1_left, $dnaResults, $userTestID);
 		
@@ -300,7 +300,7 @@ class ReportsHelper
 		
 		ReportsHelper::generatePDF_Section4($pdf, $column1_left, $column2_left, $svgData, false);
 		
-		ReportsHelper::reportSeperator($pdf,8);
+		ReportsHelper::reportSeperator($pdf);
 		
 		ReportsHelper::generatePDF_Section5($pdf, $column1_left, $dnaResults, $userTestID);
 		
@@ -406,7 +406,7 @@ class ReportsHelper
 		
 				</td>
 				<td width="15">&nbsp;</td>
-				<td><p>'.$COM_DNAGIFTS_REPORT_DNACHART_TEXT.'</p></td>		
+				<td>'.$COM_DNAGIFTS_REPORT_DNACHART_TEXT.'</td>		
 			</tr>
 		</table>';
 
@@ -485,19 +485,41 @@ class ReportsHelper
 		$x = $pdf->GetX();
 		
 		$html = '<table border="0" width="910" cellspacing="3" cellpadding="0" style="font-size:8pt">
-			<tr>
-				<td width="305">';
+			<tr>';
 		
 		if ($is_MSIE) {
-			$html .= '<img src="'.$svgData.'" />';
+			$html .= '<td width="305"><img src="'.$svgData.'" />';
+			$col1w = '5';
+			$col2w = '40';
+			$col3w = '40';
+			$col4w = '95';
+			$col5w = '115';
 		} else {
-			$html .= "&nbsp;";	
+			$html .= '<td width="305" height="155">&nbsp;';
+			$col1w = '15';
+			$col2w = '40';
+			$col3w = '40';
+			$col4w = '90';
+			$col5w = '100';
 		}
 		
-		$html .= '		</td>
+		$html .= '</td>
 		
 				<td width="15">&nbsp;</td>
 				<td><p>'.$COM_DNAGIFTS_REPORT_MOTIFLOW_TEXT.'</p></td>		
+			</tr>
+			<tr>
+				<td>
+					<table style="font-size: 6pt"><tr>
+						<td width="'.$col1w.'">&nbsp;</td>
+						<td width="'.$col2w.'" align="center" style="background-color: black;color:white;">Authority</td>
+						<td width="'.$col3w.'" align="center" style="background-color: darkgrey;">Strength</td>
+						<td width="'.$col4w.'">&nbsp;</td>
+						<td width="'.$col5w.'"align="center" style="background-color: grey;">The Valley</td>
+					</tr></table>
+				</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
 			</tr>
 		</table>';
 
@@ -506,7 +528,7 @@ class ReportsHelper
 		
 		if (!$is_MSIE) {
 			$pdf->ImageSVG($file='@'.htmlspecialchars_decode($svgData['linechart_div']), $x, $y, 
-				$w='', $h=65, $link='', $align='', $palign='', $border=0, $fitonpage=false);
+				$w='', $h=57, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 		}
 	}
 	
@@ -558,7 +580,7 @@ class ReportsHelper
 	{
 		$first_name 		= ReportsHelper::extractFirstName();
 		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY = strtoupper($first_name).'ABCDEFG'.JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY');
+		$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY = strtoupper($first_name).JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY');
 		$COM_DNAGIFTS_2NDDNAGIFT = JText::_('COM_DNAGIFTS_2NDDNAGIFT');
 		$COM_DNAGIFTS_3RDDNAGIFT = JText::_('COM_DNAGIFTS_3RDDNAGIFT');
 		$HEADIMG2_SRC 		= ReportsHelper::getHeaderImg($dnaResults, 1);;
@@ -970,7 +992,7 @@ class ReportsHelper
 		}
 		
 		$charttype = 'lxy';
-		$chartsize = '300x150';
+		$chartsize = '300x200';
 		
 		$dnaChart="https://chart.googleapis.com/chart".
 			"?cht=$charttype".

@@ -144,7 +144,8 @@ $first_name 		= ReportsHelper::extractFirstName();
 		</tr>
 		<tr>
 			<td>
-				<div id="linechart_div" style="width: 400px; height: 300px;"></div>
+				<div id="linechart_div" style="width: 400px; height: 255px;"></div>
+				<span id="line-auth">Authority</span><span id="line-strength">Strength</span><span id="line-valley">The Valley</span>
 			</td>
 			<td>&nbsp;</td>
 			<td>
