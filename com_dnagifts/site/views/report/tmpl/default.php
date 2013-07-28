@@ -272,7 +272,6 @@ $first_name 		= ReportsHelper::extractFirstName();
 						<td>
 							<p class="rptText12"><strong><?php echo strtoupper($first_name); ?><?php echo JText::_('COM_DNAGIFTS_REPORT_PURPOSE_HEADER'); ?></strong></p>
 							<p><?php echo JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P1'); ?> 
-								<?php echo strtoupper($first_name); ?> 
 								<?php echo JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P2'); ?>
 							</p>
 							<p>
@@ -283,7 +282,7 @@ $first_name 		= ReportsHelper::extractFirstName();
 								<?php echo JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P4'); ?> 
 								<?php echo $first_name; ?>.
 								<?php echo JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P5'); ?>
-							</p><?php echo $first_name; ?>,
+							</p>
 								<?php echo JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P6'); ?>
 							</p>
 							<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/dna_jesus.jpg" width="700px" height="212px" />
@@ -311,7 +310,7 @@ $first_name 		= ReportsHelper::extractFirstName();
 							</a>
 						</td>
 						<td>
-							<p class="rptText12"><strong><?php echo JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY'); ?></strong></p>
+							<p style="font-size:10pt;color:red" class="rptText12"><strong><?php echo JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY2'); ?></strong></p>
 							<p><?php echo JText::_('COM_DNAGIFTS_REPORT_BOOKDETAILS'); ?></p>
 						</td>
 						<td>

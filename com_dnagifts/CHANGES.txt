@@ -507,3 +507,8 @@
   - Fixed the Swapped colours in the saved Guages-SVG.
   - Applies some spelling, grammar and punctuation fixes.
  
+1.0.0 (2013/07/28)
+------------------
+ - Final tweaks and fixes
+ - Updated report layout to include seminar info
+ 

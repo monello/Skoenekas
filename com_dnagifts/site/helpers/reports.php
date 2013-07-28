@@ -38,26 +38,97 @@ class ReportsHelper
 	{
 		$html = '';
 		$html .= '
+			<br />
+			<img src="'.JURI::base(true).'/media/com_dnagifts/images/banner_beTHYSELF.jpg" width="930" />
+			<h3>THE DNA "BE THYSELF" SEMINAR EXPERIENCE</h3>
+			<p>The BE THYSELF Seminar is not a normal monotonous type of event, it is an interactive animation, video, props, lighting and media experience together with life changing insight to help people discover who they really are. The normal duration of a seminar is 8 hours over a period of 2 days. The DNA Seminar is presented to churches, organisations and people who want to discover their God-given gifts.</p>
 
-			<h3>ATTEND THE DNA SEMINAR IN DURBANVILLE</h3>
-			<p>The BE Thyself seminar runs over four week every month on Thursday evenings from 19:00 - 21:00.<br/>
-			The BE THYSELF Seminar is not a normal monotonous type of event, it is an interactive animation, video, 
-			props, lighting and media experience together with life changing insight to help discover who you really 
-			are. The normal duration of a seminar is 8 hours over 4 weeks. The DNA Seminar is presented to people who 
-			want to discover their God-given gift.</p>
-			<a href="'.JURI::root().'events/be-thyself-seminar"><img src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png" align="right"/></a>
-			<h3>THE BE THYSELF SEMINAR IS EXCELLENT FOR</h3>
-			<ul>
-				<li>Team Dynamics</li>
-				<li>Church Dynamics</li>
-				<li>Corporate Dynamics</li>
-				<li>Engaged couples</li>
-				<li>Personal Leadership development</li>
-			</li>
-			
-			<p>Click <a href="'.JURI::root().'events/be-thyself-seminar">here</a> to view the course outline and register online for the seminar.</p>
-			You can also host a seminar at your church, para-church organization or company.</p> 
+			<p><a href="'.JURI::root().'enquiry-dna" target="_new">CLICK HERE</a> TO ENQUIRE ABOUT A SEMINAR AT YOUR ORGANISATION</p>
 
+			<p><a href="'.JURI::root().'events/be-thyself-seminar" target="_new">UPCOMING SEMINARS (SOUTH AFRICA)</a></p>';
+		
+		if ($type == 'pdf') {
+			$html .= '<br />';
+		}
+		
+		$html.=	'<table width="100%"><tr>
+				<td colspan="2">
+					<h3>THE DNA SEMINAR IN DURBANVILLE (CAPE TOWN) SOUTH AFRICA</h3>
+				</td>
+			</tr>
+			<tr>
+			<tr>
+				<td>
+					<img src="'.JURI::base(true).'/media/com_dnagifts/images/logo_DCC2.png" align="left" height="90px" style="padding-right: 30px; padding-bottom: 10px"/>
+				</td>
+				<td>
+					<p>The "BE Thyself" seminar runs over a four week period every month on Thursday evenings from 19:00 - 21:00. Click here if you would like to register as a delegate to attend the BE THYSELF seminar in the northern suburbs of Cape Town at the <a href="http://www.d-cc.co.za/" target="_new">Durbanville Conference Centre</a></p>
+				</td>
+				</tr>
+			</table>';
+		
+		if ($type == 'pdf') {
+			$html .= '
+				<table width="100%">
+				<tr><td colspan="2"> &nbsp; </td></tr>
+				<tr><td width="400px">
+					<h3>THE BE THYSELF SEMINAR IS EXCELLENT FOR</h3>
+					<ul>
+						<li>Team Dynamics</li>
+						<li>Church Dynamics</li>
+						<li>Corporate Dynamics</li>
+						<li>Engaged couples</li>
+						<li>Personal Leadership development</li>
+					</li>
+				</td>
+				<td align="right" width="200px">
+					<a href="'.JURI::root().'events/be-thyself-seminar"><img height="150px" src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png"/></a>
+				</td></tr></table>';
+		} else {		
+			$html.=	'<table width="100%"><tr><td>
+					<h3>THE BE THYSELF SEMINAR IS EXCELLENT FOR</h3>
+					<ul>
+						<li>Team Dynamics</li>
+						<li>Church Dynamics</li>
+						<li>Corporate Dynamics</li>
+						<li>Engaged couples</li>
+						<li>Personal Leadership development</li>
+					</li>
+				</td>
+				<td align="right">
+					<a href="'.JURI::root().'events/be-thyself-seminar"><img height="200px" src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png"/></a>
+				</td></tr></table>';
+		}
+		
+		$html .=	'<p>Click <a href="'.JURI::root().'events/be-thyself-seminar">here</a> to view the course outline and register online for the seminar.</p>
+			You can also host a seminar at your church, para-church organization or company.</p>'; 
+		
+		if ($type == 'pdf') {
+			$html .= '<table width="100%">
+					<tr>
+						<td align="center">
+							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself"><img height="50px" src="'.JURI::base(true).'/media/com_dnagifts/images/attendBUTTON.png" /></a>
+						</td>
+						<td align="center">
+							<a href="'.JURI::root().'upcoming-events/rsvp"><img height="50px" src="'.JURI::base(true).'/media/com_dnagifts/images/course_button.png" /></a>
+						</td>
+					</tr>
+					<tr><td colspan="2"> &nbsp; </td></tr>
+				</table>';
+		} else {
+			$html .= '<table width="100%">
+					<tr>
+						<td align="center">
+							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself"><img src="'.JURI::base(true).'/media/com_dnagifts/images/attendBUTTON.png" /></a>
+						</td>
+						<td align="center">
+							<a href="'.JURI::root().'upcoming-events/rsvp"><img src="'.JURI::base(true).'/media/com_dnagifts/images/course_button.png" /></a>
+						</td>
+					</tr>
+				</table>';
+		}
+		$html .='<br/>
+			<img src="'.JURI::base(true).'/media/com_dnagifts/images/BE THYSELF BANNER2.jpg" width="930" />
 		';
 		return $html;
 	}
@@ -264,7 +335,7 @@ class ReportsHelper
 		ReportsHelper::generatePDF_Section9($pdf, $column1_left);
 		
 		$pdf->AddPage();
-		$additionalhtml = ReportsHelper::additionalInfo();
+		$additionalhtml = ReportsHelper::additionalInfo('pdf');
         $pdf->writeHTML($additionalhtml);
 		
 		// ######## FINALIZE DOCUMENT #########
@@ -325,7 +396,7 @@ class ReportsHelper
 		ReportsHelper::generatePDF_Section9($pdf, $column1_left);
 		
 		$pdf->AddPage();
-		$additionalhtml = ReportsHelper::additionalInfo();
+		$additionalhtml = ReportsHelper::additionalInfo('pdf');
         $pdf->writeHTML($additionalhtml);
 		
 		// ######## FINALIZE DOCUMENT #########
@@ -561,7 +632,7 @@ class ReportsHelper
 			<tr>
 				<td width="305">	
 					<img src="'.$HEADIMG_SRC.'"/><br/>
-					<img src="'.$MANIMG_SRC.'" />
+					<img height="245px" src="'.$MANIMG_SRC.'" />
 					<p>'.$STRENGTHMETER.'</p>
 				</td>
 				<td width="15">&nbsp;</td>
@@ -572,7 +643,7 @@ class ReportsHelper
 		// Print text using writeHTML()
         $pdf->writeHTML($html);
 		
-		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge1chart_svg), $x, $y + 95, 
+		$pdf->ImageSVG($file='@'.htmlspecialchars_decode($gauge1chart_svg), $x, $y + 90, 
 			$w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 	}
 
@@ -609,7 +680,7 @@ class ReportsHelper
 				<td width="305">
 					<span style="font-size:12pt;font-weight:bold;color:#999">'.$COM_DNAGIFTS_2NDDNAGIFT.'</span><br/>
 					<img src="'.$HEADIMG2_SRC.'"/><br/>
-					<img src="'.$MANIMG2_SRC.'" />
+					<img height="245px" src="'.$MANIMG2_SRC.'" />
 					<p>'.$STRENGTHMETER.'</p>
 					<img height="110px" width="110px" src="'.JPATH_SITE.'/media/com_dnagifts/images/spacer10x10.jpg" />
 				</td>
@@ -617,7 +688,7 @@ class ReportsHelper
 				<td>
 					<span style="font-size:12pt;font-weight:bold;color:#999">'.$COM_DNAGIFTS_3RDDNAGIFT.'</span><br/>
 					<img src="'.$HEADIMG3_SRC.'"/><br/>
-					<img src="'.$MANIMG3_SRC.'" />
+					<img height="245px" src="'.$MANIMG3_SRC.'" />
 					<p>'.$STRENGTHMETER.'</p>
 					<img height="110px" width="110px" src="'.JPATH_SITE.'/media/com_dnagifts/images/spacer10x10.jpg" />
 				</td>		
@@ -697,9 +768,9 @@ class ReportsHelper
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_DESIGNEDFORPURPOSE = JText::_('COM_DNAGIFTS_REPORT_DESIGNEDFORPURPOSE');
 		$HEADER = strtoupper($first_name).JText::_('COM_DNAGIFTS_REPORT_PURPOSE_HEADER');
-		$P1 = JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P1').strtoupper($first_name).' '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P2');
+		$P1 = JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P1').' '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P2');
 		$P2 = $first_name.' '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P3');
-		$P3 = JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P4').' '.$first_name.'. '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P5');
+		$P3 = JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P4').'. '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P5');
 		$P4 = $first_name.' '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P6');
 		
 		$y = $pdf->GetY();
@@ -755,16 +826,16 @@ class ReportsHelper
 					<tr>
 						<td width="120">
 							<a href="'.JURI::root().'purchase/purpose-life/the-dna-gifts-book-1-detail">
-								<img src="'.JURI::base(true).'/media/com_dnagifts/images/dna_book.jpg" width="100px" />
+								<img border="0" src="'.JURI::base(true).'/media/com_dnagifts/images/dna_book.jpg" width="100px" />
 							</a>
 						</td>
 						<td>
-							<p style="font-size:10pt"><strong>'.JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY').'</strong></p>
+							<p style="font-size:8pt;color:red"><strong>'.JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY2').'</strong></p>
 							<p>'.JText::_('COM_DNAGIFTS_REPORT_BOOKDETAILS').'</p>
 						</td>
 						<td width="100">
 							<a id="buyBtn" href="'.JURI::root().'purchase/purpose-life/the-dna-gifts-book-1-detail">
-								<img src="'.JURI::base(true).'/media/com_dnagifts/images/buy_book.jpg" width="100px"/>
+								<img border="0" src="'.JURI::base(true).'/media/com_dnagifts/images/buy_book.jpg" width="110px"/>
 							</a>
 						</td>
 					</tr>
@@ -790,7 +861,7 @@ class ReportsHelper
 		$html = '<table border="0" cellpadding="0" cellspacing="0" width="910">
 					<tr>
 						<td width="120">
-							<img src="'.JURI::base(true).'/media/com_dnagifts/images/juan_nel.jpg" width="100px" />
+							<img src="'.JURI::base(true).'/media/com_dnagifts/images/juan_nel.jpg" width="90px" />
 						</td>
 						<td>
 							<p>'.JText::_('COM_DNAGIFTS_REPORT_AUTHORDETAILS').'</p>
@@ -1169,12 +1240,10 @@ class ReportsHelper
         $db->setQuery($query);
         $result = $db->loadObject();
 		
-		/*
 		if ($result->date_sent) {
 			return;
 		}
-		*/
-		
+				
 		$filename = JPATH_SITE.DS."components".DS."com_dnagifts".DS."store".DS.$result->report_name;
 		
         $subject = JText::_( 'COM_DNAGIFTS_REPORT_EMAILSUBJECT' ); 
