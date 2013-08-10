@@ -7,7 +7,8 @@ require(JPATH_ROOT.DS.'tcpdf'.DS.'tcpdf.php');
 class MYPDF extends TCPDF {
     //Page header
     public function Header() {
-        $image_file = K_PATH_IMAGES.JText::_( 'COM_DNAGIFTS_PDF_BANNERIMAGE' );
+        //$image_file = K_PATH_IMAGES.JText::_( 'COM_DNAGIFTS_PDF_BANNERIMAGE' );
+		$image_file = JPATH_ROOT."/media/com_dnagifts/images/".JText::_( 'COM_DNAGIFTS_PDF_BANNERIMAGE' );
         $this->Image($image_file, 15, 10, 180, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
     }
 	
@@ -62,7 +63,8 @@ class ReportsHelper
 					<img src="'.JURI::base(true).'/media/com_dnagifts/images/logo_DCC2.png" align="left" height="90px" style="padding-right: 30px; padding-bottom: 10px"/>
 				</td>
 				<td>
-					<p>The "BE Thyself" seminar runs over a four week period every month on Thursday evenings from 19:00 - 21:00. Click here if you would like to register as a delegate to attend the BE THYSELF seminar in the northern suburbs of Cape Town at the <a href="http://www.d-cc.co.za/" target="_new">Durbanville Conference Centre</a></p>
+					<p>The "BE Thyself" seminar runs over a four week period every month on Thursday evenings from 19:00 - 21:00. <a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details">Click here</a> if you would like to register as a delegate to attend the BE THYSELF seminar in the northern suburbs of Cape Town at the <a href="http://www.d-cc.co.za/" target="_new">Durbanville Conference Centre</a></p>
+					<p>Durbanville Conference Centre is the ideal venue in the Northern Suburbs of Cape Town for your next conference or function, <a href="http://www.d-cc.co.za" target="_new">click here</a> to visit to find out out more info</p>
 				</td>
 				</tr>
 			</table>';
@@ -82,7 +84,7 @@ class ReportsHelper
 					</li>
 				</td>
 				<td align="right" width="200px">
-					<a href="'.JURI::root().'events/be-thyself-seminar"><img height="150px" src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png"/></a>
+					<a href="'.JURI::root().'events/be-thyself-seminar"><img height="130px" src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png"/></a>
 				</td></tr></table>';
 		} else {		
 			$html.=	'<table width="100%"><tr><td>
@@ -96,21 +98,21 @@ class ReportsHelper
 					</li>
 				</td>
 				<td align="right">
-					<a href="'.JURI::root().'events/be-thyself-seminar"><img height="200px" src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png"/></a>
+					<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details"><img height="200px" src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png"/></a>
 				</td></tr></table>';
 		}
 		
-		$html .=	'<p>Click <a href="'.JURI::root().'events/be-thyself-seminar">here</a> to view the course outline and register online for the seminar.</p>
+		$html .=	'<p>Click <a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details">here</a> to view the course outline and register online for the seminar.</p>
 			You can also host a seminar at your church, para-church organization or company.</p>'; 
 		
 		if ($type == 'pdf') {
 			$html .= '<table width="100%">
 					<tr>
 						<td align="center">
-							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself"><img height="50px" src="'.JURI::base(true).'/media/com_dnagifts/images/attendBUTTON.png" /></a>
+							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details"><img height="50px" src="'.JURI::base(true).'/media/com_dnagifts/images/attendBUTTON.png" /></a>
 						</td>
 						<td align="center">
-							<a href="'.JURI::root().'upcoming-events/rsvp"><img height="50px" src="'.JURI::base(true).'/media/com_dnagifts/images/course_button.png" /></a>
+							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details"><img height="50px" src="'.JURI::base(true).'/media/com_dnagifts/images/course_button.png" /></a>
 						</td>
 					</tr>
 					<tr><td colspan="2"> &nbsp; </td></tr>
@@ -119,10 +121,10 @@ class ReportsHelper
 			$html .= '<table width="100%">
 					<tr>
 						<td align="center">
-							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself"><img src="'.JURI::base(true).'/media/com_dnagifts/images/attendBUTTON.png" /></a>
+							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details"><img src="'.JURI::base(true).'/media/com_dnagifts/images/attendBUTTON.png" /></a>
 						</td>
 						<td align="center">
-							<a href="'.JURI::root().'upcoming-events/rsvp"><img src="'.JURI::base(true).'/media/com_dnagifts/images/course_button.png" /></a>
+							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details"><img src="'.JURI::base(true).'/media/com_dnagifts/images/course_button.png" /></a>
 						</td>
 					</tr>
 				</table>';
@@ -825,7 +827,7 @@ class ReportsHelper
 		$html = '<table border="0" cellpadding="0" cellspacing="0" width="910">
 					<tr>
 						<td width="120">
-							<a href="'.JURI::root().'purchase/purpose-life/the-dna-gifts-book-1-detail">
+							<a href="'.JURI::root().'purchase">
 								<img border="0" src="'.JURI::base(true).'/media/com_dnagifts/images/dna_book.jpg" width="100px" />
 							</a>
 						</td>
@@ -834,7 +836,7 @@ class ReportsHelper
 							<p>'.JText::_('COM_DNAGIFTS_REPORT_BOOKDETAILS').'</p>
 						</td>
 						<td width="100">
-							<a id="buyBtn" href="'.JURI::root().'purchase/purpose-life/the-dna-gifts-book-1-detail">
+							<a id="buyBtn" href="'.JURI::root().'purchase">
 								<img border="0" src="'.JURI::base(true).'/media/com_dnagifts/images/buy_book.jpg" width="110px"/>
 							</a>
 						</td>

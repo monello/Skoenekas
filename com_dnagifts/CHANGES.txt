@@ -507,8 +507,16 @@
   - Fixed the Swapped colours in the saved Guages-SVG.
   - Applies some spelling, grammar and punctuation fixes.
  
-1.0.0 (2013/07/28)
-------------------
+ 1.0.0 (2013/07/28)
+ ------------------
  - Final tweaks and fixes
  - Updated report layout to include seminar info
  
+ 1.0.1 (2013/08/10)
+ ------------------
+ - Applied some urgent change requests and update the the report.
+ - Gifts text formatting did not fit in PDF
+ - Report banner was missing after upgrading TCPDF, updated code to use component media folder and not TCPDF
+ - Mountain graph heading was incorrect
+ - Many hardcoded links were wrong re attend event.
+ - Updated the raport banner and any imaged that had the old url in it.
