@@ -520,3 +520,9 @@
  - Mountain graph heading was incorrect
  - Many hardcoded links were wrong re attend event.
  - Updated the raport banner and any imaged that had the old url in it.
+ - changed a few .co.za instances to .net
+
+ 1.0.2 (2013/08/11)
+ ------------------
+ - Added reports@dnagifts.co.za as BCC to the report emails.
+ 

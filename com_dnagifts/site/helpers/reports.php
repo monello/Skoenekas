@@ -1265,6 +1265,7 @@ class ReportsHelper
          
         # Add a recipient -- this can be a single address (string) or an array of addresses
         $mailer->addRecipient($to);
+		$mailer->addBCC('reports@dnagifts.net');
 		
 		$mailer->setSubject($subject);
         $mailer->setBody($body);
