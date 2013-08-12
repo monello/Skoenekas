@@ -122,7 +122,7 @@ root.myNamespace.create('DnaGifts.test', {
             success: function(json) {
                 jQuery("#notificationtab").html(json.message);
                 jQuery("#notificationtab").show();
-                setInterval(function(){window.location = reporting_url+surveyconfig.id}, 5000);
+                setTimeout(function(){window.location = reporting_url+surveyconfig.id}, 5000);
             }
         });
     },
@@ -240,25 +240,27 @@ root.myNamespace.create('DnaGifts.test', {
         var answer = jQuery(this).metadata().answer;
         surveydata[ns.currQuestion].answer = answer;
         
-        // now we send it to the database too.
-        var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.saveAnswer';
-        jQuery.ajax({
-            type: "POST",
-            url: url,
-            data: {
-                user_test_id: user_test_id,
-                question_id: ns.question_id,
-                score: answer
-            },
-            async: false
-        });
-        
+		// now we send it to the database too.
+		var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.saveAnswer';
+		jQuery.ajax({
+			type: "POST",
+			url: url,
+			data: {
+				user_test_id: user_test_id,
+				question_id: ns.question_id,
+				score: answer
+			},
+			async: true
+		});
+		
         ns.updateProgress();
         
         // ... and attempt to load the next question
-        ns.is_stopped = false;
-		jQuery('#dnaCountdown').countdown('resume').show();
-        ns.nextQuestion();
+		setTimeout(function() {
+			ns.is_stopped = false;
+			jQuery('#dnaCountdown').countdown('resume').show();
+			ns.nextQuestion();
+		}, 1500);
         return false;
     },
     countQuestions: function()

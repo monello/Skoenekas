@@ -526,3 +526,8 @@
  ------------------
  - Added reports@dnagifts.co.za as BCC to the report emails.
  
+ 1.0.3 (2013/08/12)
+ ------------------
+ - fixed the setInterval loop that posts to FB every 5 seconds, replaced by setTimeout.
+ - Improved the question loading so that UX goes into "LOADING" mode exactly on-click.
+ 
