@@ -88,14 +88,15 @@ table#tblScores thead th {
 table#tblScores tbody tr { color: #333333; }
 table#tblScores tbody tr td { text-align: center; }
 table#tblScores tbody tr td.tdYourGift { padding-left: 5px; text-align: left; }
-table#tblScores tbody tr td.tdScore { background-color: LightGrey; color: #333333;  }
-table#tblScores tbody tr.trPerceiver { background-color: #FF0000; }
-table#tblScores tbody tr.trServant { background-color: #FFC000; }
-table#tblScores tbody tr.trTeacher { background-color: #FFFF00; }
-table#tblScores tbody tr.trExhorter { background-color: #00B050; }
-table#tblScores tbody tr.trGiver { background-color: #538ED5; }
-table#tblScores tbody tr.trRuler { background-color: #333391; color: white; }
-table#tblScores tbody tr.trMercy { background-color: #990099; color: white; }
+table#tblScores tbody tr td.tdScore { background-color: LightGrey; color: #333333; }
+
+table#tblScores tbody tr.trPerceiver, table#tblScores tbody tr.trWaarnemer { background-color: #FF0000; }
+table#tblScores tbody tr.trServant, table#tblScores tbody tr.trDienaar { background-color: #FFC000; }
+table#tblScores tbody tr.trTeacher, table#tblScores tbody tr.trLeraar { background-color: #FFFF00; }
+table#tblScores tbody tr.trExhorter, table#tblScores tbody tr.trVermaner { background-color: #00B050; }
+table#tblScores tbody tr.trGiver, table#tblScores tbody tr.trGewer { background-color: #538ED5; }
+table#tblScores tbody tr.trRuler, table#tblScores tbody tr.trHeerser { background-color: #333391; color: white; }
+table#tblScores tbody tr.trMercy, table#tblScores tbody tr.trGenade { background-color: #990099; color: white; }
 
 table#tblDNAChart,
 table#tblDNAChart tr,
