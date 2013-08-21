@@ -266,15 +266,17 @@ class DnagiftsHelper
 		$progress['howmany'] = $db->loadResult();
 		
 		// count the number of answers
-		$query = "
-			SELECT COUNT(*)
-			FROM ".$db->nameQuote('#__dnagifts_testquestions_and_answers')." AS a
-			WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id)."
-			AND ".$db->nameQuote('test_id')." = ".$db->quote($test_id);
+		if ($user_test_id) {
+			$query = "SELECT COUNT(id)
+				FROM ".$db->nameQuote('#__dnagifts_lnk_user_test_answers')." AS a
+				WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id);
 			
-		$db->setQuery($query);
-		
-		$progress['answers'] = $db->loadResult();
+			$db->setQuery($query);
+			
+			$progress['answers'] = $db->loadResult();
+		} else {
+			$progress['answers'] = 0;
+		}
 		
 		// get percentage complete
 		$progress['percent'] = 0;

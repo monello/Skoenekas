@@ -1,0 +1,139 @@
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  214 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  215 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  216 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  217 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  218 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  219 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  220 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  221 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  222 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  223 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  224 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  225 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  226 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  227 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  228 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  229 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  230 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  231 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  232 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  233 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  234 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  235 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  236 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  237 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  238 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  239 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  240 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  241 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  242 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  243 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  244 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  245 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  246 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  247 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  248 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  249 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  250 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  251 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  252 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  253 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  254 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  255 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  256 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  257 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  258 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  259 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  260 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  261 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  262 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  263 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  264 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  265 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  266 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  267 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  268 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  269 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  270 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  271 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  272 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  273 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  274 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  275 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  276 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  277 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  278 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  279 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  280 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  281 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  282 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  283 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  284 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  285 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  286 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  287 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  288 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  289 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  290 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  291 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  292 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  293 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  294 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  295 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  296 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  297 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  298 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  299 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  300 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  301 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  302 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  303 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  304 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  305 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  306 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  307 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  308 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  309 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  310 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  311 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  312 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  313 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  314 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  315 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  316 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  317 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  318 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  319 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  320 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  321 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  322 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  323 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  324 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  325 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  326 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  327 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  328 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  329 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  330 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  331 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  332 ;
+Update `#__dnagifts_question` SET `gift_id` =  3 WHERE `id` =  333 ;
+Update `#__dnagifts_question` SET `gift_id` =  5 WHERE `id` =  334 ;
+Update `#__dnagifts_question` SET `gift_id` =  6 WHERE `id` =  335 ;
+Update `#__dnagifts_question` SET `gift_id` =  4 WHERE `id` =  336 ;
+Update `#__dnagifts_question` SET `gift_id` =  7 WHERE `id` =  337 ;
+Update `#__dnagifts_question` SET `gift_id` =  1 WHERE `id` =  338 ;
+Update `#__dnagifts_question` SET `gift_id` =  2 WHERE `id` =  339 ;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

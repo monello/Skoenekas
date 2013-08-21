@@ -26,7 +26,8 @@
  - Fixed the save new test-button link to add the created_by and published fields
  - Re-organized some of the javascript includes
  - Implemented the framework for the tests in the front end
-    (2012/08/15)
+ 
+	(2012/08/15)
  - Added the start screen to the Test
  - Updated some of the user-test interactions.
  - Implemented the passing of the surveydata to JS (albeit fake data for now)
@@ -535,4 +536,19 @@
  ------------------
  - Added DNA Report table color background classes in Adrikaans
  
+ 1.0.5 (2013/08/19)
+ ------------------
+ - Added SQL to fix afrikaans question-gifts
+ 
+ 1.0.6 (2013/08/19)
+ ------------------
+ - Add table indexes
+ 
+ 1.0.7 (2013/08/19)
+ ------------------
+ - Optimized some SQL
+ 
+ 1.0.8 (2013/08/21)
+ ------------------
+ - Fixed the test progress check
  
