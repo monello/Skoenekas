@@ -20,18 +20,28 @@ class DnaGiftsControllerTest extends JControllerForm
     $db   = JFactory::getDbo();
     $user	= JFactory::getUser();
     
-    $query = $db->getQuery(true);
-    $query->insert('#__dnagifts_lnk_user_test_answers');
-    $query->columns('lnk_user_test_id, question_id, answer_score');
-    $query->values((int) $user_test_id . ',' . (int) $question_id . ',' . (int) $score);
-    $db->setQuery($query);
-    if (!$db->query()) {
-      $this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_ANSWER'));
-      echo json_encode(array("success"=> false, "message" => JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_ANSWER')));
-      return false;
-    }
+	$query = "SELECT id
+		FROM ".$db->nameQuote('#__dnagifts_lnk_user_test_answers').
+		" WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id).
+		" AND ".$db->nameQuote('question_id')." = ".$db->quote($question_id);
+			
+	$db->setQuery($query);
+	$answer_id = $db->loadResult();
 	
-	$answer_id = $db->insertid();
+	if (!$answer_id) {	
+		$query = $db->getQuery(true);
+		$query->insert('#__dnagifts_lnk_user_test_answers');
+		$query->columns('lnk_user_test_id, question_id, answer_score');
+		$query->values((int) $user_test_id . ',' . (int) $question_id . ',' . (int) $score);
+		$db->setQuery($query);
+		if (!$db->query()) {
+		  $this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_ANSWER'));
+		  echo json_encode(array("success"=> false, "message" => JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_ANSWER')));
+		  return false;
+		}
+		
+		$answer_id = $db->insertid();
+	}
 	
 	// Get test_id
 	$query = "

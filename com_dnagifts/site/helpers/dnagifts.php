@@ -267,9 +267,9 @@ class DnagiftsHelper
 		
 		// count the number of answers
 		if ($user_test_id) {
-			$query = "SELECT COUNT(id)
-				FROM ".$db->nameQuote('#__dnagifts_lnk_user_test_answers')." AS a
-				WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id);
+			$query = "SELECT COUNT(DISTINCT(question_id))
+				FROM ".$db->nameQuote('#__dnagifts_lnk_user_test_answers').
+				" WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id);
 			
 			$db->setQuery($query);
 			

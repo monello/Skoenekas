@@ -186,23 +186,22 @@ root.myNamespace.create('DnaGifts.test', {
     {
         var ns = DnaGifts.test;
         var nsCD = Base.countdown;
-        var nextquestion = undefined;
         ns.question_id = undefined;
         jQuery.each(surveydata, function(index, elem) {
             if (!elem.answer && elem.answer !== 0) {
-                nextquestion = index;
+                ns.currQuestion = index;
                 ns.question_id = elem.id;
                 nsCD.duration = (parseInt(elem.duration)) ? parseInt(elem.duration) : parseInt(surveyconfig.default_duration);
                 return false;
             }
             return true;
         });
-        return nextquestion;
+        return true;
     },
     placeNextQuestion: function()
     {
         // this function updates the UI and adds the new question to the screen
-		jQuery("#dnaQuestionText").html(surveydata[this.currQuestion].question);
+        jQuery("#dnaQuestionText").html(surveydata[this.currQuestion].question);
     },
     updateProgress: function()
     {
@@ -406,6 +405,7 @@ root.myNamespace.create('DnaGifts.pretest', {
 					jQuery(json.buttons).appendTo("#dnaButtonsBar");
 					jQuery("#dnaLoadingDiv").hide();
 					jQuery("#dnaQuestionText").show();
+					jQuery("#dnaButtonsBar").show();
 					jQuery("#dnaMessages").hide();
 					nsP.attachAutoSuggest();
 					nsP.attachCopyAnswer();

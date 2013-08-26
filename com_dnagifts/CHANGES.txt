@@ -552,3 +552,12 @@
  ------------------
  - Fixed the test progress check
  
+ 1.0.9 (2013/08/25)
+ ------------------
+ - Fix problem with saving duplicate answers
+ - Fix query that counts anwers to ensure distinct question id is counted
+ 
+ 1.0.10 (2013/08/26)
+ -------------------
+ - Fixed a bug that broke the next-question selection.
+ - Also fixed an odd bug that did not display the answer buttons for pre-test questions. How this worked without this previously is a mystery. Maybe I accidentally deleted this line at some point.

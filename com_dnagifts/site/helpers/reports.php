@@ -880,7 +880,6 @@ class ReportsHelper
 	public static function extractFirstName()
 	{
 		$user = JFactory::getUser();
-		$user_id = $user->get("id");
 		$name1st=explode(" ",$user->name);
 		return $name1st[0];
 	}
