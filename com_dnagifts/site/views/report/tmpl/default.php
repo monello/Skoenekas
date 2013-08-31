@@ -375,7 +375,7 @@ $first_name 		= ReportsHelper::extractFirstName();
 	    $giftname = ReportsHelper::getGiftLabel($this->dnaResults, 0);
 	    $aOrAn = ReportsHelper::aOrAn($giftname);
 	    $post['message'] = 'My DNA Gift was just revealed, what it yours?';
-	    $post['link'] = 'http://www.dnagifts.net/';
+	    $post['link'] = 'http://www.dnagifts.net/home/';
 	    $post['name'] = 'The DNA Gifts Test';
 	    $post['caption'] = 'DO THE FREE  DNA GIFTS TEST';
 	    $post['picture'] = $this->dnaChartSrc;
@@ -385,7 +385,7 @@ $first_name 		= ReportsHelper::extractFirstName();
 	    $post['access_token'] = $accessToken;
 	    if ($jfbcLibrary->getMappedFbUserId()) { // Check if there is a Facebook user logged in
 	      $jfbcLibrary->setFacebookMessage($post);
-	    }
+	    } 
 	}
 ?>
 

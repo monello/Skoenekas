@@ -1,0 +1,32 @@
+/* TEST CSS */
+
+div#questiontext{
+  font-size: 18pt;
+  font-family: fantasy;
+  height: 100px;
+  display: none;
+  text-align: center;
+}
+
+div.cdprogressbar{
+  float: left;
+  width: 100%;
+  margin-top: 8px;
+  height: 5px;
+  background-color: #00ff00;
+}
+
+.container_12 {
+  border: 1px solid white;
+}
+
+div#progress {
+  text-align: right;
+}
+
+div.answer{
+  text-align: center;
+  font-size: 14pt;
+  font-family: fantasy;
+}
+

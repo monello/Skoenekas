@@ -561,3 +561,8 @@
  -------------------
  - Fixed a bug that broke the next-question selection.
  - Also fixed an odd bug that did not display the answer buttons for pre-test questions. How this worked without this previously is a mystery. Maybe I accidentally deleted this line at some point.
+ 
+ 1.0.11 (2013/08/28)
+ -------------------
+ - Updated FB back link
+ 
