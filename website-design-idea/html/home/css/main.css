@@ -75,13 +75,73 @@ body {
 #rightArrow {
 	right: -55px;
 }
-.carousel-indicators {
+ol.carousel-indicators {
 	top: 103%;
-	right: 50%;
 }
-#carouselMask {
+
+@media (max-width: 767px) {
+	ol.carousel-indicators {
+		padding-right: 20%;
+	}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+	ol.carousel-indicators {
+		padding-right: 20%;
+	}
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+	ol.carousel-indicators {
+		padding-right: 25%;
+	}
+}
+@media (min-width: 1200px) {
+	ol.carousel-indicators {
+		padding-right: 30%;
+	}
+}
+ol.carousel-indicators li {
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 5px;
+	border-radius: 10px 10px 10px 10px;
+	border: 1px solid #ffffff;
+}
+.active.perceiverDot {background-color: #ff0000;}
+.active.servantDot {background-color: #ff9c00;}
+.active.teacherDot {background-color: #fff001;}
+.active.exhorterDot {background-color: #5af85e;}
+.active.giverDot {background-color: #0668fb;}
+.active.rulerDot {background-color: #8303b9;}
+.active.mercyDot {background-color: #be06b3;}
+
+#carouselMask,
+#dnaHeptagons0,
+#dnaHeptagons1,
+#dnaHeptagons2,
+#dnaHeptagons3,
+#dnaHeptagons4,
+#dnaHeptagons5,
+#dnaHeptagons6,
+#dnaHeptagons7 {
 	position: absolute;
 	top: 0;
-	height: 100px;
 	width: 100%;
+}
+
+#dnaHeptagons0 { display: block; }
+#dnaHeptagons1 { display: block; }
+#dnaHeptagons2 { display: none; }
+#dnaHeptagons3 { display: none; }
+#dnaHeptagons4 { display: none; }
+#dnaHeptagons5 { display: none; }
+#dnaHeptagons6 { display: none; }
+#dnaHeptagons7 { display: none; }
+
+.tooltip-inner {
+  color: #000000;
+  background-color: #ffffff;
+  font-weight: bold;
+}
+.tooltip.top .tooltip-arrow  {
+	border-top-color: #ffffff;
 }
