@@ -70,7 +70,7 @@
 									alt="DNAGifts/Gifts">COM_DNAGIFTS_GIFTS</menu>
 			<menu link="option=com_dnagifts&amp;view=answers" view="answers" img="/media/com_dnagifts/images/answers-16x16.png"
 									alt="DNA Gifts/Manage Answers">COM_DNAGIFTS_ANSWERS</menu>
-			<menu link="option=com_dnagifts&amp;view=reports" view="reports" img="/media/com_dnagifts/images/answers-16x16.png"
+			<menu link="option=com_dnagifts&amp;view=reports" view="reports" img="/media/com_dnagifts/images/reports-16x16.png"
 									alt="DNA Gifts/Do Reporting">COM_DNAGIFTS_REPORTS</menu>
 		</submenu>
 		<!-- Administration Main File Copy Section -->

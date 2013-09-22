@@ -12,7 +12,7 @@ CREATE TABLE `#__dnagifts_healthchecks` (
   `new_incomplete` int(11) NOT NULL DEFAULT '0' COMMENT 'new incomplete since last run',
   `total_extraanswers` int(11) NOT NULL DEFAULT '0' COMMENT 'Total number of tests with extra answers',
   `new_extraanswers` int(11) NOT NULL DEFAULT '0' COMMENT 'new tests with extra answers since last run',
-  `sent_datetime` int(11) NOT NULL COMMENT 'date and time the report was sent to Admins',
+  `sent_datetime` int(11) NULL COMMENT 'date and time the report was sent to Admins',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_generated_date` (`generated_datetime`),
   KEY `idx_total_tests` (`total_tests`),

@@ -583,3 +583,7 @@
  - Created a new table "#__dnagifts_healthchecks"
  - Fixed the broken reporting controller. Doesn't do anything yet it's just the skeleton code.
  
+ 1.0.15 (2013/09/22)
+ -------------------
+ - Added a report dashboard screen with a health check on it
+ 

@@ -200,7 +200,8 @@ if ($mysqli->connect_errno) {
 	$data .= $report_data['new_extraanswers_tests'].", ";
 	$data .= "NULL";
 	
-	$mysqli->query("INSERT INTO jml_dnagifts_healthchecks VALUES (".$data.")");
+	$query = "INSERT INTO jml_dnagifts_healthchecks VALUES (".$data.")";
+	$mysqli->query($query);
 	$mysqli->close();
 }
 

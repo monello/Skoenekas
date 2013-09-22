@@ -2,7 +2,7 @@
 defined('_JEXEC') or die;
 
 /**
- * Banners component helper.
+ * DNA Gifts component helper.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_dnagifts
@@ -242,6 +242,21 @@ class DnagiftsHelper
 		return $result;
 	}
 	
+	public static function getHealhCheckData()
+	{
+		//$result	= new JObject;
+		
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+		
+		$query->select('*');
+		$query->from($db->quoteName('#__dnagifts_healthchecks'));
+		$query->order($db->nameQuote('generated_datetime').' DESC');
+		$db->setQuery($query,0,1); // LIMIT 1
+		$results = $db->loadObject();
+		return $results;
+	}
+	
   public static function addEllipsis($string, $length, $end='...')
   {
     return (strlen($string) > $length) ? substr($string, 0, $length - strlen($end )) . $end : $string;
@@ -295,6 +310,8 @@ class DnagiftsHelper
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/gift-16x16.png);}');
 		$document->addStyleDeclaration('.icon-16-dnagifts16x16-answer ' .
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/answers-16x16.png);}');
+		$document->addStyleDeclaration('.icon-16-dnagifts16x16-report ' .
+		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/reports-16x16.png);}');
 		
 		$document->addStyleDeclaration('.icon-48-dnatests48x48 ' .
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/Tests-48x48.png);}');
@@ -304,6 +321,8 @@ class DnagiftsHelper
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/Options-48x48.png);}');
 		$document->addStyleDeclaration('.icon-48-dnaanswers48x48 ' .
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/answers-48x48.png);}');
+		$document->addStyleDeclaration('.icon-48-dnareports48x48 ' .
+		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/reports-48x48.png);}');
 		
 		$document->addStyleDeclaration('.colorpatch {float: right; display: inline; height: 15px; width: 30px;}');
 	}
