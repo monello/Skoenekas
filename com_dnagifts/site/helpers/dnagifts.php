@@ -126,8 +126,8 @@ class DnagiftsHelper
 		$data = Null;
 		$db = JFactory::getDBO();
 		$query = "SELECT * FROM ".$db->nameQuote('#__dnagifts_pretest_info')." WHERE ".$db->nameQuote('user_id')." = ".$db->quote($user->get("id")).";";
-    $db->setQuery($query);
-    $data = $db->loadObject();
+		$db->setQuery($query);
+		$data = $db->loadObject();
     
 		// Check for a database error.
 		if ($db->getErrorNum()) {

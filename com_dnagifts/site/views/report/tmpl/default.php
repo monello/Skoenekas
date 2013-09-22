@@ -376,12 +376,10 @@ $first_name 		= ReportsHelper::extractFirstName();
 	    $aOrAn = ReportsHelper::aOrAn($giftname);
 	    $post['message'] = 'My DNA Gift was just revealed, what it yours?';
 	    $post['link'] = 'http://www.dnagifts.net/home/';
-	    $post['name'] = 'The DNA Gifts Test';
-	    $post['caption'] = 'DO THE FREE  DNA GIFTS TEST';
-	    $post['picture'] = $this->dnaChartSrc;
-	    $post['description'] = $first_name.' has just done the FREE DNA Gifts test. This Test reveals your Dynamic Natural Ability. '.
-	                           $first_name.' has the Dynamic Natural Ability of '.$aOrAn.' '.$giftname.
-	                           '. Click here to discover your DNA and unlock your life purpose.';
+	    $post['name'] = 'The FREE DNA Gifts Test';
+	    $post['caption'] = 'KNOW THYSELF';
+	    $post['picture'] = 'http://www.dnagifts.net/media/com_dnagifts/images/1e5e3de6-1713-11e3-8aec-ae0046dcb120.jpg'; //$this->dnaChartSrc;
+	    $post['description'] = $first_name.' has done the FREE DNA Gifts test. This test revealed my Dynamic Natural Ability. It was designed to help me to discover my life-purpose. Its insightful and will help you also to unlock your life purpose.';
 	    $post['access_token'] = $accessToken;
 	    if ($jfbcLibrary->getMappedFbUserId()) { // Check if there is a Facebook user logged in
 	      $jfbcLibrary->setFacebookMessage($post);

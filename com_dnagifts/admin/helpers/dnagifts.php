@@ -278,6 +278,12 @@ class DnagiftsHelper
 			$vName == 'answers'
 		);
 		
+		JSubMenuHelper::addEntry(
+			JText::_('COM_DNAGIFTS_REPORTS'),
+			'index.php?option=com_dnagifts&view=reports',
+			$vName == 'reports'
+		);
+
 		// set some global property
 		$document = JFactory::getDocument();
 		

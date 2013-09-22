@@ -566,3 +566,20 @@
  -------------------
  - Updated FB back link
  
+ 1.0.12 (2013/09/06)
+ -------------------
+ - Updated the preset question
+ - Updated the facebook post
+  
+ 1.0.13 (2013/09/21)
+ -------------------
+ - Added a cron job to ensure the progress value for each test record is accurate enough to report on.
+ - Added three extra fields to the user-tests table to help with proper reporting
+ - Added the first version of the back-end reporting section
+ 
+ 1.0.14 (2013/09/22)
+ -------------------
+ - Updated the cron script to log numbers to a new table
+ - Created a new table "#__dnagifts_healthchecks"
+ - Fixed the broken reporting controller. Doesn't do anything yet it's just the skeleton code.
+ 
