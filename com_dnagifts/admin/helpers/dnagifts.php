@@ -217,6 +217,110 @@ class DnagiftsHelper
 		return $options;
 	}
 	
+	public static function getTestUserOptions()
+	{
+		// Initialize variables.
+		$options = array();
+		
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+		
+		$query->select('a.user_id As value');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'). ' AS a');
+		
+		$query->select('CONCAT(b.name, " (", b.username, ")") AS text');
+		$query->join('LEFT', $db->quoteName('#__users').' AS b ON b.id = a.user_id');
+		
+		$query->group('a.user_id');
+		$query->order('b.name');
+		
+		// Get the options.
+		$db->setQuery($query);
+		
+		$options = $db->loadObjectList();
+		
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		array_unshift($options, JHtml::_('select.option', '', '- Select User -'));
+		
+		return $options;
+	}
+	
+	public static function getTestsDoneOptions()
+	{
+		// Initialize variables.
+		$options = array();
+		
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+		
+		$query->select('a.test_id As value');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'). ' AS a');
+		
+		$query->select('CONCAT(b.test_name, " (test_id: ", b.id, ")") AS text');
+		$query->join('LEFT', $db->quoteName('#__dnagifts_test').' AS b ON b.id = a.test_id');
+		$query->group('a.test_id');
+		$query->order('b.test_name');
+		
+		// Get the options.
+		$db->setQuery($query);
+		
+		$options = $db->loadObjectList();
+		
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		array_unshift($options, JHtml::_('select.option', '', '- Select Test -'));
+		
+		return $options;
+	}
+	
+	public static function getTestProgressOptions()
+	{
+		// Initialize variables.
+		$options = array();
+		
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+		
+		$query->select('progress As value, CONCAT(progress,"%") AS text');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
+		$query->group('progress');
+		$query->order('progress');
+		
+		// Get the options.
+		$db->setQuery($query);
+		
+		$options = $db->loadObjectList();
+		
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		array_unshift($options, JHtml::_('select.option', '', '- Select Progress -'));
+		
+		return $options;
+	}
+	
+	public static function getTestStatusOptions()
+	{
+		// Build the active state filter options.
+		$options	= array();
+		$options[]	= JHtml::_('select.option', '', '- Select Status -');
+		$options[]	= JHtml::_('select.option', 1, 'Good');
+		$options[]	= JHtml::_('select.option', 2, 'Incomplete');
+		$options[]	= JHtml::_('select.option', 3, 'No Report');
+		$options[]	= JHtml::_('select.option', 4, 'Extra Answers');
+
+		return $options;
+	}
+	
 	/**
 	 * Gets a list of the actions that can be performed.
 	 * 
@@ -323,6 +427,8 @@ class DnagiftsHelper
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/answers-48x48.png);}');
 		$document->addStyleDeclaration('.icon-48-dnareports48x48 ' .
 		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/reports-48x48.png);}');
+		$document->addStyleDeclaration('.icon-48-dnatesthist48x48 ' .
+		    '{background-image: url('.JURI::root(true).'/media/com_dnagifts/images/archive-iton-48x48.png);}');
 		
 		$document->addStyleDeclaration('.colorpatch {float: right; display: inline; height: 15px; width: 30px;}');
 	}

@@ -56,6 +56,20 @@ table.dnaHealthChecks tr td:first-of-type { font-weight: bold; }
 table.dnaHealthChecks tr td:last-of-type { text-align: right; }
 table.dnaHealthChecks tr:nth-child(odd) { background-color:#eee; }
 table.dnaHealthChecks tr:nth-child(even) { background-color:#fff; }
+
+a.dnaRetportBtn {
+	border: 1px solid #D5D5D5;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px;
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+a.dnaRetportBtn:hover {
+	background-color: #D5D5D5;
+}
+div#dnaRptTestHistory ul { padding-left: 13px; }
 </style>
 
 <div id="dnaReportingWrapper">
