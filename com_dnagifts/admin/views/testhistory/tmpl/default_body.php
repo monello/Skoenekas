@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted Access');
 		<td>
 			<?php echo JHtml::_('date', $item->started_datetime, JText::_('DATE_FORMAT_LC2')); ?>
 		</td>
-		<td>
+		<td align="center">
 			<?php
 			switch ($item->status) {
 				case 1:

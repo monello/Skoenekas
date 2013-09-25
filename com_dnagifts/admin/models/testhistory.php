@@ -59,7 +59,7 @@ class DnaGiftsModelTesthistory extends JModelList
 		$this->setState('params', $params);
 		
 		// List state information.
-		parent::populateState('started_datetime', 'asc');
+		parent::populateState('started_datetime', 'desc');
 	}
 	
 	/**

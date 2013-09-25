@@ -591,3 +591,11 @@
  -------------------
  - Added the Test History report
  
+ 1.0.17 (2013/09/25)
+ -------------------
+ - Updated the facebook-post piccy
+ - Added the table "#__dnagifts_testresults" - This table logs the final score and gift positions for each completed test
+ - Added a cron job to keep the table updated - runs every 5 minutes
+ - Centralized the test-history status indicator
+ - Changed the default sort order for the test-history report to started_datetime desc
+ 

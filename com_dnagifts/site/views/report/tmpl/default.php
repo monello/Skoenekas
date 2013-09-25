@@ -378,7 +378,7 @@ $first_name 		= ReportsHelper::extractFirstName();
 	    $post['link'] = 'http://www.dnagifts.net/home/';
 	    $post['name'] = 'The FREE DNA Gifts Test';
 	    $post['caption'] = 'KNOW THYSELF';
-	    $post['picture'] = 'http://www.dnagifts.net/media/com_dnagifts/images/1e5e3de6-1713-11e3-8aec-ae0046dcb120.jpg'; //$this->dnaChartSrc;
+	    $post['picture'] = 'http://www.dnagifts.net/media/com_dnagifts/images/ab520632-247f-11e3-8b68-e1d49c0db4f0-172px.jpg'; //$this->dnaChartSrc;
 	    $post['description'] = $first_name.' has done the FREE DNA Gifts test. This test revealed my Dynamic Natural Ability. It was designed to help me to discover my life-purpose. Its insightful and will help you also to unlock your life purpose.';
 	    $post['access_token'] = $accessToken;
 	    if ($jfbcLibrary->getMappedFbUserId()) { // Check if there is a Facebook user logged in
