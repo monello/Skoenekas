@@ -599,3 +599,21 @@
  - Centralized the test-history status indicator
  - Changed the default sort order for the test-history report to started_datetime desc
  
+ 1.0.18 (2013/09/28)
+ -------------------
+ - Dropped table `#__dnagifts_lnk_user_gifts` is not used and is replaced by `#__dnagifts_testresults` which is more complete
+ - Removed the emailing code from the progress update cron and set the cron to run every 5 minutes
+ 
+ 1.0.19 (2013/09/29)
+ -------------------
+ - Updated the healthcheck cron to run every 5 minutes, but only if there were new test records. 
+ - Replaced the emailing code in the healthcheck cron
+ - Added an 'is_timing_on' field to the #__dnagifts_lnk_user_tests table to track the question-timing setting at time of doing the test.
+ - Added the code to update the is_timing_on, question_count and browser into on the lnk_user_test table
+ 
+ 1.0.20 (2013/09/29)
+ -------------------
+ - Dropped the browser_info field and added the fields user_browswer and user_platform instead
+ - Added the user browser and platform to the the report.
+ - Tweaked the dashboard graph
+ 

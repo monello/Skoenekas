@@ -25,6 +25,19 @@ div.statusicon {
 .incompleteicon { background-position: 137px 0px }
 .noreporticon { background-position: 62px 0px }
 .extraanswersicon { background-position: 100px 0px }
+
+.progresstext { font-weight: bold; font-size: 110% }
+.goodstatus	{ color: rgb(3,122,11) }
+.incompletestatus { color: rgb(104,104,104)  }
+.noreportstatus { color: rgb(176,0,0) }
+.extraanswersstatus { color: rgb(255,137,17) }
+
+a.viewreport {
+	display: block; 
+	height: 24px;
+	width: 24px;
+	background-image: url(<?php echo JURI::root(true) ?>/media/com_dnagifts/images/view-report24x24.png);
+}
 </style>
 <form action="<?php echo JRoute::_('index.php?option=com_dnagifts&view=testhistory'); ?>" method="post" name="adminForm" id="adminForm">
 	<?php echo $this->loadTemplate('filterbar');?>

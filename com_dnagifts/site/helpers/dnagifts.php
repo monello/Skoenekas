@@ -318,5 +318,10 @@ class DnagiftsHelper
 			}
 		}
 		return 0;
+	}
+	
+	function getBrowser()
+	{
+		return get_browser(null, true);
 	}	
 }

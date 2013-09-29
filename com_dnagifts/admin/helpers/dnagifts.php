@@ -227,8 +227,10 @@ class DnagiftsHelper
 		
 		$query->select('a.user_id As value');
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'). ' AS a');
+		$query->where('a.user_id IS NOT NULL');
 		
 		$query->select('CONCAT(b.name, " (", b.username, ")") AS text');
+		$query->where('b.name IS NOT NULL');
 		$query->join('LEFT', $db->quoteName('#__users').' AS b ON b.id = a.user_id');
 		
 		$query->group('a.user_id');
@@ -259,8 +261,10 @@ class DnagiftsHelper
 		
 		$query->select('a.test_id As value');
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'). ' AS a');
+		$query->where('a.test_id IS NOT NULL');
 		
 		$query->select('CONCAT(b.test_name, " (test_id: ", b.id, ")") AS text');
+		$query->where('b.test_name IS NOT NULL');
 		$query->join('LEFT', $db->quoteName('#__dnagifts_test').' AS b ON b.id = a.test_id');
 		$query->group('a.test_id');
 		$query->order('b.test_name');
@@ -304,6 +308,64 @@ class DnagiftsHelper
 		}
 		
 		array_unshift($options, JHtml::_('select.option', '', '- Select Progress -'));
+		
+		return $options;
+	}
+	
+	public static function getUserBrowserOptions()
+	{
+		// Initialize variables.
+		$options = array();
+		
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+		
+		$query->select('user_browser As value, user_browser AS text');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
+		$query->where('user_browser IS NOT NULL');
+		$query->group('user_browser');
+		$query->order('user_browser');
+		
+		// Get the options.
+		$db->setQuery($query);
+		
+		$options = $db->loadObjectList();
+		
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		array_unshift($options, JHtml::_('select.option', '', '- Select Browser -'));
+		
+		return $options;
+	}
+	
+	public static function getUserPlatformOptions()
+	{
+		// Initialize variables.
+		$options = array();
+		
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+		
+		$query->select('user_platform As value, user_platform AS text');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
+		$query->where('user_platform IS NOT NULL');
+		$query->group('user_platform');
+		$query->order('user_platform');
+		
+		// Get the options.
+		$db->setQuery($query);
+		
+		$options = $db->loadObjectList();
+		
+		// Check for a database error.
+		if ($db->getErrorNum()) {
+			JError::raiseWarning(500, $db->getErrorMsg());
+		}
+		
+		array_unshift($options, JHtml::_('select.option', '', '- Select Platform -'));
 		
 		return $options;
 	}

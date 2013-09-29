@@ -67,11 +67,12 @@ class DnaGiftsControllerTest extends JControllerForm
   
   public function logUserTest()
 	{
-    $test_id	= JRequest::getCmd('test_id');
-    $db		 	= JFactory::getDbo();
-    $user	 	= JFactory::getUser();
-    $sessionID	= DnaGiftsHelper::getSessionID();
-    
+    $test_id		= JRequest::getCmd('test_id');
+    $db		 		= JFactory::getDbo();
+    $user	 		= JFactory::getUser();
+    $sessionID		= DnaGiftsHelper::getSessionID();
+	$browser 		= get_browser(null, true);
+	
     $query = "
 	  SELECT id
 		FROM ".$db->nameQuote('#__dnagifts_lnk_user_tests')."
@@ -98,11 +99,33 @@ class DnaGiftsControllerTest extends JControllerForm
 	$db->setQuery($query);
 	$db->query();
     
+	// Check if the test user question timing.
+	// Track to use in the future for debugging problematic test results
+	$query = "SELECT use_timing
+		FROM ".$db->nameQuote('#__dnagifts_test')."
+		WHERE ".$db->nameQuote('id')." = ".$db->quote($test_id);
+	$db->setQuery($query);
+	$use_timing = $db->loadResult();
+	
+	// Count the questions for this test
+	$query = "SELECT howmany
+		FROM ".$db->nameQuote('#__dnagifts_count_testquestions')."
+		WHERE ".$db->nameQuote('test_id')." = ".$db->quote($test_id);
+	$db->setQuery($query);
+	$question_count = $db->loadResult();
+	
     // Log the new Session ID
     $query = $db->getQuery(true);
     $query->insert('#__dnagifts_lnk_user_tests');
-    $query->columns('session_id, user_id, test_id');
-    $query->values($db->quote($sessionID) . ',' .(int) $user->get('id') . ',' . (int) $test_id);
+    $query->columns('session_id, user_id, test_id, user_browser, user_platform, is_timing_on, question_count');
+    $query->values($db->quote($sessionID) . ',' 
+					. (int) $user->get('id') . ',' 
+					. (int) $test_id . ',' 
+					. $db->quote($browser['parent']) . ','
+					. $db->quote($browser['platform']) . ','
+					. (int) $use_timing .','
+					. (int) $question_count
+				);
     $db->setQuery($query);
     if (!$db->query()) {
       $this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_USERTEST'));

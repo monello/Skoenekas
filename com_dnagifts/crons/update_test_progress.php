@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * This cron updates the progress value in the lnk_user_test table.
+ * This is done for admin-reporting purposes, not for progress tracking during doing a test.
+ * Progress tracking during the test is done by Ajax, but changes are things can go wrong there, 
+ * 		so this cron corrects it every 5 minutes.
+ **/
+ 
 // Create connection
 $mysqli = new mysqli("localhost", "dnagifts_cron", "kCRcKqPsTvrQ", "dnagifts_jmln");
 
@@ -9,15 +15,8 @@ if ($mysqli->connect_errno) {
   $msqlerr ="Failed to connect to MySQL: " . $mysqli->connect_error;
 } else {
 	$report_data = array();
-
-	$mysqli->query("UPDATE jml_dnagifts_lnk_user_tests a
-		INNER JOIN jml_dnagifts_calculate_testprogress b ON a.id = b.lnk_user_test_id
-		SET a.progress_updated = Now(),
-		   a.progress = CONVERT(ROUND(b.progress), UNSIGNED) 
-		WHERE a.progress_updated IS NULL
-		AND TIME_TO_SEC(TIMEDIFF(NOW(), a.started_datetime))/3600 > 2");
 	
-	$query = "SELECT * FROM `ccblm_dnagifts_healthchecks` 
+	$query = "SELECT * FROM `jml_dnagifts_healthchecks` 
 			ORDER BY `generated_datetime` DESC LIMIT 1";
 	$result = $mysqli->query($query);
 	if ($result->num_rows) {
@@ -33,18 +32,30 @@ if ($mysqli->connect_errno) {
 	$report_data['total_tests'] = $data['howmany'];
 	$result->free();
 	
-	// Count all NEW the test records
-	if ($last_data) {
-		$query = "SELECT COUNT(id) howmany 
-				FROM jml_dnagifts_lnk_user_tests 
-				WHERE `started_datetime` >= '".$last_data['generated_datetime']."'";
-		$result = $mysqli->query($query);
-		$data = $result->fetch_assoc();
-		$report_data['new_tests'] = $data['howmany'];
-		$result->free();
-	} else {
-		$report_data['new_tests'] = 0;
+	// if there were no new tests registered in the last 5 minutes, then skip the rest of the processing
+	// Mostly we just want to keep the healthchecks table to a not-so-stupidly-huge size :)
+	echo $data['howmany']." == ".$last_data['total_tests']."<br />";
+	if ($data['howmany'] == $last_data['total_tests']) {
+		echo "Exiting: Nothing new to report here";
+		die();
 	}
+	
+	// update the progress field for test records that have no "progress_updated" value and is older than 2 hours
+	$mysqli->query("UPDATE jml_dnagifts_lnk_user_tests a
+		INNER JOIN jml_dnagifts_calculate_testprogress b ON a.id = b.lnk_user_test_id
+		SET a.progress_updated = Now(),
+		   a.progress = CONVERT(ROUND(b.progress), UNSIGNED) 
+		WHERE a.progress_updated IS NULL
+		AND TIME_TO_SEC(TIMEDIFF(NOW(), a.started_datetime))/3600 > 2");
+	
+	// Count all NEW the test records
+	$query = "SELECT COUNT(id) howmany 
+			FROM jml_dnagifts_lnk_user_tests 
+			WHERE `started_datetime` >= '".$last_data['generated_datetime']."'";
+	$result = $mysqli->query($query);
+	$data = $result->fetch_assoc();
+	$report_data['new_tests'] = $data['howmany'];
+	$result->free();
 	
 	// count all the good tests
 	$query = "SELECT COUNT(id) howmany 
@@ -56,18 +67,14 @@ if ($mysqli->connect_errno) {
 	$result->free();
 	
 	// count all the NEW good tests
-	if ($last_data) {
-		$query = "SELECT COUNT(id) howmany 
-				FROM jml_dnagifts_lnk_user_tests 
-				WHERE progress = 100 
-				AND `started_datetime` >= '".$last_data['generated_datetime']."'";
-		$result = $mysqli->query($query);
-		$data = $result->fetch_assoc();
-		$report_data['new_good_tests'] = $data['howmany'];
-		$result->free();
-	} else {
-		$report_data['new_good_tests'] = 0;
-	}
+	$query = "SELECT COUNT(id) howmany 
+			FROM jml_dnagifts_lnk_user_tests 
+			WHERE progress = 100 
+			AND `started_datetime` >= '".$last_data['generated_datetime']."'";
+	$result = $mysqli->query($query);
+	$data = $result->fetch_assoc();
+	$report_data['new_good_tests'] = $data['howmany'];
+	$result->free();
 	
 	// count all the noreport tests
 	$query = "SELECT COUNT(id) howmany 
@@ -81,20 +88,17 @@ if ($mysqli->connect_errno) {
 	$result->free();
 	
 	// count all NEW the noreport tests
-	if ($last_data) {
-		$query = "SELECT COUNT(id) howmany 
-				FROM jml_dnagifts_lnk_user_tests 
-				WHERE progress = 100 
-				AND report_name is NULL 
-				AND resolved = FALSE 
-				AND `started_datetime` >= '".$last_data['generated_datetime']."'";
-		$result = $mysqli->query($query);
-		$data = $result->fetch_assoc();
-		$report_data['new_noreport_tests'] = $data['howmany'];
-		$result->free();
-	} else {
-		$report_data['new_noreport_tests'] = 0;
-	}
+	$query = "SELECT COUNT(id) howmany 
+			FROM jml_dnagifts_lnk_user_tests 
+			WHERE progress = 100 
+			AND report_name is NULL 
+			AND resolved = FALSE 
+			AND `started_datetime` >= '".$last_data['generated_datetime']."'";
+	$result = $mysqli->query($query);
+	$data = $result->fetch_assoc();
+	$report_data['new_noreport_tests'] = $data['howmany'];
+	$result->free();
+
 	// Extract the data for the no-report tests
 	if ($report_data['noreport_tests'] > 0) {
 		$query = "SELECT * FROM jml_dnagifts_lnk_user_tests 
@@ -120,18 +124,14 @@ if ($mysqli->connect_errno) {
 	$result->free();
 	
 	// count all the NEW incomplete tests
-	if ($last_data) {
-		$query = "SELECT COUNT(id) howmany 
-			FROM jml_dnagifts_lnk_user_tests 
-			WHERE progress < 100 
-			AND `started_datetime` >= '".$last_data['generated_datetime']."'";
-		$result = $mysqli->query($query);
-		$data = $result->fetch_assoc();
-		$report_data['new_incomplete_tests'] = $data['howmany'];
-		$result->free();
-	} else {
-		$report_data['new_incomplete_tests'] = 0;
-	}
+	$query = "SELECT COUNT(id) howmany 
+		FROM jml_dnagifts_lnk_user_tests 
+		WHERE progress < 100 
+		AND `started_datetime` >= '".$last_data['generated_datetime']."'";
+	$result = $mysqli->query($query);
+	$data = $result->fetch_assoc();
+	$report_data['new_incomplete_tests'] = $data['howmany'];
+	$result->free();
 	
 	// Extract the data for the incomplete tests
 	if ($report_data['incomplete_tests'] > 0) {
@@ -157,18 +157,14 @@ if ($mysqli->connect_errno) {
 	$result->free();
 	
 	// count all the NEW extra-answer tests
-	if ($last_data) {
-		$query = "SELECT COUNT(id) howmany 
-			FROM jml_dnagifts_lnk_user_tests 
-			WHERE progress > 100 
-			AND `started_datetime` >= '".$last_data['generated_datetime']."'";
-		$result = $mysqli->query($query);
-		$data = $result->fetch_assoc();
-		$report_data['new_extraanswers_tests'] = $data['howmany'];
-		$result->free();
-	} else {
-		$report_data['new_extraanswers_tests'] = 0;
-	}
+	$query = "SELECT COUNT(id) howmany 
+		FROM jml_dnagifts_lnk_user_tests 
+		WHERE progress > 100 
+		AND `started_datetime` >= '".$last_data['generated_datetime']."'";
+	$result = $mysqli->query($query);
+	$data = $result->fetch_assoc();
+	$report_data['new_extraanswers_tests'] = $data['howmany'];
+	$result->free();
 	
 	// Extract the data for the extra-answer tests
 	if ($report_data['extraanswers_tests'] > 0) {
@@ -205,7 +201,6 @@ if ($mysqli->connect_errno) {
 	$mysqli->close();
 }
 
-
 $to = "louw.morne@gmail.com";
 $subject = "CRON - Update Test Progress";
 $message = "Result: ";
@@ -236,4 +231,5 @@ $from = "reports@dnagifts.co.za";
 $headers = "From:" . $from;
 mail($to,$subject,$message,$headers);
 echo "Mail Sent.";
+
 ?>

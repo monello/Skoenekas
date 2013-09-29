@@ -21,7 +21,7 @@ class DnaGiftsModelTesthistory extends JModelList
 	{
 		if (empty($config['filter_fields'])) {
 			$config['filter_fields'] = array(
-				'id', 'status', 'user_id', 'test_id', 'progress', 'started_datetime'
+				'id', 'status', 'user_id', 'test_id', 'report_name', 'progress', 'started_datetime', 'browser', 'platform'
 			);
 		}
 		parent::__construct($config);
@@ -54,6 +54,12 @@ class DnaGiftsModelTesthistory extends JModelList
 		$progress = $this->getUserStateFromRequest($this->context.'.filter.progress', 'filter_progress', '', 'string');
 		$this->setState('filter.progress', $progress);
 		
+		$browser = $this->getUserStateFromRequest($this->context.'.filter.browser', 'filter_browser', '', 'string');
+		$this->setState('filter.browser', $browser);
+		
+		$platform = $this->getUserStateFromRequest($this->context.'.filter.platform', 'filter_platform', '', 'string');
+		$this->setState('filter.platform', $platform);
+		
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_dnagifts');
 		$this->setState('params', $params);
@@ -80,6 +86,8 @@ class DnaGiftsModelTesthistory extends JModelList
 		$id.= ':' . $this->getState('filter.user_id');
 		$id.= ':' . $this->getState('filter.test_id');
 		$id.= ':' . $this->getState('filter.progress');
+		$id.= ':' . $this->getState('filter.browser');
+		$id.= ':' . $this->getState('filter.platform');
 		return parent::getStoreId($id);
 	}
 
@@ -95,7 +103,8 @@ class DnaGiftsModelTesthistory extends JModelList
 		$query = $db->getQuery(true);
 		
 		// Select the required fields from the table.
-		$query->select('a.id, a.user_id, a.test_id, a.progress, a.started_datetime, a.report_name, c.test_name,
+		$query->select('a.id, a.user_id, a.test_id, a.question_count, a.progress, a.started_datetime, 
+			a.report_name, c.test_name, a.user_browser, a.user_platform,
 			IF(a.progress = 100 && a.report_name IS NULL, 3, 
 				IF(a.progress = 100 && a.report_name IS NOT NULL , 1, 
 					IF(a.progress < 100, 2,4))) AS status');
@@ -108,6 +117,10 @@ class DnaGiftsModelTesthistory extends JModelList
 		// Join over the users
 		$query->select('c.test_name');
 		$query->join('LEFT', $db->quoteName('#__dnagifts_test').' AS c ON c.id = a.test_id');
+		
+		// Join over the users
+		$query->select('d.howmany as answer_count');
+		$query->join('LEFT', $db->quoteName('#__dnagifts_count_testanswers').' AS d ON a.id = d.lnk_user_test_id');
 		
 		// Filter by user_id state
 		$status = $this->getState('filter.status');
@@ -146,11 +159,23 @@ class DnaGiftsModelTesthistory extends JModelList
 			$query->where('a.progress = '.(int) $progress);
 		}
 		
+		// Filter by browser
+		$browser = $this->getState('filter.browser');
+		if (!empty($browser)) {
+			$query->where('a.user_browser = '.$db->quote($browser));
+		}
+		
+		// Filter by platform
+		$platform = $this->getState('filter.platform');
+		if (!empty($platform)) {
+			$query->where('a.user_platform = '.$db->quote($platform));
+		}
+		
 		// Filter by search in title
 		$search = $this->getState('filter.search');
 		if (!empty($search)) {
 			$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-			$query->where('c.test_name LIKE '.$search.'');
+			$query->where('b.name LIKE '.$search.'');
 		}
 		
 		// Add the list ordering clause.

@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * This cron logs all the results of tests that were 100% complete.
+ * It logs the giftings in order of position.
+ * The results in this table are used during Adminstrator reporting
+ **/
+ 
 function logResults($mysqli, $user_test_id) {
 	$query = "SELECT b.gift_id, sum( a.answer_score ) AS total_score
 		FROM `jml_dnagifts_lnk_user_test_answers` AS a

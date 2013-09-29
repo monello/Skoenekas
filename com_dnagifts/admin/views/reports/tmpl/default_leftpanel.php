@@ -3,8 +3,8 @@
 defined('_JEXEC') or die('Restricted Access');
 ?>
 <div id="dnaRptTestHistory">
-	<h4>Test History</h4>
-	<a class="dnaRetportBtn" href="<?php JURI::root(true) ?>/administrator/index.php?option=com_dnagifts&view=testhistory" id="rptSurveyHistory"><img src="<?php JURI::root(true) ?>/media/com_dnagifts/images/archive-icon-64x64.png"/></a>
+	<h4>Test Log - Report</h4>
+	<a title="View Report::Click here to view the Test Log - Report" class="hasTip dnaRetportBtn" href="<?php JURI::root(true) ?>/administrator/index.php?option=com_dnagifts&view=testhistory" id="rptSurveyHistory"><img src="<?php JURI::root(true) ?>/media/com_dnagifts/images/archive-icon-64x64.png"/></a>
 	<div style="display: inline-block">
 		View a list of all the tests registered on the database.
 		<ul>	

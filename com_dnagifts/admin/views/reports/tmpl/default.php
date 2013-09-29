@@ -2,6 +2,8 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 
+// load tooltip behavior
+JHtml::_('behavior.tooltip');
 ?>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
@@ -19,10 +21,13 @@ defined('_JEXEC') or die('Restricted Access');
         ]);
 
         var options = {
-		  legend: {position: 'bottom'},
-		  height: 300,
+		  legend: 'none',
 		  slices: { 3: {offset: 0.2}},
-		  is3D: true
+		  is3D: true,
+		  backgroundColor: 'transparent',
+		  chartArea: { width: 200, height: 200, top: 65 },
+		  colors:['#0c7112', '#3366cc', '#ff9900', '#dc3912'],
+		  pieStartAngle: -45
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
@@ -46,6 +51,7 @@ defined('_JEXEC') or die('Restricted Access');
 #dnaReportingRightPanel{
 	float: right;
 	width: 39%;
+	min-width: 600px;
 }
 
 .dnaReportingPanelInner { margin: 10px; }
