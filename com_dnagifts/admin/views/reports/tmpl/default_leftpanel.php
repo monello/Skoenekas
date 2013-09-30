@@ -5,7 +5,7 @@ defined('_JEXEC') or die('Restricted Access');
 <div id="dnaRptTestHistory">
 	<h4>Test Log - Report</h4>
 	<a title="View Report::Click here to view the Test Log - Report" class="hasTip dnaRetportBtn" href="<?php JURI::root(true) ?>/administrator/index.php?option=com_dnagifts&view=testhistory" id="rptSurveyHistory"><img src="<?php JURI::root(true) ?>/media/com_dnagifts/images/archive-icon-64x64.png"/></a>
-	<div style="display: inline-block">
+	<div style="display: inline-block; width: 80%">
 		View a list of all the tests registered on the database.
 		<ul>	
 			<li>Monitor how many tests were successfully completed and how many tests were started, but never completed.</li>

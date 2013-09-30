@@ -33,8 +33,6 @@ JHtml::_('behavior.tooltip');
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
       }
-
-
 </script>
 
 <style>
@@ -46,12 +44,12 @@ JHtml::_('behavior.tooltip');
 
 #dnaReportingLeftPanel {
 	float: left;
-	width: 60%;
+	width: 50%;
 }
 #dnaReportingRightPanel{
 	float: right;
-	width: 39%;
-	min-width: 600px;
+	width: 49%;
+	min-width: 605px;
 }
 
 .dnaReportingPanelInner { margin: 10px; }

@@ -8,7 +8,7 @@ jimport('joomla.application.component.modellist');
 /**
  * DnaGifts Model
  */
-class DnaGiftsModelTesthistory extends JModelList
+class DnaGiftsModelTestdetail extends JModelList
 {
 	/**
 	* Constructor.
@@ -19,12 +19,14 @@ class DnaGiftsModelTesthistory extends JModelList
 	*/
 	public function __construct($config = array())
 	{
+	
 		if (empty($config['filter_fields'])) {
 			$config['filter_fields'] = array(
 				'id', 'status', 'user_id', 'test_id', 'report_name', 'progress', 'started_datetime', 'browser', 'platform'
 			);
 		}
 		parent::__construct($config);
+	
 	}
 	
 	/**

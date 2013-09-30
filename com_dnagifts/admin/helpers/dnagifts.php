@@ -228,8 +228,9 @@ class DnagiftsHelper
 		$query->select('a.user_id As value');
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'). ' AS a');
 		$query->where('a.user_id IS NOT NULL');
+		$query->where('a.resolved = 0');
 		
-		$query->select('CONCAT(b.name, " (", b.username, ")") AS text');
+		$query->select('b.name AS text');
 		$query->where('b.name IS NOT NULL');
 		$query->join('LEFT', $db->quoteName('#__users').' AS b ON b.id = a.user_id');
 		
@@ -262,6 +263,7 @@ class DnagiftsHelper
 		$query->select('a.test_id As value');
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'). ' AS a');
 		$query->where('a.test_id IS NOT NULL');
+		$query->where('a.resolved = 0');
 		
 		$query->select('CONCAT(b.test_name, " (test_id: ", b.id, ")") AS text');
 		$query->where('b.test_name IS NOT NULL');
@@ -294,6 +296,7 @@ class DnagiftsHelper
 		
 		$query->select('progress As value, CONCAT(progress,"%") AS text');
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
+		$query->where('resolved = 0');
 		$query->group('progress');
 		$query->order('progress');
 		
@@ -322,6 +325,7 @@ class DnagiftsHelper
 		
 		$query->select('user_browser As value, user_browser AS text');
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
+		$query->where('resolved = 0');
 		$query->where('user_browser IS NOT NULL');
 		$query->group('user_browser');
 		$query->order('user_browser');
@@ -351,6 +355,7 @@ class DnagiftsHelper
 		
 		$query->select('user_platform As value, user_platform AS text');
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
+		$query->where('resolved = 0');
 		$query->where('user_platform IS NOT NULL');
 		$query->group('user_platform');
 		$query->order('user_platform');

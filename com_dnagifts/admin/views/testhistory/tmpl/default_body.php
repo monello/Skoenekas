@@ -30,7 +30,7 @@ defined('_JEXEC') or die('Restricted Access');
 ?>
 	<tr class="row<?php echo $i % 2; ?>">
 		<td>
-			<a href="#" title="View Report::Click here to see a detailed break down of this test" class="hasTip viewreport"></a>
+			<a href="<?php JURI::root(true) ?>/administrator/index.php?option=com_dnagifts&view=testdetail" title="View Report::Click here to see a detailed break down of this test" class="hasTip viewreport"></a>
 		</td>
 		<td>
 			<?php echo $item->name; ?> (<?php echo $item->username; ?>)

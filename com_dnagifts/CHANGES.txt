@@ -617,3 +617,9 @@
  - Added the user browser and platform to the the report.
  - Tweaked the dashboard graph
  
+ 1.0.21 (2013/09/30)
+ -------------------
+ - Added the testdetail controller.
+ - Added the resolved flag of the user-tests table into all reporting queries to ignore these records
+ - Added click-throughs from the report dashboard screen to the test history, filtered by the status
+ 
