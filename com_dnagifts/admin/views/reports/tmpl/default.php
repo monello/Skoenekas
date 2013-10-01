@@ -4,6 +4,7 @@ defined('_JEXEC') or die('Restricted Access');
 
 // load tooltip behavior
 JHtml::_('behavior.tooltip');
+JHTML::_('behavior.modal');
 ?>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
@@ -75,6 +76,8 @@ a.dnaRetportBtn:hover {
 }
 div#dnaRptTestHistory ul { padding-left: 13px; }
 </style>
+
+<a href="http://localhost/index.php?option=com_dnagifts&format=raw&view=report&id=11" class="modal" rel="{size: {x: 1000, y: 600}, handler: 'iframe'}">Re-Generate Report</a>
 
 <div id="dnaReportingWrapper">
 	<div id="dnaReportingLeftPanel">

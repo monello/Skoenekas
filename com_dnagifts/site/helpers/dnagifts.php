@@ -50,6 +50,16 @@ class DnagiftsHelper
 		return $renderer->render($position, $options, null);
 	}
 	
+	public static function isLoggedIn()
+	{
+		$user = JFactory::getUser();
+		if ($user->get("id")) {
+			return True;
+		} else {
+			return False;
+		}
+	}
+	
 	public static function authenticate()
 	{
 		$user = JFactory::getUser();

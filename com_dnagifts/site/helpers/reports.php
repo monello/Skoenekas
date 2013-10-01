@@ -26,13 +26,6 @@ class MYPDF extends TCPDF {
     }
 }
 
-/**
- * Banners component helper.
- *
- * @package		Joomla.Administrator
- * @subpackage	com_dnagifts
- * @since		1.6
- */
 class ReportsHelper
 {
 	public static function additionalInfo($type='') 

@@ -4,7 +4,8 @@ defined('_JEXEC') or die('Restricted access');
 
 JHtml::_('behavior.tooltip');
 
-$this->isLoggedIn = DnaGiftsHelper::authenticate();
+//$this->isLoggedIn = DnaGiftsHelper::authenticate();
+$this->isLoggedIn = DnaGiftsHelper::isLoggedIn();
 
 $first_name 		= ReportsHelper::extractFirstName();
 

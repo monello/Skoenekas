@@ -57,9 +57,9 @@ root.myNamespace.create('DnaGifts.report', {
       url: url,
       data: {
 				userTestID: userTestID,
-        svgData: ns.chartSVG,
+				svgData: ns.chartSVG,
 				imgChartSRC: jQuery("table#tblDNAChart img:first").attr("src")
-      },
+			},
 			success: function(json) {
 				if (json.success) {
 					jQuery("#notificationspinner").hide();

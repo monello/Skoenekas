@@ -623,3 +623,6 @@
  - Added the resolved flag of the user-tests table into all reporting queries to ignore these records
  - Added click-throughs from the report dashboard screen to the test history, filtered by the status
  
+ 1.0.22 (2013/10/01)
+ -------------------
+ - Started adding the initial tests to re-generate a report.
