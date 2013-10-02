@@ -3,6 +3,7 @@ defined('_JEXEC') or die;
 
 require(JPATH_ROOT.DS.'tcpdf'.DS.'config/lang/eng.php');
 require(JPATH_ROOT.DS.'tcpdf'.DS.'tcpdf.php');
+JLoader::register('UtilsHelper', JPATH_COMPONENT.'/helpers/utils.php');
 
 class MYPDF extends TCPDF {
     //Page header
@@ -219,34 +220,29 @@ class ReportsHelper
 	
 	public static function uniqueDNAChartFilename($userTestID)
 	{
-		$user = JFactory::getUser();
-		$user_id = $user->get("id");
-		
+		$data = UtilsHelper::reverseUserTestId($userTestID);
+		$user_id = $data[1];
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-    $query->select('test_id, started_datetime');
+		$query->select('test_id, started_datetime');
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
 		$query->where('id = '.$userTestID);
-    $db->setQuery($query);
-    $result = $db->loadObject();
+		$db->setQuery($query);
+		$result = $db->loadObject();
 		
-    $timeblah = array('-',':',' ');
-    $timestamp = str_replace($timeblah, "", $result->started_datetime);
+		$timeblah = array('-',':',' ');
+		$timestamp = str_replace($timeblah, "", $result->started_datetime);
 		$documentname = 'dnachart_'.$user_id."-".$timestamp."-".$result->test_id;
 		
 		return $documentname;
 	}
   
-	public static function prepareData($userTestID)
+	public static function generatePDFName($userTestID)
 	{
 		$documentname       = JText::_( 'COM_DNAGIFTS_PDF_FILENAME' );
-		$report				= new DnaGiftsControllerReport();
-		$model				= $report->getModel('Report', 'DnaGiftsModel');
-		$dnaResults			= $model->getResultsObject($userTestID);
-		
 		// Generate the report's document name
-        $user = JFactory::getUser();
-		$user_id = $user->get("id");
+		$data = UtilsHelper::reverseUserTestId($userTestID);
+		$user_id = $data[1];
         
         $db = JFactory::getDbo();
 		$query = $db->getQuery(true);
@@ -259,8 +255,19 @@ class ReportsHelper
         $timestamp = str_replace($timeblah, "", $result->started_datetime);
         
         $documentname = $documentname." (".$user_id."-".$timestamp."-".$result->test_id.")".".pdf";
+		return $documentname;
+	}
+  
+	public static function prepareData($userTestID)
+	{
+		$report				= new DnaGiftsControllerReport();
+		$model				= $report->getModel('Report', 'DnaGiftsModel');
+		$dnaResults			= $model->getResultsObject($userTestID);
+		
+		$documentname = ReportsHelper::generatePDFName($userTestID);
         
 		// Log the report name in next to the user-test record
+		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->update('#__dnagifts_lnk_user_tests');
 		$query->set('report_name = '.$db->quote($documentname));
@@ -278,6 +285,7 @@ class ReportsHelper
 		$column2_left = 107;
 		
 		$pdf =& ReportsHelper::documentSetup($userTestID);
+		list ($result, $user_id, $test_id) = UtilsHelper::reverseUserTestId($userTestID);
 		
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
 		
@@ -313,7 +321,7 @@ class ReportsHelper
 		
 		$pdf->AddPage();
 		
-		ReportsHelper::generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID);
+		ReportsHelper::generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID, $user_id);
 		
 		ReportsHelper::reportSeperator($pdf);
 		
@@ -323,11 +331,11 @@ class ReportsHelper
 		
 		$pdf->AddPage();
 		
-		ReportsHelper::generatePDF_Section8($pdf, $column1_left);
+		ReportsHelper::generatePDF_Section8($pdf, $column1_left, $user_id);
 		
 		ReportsHelper::reportSeperator($pdf);
 		
-		ReportsHelper::generatePDF_Section9($pdf, $column1_left);
+		ReportsHelper::generatePDF_Section9($pdf, $column1_left, $user_id);
 		
 		$pdf->AddPage();
 		$additionalhtml = ReportsHelper::additionalInfo('pdf');
@@ -344,7 +352,7 @@ class ReportsHelper
 		$column2_left = 107;
 		
 		$pdf =& ReportsHelper::documentSetup($userTestID);
-		
+		list ($result, $user_id, $test_id) = UtilsHelper::reverseUserTestId($userTestID);
 		
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
 		
@@ -374,7 +382,7 @@ class ReportsHelper
 		
 		$pdf->AddPage();
 		
-		ReportsHelper::generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID);
+		ReportsHelper::generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID, $user_id);
 		
 		ReportsHelper::reportSeperator($pdf);
 		
@@ -384,11 +392,11 @@ class ReportsHelper
 		
 		$pdf->AddPage();
 		
-		ReportsHelper::generatePDF_Section8($pdf, $column1_left);
+		ReportsHelper::generatePDF_Section8($pdf, $column1_left, $user_id);
 		
 		ReportsHelper::reportSeperator($pdf);
 		
-		ReportsHelper::generatePDF_Section9($pdf, $column1_left);
+		ReportsHelper::generatePDF_Section9($pdf, $column1_left, $user_id);
 		
 		$pdf->AddPage();
 		$additionalhtml = ReportsHelper::additionalInfo('pdf');
@@ -642,9 +650,9 @@ class ReportsHelper
 			$w='', $h=35, $link='', $align='', $palign='', $border=0, $fitonpage=false);
 	}
 
-	public static function generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID)
+	public static function generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID, $user_id)
 	{
-		$first_name 		= ReportsHelper::extractFirstName();
+		$first_name 		= ReportsHelper::extractFirstName($user_id);
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY = strtoupper($first_name).JText::_('COM_DNAGIFTS_REPORT_MOTIFLOW_SECONDARY');
 		$COM_DNAGIFTS_2NDDNAGIFT = JText::_('COM_DNAGIFTS_2NDDNAGIFT');
@@ -756,9 +764,9 @@ class ReportsHelper
         $pdf->writeHTML($html);	
 	}
 
-	public static function generatePDF_Section8($pdf, $column1_left)
+	public static function generatePDF_Section8($pdf, $column1_left, $user_id)
 	{
-		$first_name = ReportsHelper::extractFirstName();
+		$first_name = ReportsHelper::extractFirstName($user_id);
 		
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_DESIGNEDFORPURPOSE = JText::_('COM_DNAGIFTS_REPORT_DESIGNEDFORPURPOSE');
@@ -799,9 +807,9 @@ class ReportsHelper
         $pdf->writeHTML($html);
 	}
 
-	public static function generatePDF_Section9($pdf, $column1_left)
+	public static function generatePDF_Section9($pdf, $column1_left, $user_id)
 	{
-		$first_name = ReportsHelper::extractFirstName();
+		$first_name = ReportsHelper::extractFirstName($user_id);
 		
 		// TEXT REPLACEMENT VARIABLES
 		$COM_DNAGIFTS_REPORT_PURCHASETODAY = JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY');
@@ -870,9 +878,9 @@ class ReportsHelper
 		
 	}
 	
-	public static function extractFirstName()
+	public static function extractFirstName($user_id)
 	{
-		$user = JFactory::getUser();
+		$user = UtilsHelper::getUserObject($user_id);
 		$name1st=explode(" ",$user->name);
 		return $name1st[0];
 	}
@@ -1222,9 +1230,13 @@ class ReportsHelper
 		return $height;
 	}
 	
-	public static function emailReportPDF($userTestID)
+	public static function emailReportPDF($userTestID, $user_id, $is_raw)
 	{
-		$user = JFactory::getUser();
+		if ($is_raw < 1) {
+			$user = UtilsHelper::getUserObject($user_id);
+		} else {
+			$user = UtilsHelper::getUserObject();
+		}
 		
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
@@ -1234,19 +1246,15 @@ class ReportsHelper
         $db->setQuery($query);
         $result = $db->loadObject();
 		
-		if ($result->date_sent) {
+		if ($result->date_sent && $is_raw < 1) {
 			return;
 		}
-				
+		
 		$filename = JPATH_SITE.DS."components".DS."com_dnagifts".DS."store".DS.$result->report_name;
 		
         $subject = JText::_( 'COM_DNAGIFTS_REPORT_EMAILSUBJECT' ); 
-        //$body = JText::_( 'COM_DNAGIFTS_REPORT_EMAILMESSAGE' );
-		list($body, $images) = ReportsHelper::getEmailBodyAndImages();
-		
+		list($body, $images) = ReportsHelper::getEmailBodyAndImages($user->id);
         $to = $user->get("email");
-		//$to = "louw.morne@gmail.com";
-		
         $from = array('no-reply@dnagifts,co.za', JText::_( 'COM_DNAGIFTS_PDF_AUTHOR' ));
         
         # Invoke JMail Class
@@ -1257,7 +1265,9 @@ class ReportsHelper
          
         # Add a recipient -- this can be a single address (string) or an array of addresses
         $mailer->addRecipient($to);
-		$mailer->addBCC('reports@dnagifts.net');
+		if($is_raw < 1) {
+			$mailer->addBCC('reports@dnagifts.net');
+		}
 		
 		$mailer->setSubject($subject);
         $mailer->setBody($body);
@@ -1286,7 +1296,7 @@ class ReportsHelper
 		$db->query();
 	}
 	
-	public static function getEmailBodyAndImages()
+	public static function getEmailBodyAndImages($user_id)
 	{
 		$template_id = 9;
 		$db = JFactory::getDbo();
@@ -1301,7 +1311,7 @@ class ReportsHelper
 						$result->body.'</body></html>';
 						
 		$pattern 	 = '/\{subtag\:name\}/i';
-		$replacement = ReportsHelper::extractFirstName();
+		$replacement = ReportsHelper::extractFirstName($user_id);
 		$html 		 = preg_replace($pattern, $replacement, $html);
 		$images 	 = ReportsHelper::extractEmailImages($html);
 		$html 		 = ReportsHelper::srcToCid($html, $images);

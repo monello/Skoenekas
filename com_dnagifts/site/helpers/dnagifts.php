@@ -1,13 +1,6 @@
 <?php
 defined('_JEXEC') or die;
 
-/**
- * Banners component helper.
- *
- * @package		Joomla.Administrator
- * @subpackage	com_dnagifts
- * @since		1.6
- */
 class DnagiftsHelper
 {
 	public static function getSessionID()
@@ -333,5 +326,5 @@ class DnagiftsHelper
 	function getBrowser()
 	{
 		return get_browser(null, true);
-	}	
+	}
 }

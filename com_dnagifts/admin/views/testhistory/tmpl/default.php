@@ -4,6 +4,7 @@ defined('_JEXEC') or die('Restricted Access');
 
 // load tooltip behavior
 JHtml::_('behavior.tooltip');
+JHTML::_('behavior.modal');
 
 $this->listOrder	= $this->escape($this->state->get('list.ordering'));
 $this->listDirn		= $this->escape($this->state->get('list.direction'));
@@ -32,12 +33,34 @@ div.statusicon {
 .noreportstatus { color: rgb(176,0,0) }
 .extraanswersstatus { color: rgb(255,137,17) }
 
-a.viewreport {
-	display: block; 
+a.viewreport,
+a.pdfreport,
+a.reviewreport,
+a.emailreport {
+	display: inline-block; 
 	height: 24px;
 	width: 24px;
-	background-image: url(<?php echo JURI::root(true) ?>/media/com_dnagifts/images/view-report24x24.png);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+	filter: alpha(opacity=40);
+	-moz-opacity:0.4;
+	-khtml-opacity: 0.4;
+	opacity: 0.4;
 }
+a.viewreport:hover,
+a.pdfreport:hover,
+a.reviewreport:hover,
+a.emailreport:hover {
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	-moz-opacity:1;
+	-khtml-opacity: 1;
+	opacity: 1;
+}
+a.viewreport { background-image: url(<?php echo JURI::root(true) ?>/media/com_dnagifts/images/view-report24x24.png);}
+a.pdfreport { background-image: url(<?php echo JURI::root(true) ?>/media/com_dnagifts/images/1347795839_pdf.png);}
+a.reviewreport { background-image: url(<?php echo JURI::root(true) ?>/media/com_dnagifts/images/reports-22x22.png);}
+a.emailreport { background-image: url(<?php echo JURI::root(true) ?>/media/com_dnagifts/images/emailIcon24x24.png);}
+
 </style>
 <form action="<?php echo JRoute::_('index.php?option=com_dnagifts&view=testhistory'); ?>" method="post" name="adminForm" id="adminForm">
 	<?php echo $this->loadTemplate('filterbar');?>

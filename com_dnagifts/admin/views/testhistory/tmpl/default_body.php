@@ -30,7 +30,15 @@ defined('_JEXEC') or die('Restricted Access');
 ?>
 	<tr class="row<?php echo $i % 2; ?>">
 		<td>
-			<a href="<?php JURI::root(true) ?>/administrator/index.php?option=com_dnagifts&view=testdetail" title="View Report::Click here to see a detailed break down of this test" class="hasTip viewreport"></a>
+			<a href="<?php JURI::root(true) ?>/administrator/index.php?option=com_dnagifts&view=testdetail" 
+				title="View Test Analysis::Click here to see a detailed breakdown of this test" 
+				class="hasTip viewreport"></a>
+			<?php if ((int) $item->progress >= 80): ?>
+				<a href="<?php JURI::root(true) ?>/index.php?option=com_dnagifts&format=raw&view=report&id=<?php echo (int) $item->id; ?>" 
+					title="Download Report Results::Click here to download the Test Results Report of this test in PDF format" 
+					class="hasTip pdfreport modal"
+					rel="{size: {x: 1000, y: 550}, handler: 'iframe'}"></a>
+			<?php endif; ?>
 		</td>
 		<td>
 			<?php echo $item->name; ?> (<?php echo $item->username; ?>)

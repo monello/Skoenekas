@@ -6,42 +6,14 @@ JHtml::_('behavior.tooltip');
 JLoader::register('ReportsHelper', JPATH_COMPONENT.'/helpers/reports.php');
 
 //$this->isLoggedIn = DnaGiftsHelper::authenticate();
-$this->isLoggedIn 	= DnaGiftsHelper::isLoggedIn();
-$first_name 		= ReportsHelper::extractFirstName($this->user->id);
-$report_name		= ReportsHelper::generatePDFName($this->userTestID);
+$this->isLoggedIn = DnaGiftsHelper::isLoggedIn();
+
+$first_name 		= ReportsHelper::extractFirstName();
+
 ?>
 <script type="text/javascript">
 	var juri = '<?php echo JURI::root(true); ?>';
-	var uid = <?php echo $this->user->id; ?>;
-	var israw = <?php echo $this->israw; ?>;
 </script>
-<style>
-div.actionsbar {
-	background-color: white; 
-	position: fixed; 
-	top: 0px;
-	left: 0px;
-	height: 35px; 
-	padding-left: 5px;
-	width: 100%;
-	box-shadow: 0px 10px 5px rgb(208,208,208);
-	font-weight: bold;
-	font-family: arial,helvetica,sans-serif;
-	z-index: 1000;
-}
-div.actionsbar a { color: blue }
-#dnaReportWrapper { font-family: arial,helvetica,sans-serif; }
-#notificationcontainer { margin-top: 50px; }
-.actionsbar { display: none }
-</style>
-
-<?php if ($this->israw > 0): ?>
-<div class="actionsbar">
-	<a id="resendReportBtn" href="#" class="hasTip" title="Email to User::Click here to resend the report of this test to the user">Email to User</a> | 
-	<a href="<?php echo JURI::base(true); ?>/index.php?option=com_dnagifts&task=reports.dlpdf&f=<?php echo str_replace("\s","\%20",$report_name) ?>"" class="hasTip" title="Download as PDF::Click here to download the report of this test as a PDF. You can then mail attach it to an email manually">Download as PDF</a>
-</div>
-<?php endif; ?>
-
 <div id="notificationcontainer">
   <div id="notificationtab">
 	<img id="notificationspinner" src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/spinner16x16.gif">
@@ -59,11 +31,7 @@ div.actionsbar a { color: blue }
 	};
 	var first_name = '<?php echo $first_name; ?>';
 </script>
-
-<?php if ($this->israw < 1): ?>
 <div id="fb-root"></div>
-<?php endif; ?>
-
 <div id="dnaReportWrapper">
 	<img src="<?php echo JURI::base(true) ?>/media/com_dnagifts/images/banner1-900px.png" style="margin-bottom: 30px" width="900px" height="189px" />
 	<table id="tblReportSection" width="900" cellpadding="0" cellspacing="0">
@@ -397,10 +365,10 @@ div.actionsbar a { color: blue }
 </div>
 
 <?php 
-
+/*
 	$required_file = JPATH_ROOT.DS.'components'.DS.'com_jfbconnect'.DS.'libraries'.DS.'facebook.php';
 	
-	if (file_exists($required_file) && $this->israw < 1) {
+	if (file_exists($required_file)) {
 		require_once $required_file;
 	    $userMapModel = new JFBConnectModelUserMap();
 	    $userMapModel->getData($this->user->id);
@@ -420,7 +388,7 @@ div.actionsbar a { color: blue }
 	      $jfbcLibrary->setFacebookMessage($post);
 	    } 
 	}
-	
+	*/
 ?>
 
 

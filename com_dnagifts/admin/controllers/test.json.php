@@ -166,6 +166,7 @@ class DnaGiftsControllerTest extends JControllerForm
 	}
 	
 	public function saveNewTestQuestion() {
+		$user_id = JRequest::getCmd('uid');
 		$test_id = JRequest::getCmd('test_id');
 		$question_id = JRequest::getCmd('question_id');
 		$show_duration = JRequest::getCmd('show_duration');

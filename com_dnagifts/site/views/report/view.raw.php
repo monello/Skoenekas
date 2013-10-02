@@ -4,9 +4,9 @@ defined('_JEXEC') or die('Restricted access');
  
 // import Joomla view library
 jimport('joomla.application.component.view');
+JLoader::register('UtilsHelper', JPATH_COMPONENT.'/helpers/utils.php');
 JLoader::register('ReportsHelper', JPATH_COMPONENT.'/helpers/reports.php');
-JLoader::register('DnagiftsHelper', JPATH_COMPONENT.'/helpers/dnagifts.php');
- 
+
 /**
  * HTML View class for the DnaGifts Component
  */
@@ -14,9 +14,24 @@ class DnaGiftsViewReport extends JView
 {
 	public function display($tpl = null) 
 	{
-		$user = JFactory::getUser();
+		$test_user_id 	= JRequest::getVar('id');
+		if (!$test_user_id) {
+			JError::raiseError(500, implode('<br />', array("Invalid Request :: Not a valid user-test-id")));
+			return false;
+		}
+		
+		$data = UtilsHelper::reverseUserTestId($test_user_id);
+		if (!$data[0]) {
+			JError::raiseError(500, implode('<br />', array("Invalid Request :: Not a valid user-test-id")));
+			return false;
+		}
+		
+		$user_id = $data[1];
+		$test_id = $data[2];
+		
+		$user = UtilsHelper::getUserObject($user_id);
 		if (!$user->get("id")) {
-			$app = JFactory::getApplication()->redirect('/');
+			JError::raiseError(500, implode('<br />', array("Invalid Request :: Not a valid user id")));
 			return false;
 		}
 		
@@ -25,24 +40,15 @@ class DnaGiftsViewReport extends JView
 	    $params    	= $app->getParams();
     	$dispatcher	= JDispatcher::getInstance();
 		
-		$test_id 	= JRequest::getVar('id');
-		
 		if (!$test_id) 
 		{
 			JError::raiseError(500, implode('<br />', array("Invalid Request :: Missing test_id")));
 			return false;
 		}
-		
-		$test_user_id = DnagiftsHelper::getUserTestID($test_id);
-		
-		if (!$test_user_id) 
-		{
-			JError::raiseError(500, implode('<br />', array("Invalid Request :: Test ID does not match user")));
-			return false;
-		}
-		
+		$israw = 1;
 		$this->assignRef( 'dnaMaxScore', ReportsHelper::getDnaMaxScore($test_user_id) );
-		$this->assignRef( 'user', JFactory::getUser() );
+		$this->assignRef( 'user', $user );
+		$this->assignRef( 'israw', $israw );
 		$this->assignRef( 'testid', $test_id);
 		$this->assignRef( 'userTestID', $test_user_id );
 		$this->assignRef( 'dnaResults', $model->getResultsObject($test_user_id));
@@ -56,6 +62,7 @@ class DnaGiftsViewReport extends JView
 		}
 		
 		$html = $this->loadTemplate($tpl);
+		
 		
 		if ($html instanceof Exception)
 		{

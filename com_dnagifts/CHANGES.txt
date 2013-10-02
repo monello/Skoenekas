@@ -626,3 +626,10 @@
  1.0.22 (2013/10/01)
  -------------------
  - Started adding the initial tests to re-generate a report.
+ 
+ 1.0.23 (2013/10/03)
+ -------------------
+ - Implemented all the functionality to re-create a Users Test report.
+ - Resend report
+ - Download as PDF
+ 

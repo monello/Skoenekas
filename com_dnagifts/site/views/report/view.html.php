@@ -41,8 +41,10 @@ class DnaGiftsViewReport extends JView
 			return false;
 		}
 		
+		$israw = 0;
 		$this->assignRef( 'dnaMaxScore', ReportsHelper::getDnaMaxScore($test_user_id) );
 		$this->assignRef( 'user', JFactory::getUser() );
+		$this->assignRef( 'israw', $israw );
 		$this->assignRef( 'testid', $test_id);
 		$this->assignRef( 'userTestID', $test_user_id );
 		$this->assignRef( 'dnaResults', $model->getResultsObject($test_user_id));

@@ -3,8 +3,8 @@
 defined('_JEXEC') or die('Restricted Access');
 ?>
 <tr>
-	<th width="24px">
-		View
+	<th width="60px">
+		Actions
 	</th>
 	<th width="15%" style="text-align:left">
 		<?php echo JHtml::_('grid.sort', 'COM_DNAGIFTS_TESTSHIST_HEADING_USERNAME', 'user_id', $this->listDirn, $this->listOrder); ?>

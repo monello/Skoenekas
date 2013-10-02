@@ -48,27 +48,53 @@ root.myNamespace.create('DnaGifts.report', {
 		});
 		return howmany;
 	},
+	resendReport: function()
+	{
+		var goahead = confirm("Are you sure you want to re-send this report to the user?");
+		if (!goahead) {
+			return false;
+		}
+		
+		var ns = DnaGifts.report;
+		var url=juri+'/index.php?option=com_dnagifts&format=json&task=report.emailReportPDF';
+		jQuery.ajax({
+		  type: "POST",
+		  url: url,
+		  data: {
+				uid: uid,
+				userTestID: userTestID,
+			},
+			success: function(json) {
+				if (json.success) {
+					alert("Report was successfully sent");
+				}
+			}
+		});
+	},
 	dispatchReport: function()
 	{
 		var ns = DnaGifts.report;
 		var url=juri+'/index.php?option=com_dnagifts&format=json&task=report.dispatchReport';
-    jQuery.ajax({
-      type: "POST",
-      url: url,
-      data: {
+		jQuery.ajax({
+		  type: "POST",
+		  url: url,
+		  data: {
+				uid: uid,
+				israw: israw,
 				userTestID: userTestID,
 				svgData: ns.chartSVG,
 				imgChartSRC: jQuery("table#tblDNAChart img:first").attr("src")
 			},
 			success: function(json) {
 				if (json.success) {
+					jQuery(".actionsbar").slideDown();
 					jQuery("#notificationspinner").hide();
 					jQuery("#notificationtext").html(json.message);
 					jQuery("#notificationtab").css('backgroundColor', '#9fff9f').show();
 					setInterval(function(){jQuery("#notificationtab").fadeOut()}, 3000);
 				}
 			}
-    });
+		});
 	},
 	dispatchMSIEReport: function()
 	{
@@ -79,6 +105,8 @@ root.myNamespace.create('DnaGifts.report', {
             type: "POST",
             url: url,
             data: {
+				uid: uid,
+				israw: israw,
 				userTestID: userTestID
             },
 			success: function(json) {
@@ -102,6 +130,7 @@ root.myNamespace.create('DnaGifts.report', {
 */
 Base.Helpers.bind_load(function () {
 	var ns = DnaGifts.report;
+	jQuery("#resendReportBtn").live("click",ns.resendReport);
     jQuery.metadata.setType('attr','data');
 	setInterval(function(){jQuery("#notificationtab").fadeOut()}, 6000);
     if (BrowserDetect.browser == 'Explorer') {
