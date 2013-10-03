@@ -57,6 +57,8 @@ if ($mysqli->connect_errno) {
 	$report_data['new_tests'] = $data['howmany'];
 	$result->free();
 	
+	//////////////////////////
+	
 	// count all the good tests
 	$query = "SELECT COUNT(id) howmany 
 			FROM jml_dnagifts_lnk_user_tests 
@@ -75,6 +77,8 @@ if ($mysqli->connect_errno) {
 	$data = $result->fetch_assoc();
 	$report_data['new_good_tests'] = $data['howmany'];
 	$result->free();
+	
+	//////////////////////////
 	
 	// count all the noreport tests
 	$query = "SELECT COUNT(id) howmany 
@@ -114,29 +118,34 @@ if ($mysqli->connect_errno) {
 		$result->free();
 	}
 	
-	// count all the incomplete tests
+	//////////////////////////
+	
+	// count all the incomplete tests (>=80%)
 	$query = "SELECT COUNT(id) howmany 
 		FROM jml_dnagifts_lnk_user_tests 
-		WHERE progress < 100";
+		WHERE progress < 100
+		AND progress >= 80";
 	$result = $mysqli->query($query);
 	$data = $result->fetch_assoc();
 	$report_data['incomplete_tests'] = $data['howmany'];
 	$result->free();
 	
-	// count all the NEW incomplete tests
+	// count all the NEW incomplete tests  (>=80%)
 	$query = "SELECT COUNT(id) howmany 
 		FROM jml_dnagifts_lnk_user_tests 
 		WHERE progress < 100 
+		AND progress >= 80
 		AND `started_datetime` >= '".$last_data['generated_datetime']."'";
 	$result = $mysqli->query($query);
 	$data = $result->fetch_assoc();
 	$report_data['new_incomplete_tests'] = $data['howmany'];
 	$result->free();
 	
-	// Extract the data for the incomplete tests
+	// Extract the data for the incomplete tests  (>=80%)
 	if ($report_data['incomplete_tests'] > 0) {
 		$query = "SELECT * FROM jml_dnagifts_lnk_user_tests 
-			WHERE progress < 100  
+			WHERE progress < 100 
+			AND progress >= 80			
 			AND resolved = FALSE";
 		$result = $mysqli->query($query);
 		$incomplete_records = "";
@@ -146,6 +155,43 @@ if ($mysqli->connect_errno) {
 		}
 		$result->free();
 	}
+	
+	//////////////////////////
+	
+	// count all the incomplete tests (<80%)
+	$query = "SELECT COUNT(id) howmany 
+		FROM jml_dnagifts_lnk_user_tests 
+		WHERE progress < 80";
+	$result = $mysqli->query($query);
+	$data = $result->fetch_assoc();
+	$report_data['incomplete_tests_less'] = $data['howmany'];
+	$result->free();
+	
+	// count all the NEW incomplete tests (<80%)
+	$query = "SELECT COUNT(id) howmany 
+		FROM jml_dnagifts_lnk_user_tests 
+		WHERE progress < 80
+		AND `started_datetime` >= '".$last_data['generated_datetime']."'";
+	$result = $mysqli->query($query);
+	$data = $result->fetch_assoc();
+	$report_data['new_incomplete_tests_less'] = $data['howmany'];
+	$result->free();
+	
+	// Extract the data for the incomplete tests (<80%)
+	if ($report_data['incomplete_tests_less'] > 0) {
+		$query = "SELECT * FROM jml_dnagifts_lnk_user_tests 
+			WHERE progress < 80  
+			AND resolved = FALSE";
+		$result = $mysqli->query($query);
+		$incomplete_records = "";
+		while($row = $result->fetch_assoc()) {
+			$incomplete_records .= implode(',',$row);
+			$incomplete_records .= "\n";
+		}
+		$result->free();
+	}
+	
+	//////////////////////////
 	
 	// count all the extra-answer tests
 	$query = "SELECT COUNT(id) howmany 
@@ -180,6 +226,8 @@ if ($mysqli->connect_errno) {
 		$result->free();
 	}
 	
+	//////////////////////////
+	
 	//-----------
 	
 	// Insert new record into the #__dnagifts_healthchecks table
@@ -192,6 +240,8 @@ if ($mysqli->connect_errno) {
 	$data .= $report_data['new_noreport_tests'].", ";
 	$data .= $report_data['incomplete_tests'].", ";
 	$data .= $report_data['new_incomplete_tests'].", ";
+	$data .= $report_data['incomplete_tests_less'].", ";
+	$data .= $report_data['new_incomplete_tests_less'].", ";
 	$data .= $report_data['extraanswers_tests'].", ";
 	$data .= $report_data['new_extraanswers_tests'].", ";
 	$data .= "NULL";
@@ -212,11 +262,16 @@ if ($msqlerr) {
 	$message .= "SUCCESS\n\nTotal number of test records: ".$report_data['total_tests'].
 		"\nNumber of people that completed the test: ".$report_data['good_tests'].
 		"\nNumber of people that completed the test, but did not get a report: ".$report_data['noreport_tests'].
-		"\nNumber of people that started a test, but did not complete it: ".$report_data['incomplete_tests'].
+		"\nNumber of people that started a test, but stopped between 80% and 100%: ".$report_data['incomplete_tests'].
+		"\nNumber of people that started a test, but stopped before 80%: ".$report_data['incomplete_tests_less'].
 		"\nNumber of people that started a test, but have more answers than questions (POSSIBLE ERRORS): ".$report_data['extraanswers_tests'];
 		
 	if($report_data['incomplete_tests'] > 0) {
-		$message .= "\n\nINCOMPLETE RECORDS:\n".$fields.$incomplete_records;
+		$message .= "\n\nINCOMPLETE RECORDS (>=80%):\n".$fields.$incomplete_records;
+	}
+	
+	if($report_data['incomplete_tests_less'] > 0) {
+		$message .= "\n\nINCOMPLETE RECORDS (<80%):\n".$fields.$incomplete_records;
 	}
 	
 	if($report_data['extraanswers_tests'] > 0) {

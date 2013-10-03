@@ -16,9 +16,14 @@ defined('_JEXEC') or die('Restricted Access');
 			<td style="background-color: #0c7112" onclick="javascript:showPieTip()">&nbsp;&nbsp;</td>
 		</tr>
 		<tr>
-			<td>Incomplete Tests:</td>
+			<td>Incomplete Tests (>=80%):</td>
 			<td><a style="text-decoration:underline" href="<?php JURI::root(true) ?>/administrator/index.php?option=com_dnagifts&view=testhistory&filter_status=2"><?php echo $this->healthData->total_incomplete ?></a></td>
-			<td style="background-color: #3366cc">&nbsp;&nbsp;</td>
+			<td style="background-color: #0000CC">&nbsp;&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Incomplete Tests (<80%):</td>
+			<td><a style="text-decoration:underline" href="<?php JURI::root(true) ?>/administrator/index.php?option=com_dnagifts&view=testhistory&filter_status=5"><?php echo $this->healthData->total_incomplete_less ?></a></td>
+			<td style="background-color: #FFFF00">&nbsp;&nbsp;</td>
 		</tr>
 		<tr>
 			<td>Tests with too many answers:</td>

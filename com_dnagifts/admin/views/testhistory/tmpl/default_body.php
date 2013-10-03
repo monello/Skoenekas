@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted Access');
 		case 2:
 			$cssclass_icon = "incompleteicon";
 			$cssclass_text = "incompletestatus";
-			$tooltip = "Status Incomplete::This test was started but the user never finished";
+			$tooltip = "Status Incomplete (>80%)::This test was started but only completed between 80% and 99% of the test";
 			break;
 		case 3:
 			$cssclass_icon = "noreporticon";
@@ -25,6 +25,11 @@ defined('_JEXEC') or die('Restricted Access');
 			$cssclass_icon = "extraanswersicon";
 			$cssclass_text = "extraanswersstatus";
 			$tooltip = "Status Extra-Answers::This Test has more answers than questions. PLEASE INVESTIGATE";
+			break;
+		case 5:
+			$cssclass_icon = "incompletelessicon";
+			$cssclass_text = "incompletelessstatus";
+			$tooltip = "Status Incomplete (<80%)::This test was started but completed less than 80% of the test";
 			break;
 	} 
 ?>

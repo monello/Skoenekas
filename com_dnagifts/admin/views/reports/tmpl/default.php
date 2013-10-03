@@ -15,18 +15,19 @@ JHtml::_('behavior.tooltip');
         var data = google.visualization.arrayToDataTable([
           ['Type', 'Size'],
           ['Completed', <?php echo $this->healthData->total_good ?>],
-          ['Incomplete', <?php echo $this->healthData->total_incomplete ?>],
+          ['Incomplete >=80%', <?php echo $this->healthData->total_incomplete ?>],
+		  ['Incomplete <80%', <?php echo $this->healthData->total_incomplete_less ?>],
           ['Extra Answers', <?php echo $this->healthData->total_extraanswers ?>],
 		  ['No Report', <?php echo $this->healthData->total_noreport ?>]
         ]);
 
         var options = {
 		  legend: 'none',
-		  slices: { 3: {offset: 0.2}},
+		  slices: { 4: {offset: 0.2}},
 		  is3D: true,
 		  backgroundColor: 'transparent',
 		  chartArea: { width: 200, height: 200, top: 65 },
-		  colors:['#0c7112', '#3366cc', '#ff9900', '#dc3912'],
+		  colors:['#0c7112', '#0000CC',  '#FFFF00', '#ff9900', '#dc3912'],
 		  pieStartAngle: -45
         };
 

@@ -55,7 +55,7 @@ root.myNamespace.create('DnaGifts.report', {
 			return false;
 		}
 		
-		var ns = DnaGifts.report;
+var ns = DnaGifts.report;
 		var url=juri+'/index.php?option=com_dnagifts&format=json&task=report.emailReportPDF';
 		jQuery.ajax({
 		  type: "POST",
@@ -87,7 +87,7 @@ root.myNamespace.create('DnaGifts.report', {
 			},
 			success: function(json) {
 				if (json.success) {
-					jQuery(".actionsbar").slideDown();
+					//jQuery(".actionsbar").show();
 					jQuery("#notificationspinner").hide();
 					jQuery("#notificationtext").html(json.message);
 					jQuery("#notificationtab").css('backgroundColor', '#9fff9f').show();

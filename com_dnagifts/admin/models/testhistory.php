@@ -107,7 +107,8 @@ class DnaGiftsModelTesthistory extends JModelList
 			a.report_name, c.test_name, a.user_browser, a.user_platform,
 			IF(a.progress = 100 && a.report_name IS NULL, 3, 
 				IF(a.progress = 100 && a.report_name IS NOT NULL , 1, 
-					IF(a.progress < 100, 2,4))) AS status');
+					IF(a.progress >=80 && a.progress < 100, 2,
+						IF(a.progress <80, 5, 4)))) AS status');
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'). ' AS a');
 		$query->where('a.resolved = 0');
 		
@@ -131,13 +132,16 @@ class DnaGiftsModelTesthistory extends JModelList
 					$query->where('a.progress = 100 AND a.report_name IS NOT NULL');
 					break;
 				case 2:
-					$query->where('a.progress < 100');
+					$query->where('a.progress < 100 AND a.progress >= 80');
 					break;
 				case 3:
 					$query->where('a.progress = 100 AND a.report_name IS NULL');
 					break;
 				case 4:
 					$query->where('a.progress > 100');
+					break;
+				case 5:
+					$query->where('a.progress < 80');
 					break;
 			}
 		}

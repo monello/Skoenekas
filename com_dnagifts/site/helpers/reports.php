@@ -1232,7 +1232,7 @@ class ReportsHelper
 	
 	public static function emailReportPDF($userTestID, $user_id, $is_raw)
 	{
-		if ($is_raw < 1) {
+		if ($is_raw > 0) {
 			$user = UtilsHelper::getUserObject($user_id);
 		} else {
 			$user = UtilsHelper::getUserObject();
@@ -1244,6 +1244,7 @@ class ReportsHelper
 		$query->from($db->quoteName('#__dnagifts_lnk_user_tests'));
 		$query->where('id = '.$userTestID);
         $db->setQuery($query);
+		
         $result = $db->loadObject();
 		
 		if ($result->date_sent && $is_raw < 1) {

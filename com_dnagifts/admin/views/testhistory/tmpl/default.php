@@ -23,13 +23,15 @@ div.statusicon {
 	background-image: url(<?php echo JURI::root(true) ?>/media/com_dnagifts/images/status-icons.png);
 }
 .goodicon { background-position: 175px 0px }
-.incompleteicon { background-position: 137px 0px }
+.incompleteicon { background-position: 1px 0px }
+.incompletelessicon { background-position: 236px 0px }
 .noreporticon { background-position: 62px 0px }
 .extraanswersicon { background-position: 100px 0px }
 
 .progresstext { font-weight: bold; font-size: 110% }
-.goodstatus	{ color: rgb(3,122,11) }
-.incompletestatus { color: rgb(104,104,104)  }
+.goodstatus	{ color: #0c7112 }
+.incompletestatus { color: #0000CC }
+.incompletelessstatus { color: #FFFF00 }
 .noreportstatus { color: rgb(176,0,0) }
 .extraanswersstatus { color: rgb(255,137,17) }
 

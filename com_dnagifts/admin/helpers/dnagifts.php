@@ -381,7 +381,8 @@ class DnagiftsHelper
 		$options	= array();
 		$options[]	= JHtml::_('select.option', '', '- Select Status -');
 		$options[]	= JHtml::_('select.option', 1, 'Good');
-		$options[]	= JHtml::_('select.option', 2, 'Incomplete');
+		$options[]	= JHtml::_('select.option', 2, 'Incomplete >=80%');
+		$options[]	= JHtml::_('select.option', 5, 'Incomplete <80%');
 		$options[]	= JHtml::_('select.option', 3, 'No Report');
 		$options[]	= JHtml::_('select.option', 4, 'Extra Answers');
 

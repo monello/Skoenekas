@@ -633,3 +633,8 @@
  - Resend report
  - Download as PDF
  
+ 1.0.24 (2013/10/04)
+ -------------------
+ - Fishinshed the re-create, send and download of use test results.
+ - Refined the Health Check split Incomplete between <80% & >=80%
+ 

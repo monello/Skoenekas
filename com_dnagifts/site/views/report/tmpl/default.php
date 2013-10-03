@@ -32,7 +32,7 @@ div.actionsbar {
 div.actionsbar a { color: blue }
 #dnaReportWrapper { font-family: arial,helvetica,sans-serif; }
 #notificationcontainer { margin-top: 50px; }
-.actionsbar { display: none }
+/*.actionsbar { display: none }*/
 </style>
 
 <?php if ($this->israw > 0): ?>

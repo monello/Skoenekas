@@ -3,8 +3,8 @@ defined('_JEXEC') or die;
 
 class UtilsHelper
 {	
-	public function getUserObject($uid) {
-		if ($uid) {
+	public function getUserObject($uid=0) {
+		if ($uid > 0) {
 			return JFactory::getUser($uid);
 		} else {
 			return JFactory::getUser();
