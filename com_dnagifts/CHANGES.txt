@@ -638,3 +638,8 @@
  - Fishinshed the re-create, send and download of use test results.
  - Refined the Health Check split Incomplete between <80% & >=80%
  
+ 1.1.01 (2013/10/05)
+ -------------------
+ - Added the Data Maintenance Admin Section
+ - Re-organized the CSS into files for the admin/reports and admin/testhistory controllers
+ 

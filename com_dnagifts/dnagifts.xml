@@ -10,7 +10,7 @@
 	<copyright>Copyright Info</copyright>
 	<license>License Info</license>
 	<!--  The version string is recorded in the components table -->
-	<version>1.0.24</version>
+	<version>1.1.01</version>
 	<!-- The description is optional and defaults to the name -->
 	<description>COM_DNAGIFTS_DESCRIPTION</description>
 		
@@ -72,6 +72,8 @@
 									alt="DNA Gifts/Manage Answers">COM_DNAGIFTS_ANSWERS</menu>
 			<menu link="option=com_dnagifts&amp;view=reports" view="reports" img="/media/com_dnagifts/images/reports-16x16.png"
 									alt="DNA Gifts/Do Reporting">COM_DNAGIFTS_REPORTS</menu>
+			<menu link="option=com_dnagifts&amp;view=maintenance" view="maintenance" img="/media/com_dnagifts/images/maintenance-16x16.png"
+									alt="DNA Gifts/Data Maintenance">COM_DNAGIFTS_MAINTENANCE</menu>
 		</submenu>
 		<!-- Administration Main File Copy Section -->
 		<!-- Note the folder attribute: This attribute describes the folder

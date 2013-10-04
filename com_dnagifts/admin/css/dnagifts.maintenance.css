@@ -1,0 +1,35 @@
+/* styles */
+a.maintain {
+	position: relative;
+	display: inline-block;
+	float: left;
+	height: 125px;
+	width: 120px;
+	border: 1px solid black;
+	border-radius: 5px;
+	margin: 10px;
+	background-color: #fff;
+}
+a.maintain:hover { background-color: #58ACFA; }
+span.maintainLbl {
+	position: absolute;
+	bottom: 2px;
+	width: 100%;
+	text-align: center;
+}
+
+a#churchBtn{ 
+	background-image: url(/media/com_dnagifts/images/church-100x100.png);
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+}
+a#pastorBtn{
+	background-image: url(/media/com_dnagifts/images/preacher-100x100.png);
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+}
+a#cityBtn{
+	background-image: url(/media/com_dnagifts/images/city-100x100.png);
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+}
