@@ -29,6 +29,7 @@ class DnagiftsHelper
 			return '0';
 		}
 	}
+	
 	public static function addEllipsis($string, $length, $end='...')
   {
     return (strlen($string) > $length) ? substr($string, 0, $length - strlen($end )) . $end : $string;
@@ -290,11 +291,26 @@ class DnagiftsHelper
 		// check if the test is still in-progres for this user
 		if ((int) $progress['percent'] > 0 && (int) $progress['percent'] < 100) {
 			$progress['inprogress'] = true;
+			// get the last question_id and answer saved
+			$last = DnagiftsHelper::getLastAnswer($db, $user_test_id);
+			$progress['prev_question_id'] = $last->question_id;
+			$progress['prev_answer'] = $last->answer_score;
 		} else {
 			$progress['inprogress'] = false;
 		}
 		
 		return $progress;
+	}
+	
+	public static function getLastAnswer($db, $user_test_id) 
+	{
+		$query = $db->getQuery(true);
+		$query->select('question_id, answer_score');
+		$query->from($db->quoteName('#__dnagifts_lnk_user_test_answers'));
+		$query->order($db->nameQuote('answer_datetime').' DESC');
+		$db->setQuery($query,0,1); // LIMIT 1
+		$results = $db->loadObject();
+		return $results;
 	}
 	
 	public static function hasCompletedTests()

@@ -643,3 +643,8 @@
  - Added the Data Maintenance Admin Section
  - Re-organized the CSS into files for the admin/reports and admin/testhistory controllers
  
+ 1.1.02 (2013/10/07)
+ -------------------
+ - On attempting to log the test record, when starting a test I added a few user session checks to ensure we have a logged in user.
+ - Added test-progress healthchecks and some recovery procedures in case answers get lost during the completion of a test.
+ 

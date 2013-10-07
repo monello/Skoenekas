@@ -11,6 +11,14 @@ if ($this->progress['inprogress']) {
   $playmessage = 'COM_DNAGIFTS_TEST_STARTMESSAGE';
   $playbutton = 'play';
 }
+
+if ($this->progress['prev_question_id']) {
+	$lqid = $this->progress['prev_question_id'];
+	$lans = $this->progress['prev_answer'];
+} else {
+	$lqid = -1;
+	$lans = -1;
+}
 ?>
 
 <div id="notificationcontainer">
@@ -20,13 +28,15 @@ if ($this->progress['inprogress']) {
 	var juri = '<?php echo JURI::root(true); ?>';
 	var surveyconfig = <?php echo $this->testconfig; ?>;
 	var surveydata = <?php echo $this->surveydata; ?>;
+	DnaGifts.test.prev_question_id = <?php echo $lqid; ?>;
+	DnaGifts.test.prev_score = <?php echo $lans; ?>;
 	var user_test_id = <?php echo $this->user_test_id ? $this->user_test_id : 'undefined'; ?>;
 	var reporting_url = '<?php echo JURI::base(); ?>index.php?option=com_dnagifts&view=report&id=';
 	var autoSuggestData = {
 		churchList: <?php echo json_encode($this->autoSuggestData['churchList']); ?>,
-    pastorList: <?php echo json_encode($this->autoSuggestData['pastorList']); ?>,
-    cityList: <?php echo json_encode($this->autoSuggestData['cityList']); ?>
-  };
+		pastorList: <?php echo json_encode($this->autoSuggestData['pastorList']); ?>,
+		cityList: <?php echo json_encode($this->autoSuggestData['cityList']); ?>
+	};
   var hasPretestInfo = <?php echo $this->hasPretestInfo; ?>;
 </script>
 

@@ -1,6 +1,6 @@
 root.myNamespace.create('DnaGifts.test', {
     language: 'en',
-    translations:
+	translations:
     {
       af: {
         nextQuestionLoading: "Volgende vraag laai ...",
@@ -154,7 +154,13 @@ root.myNamespace.create('DnaGifts.test', {
                 test_id: surveyconfig.id
             },
             success: function(json_data){
-                user_test_id = json_data.user_test_id;
+				if (json_data.success) {
+					user_test_id = json_data.user_test_id;
+				} else {
+					jQuery("#dnaTestSpace").hide();
+					alert(json_data.message);
+					window.location = juri+'/index.php?option=com_dnagifts&view=dnagifts';
+				}
             }
         });
         return false;
@@ -226,7 +232,7 @@ root.myNamespace.create('DnaGifts.test', {
         if(Base.countdown.is_paused) {
             ns.executePlay();
         }
-        
+        var counts = ns.countQuestions();
         ns.clearPreviousQuestion();
         jQuery(".dnaPauseDivider").hide();
         jQuery("#dnaPauseButton").hide();
@@ -238,7 +244,7 @@ root.myNamespace.create('DnaGifts.test', {
         // this function will save the answer to the JS object
         var answer = jQuery(this).metadata().answer;
         surveydata[ns.currQuestion].answer = answer;
-        
+		
 		// now we send it to the database too.
 		var url=juri+'/index.php?option=com_dnagifts&format=json&task=test.saveAnswer';
 		jQuery.ajax({
@@ -247,12 +253,22 @@ root.myNamespace.create('DnaGifts.test', {
 			data: {
 				user_test_id: user_test_id,
 				question_id: ns.question_id,
-				score: answer
+				score: answer,
+				prev_question_id: ns.prev_question_id,
+				prev_score: ns.prev_score,
+				done: counts.done
 			},
-			async: true
+			success: function(json_data) {
+				if (!json_data.success) {
+					jQuery("#dnaTestSpace").hide();
+					alert(json_data.message);
+					location.reload();
+				}
+			}
 		});
 		
         ns.updateProgress();
+		ns.updatePrevResults(ns.question_id,answer);
         
         // ... and attempt to load the next question
 		setTimeout(function() {
@@ -262,6 +278,12 @@ root.myNamespace.create('DnaGifts.test', {
 		}, 1500);
         return false;
     },
+	updatePrevResults: function (qid,answer)
+	{
+		var ns = DnaGifts.test;
+		ns.prev_question_id = qid;
+		ns.prev_score = answer;
+	},
     countQuestions: function()
     {
         var counts = {total: 0, done: 0, togo: 0};

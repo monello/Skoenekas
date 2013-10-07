@@ -11,15 +11,69 @@ require_once JPATH_COMPONENT.'/helpers/dnagifts.php';
  */
 class DnaGiftsControllerTest extends JControllerForm
 {
-  public function saveAnswer()
+	public function testHealthChecks($db, $user_test_id, $done, $prev_question_id, $prev_score)
 	{
-    $user_test_id = JRequest::getCmd('user_test_id');
-    $question_id  = JRequest::getCmd('question_id');
-    $score        = JRequest::getCmd('score');
-    
+		// count how many answers are logged for this test so far
+		// compare it to the $done values sent in by JS
+		$query = "SELECT count(*)
+		FROM ".$db->nameQuote('#__dnagifts_lnk_user_test_answers').
+		" WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id);
+			
+		$db->setQuery($query);
+		$howmany = $db->loadResult();
+		$difference = abs((int) $done - (int)$howmany);
+		
+		if ((int) $difference > 1) {
+			return $difference;
+		}
+		
+		if ((int) $difference > 0) {
+			// if the totals don't match
+			// now check that the previous answer was successfully saved
+			$query = "SELECT id
+				FROM ".$db->nameQuote('#__dnagifts_lnk_user_test_answers').
+				" WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id).
+				" AND ".$db->nameQuote('question_id')." = ".$db->quote($prev_question_id);
+			
+			$db->setQuery($query);
+			$answer_id = $db->loadResult();
+			
+			if (!$answer_id) {	
+				$query = $db->getQuery(true);
+				$query->insert('#__dnagifts_lnk_user_test_answers');
+				$query->columns('lnk_user_test_id, question_id, answer_score');
+				$query->values((int) $user_test_id . ',' . (int) $prev_question_id . ',' . (int) $prev_score);
+				$db->setQuery($query);
+				$this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_ANSWER'));
+				$db->query();
+			} else {
+				return 2;
+			}
+		}
+		return $difference;
+	}
+	
+	public function saveAnswer()
+	{
+    $user_test_id 		= JRequest::getCmd('user_test_id');
+    $question_id  		= JRequest::getCmd('question_id');
+    $score        		= JRequest::getCmd('score');
+	$prev_question_id 	= JRequest::getCmd('prev_question_id');
+    $prev_score       	= JRequest::getCmd('prev_score');
+    $done	  			= JRequest::getCmd('done');
+	
     $db   = JFactory::getDbo();
     $user	= JFactory::getUser();
-    
+	
+	if ($done > 0) {
+		$difference = $this->testHealthChecks($db, $user_test_id, $done, $prev_question_id, $prev_score);
+		if ($difference > 1) {
+			echo json_encode(array("success"=> false, 
+				"message"=>"OOPS!! Something went wrong, we need to reset this test.\nThis page will reload. We apologise for the inconvenience."));
+			return false;
+		}
+	}
+	
 	$query = "SELECT id
 		FROM ".$db->nameQuote('#__dnagifts_lnk_user_test_answers').
 		" WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id).
@@ -72,6 +126,13 @@ class DnaGiftsControllerTest extends JControllerForm
     $user	 		= JFactory::getUser();
     $sessionID		= DnaGiftsHelper::getSessionID();
 	$browser 		= get_browser(null, true);
+	
+	if (!$user || $user->id == 0 || !$sessionID || strlen($sessionID) < 5) {
+		$app = JFactory::getApplication();
+		$error = $app->logout();		
+		echo json_encode(array("success"=> false, "message" => JText::_('COM_DNAGIFTS_TEST_ERROR_NOUSEROBJECT')));
+		return false;
+	}
 	
     $query = "
 	  SELECT id
@@ -134,8 +195,9 @@ class DnaGiftsControllerTest extends JControllerForm
     }
     $user_test_id = $db->insertid();
     
-    if (!$user_test_id) {
-	  echo json_encode(array("success"=> false));
+    if (!$user_test_id || $user_test_id == 0) {
+	  echo json_encode(array("success"=> false, 
+		"message"=>"OOPS!! Something went wrong, we are unable to process this request at the moment.\nPlease log in again. We apologise for the inconvenience."));
 	} else {
 	  echo json_encode(array("success" => true, "user_test_id" => $user_test_id));
 	}
