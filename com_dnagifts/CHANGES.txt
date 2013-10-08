@@ -648,3 +648,11 @@
  - On attempting to log the test record, when starting a test I added a few user session checks to ensure we have a logged in user.
  - Added test-progress healthchecks and some recovery procedures in case answers get lost during the completion of a test.
  
+ 1.1.03 (2013/10/08)
+ -------------------
+ - Updated the pre-test question autosuggest views
+ - Updated the code to save and read the mapped fields
+ - Continued the Data Maintenance section in Admin
+ - Added a cron to maintain the mapped fields where mapping is not yet done
+ - Added a basic check to see if pre-test questions are in fact answered
+ 

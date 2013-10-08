@@ -473,10 +473,14 @@ root.myNamespace.create('DnaGifts.pretest', {
     savePretestQuestion: function()
     {
       var ns = DnaGifts.test;
-    	var nsP = DnaGifts.pretest;
+      var nsP = DnaGifts.pretest;
       
       // this function will save the answer to the JS object
       var answr = jQuery(this).metadata().answer;
+	  if ((!answr && answr != 0) || answr < 0) {
+		alert("Please provide an answer to this question");
+		return false;
+	  }
       var fld = jQuery(this).metadata().field;
       
       // now we send it to the database too.

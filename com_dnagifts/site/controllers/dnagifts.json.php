@@ -89,7 +89,7 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
                         </div>
                       </td>
                       <td align="center" width="25%">
-                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'church_name\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
+                        <div class="dnaAnswerButton" style="display: block;"><a data="{answer: undefined, field: \'church_name\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
                       </td>
                     </tr>
         </tbody>
@@ -119,7 +119,7 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
               </div>
             </td>
             <td align="center" width="25%">
-              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'pastor_reverend\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
+              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: undefined, field: \'pastor_reverend\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
             </td>
           </tr>
         </tbody>
@@ -150,7 +150,7 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
               </div>
             </td>
             <td align="center" width="25%">
-              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'your_city\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
+              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: undefined, field: \'your_city\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
             </td>
           </tr>
         </tbody>
@@ -184,7 +184,7 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
               <select id="textfield" name="your_country">' . $options_html . '</select></div>
             </td>
             <td align="center" width="25%">
-              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'your_country\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
+              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: -1, field: \'your_country\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Save</a></div>
             </td>
           </tr>
         </tbody>
@@ -200,77 +200,92 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
     ));
 	}
   
-  /***************************************************************************** QUESTION 7 ************************************************************************************************************/
-  public function getQ7()
+	/***************************************************************************** QUESTION 7 ************************************************************************************************************/
+	public function getQ7()
 	{
 		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_DIVINE_LABEL');
-    $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_DIVINE_DESC');
+		$questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_DIVINE_DESC');
     
-    $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
-        <tbody>
-          <tr id="trButtons">
-            <td align="center">
-              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 1, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Yes</a></div>
-            </td>
-            <td align="center">
-              <div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">No</a></div>
-            </td>
-          </tr>
-        </tbody>
-      </table></div>';
+		$buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
+		<tbody>
+			<tr id="trButtons">
+				<td align="center">
+					<div class="dnaAnswerButton" style="display: block;"><a data="{answer: 1, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">Yes</a></div>
+				</td>
+				<td align="center">
+					<div class="dnaAnswerButton" style="display: block;"><a data="{answer: 0, field: \'believe_divine\'}" href="#" class="pretestbutton btnAnswer hasTip" title="">No</a></div>
+				</td>
+			</tr>
+		</tbody>
+		</table></div>';
 		
-    echo json_encode(array(
-      "success"       => true, 
-      "label"         => $label,
-      "questionText"  => $questionText,
-      "buttons"       => $buttons
-    ));
+		echo json_encode(array(
+			"success"       => true, 
+			"label"         => $label,
+			"questionText"  => $questionText,
+			"buttons"       => $buttons
+		));
 	}
   
   
-  /****************************************************************************************************************************************************************************************************/
-  /***************************************************************************** SAVE ANSWER ***********************************************************************************************************/
-  /****************************************************************************************************************************************************************************************************/
-  public function saveAnswer()
+	/****************************************************************************************************************************************************************************************************/
+	/***************************************************************************** SAVE ANSWER ***********************************************************************************************************/
+	/****************************************************************************************************************************************************************************************************/
+	public function saveAnswer()
 	{
-    $field = JRequest::getVar('field');
-    $answer = JRequest::getVar('answer');
-    
-    $user	= JFactory::getUser();
-    $user_id = (int) $user->get('id');
-    $id = DnaGiftsHelper::hasPretestID($user_id);
-    
-    $db   = JFactory::getDbo();
-    $query = $db->getQuery(true);
-    
-    if (!$id) {
-      if($field == 'is_christian') {
-        $query->insert('#__dnagifts_pretest_info');
-        $query->columns('user_id, is_christian, in_church');
-        $query->values((int) $user_id . ',' . (int) $answer . ',-1');
-      } else {      
-        $errtext = "Cannot save this question because pretest-record does not exist";
-        $this->setError($errtext);
-        echo json_encode(array("success"=> false, "message" => $errtext));
-        return false;
-      }
-    } else {
-    	$query->update('#__dnagifts_pretest_info');
-      if (gettype($answer) == "integer") {
-        $query->set($field.'  = '.(int) $answer);
-      } else {
-		$query->set($field.'  = '.$db->quote($this->camelCaseSentence($answer)));
-      }
-      $query->where('id = ' . (int) $id);
-    }
-    $db->setQuery($query);
-    
-    if (!$db->query()) {
-      $this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_ANSWER'));
-      echo json_encode(array("success"=> false, "message" => JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_ANSWER')));
-      return false;
-    }
-    echo json_encode(array("success" => true, "answer" => $answer));
+		$field = JRequest::getVar('field');
+		$answer = JRequest::getVar('answer');
+		
+		$user	= JFactory::getUser();
+		$user_id = (int) $user->get('id');
+		$id = DnaGiftsHelper::hasPretestID($user_id);
+		
+		$db   = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		
+		if (!$id) {
+			if($field == 'is_christian') {
+				$query->insert('#__dnagifts_pretest_info');
+				$query->columns('user_id, is_christian, in_church');
+				$query->values((int) $user_id . ',' . (int) $answer . ',-1');
+			} else {      
+				$errtext = "Cannot save this question because pretest-record does not exist";
+				$this->setError($errtext);
+				echo json_encode(array("success"=> false, "message" => $errtext));
+				return false;
+			}
+		} else {
+			$query->update('#__dnagifts_pretest_info');
+			switch ($field) {
+				case 'church_name':
+					$query->set($field.'  = '.$db->quote($this->camelCaseSentence($answer)));
+					$query->set('church_mapped  = '.$db->quote($this->camelCaseSentence($answer)));
+					break;
+				case 'your_city':
+					$query->set($field.'  = '.$db->quote($this->camelCaseSentence($answer)));
+					$query->set('city_mapped  = '.$db->quote($this->camelCaseSentence($answer)));
+					break;
+				case 'pastor_reverend':
+					$query->set($field.'  = '.$db->quote($this->camelCaseSentence($answer)));
+					$query->set('pastor_mapped  = '.$db->quote($this->camelCaseSentence($answer)));
+					break;
+				default:
+					if (gettype($answer) == "integer") {
+						$query->set($field.'  = '.(int) $answer);
+					} else {
+						$query->set($field.'  = '.$db->quote($this->camelCaseSentence($answer)));
+					}
+			}
+			$query->where('id = ' . (int) $id);
+		}
+		$db->setQuery($query);
+		
+		if (!$db->query()) {
+			$this->setError(JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_ANSWER'));
+			echo json_encode(array("success"=> false, "message" => JText::_('COM_DNAGIFTS_TEST_ERROR_SAVE_ANSWER')));
+			return false;
+		}
+		echo json_encode(array("success" => true, "answer" => $answer));
 	}
   
 	protected function camelCaseSentence($input) {
