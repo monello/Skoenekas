@@ -1,0 +1,47 @@
+.dnaTestCard {
+	background-color: white; 
+	border: 1px solid black; 
+	padding: 20px; 
+	margin-bottom: 20px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 10px #bbbbbb;
+}
+.dnaQuesNmbr, .dnaQuesText { padding: 5px; }
+.dnaQuesText { 
+	display: inline-block; 
+	font-family: sans-serif;
+	font-size: 16pt;
+	text-shadow: 3px 2px 4px rgba(0, 0, 0, 0.7);
+	margin-bottom: 10px;
+}
+.dnaQuesNmbr { 
+	color: #999; 
+	margin-top: 10px;
+}
+.dnaAnsText { display: inline-block; }
+.noanswer  .dnaAnsText {
+	border: 1px solid red;
+	background-color: yellow;
+	font-weight: bold;
+	padding: 10px;
+	margin-left: 10px;
+}
+.dnaGiftBlock {
+	display: inline-block;
+	padding: 5px;
+	font-weight: bold;
+	border-radius: 5px;
+	color: white;
+}
+#dnaFilters  { padding: 10px 10px }
+#fltScoreWrap  { margin-left: 10px; }
+#fltScoreWrap select { float: none !important; }
+span.answer { 
+	font-size: 16pt;
+	margin-left: 10px;
+}
+#dnaFiltersSet {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}

@@ -35,7 +35,7 @@ defined('_JEXEC') or die('Restricted Access');
 ?>
 	<tr class="row<?php echo $i % 2; ?>">
 		<td>
-			<a href="<?php JURI::root(true) ?>/administrator/index.php?option=com_dnagifts&view=testdetail" 
+			<a href="<?php JURI::root(true) ?>/administrator/index.php?option=com_dnagifts&view=testdetail&id=<?php echo (int) $item->id; ?>" 
 				title="View Test Analysis::Click here to see a detailed breakdown of this test" 
 				class="hasTip viewreport"></a>
 			<?php if ((int) $item->progress >= 80): ?>

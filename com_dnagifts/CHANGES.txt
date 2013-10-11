@@ -656,3 +656,7 @@
  - Added a cron to maintain the mapped fields where mapping is not yet done
  - Added a basic check to see if pre-test questions are in fact answered
  
+ 1.1.04 (2013/10/10)
+ -------------------
+ - Added the Test Analysis Report
+ 
