@@ -57,7 +57,6 @@ class DnaGiftsControllerTest extends JControllerForm
 		$query->set('button_id = ' . (int) $button_id);
 		$query->where('id = ' . (int) $link_id);
 		$db->setQuery($query);
-		
 		$db->query();
 		
 		// get button details

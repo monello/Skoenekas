@@ -5,28 +5,11 @@ class DnagiftsHelper
 {
 	public static function getSessionID()
 	{
-		$user = JFactory::getUser();
-		
-		if (!$user) {
-			return 0;
-		}
-		
-		$db = JFactory::getDBO();
-		$query = "SELECT session_id
-				FROM ".$db->nameQuote('#__session')."
-				WHERE ".$db->nameQuote('userid')." = ".$db->quote($user->get("id"))."
-				AND ".$db->nameQuote('client_id')." = 0";
-		$db->setQuery($query);
-		
-		// Check for a database error.
-		if ($db->getErrorNum()) {
-			JError::raiseWarning(500, $db->getErrorMsg());
-		}
-		
-		if ($session_id = $db->loadResult()) {
-			return $session_id;
+		$session =& JFactory::getSession();
+		if($session) {
+			return $session->getId();
 		} else {
-			return '0';
+			return null;
 		}
 	}
 	
@@ -68,7 +51,7 @@ class DnagiftsHelper
 		}
 	}
 	
-  public static function pretestFlightChecks()
+	public static function pretestFlightChecks()
 	{
 		$user = JFactory::getUser();
 		
@@ -157,7 +140,7 @@ class DnagiftsHelper
     return 1;
 	}
 	
-  public static function hasPretestID($userid)
+	public static function hasPretestID($userid)
 	{
 		$db = JFactory::getDBO();
 		$query = "
@@ -174,11 +157,12 @@ class DnagiftsHelper
 		return($db->loadResult());
 	}
   
-	public static function getUserTestID($test_id = 0)
+	/* checks if this is an active test based on the test id and the user's current session id */
+	public static function getUserTestID($test_id)
 	{
 		$session_id = DnagiftsHelper::getSessionID();
 		if (!$session_id || !$test_id) {
-			return 0;
+			return null;
 		}
 		
 		$db = JFactory::getDBO();
@@ -194,8 +178,8 @@ class DnagiftsHelper
 			JError::raiseWarning(500, $db->getErrorMsg());
 		}
 		
-		if ($test_user_id = $db->loadResult()) {
-			return $test_user_id;
+		if ($user_test_id = $db->loadResult()) {
+			return $user_test_id;
 		} else {
 			return null;
 		}
@@ -273,7 +257,8 @@ class DnagiftsHelper
 		if ($user_test_id) {
 			$query = "SELECT COUNT(DISTINCT(question_id))
 				FROM ".$db->nameQuote('#__dnagifts_lnk_user_test_answers').
-				" WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id);
+				" WHERE ".$db->nameQuote('lnk_user_test_id')." = ".$db->quote($user_test_id) .
+				" AND is_skipped = 0";
 			
 			$db->setQuery($query);
 			
@@ -285,7 +270,7 @@ class DnagiftsHelper
 		// get percentage complete
 		$progress['percent'] = 0;
 		if ($progress['howmany']) {
-			$progress['percent'] = round($progress['answers'] / $progress['howmany'] * 100);
+			$progress['percent'] = round($progress['answers'] / $progress['howmany'] * 100, 1);
 		}
     
 		// check if the test is still in-progres for this user

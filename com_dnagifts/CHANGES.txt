@@ -660,3 +660,8 @@
  -------------------
  - Added the Test Analysis Report
  
+ 1.1.05 (2013/10/12)
+ -------------------
+ - rewrote the test process
+ - still have a few kink to iron out
+ 

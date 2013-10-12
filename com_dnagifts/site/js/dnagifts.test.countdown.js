@@ -29,10 +29,11 @@ root.myNamespace.create('Base.countdown', {
 		Base.countdown.duration = (parseInt(duration)) ? parseInt(duration) : parseInt(surveyconfig.default_duration); 
 		jQuery('#dnaCountdown').countdown({until: this.shortly, onExpiry: callback, onTick: this.watchCountDown}); 
     },
-    startCountDown: function()
+    startCountDown: function(duration_override)
     {
         this.shortly = new Date(); 
-        this.shortly.setSeconds(this.shortly.getSeconds() + Base.countdown.duration); 
+		var duration = duration_override ? duration_override : Base.countdown.duration;
+        this.shortly.setSeconds(this.shortly.getSeconds() + duration); 
         jQuery('#dnaCountdown').countdown('option', {until: this.shortly}); 
     },
     watchCountDown: function(periods) {

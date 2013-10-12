@@ -1,43 +1,58 @@
 <?php
+// No direct access to this file
 defined('_JEXEC') or die('Restricted access');
+
+// import Joomla view library
 jimport('joomla.application.component.view');
-
-JLoader::register('DnagiftsHelper', JPATH_COMPONENT.'/helpers/dnagifts.php');
-
+ 
+/**
+ * HTML View class for the DnaGifts Component
+ */
 class DnaGiftsViewTest extends JView
 {
+	/**
+	 * display method of DNAGIFT view
+	 * @return void
+	 */
+	protected $survey_data;
+	
 	public function display($tpl=null) 
 	{
 		$test_id = JRequest::getVar( 'id', 0 );
 		
-		// Check if this is an active test for the current user session
-		$user_test_id	= DnagiftsHelper::getUserTestID($test_id);
-		$is_active 		= $user_test_id ? true : false;
+		$model 				= $this->getModel();
+		$buttons			= $model->getTestButtons( $test_id );
+		$config 			= $model->getTestConfig( $test_id );
+		$user_test_id 		= DnaGiftsHelper::getUserTestID( $test_id );
+		$data 				= $model->getTestData( $test_id, $user_test_id );
+		$progress 			= DnagiftsHelper::getUserProgress( $user_test_id, $test_id );
 		
-		$model 			= $this->getModel();
-		$buttons		= $model->getTestButtons( $test_id );
-		$buttonwidth	= $this->calcButtonWidth( $buttons );
-		$testconfig 		= $model->getTestConfig( $test_id );
-		
-		$this->assignRef( 'testconfig', $testconfig );
-		$this->assignRef( 'test_id', $test_id );
-		$this->assignRef( 'is_active', $is_active );
-		$this->assignRef( 'buttons', $buttons );
-		$this->assignRef( 'buttonwidth', $buttonwidth );
-		
-		parent::display();
-		$this->setDocument();
-	}
-	
-	protected function calcButtonWidth($buttons)
-	{
-		$buttonwidth	= 120;
+		$buttonwidth  = 120;
 		if (count($buttons)) {
 			$buttonwidth  = floor(100 / count($buttons));
 		}
-		return $buttonwidth;
+		
+		$this->assignRef( 'testid', $test_id );
+		$this->assignRef( 'user_test_id', $user_test_id );
+		$this->assignRef( 'buttons', $buttons );
+		$this->assignRef( 'surveydata', $data );
+		$this->assignRef( 'testconfig', $config );
+		$this->assignRef( 'buttonwidth', $buttonwidth );
+		$this->assignRef( 'progress', $progress );
+		$this->assignRef( 'autoSuggestData', $model->getAutoSuggestData() );
+		
+		// Display the template
+		parent::display();
+		
+		// Set the document
+		$this->setDocument();
 	}
 	
+	/**
+	 * Method to set up the document properties
+	 *
+	 * @return void
+	 */
 	protected function setDocument() 
 	{
 		$document = JFactory::getDocument();
