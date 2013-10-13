@@ -16,7 +16,6 @@ class DnaGiftsControllerTest extends JControllerForm
 		$test_id = JRequest::getVar('test_id');
 		$question_id = JRequest::getVar('question_id', -1);
 		$answer_score = JRequest::getVar('answer_score', -1);
-		$progress = JRequest::getVar('progress', 0);
 		
 		$model = $this->getModel( 'test' );
 		
@@ -38,7 +37,7 @@ class DnaGiftsControllerTest extends JControllerForm
 			}
 		} else {
 			if ($question_id > 0) {
-				$model->logAnswer($user_test_id, $question_id, $answer_score, $progress);
+				$model->logAnswer($user_test_id, $question_id, $answer_score);
 			}
 		}
 		
@@ -56,7 +55,7 @@ class DnaGiftsControllerTest extends JControllerForm
 		//	- progress percentage
 		//	- questions done
 		//	- questions to go (INCLUDES passed questions)
-		list ($progress, $total, $done, $togo) = $model->getUserTestProgress($test_id, $user_test_id);
+		list ($progress, $total, $done, $togo) = $model->getUserTestProgress($user_test_id);
 		
 		echo json_encode(array(
 			"success" => true,

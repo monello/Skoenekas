@@ -72,8 +72,7 @@ root.myNamespace.create('DnaGifts.test', {
 			data: {
 				test_id: ns.test_id,
 				question_id: ns.question_id > 0 ? ns.question_id : undefined,
-				answer_score: (answer_score || answer_score === 0) ? answer_score : undefined,
-				progress: ns.progress ? ns.progress : 0
+				answer_score: (answer_score || answer_score === 0) ? answer_score : undefined
 			},
 			success: function(json) {
 				if (!json.success) {
@@ -100,32 +99,19 @@ root.myNamespace.create('DnaGifts.test', {
         var ns = DnaGifts.test;
 		
 		// update stuff
-        if (!Base.countdown.is_paused)
-            jQuery("#dnaMessages").html('<em style="color: #ff8000">'+ns.translate('nextQuestionLoading')+'</em>').show();
-        else
-            jQuery("#dnaMessages").html('<em style="color: #ff8000">'+ns.translate('hitPlay')+'</em>').show();
-        
+        jQuery("#dnaMessages").html('<em style="color: #ff8000">'+ns.translate('nextQuestionLoading')+'</em>').show();
+        Base.countdown.running = false;
+		
 		// hide stuff
 		jQuery("#dnaCountdown").hide();
 		jQuery("#dnaQuestionText").hide();
         jQuery(".dnaAnswerButton").hide();
+		jQuery("#dnaInteractions").hide();
         
 		// show stuff
-		if (!Base.countdown.is_paused)
-            jQuery("#dnaLoadingDiv").show();
-        else
-            jQuery("#dnaPauseDiv").show();
+        jQuery("#dnaLoadingDiv").show();
     },
-	executePause: function()
-    {
-        var ns = DnaGifts.test;
-        ns.clearPreviousQuestion();
-        jQuery("#dnaPauseButton").hide();
-        jQuery(".dnaPauseDivider").hide();
-        jQuery(".dnaPlayButton").show();
-        jQuery("#dnaInteractions").hide();
-    },
-    renderQuestion: function(json)
+	renderQuestion: function(json)
     {
 		var ns = DnaGifts.test;
 		var nsCD = Base.countdown;
@@ -134,6 +120,7 @@ root.myNamespace.create('DnaGifts.test', {
 		ns.question_id = json.question_id;
 		jQuery("#dnaQuestionText").html(json.question_text);
 		ns.updateProgress(json);
+		nsCD.running = true;
 		
         // hide stuff
 		jQuery("#pretestquestiondiv").remove();
@@ -153,15 +140,13 @@ root.myNamespace.create('DnaGifts.test', {
 			
 		if (parseInt(surveyconfig.use_timing)){
 			jQuery("#dnaCountdown").show();
-			jQuery("#pauseTestContainer").show();
 			nsCD.startCountDown(json.show_duration);
         }
     },
 	updateProgress: function(json)
     {
         var ns = DnaGifts.test;
-		ns.progress = json.progress;
-        var ssdone = json.done != 1 ? ns.translate('questions') : ns.translate('question');
+		var ssdone = json.done != 1 ? ns.translate('questions') : ns.translate('question');
         var sstogo = json.togo != 1 ? ns.translate('questions') : ns.translate('question');
 		
         jQuery("#progressbar").progressbar("value", json.progress);
@@ -213,7 +198,24 @@ root.myNamespace.create('DnaGifts.test', {
 		ns.saveAndFetch(answer_score);
 		return false;
 	},
-	
+	pauseTest: function()
+	{
+		// pause the countdown
+		Base.countdown.is_paused = true;
+		
+		// hide the  top bar (this includes the countdown, interactions, and progress sections)
+		jQuery("#dnaTopBar").hide();
+		
+		// hide the progress & button bars
+		jQuery("#dnaProgressBar").hide();
+		jQuery("#dnaButtonsBar").hide();
+		
+		// update the question text
+		jQuery("#dnaQuestionText").html("This test is now pausing...");
+		
+		// reload the page
+		location.reload();
+	},
     //------------------------------------------------------------------------
     onload_functions: function(ns)
     {
@@ -221,6 +223,7 @@ root.myNamespace.create('DnaGifts.test', {
 		jQuery(".playbutton, .pausebutton").bind("click", ns.executePlay);
 		jQuery("#dnaPassButton").bind("click", ns.passQuestion);
 		jQuery(".btnAnswer").bind("click", ns.saveAnswer);
+		jQuery("#dnaPauseButton").bind("click", ns.pauseTest);
 		jQuery("#progressbar").progressbar({ value: 0 });
 		if(parseInt(surveyconfig.use_timing)) {
 			nsCD.createCountDown(surveyconfig.default_duration, this.passQuestion);

@@ -273,8 +273,8 @@ class DnagiftsHelper
 			$progress['percent'] = round($progress['answers'] / $progress['howmany'] * 100, 1);
 		}
     
-		// check if the test is still in-progres for this user
-		if ((int) $progress['percent'] > 0 && (int) $progress['percent'] < 100) {
+		// check if the test is still in-progress for this user
+		if ((float) $progress['percent'] > 0 && (float) $progress['percent'] < 100) {
 			$progress['inprogress'] = true;
 			// get the last question_id and answer saved
 			$last = DnagiftsHelper::getLastAnswer($db, $user_test_id);

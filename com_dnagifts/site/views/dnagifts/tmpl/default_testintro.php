@@ -71,7 +71,7 @@ $activeTests = $model->getAllActiveTests();
             </a>
           <?php else: ?>
             <?php 
-            if ((int) $progress['percent'] >= 100): 
+            if ((float) $progress['percent'] >= 100): 
             ?>
               <img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/tinycheck.png"
                 height="16px"

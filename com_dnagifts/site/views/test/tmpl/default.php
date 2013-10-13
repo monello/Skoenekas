@@ -29,7 +29,7 @@ if ($this->is_active) {
 		<div id="dnaCountdown" style="display:none"></div>
 		<div id="dnaMessages" style="display:none"></div>
 		<div id="dnaInteractions" style="display:none">
-			<span id="pauseTestContainer" style="display:none">
+			<span id="pauseTestContainer">
 				<a id="dnaPauseButton" href="javascript:void(0)">PAUSE</a>
 				<a id="dnaPlayButton" class="playbutton" href="javascript:void(0)" style="display:none">PLAY</a>
 				<span class="dnaPauseDivider">&nbsp;/&nbsp;</span>

@@ -103,7 +103,7 @@ class DnaGiftsModelTest extends JModel
 		return $nextQuestionObj;
 	}
 	
-	public function logAnswer($user_test_id, $question_id, $answer_score, $progress)
+	public function logAnswer($user_test_id, $question_id, $answer_score)
 	{
 		$db = $this->getDbo();
 		
@@ -136,9 +136,11 @@ class DnaGiftsModelTest extends JModel
 			$db->setQuery($query);
 			$db->query();
 			
+			$progress = $this->getUserTestProgress($user_test_id);
+			
 			$query = $db->getQuery(true);
 			$query->update('#__dnagifts_lnk_user_tests');
-			$query->set('progress = '. (int) $progress);
+			$query->set('progress = ' . ceil($progress[0]));
 			$query->where('id = ' . (int) $user_test_id);
 			$db->setQuery($query);
 			$db->query();
@@ -172,7 +174,28 @@ class DnaGiftsModelTest extends JModel
 			}
 		}
 	}
+	
+	public function getUserTestProgress($user_test_id) 
+	{
+		$db = $this->getDbo();
 		
+		$sql = "SELECT test_id, howmany FROM #__dnagifts_count_testanswers WHERE lnk_user_test_id = $user_test_id";
+		$db->setQuery($sql);
+		$data = $db->loadObject();
+		$done = $data->howmany;
+		$test_id = $data->test_id;
+		
+		$sql = "SELECT howmany FROM #__dnagifts_count_testquestions WHERE test_id = $test_id";
+		$db->setQuery($sql);
+		$total = $db->loadResult();
+		
+		$progress = round($done / $total * 100, 1);
+		
+		$togo = $total - $done;
+		
+		return array($progress, $total, $done, $togo);
+	}
+	/* OLD
 	public function getUserTestProgress($test_id, $user_test_id)
 	{
 		$total = $progress = 0;
@@ -222,6 +245,7 @@ class DnaGiftsModelTest extends JModel
 		
 		return array($progress, $total, $done, $total_togo);
 	}
+	*/
 	
 	public function getTestConfig($test_id) {
 		$db = $this->getDbo();

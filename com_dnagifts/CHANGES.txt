@@ -665,3 +665,8 @@
  - rewrote the test process
  - still have a few kink to iron out
  
+ 1.1.06 (2013/10/13)
+ -------------------
+ - ironed out the bugs of the new test process
+ - need to still incorporate the pre-test questions
+ - need to still add the auto suggest data
