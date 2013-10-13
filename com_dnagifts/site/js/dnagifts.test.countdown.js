@@ -32,13 +32,13 @@ root.myNamespace.create('Base.countdown', {
         this.shortly = new Date(); 
 		var duration = duration_override ? duration_override : Base.countdown.duration;
         this.shortly.setSeconds(this.shortly.getSeconds() + duration); 
+		jQuery('#dnaCountdown').countdown("resume");
         jQuery('#dnaCountdown').countdown('option', {until: this.shortly}); 
     },
     watchCountDown: function(periods) {
 		var ns = Base.countdown;
         if (!ns.running)
           return true;
-          
         ns.togo = periods[6];
         ss = ns.togo > 1 ? 's' : '';
 		if (ns.togo < 1)

@@ -16,6 +16,12 @@ if ($this->is_active) {
 	var juri = '<?php echo JURI::root(true); ?>';
 	var surveyconfig = <?php echo $this->testconfig; ?>;
 	var reporting_url = '<?php echo JURI::base(); ?>index.php?option=com_dnagifts&view=report&id=';
+	var hasPretestInfo = <?php echo $this->hasPretestInfo; ?>;
+	var autoSuggestData = {
+		churchList: <?php echo json_encode($this->autoSuggestData['churchList']); ?>,
+		pastorList: <?php echo json_encode($this->autoSuggestData['pastorList']); ?>,
+		cityList: <?php echo json_encode($this->autoSuggestData['cityList']); ?>
+	};
 </script>
 
 <div id="notificationcontainer">
@@ -23,7 +29,6 @@ if ($this->is_active) {
 </div>
 
 <div id="dnaTestSpace" data="{userlanguage: '<?php echo DnagiftsHelper::getCurrentLanguageCode(); ?>'}">
-	
 	<!-- The top bar contains all the test controls -->
 	<div id="dnaTopBar">
 		<div id="dnaCountdown" style="display:none"></div>

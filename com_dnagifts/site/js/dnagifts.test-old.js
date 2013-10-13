@@ -375,30 +375,32 @@ root.myNamespace.create('DnaGifts.pretest', {
       });
       return true;
     },
+	
     timeForPretestQuestion: function()
     {
-      var ns = DnaGifts.test;
+		var ns = DnaGifts.test;
     	var nsP = DnaGifts.pretest;
       
-      if (!nsP.countRemaining() || jQuery.inArray(ns.currQuestion, nsP.positions_log) > -1 )
-        return false;
+		if (!nsP.countRemaining() || jQuery.inArray(ns.currQuestion, nsP.positions_log) > -1 )
+			return false;
       
-      nsP.doPreFlightChecks();
+		nsP.doPreFlightChecks();
       
     	if (nsP.passPretestQuestion) {
-        nsP.passPretestQuestion = false;
-        return false;
-      }
+			nsP.passPretestQuestion = false;
+			return false;
+		}
     	
-      if (hasPretestInfo == 0 && ns.currQuestion && ns.currQuestion > 0) {
-        if (ns.currQuestion % 7 == 0) {
-          nsP.passPretestQuestion = true;
-          nsP.positions_log.push(ns.currQuestion);
-          return true;
-        }
-      }
-      return false;
+		if (hasPretestInfo == 0 && ns.currQuestion && ns.currQuestion > 0) {
+			if (ns.currQuestion % 7 == 0) {
+				nsP.passPretestQuestion = true;
+				nsP.positions_log.push(ns.currQuestion);
+				return true;
+			}
+		}
+		return false;
     },
+	
     placeNextPretestQuestion: function()
     {
       var nsP = DnaGifts.pretest;

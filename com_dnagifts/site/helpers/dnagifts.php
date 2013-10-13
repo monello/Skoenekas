@@ -61,46 +61,46 @@ class DnagiftsHelper
 		$data = Null;
 		$db = JFactory::getDBO();
 		$query = "SELECT * FROM ".$db->nameQuote('#__dnagifts_pretest_info')." WHERE ".$db->nameQuote('user_id')." = ".$db->quote($user->get("id")).";";
-    $db->setQuery($query);
-    $data = $db->loadObject();
+		$db->setQuery($query);
+		$data = $db->loadObject();
     
 		// Check for a database error.
 		if ($db->getErrorNum()) {
 			JError::raiseWarning(500, $db->getErrorMsg());
 		}
 		
-    if (!$data) {
-      return False;
-    }
+		if (!$data) {
+			return False;
+		}
     
-    $checks = array();
-    if ($data->is_christian !== Null) {
-      $checks[] = 1;
-    }
+		$checks = array();
+		if ($data->is_christian !== Null) {
+			$checks[] = 1;
+		}
     
-    if ($data->in_church !== Null && $data->in_church > -1) {
-      $checks[] = array(2, $data->in_church);
-      if ($data->church_name !== Null) {
-        $checks[] = 3;
-      }
-      if ($data->pastor_reverend !== Null) {
-        $checks[] = 4;
-      }
-    }
+		if ($data->in_church !== Null && $data->in_church > -1) {
+			$checks[] = array(2, $data->in_church);
+			if ($data->church_name !== Null) {
+				$checks[] = 3;
+			}
+			if ($data->pastor_reverend !== Null) {
+				$checks[] = 4;
+			}
+		}
     
-    if ($data->your_city !== Null) {
-      $checks[] = 5;
-    }
+		if ($data->your_city !== Null) {
+			$checks[] = 5;
+		}
     
-    if ($data->your_country !== Null) {
-      $checks[] = 6;
-    }
+		if ($data->your_country !== Null) {
+			$checks[] = 6;
+		}
     
-    if ($data->believe_divine !== Null) {
-      $checks[] = 7;
-    }
+		if ($data->believe_divine !== Null) {
+			$checks[] = 7;
+		}
     
-    return $checks;
+		return $checks;
 	}
   
 	public static function hasPretestInfo()
@@ -110,6 +110,7 @@ class DnagiftsHelper
 		if (!$user) {
 			return 0;
 		}
+		
 		$data = Null;
 		$db = JFactory::getDBO();
 		$query = "SELECT * FROM ".$db->nameQuote('#__dnagifts_pretest_info')." WHERE ".$db->nameQuote('user_id')." = ".$db->quote($user->get("id")).";";
@@ -121,23 +122,23 @@ class DnagiftsHelper
 			JError::raiseWarning(500, $db->getErrorMsg());
 		}
 		
-    if (!$data) {
-      return 0;
-    }
+		if (!$data) {
+			return 0;
+		}
     
-    if ($data->is_christian === Null || $data->in_church === Null || $data->in_church < 0 || 
-        $data->your_city === Null || $data->your_country === Null || $data->believe_divine === Null)
-    {
-      return 0;
-    }
+		if ($data->is_christian === Null || $data->in_church === Null || $data->in_church < 0 || 
+			$data->your_city === Null || $data->your_country === Null || $data->believe_divine === Null)
+		{
+			return 0;
+		}
     
-    if ($data->in_church == 1) {
-      if ($data->church_name === Null || $data->pastor_reverend === Null) {
-        return 0;
-      }
-    }
+		if ($data->in_church == 1) {
+			if ($data->church_name === Null || $data->pastor_reverend === Null) {
+				return 0;
+			}
+		}
     
-    return 1;
+		return 1;
 	}
 	
 	public static function hasPretestID($userid)

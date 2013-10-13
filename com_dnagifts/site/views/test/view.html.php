@@ -11,19 +11,22 @@ class DnaGiftsViewTest extends JView
 		$test_id = JRequest::getVar( 'id', 0 );
 		
 		// Check if this is an active test for the current user session
-		$user_test_id	= DnagiftsHelper::getUserTestID($test_id);
-		$is_active 		= $user_test_id ? true : false;
-		
-		$model 			= $this->getModel();
-		$buttons		= $model->getTestButtons( $test_id );
-		$buttonwidth	= $this->calcButtonWidth( $buttons );
+		$user_test_id		= DnagiftsHelper::getUserTestID($test_id);
+		$is_active 			= $user_test_id ? true : false;
+		$model 				= $this->getModel();
+		$buttons			= $model->getTestButtons( $test_id );
+		$buttonwidth		= $this->calcButtonWidth( $buttons );
 		$testconfig 		= $model->getTestConfig( $test_id );
+		$hasPretestInfo 	= DnagiftsHelper::hasPretestInfo();
+		$autoSuggestData	= $model->getAutoSuggestData();
 		
 		$this->assignRef( 'testconfig', $testconfig );
 		$this->assignRef( 'test_id', $test_id );
 		$this->assignRef( 'is_active', $is_active );
 		$this->assignRef( 'buttons', $buttons );
 		$this->assignRef( 'buttonwidth', $buttonwidth );
+		$this->assignRef( 'hasPretestInfo', $hasPretestInfo );
+		$this->assignRef( 'autoSuggestData', $autoSuggestData );
 		
 		parent::display();
 		$this->setDocument();

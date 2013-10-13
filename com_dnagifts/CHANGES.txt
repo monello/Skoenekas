@@ -670,3 +670,8 @@
  - ironed out the bugs of the new test process
  - need to still incorporate the pre-test questions
  - need to still add the auto suggest data
+ 
+ 1.2.00 (2013/10/13)
+ -------------------
+ - Completed the test-controller refactoring.
+ 
