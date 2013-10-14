@@ -116,11 +116,11 @@ class DnaGiftsModelTesthistory extends JModelList
 		$query->select('b.name, b.username');
 		$query->join('LEFT', $db->quoteName('#__users').' AS b ON b.id = a.user_id');
 		
-		// Join over the users
+		// Join over the tests
 		$query->select('c.test_name');
 		$query->join('LEFT', $db->quoteName('#__dnagifts_test').' AS c ON c.id = a.test_id');
 		
-		// Join over the users
+		// Join over the answers
 		$query->select('d.howmany as answer_count');
 		$query->join('LEFT', $db->quoteName('#__dnagifts_count_testanswers').' AS d ON a.id = d.lnk_user_test_id');
 		

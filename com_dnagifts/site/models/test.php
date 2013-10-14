@@ -185,6 +185,14 @@ class DnaGiftsModelTest extends JModel
 		$done = $data->howmany;
 		$test_id = $data->test_id;
 		
+		if (!$test_id) {
+			$sql = "SELECT test_id FROM #__dnagifts_lnk_user_tests WHERE id = $user_test_id";
+			$db->setQuery($sql);
+			$data = $db->loadObject();
+			$done = $data->howmany;
+			$test_id = $data->test_id;
+		}
+		
 		$sql = "SELECT howmany FROM #__dnagifts_count_testquestions WHERE test_id = $test_id";
 		$db->setQuery($sql);
 		$total = $db->loadResult();

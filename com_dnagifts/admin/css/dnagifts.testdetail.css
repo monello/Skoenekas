@@ -20,12 +20,19 @@
 	margin-top: 10px;
 }
 .dnaAnsText { display: inline-block; }
-.noanswer  .dnaAnsText {
-	border: 1px solid red;
-	background-color: yellow;
+.noanswer  .dnaAnsText,
+.answerskipped  .dnaAnsText {
 	font-weight: bold;
 	padding: 10px;
 	margin-left: 10px;
+}
+.noanswer  .dnaAnsText {
+	border: 1px solid red;
+	background-color: yellow;
+}
+.answerskipped  .dnaAnsText {
+	border: 1px solid DarkBlue;
+	background-color: LightBlue;
 }
 .dnaGiftBlock {
 	display: inline-block;

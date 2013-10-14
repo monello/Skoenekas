@@ -24,7 +24,7 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
   public function getQ1()
 	{
 		$label = JText::_('COM_DNAGIFTS_PRETEST_FIELD_ISCHRISTIAN_LABEL');
-    $questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_ISCHRISTIAN_DESC');
+		$questionText = JText::_('COM_DNAGIFTS_PRETEST_FIELD_ISCHRISTIAN_DESC');
     
     $buttons = '<div id="pretestquestiondiv"><table id="pretestquestiontable" height="100%" width="50%" style="margin-left:auto; margin-right:auto;">
         <tbody>

@@ -16,19 +16,22 @@ class DnaGiftsViewTestdetail extends JView
 		$testdata = $model->getTestQuestions($test_id);
 		$testsummary = $model->getTestSummary($user_test_id);
 		$answerdata = $model->getUserAnswers($user_test_id);
+		$skippeddata = $model->getSkippedAnswers($user_test_id);
 		$buttonscores = $model->getButtonScores($test_id);
-		$scoregroups = $model->getTestScoreGroups($user_test_id);
+		$scoregroups = $model->getTestScoreGroups($user_test_id, $test_id);
 		
 		$stats = array(
 			'questionCount' => count($testdata), 
 			'answerCount' => count($answerdata),
-			'missedQuestions' => count($testdata) - count($answerdata),
+			'missedQuestions' => count($testdata) - (count($answerdata) + count($skippeddata)),
+			'skippedCount' => count($skippeddata),
 			'percentComplete' => round(count($answerdata) / count($testdata) * 100, 2)
 		);
 		$this->assignRef( 'testdata', $testdata );
 		$this->assignRef( 'user', $user );
 		$this->assignRef( 'testsummary', $testsummary );
 		$this->assignRef( 'answerdata', $answerdata );
+		$this->assignRef( 'skippeddata', $skippeddata );
 		$this->assignRef( 'stats', $stats );
 		$this->assignRef( 'buttonscores', $buttonscores );
 		$this->assignRef( 'scoregroups', $scoregroups );

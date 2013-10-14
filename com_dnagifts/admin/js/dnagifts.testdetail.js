@@ -13,6 +13,16 @@ root.myNamespace.create('DnaGifts.testdetail', {
 		
 		jQuery(".dnaTestCard").show();
 		jQuery(".hasanswer").fadeOut();
+		jQuery(".answerskipped").fadeOut();
+	},
+	showskipped: function () 
+	{
+		var ns = DnaGifts.testdetail;
+		ns.resetSelectListFilters();
+		
+		jQuery(".dnaTestCard").show();
+		jQuery(".noanswer").fadeOut();
+		jQuery(".hasanswer").fadeOut();
 	},
 	showgood: function () 
 	{
@@ -21,6 +31,7 @@ root.myNamespace.create('DnaGifts.testdetail', {
 		
 		jQuery(".dnaTestCard").show();
 		jQuery(".noanswer").fadeOut();
+		jQuery(".answerskipped").fadeOut();
 	},
 	filterByScores: function ()
 	{
@@ -50,6 +61,7 @@ root.myNamespace.create('DnaGifts.testdetail', {
 		var ns = DnaGifts.testdetail;
 		jQuery(document).on( "click", "#showall", ns.showall );
 		jQuery(document).on( "click", "#showmissed", ns.showmissed );
+		jQuery(document).on( "click", "#showskipped", ns.showskipped );
 		jQuery(document).on( "click", "#showgood", ns.showgood );
 		jQuery(document).on( "change", "#fltScores", ns.filterByScores );
 		ns.resetSelectListFilters();

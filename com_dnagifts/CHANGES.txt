@@ -675,3 +675,9 @@
  -------------------
  - Completed the test-controller refactoring.
  
+ 1.2.01 (2013/10/14)
+ -------------------
+ - Updated the the wording of the "Is Christian" pretest question
+ - Fixed the counts of the testdetail report
+ - Updated the testdeail report to include missed and skipped questions
+ 

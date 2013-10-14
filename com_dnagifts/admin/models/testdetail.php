@@ -37,7 +37,20 @@ class DnaGiftsModelTestdetail extends JModelList
 		$db = $this->getDBO();
 		$sql = "SELECT *
 			FROM #__dnagifts_lnk_user_test_answers
-			WHERE lnk_user_test_id = $user_test_id";
+			WHERE lnk_user_test_id = $user_test_id
+			AND is_skipped = 0";
+		$db->setQuery($sql);
+		$data = $db->loadObjectList();
+		return $data;
+	}
+	
+	function getSkippedAnswers($user_test_id) 
+	{
+		$db = $this->getDBO();
+		$sql = "SELECT *
+			FROM #__dnagifts_lnk_user_test_answers
+			WHERE lnk_user_test_id = $user_test_id
+			AND is_skipped > 0";
 		$db->setQuery($sql);
 		$data = $db->loadObjectList();
 		return $data;
@@ -54,13 +67,15 @@ class DnaGiftsModelTestdetail extends JModelList
 		return $data;
 	}
 	
-	function getTestScoreGroups($user_test_id) 
+	function getTestScoreGroups($user_test_id, $test_id) 
 	{
 		$db = $this->getDBO();
-		$sql = "SELECT a.answer_score, b.button_text, COUNT(*) AS howmany
-			FROM #__dnagifts_lnk_user_test_answers a 
-			LEFT JOIN #__dnagifts_option_button b ON b.score = a.answer_score
+		$sql = "SELECT a.answer_score, b.button_text, COUNT( * ) AS howmany
+			FROM #__dnagifts_list_all_answers a
+			LEFT JOIN #__dnagifts_list_all_testbuttons b ON b.score = a.answer_score
 			WHERE lnk_user_test_id = $user_test_id
+			AND b.test_id = $test_id
+			AND is_skipped = 0
 			GROUP BY a.answer_score
 			ORDER BY a.answer_score";
 		$db->setQuery($sql);

@@ -37,22 +37,34 @@ JHtml::_('behavior.tooltip');
 		<td><strong>Date Sent:<strong></td>
 		<td><?php echo $this->testsummary->date_sent ?></td>
 	</tr>
+	<?php endif; ?>
 	<tr>
 		<td><strong>Percentage Complete:</strong></td>
-		<td colspan="3"> <?php echo $this->stats['percentComplete'] ?>%</td>
+		<td colspan="3">
+			<?php echo $this->stats['percentComplete'] ?>% | 
+			This test has: <?php echo $this->stats['questionCount'] ?> questions. This user answered: <?php echo $this->stats['answerCount'] ?>, skipped: <?php echo $this->stats['skippedCount'] ?> and missed: <?php echo $this->stats['missedQuestions'] ?>
+		</td>
 	</tr>
-	<?php endif; ?>
 </table>
 
 <fieldset id="dnaFiltersSet">
 	<legend>Filters</legend>
-<?php if ($this->stats['missedQuestions'] > 0) : ?>
+
 <div id="dnaFilters">
-	<a href="javascript:void(0);" id="showall">Show All (<?php echo $this->stats['questionCount'] ?>)</a> | 
-	<a href="javascript:void(0);" id="showmissed">Show Missed Questions (<?php echo $this->stats['missedQuestions'] ?>)</a> | 
-	<a href="javascript:void(0);" id="showgood">Show Answers Questions (<?php echo $this->stats['answerCount'] ?>)</a>
+	<?php if ($this->stats['questionCount'] > 0) : ?>
+		<a href="javascript:void(0);" id="showall">Show All (<?php echo $this->stats['questionCount'] ?>)</a> | 
+	<?php endif; ?>
+	<?php if ($this->stats['missedQuestions'] > 0) : ?>
+		<a href="javascript:void(0);" id="showmissed">Show Missed Questions (<?php echo $this->stats['missedQuestions'] ?>)</a> | 
+	<?php endif; ?>
+	<?php if ($this->stats['skippedCount'] > 0) : ?>
+		<a href="javascript:void(0);" id="showskipped">Show Skipped Questions (<?php echo $this->stats['skippedCount'] ?>)</a> |
+	<?php endif; ?>
+	<?php if ($this->stats['answerCount'] > 0) : ?>
+		<a href="javascript:void(0);" id="showgood">Show Answers Questions (<?php echo $this->stats['answerCount'] ?>)</a>
+	<?php endif; ?>
 </div>
-<?php endif; ?>
+
 
 <div id="fltScoreWrap">
 	<strong>Score:</strong> 
@@ -71,13 +83,24 @@ $cntr = 1;
 foreach ($this->testdata as $row):
 	$answerObj = false;
 	$answerClass = 'noanswer';
+	
 	foreach ($this->answerdata as $answer) :
 		if ($answer->question_id == $row->question_id) {
-			$answerObj = $answer;
 			$answerClass = 'hasanswer';
+			$answerObj = $answer;
 			break;
 		}
 	endforeach;
+	
+	if (!$answerObj) {
+		foreach ($this->skippeddata as $answer) :
+			if ($answer->question_id == $row->question_id) {
+				$answerClass = 'answerskipped';
+				$answerObj = $answer;
+				break;
+			}
+		endforeach;
+	}
 	
 	$btnText = '';
 	if ($answerObj) {
@@ -89,13 +112,18 @@ foreach ($this->testdata as $row):
 	}
 ?>
 
-<div class="dnaTestCard <?php echo $answerClass; ?> scr_<?php echo $answerObj->answer_score; ?>">
+<div class="dnaTestCard <?php echo $answerClass; ?> scr_<?php echo $answerClass == 'hasanswer' ? $answerObj->answer_score : $answerClass; ?>">
 	<div class="dnaQuesText"><?php echo $row->question_text; ?></div>
 	<div class="dnaAnswer">
 		<div class="dnaGiftBlock" style="background-color: <?php echo $row->color_hex; ?>;"><?php echo $row->name; ?></div>
 		<div class="dnaAnsText">
 		<?php if ($answerObj) :
-				echo '<span class="answer"><strong> Answer:</strong> '.$btnText.'</span>  (Score: '.$answerObj->answer_score.')';
+				if((int) $answerObj->is_skipped > 0) {
+					$skipstr = $answerObj->is_skipped > 1 ? $answerObj->is_skipped ." times" : $answerObj->is_skipped." time";
+					echo "<em>Answer was skipped $skipstr and never completed</em>";
+				} else {
+					echo '<span class="answer"><strong> Answer:</strong> '.$btnText.'</span>  (Score: '.$answerObj->answer_score.')';
+				}
 			else:
 				echo "<em>No answer found</em>";
 			endif; ?>
