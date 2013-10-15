@@ -681,3 +681,13 @@
  - Fixed the counts of the testdetail report
  - Updated the testdeail report to include missed and skipped questions
  
+ 1.2.02 (2013/10/15)
+ -------------------
+ - Updated the preset_info table, deleted fields I did not need and added approved fields
+ - Updated the auto-suggest views for church, pastor and city
+ - Deleted the cron that mantained the mapped fields I just deleted
+ - Removed all references to the deleted fields from the code base
+ - Updated the code that builds the autosuggest data sets
+ - Added code to trim leading, trailing and repeating spaces from user input for church, pastor and city
+ - Updated the Admin - Maintenance code. Still has some bugs
+ 

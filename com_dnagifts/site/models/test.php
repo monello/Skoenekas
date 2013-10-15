@@ -299,6 +299,7 @@ class DnaGiftsModelTest extends JModel
 		$query = $db->getQuery(true);
 		$query->select('church_name');
 		$query->from($db->quoteName('#__dnagifts_churchlist'));
+		$query->where('church_approved = 1');
 		$db->setQuery($query);
 		$churchList = $db->loadResultArray();
 		if ($db->getErrorNum()) {
@@ -309,6 +310,7 @@ class DnaGiftsModelTest extends JModel
 		$query = $db->getQuery(true);
 		$query->select('your_city');
 		$query->from($db->quoteName('#__dnagifts_citylist'));
+		$query->where('city_approved = 1');
 		$db->setQuery($query);
 		$cityList = $db->loadResultArray();
 		if ($db->getErrorNum()) {
@@ -319,6 +321,7 @@ class DnaGiftsModelTest extends JModel
 		$query = $db->getQuery(true);
 		$query->select('pastor_reverend');
 		$query->from($db->quoteName('#__dnagifts_pastorlist'));
+		$query->where('pastor_approved = 1');
 		$db->setQuery($query);
 		$pastorList = $db->loadResultArray();
 		if ($db->getErrorNum()) {

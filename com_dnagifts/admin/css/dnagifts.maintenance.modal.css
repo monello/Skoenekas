@@ -1,0 +1,2 @@
+table#mntTable tr:nth-child(even) {background: #ccc}
+table#mntTable tr:nth-child(odd) {background: #fff}

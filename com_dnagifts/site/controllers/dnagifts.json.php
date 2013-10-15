@@ -256,18 +256,17 @@ class DnaGiftsControllerDnaGifts extends JControllerForm
 			}
 		} else {
 			$query->update('#__dnagifts_pretest_info');
+			$answer = preg_replace('/\s+/', ' ',$answer); // reduce repeating spaces
+			$answer = trim($answer); // trim leading and trailing spaces
 			switch ($field) {
 				case 'church_name':
 					$query->set($field.'  = '.$db->quote($this->camelCaseSentence($answer)));
-					$query->set('church_mapped  = '.$db->quote($this->camelCaseSentence($answer)));
 					break;
 				case 'your_city':
 					$query->set($field.'  = '.$db->quote($this->camelCaseSentence($answer)));
-					$query->set('city_mapped  = '.$db->quote($this->camelCaseSentence($answer)));
 					break;
 				case 'pastor_reverend':
 					$query->set($field.'  = '.$db->quote($this->camelCaseSentence($answer)));
-					$query->set('pastor_mapped  = '.$db->quote($this->camelCaseSentence($answer)));
 					break;
 				default:
 					if (gettype($answer) == "integer") {
