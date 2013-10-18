@@ -1,2 +1,29 @@
+div#maintenanceWrapper {font-family: Arial,Helvetica,sans-serif}
+table#mntTable{border: 1px solid LightGrey; font-size: 10pt}
 table#mntTable tr:nth-child(even) {background: #ccc}
 table#mntTable tr:nth-child(odd) {background: #fff}
+h3 {
+	color: #146295;
+    font-size: 16pt;
+    font-weight: bold;
+    line-height: 48px;
+    margin: 0;
+    padding: 0;
+}
+fieldset {width: 600px}
+legend {
+    color: #146295;
+    font-size: 10pt;
+    font-weight: bold;
+}
+div#processing{
+	display: none;
+    background: none repeat scroll 0 0 #F5ECCE;
+    border: 2px solid;
+    font-weight: bold;
+    padding: 20px;
+    position: fixed;
+    text-align: center;
+    top: 100px;
+    width: 800px;
+}

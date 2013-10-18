@@ -691,3 +691,7 @@
  - Added code to trim leading, trailing and repeating spaces from user input for church, pastor and city
  - Updated the Admin - Maintenance code. Still has some bugs
  
+ 1.2.03 (2013/10/18)
+ -------------------
+ - Finished the Data Maintenance Section
+ 

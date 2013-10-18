@@ -4,7 +4,8 @@ jimport('joomla.application.component.controllerform');
 
 class DnaGiftsControllerMaintenance extends JControllerForm
 {
-	public function saveMappedValue() {
+	public function saveMappedValue()
+	{
 		$oldvalue = JRequest::getVar('oldvalue');
 		$newvalue = JRequest::getVar('newvalue');
 		$type = JRequest::getVar('fieldtype');
@@ -14,7 +15,7 @@ class DnaGiftsControllerMaintenance extends JControllerForm
 			case 'church_name':
 				$approvefield = 'church_approved';
 				break;
-			case 'pastor_reverence':
+			case 'pastor_reverend':
 				$approvefield = 'pastor_approved';
 				break;
 			case 'your_city':
@@ -25,7 +26,7 @@ class DnaGiftsControllerMaintenance extends JControllerForm
 		$db = JFactory::getDbo();
 		
 		$query = $db->getQuery(true);
-		$query->update('#__dnagifts_presetinfo');
+		$query->update('#__dnagifts_pretest_info');
 		$query->set($type.' = "'.$newvalue.'"');
 		$query->set($approvefield.' = 1');
 		$query->where($type.' = "'.$oldvalue.'"');
@@ -36,7 +37,8 @@ class DnaGiftsControllerMaintenance extends JControllerForm
 		echo json_encode(array("success" => true, "counter" => $counter));
 	}
 	
-	public function deleteBadValue() {
+	public function deleteBadValue() 
+	{
 		$oldvalue = JRequest::getVar('oldvalue');
 		$type = JRequest::getVar('fieldtype');
 		$counter = JRequest::getVar('counter');
@@ -44,11 +46,10 @@ class DnaGiftsControllerMaintenance extends JControllerForm
 		$db = JFactory::getDbo();
 		
 		$query = $db->getQuery(true);
-		$query->update('#__dnagifts_presetinfo');
+		$query->update('#__dnagifts_pretest_info');
 		$query->set($type.' = NULL');
 		$query->where($type.' = "'.$oldvalue.'"');
 		$db->setQuery($query);
-		echo $query;
 		$db->query();
 		
 		//echo json_encode(array("success" => false, "message" => "There was an error\nWe were unable to complete your request\nWe applogise for teh inconvenience"));

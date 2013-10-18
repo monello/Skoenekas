@@ -34,32 +34,51 @@ switch ($this->type) {
 <script src="<?php echo JURI::base(true); ?>/components/com_dnagifts/js/dnagifts.maintenance.js" type="text/javascript"></script>
 <script type="text/javascript">
 	var juri = '<?php echo JURI::root(true); ?>/administrator';
-	var autoSuggestData = <?php echo json_encode($this->autoSuggestData); ?>;
+	var autoSuggestData = <?php echo $this->autoSuggestData ? json_encode($this->autoSuggestData) : json_encode(array()); ?>;
 </script>
+<div id="maintenanceWrapper">
+	<div id="processing">Processing. Please wait...</div>
+	<h3><?php echo $header; ?></h2>
+	<fieldset>
+		<legend>Update values that are already approved</legend>
+		<select id="approvedvalue">
+			<option value="0">- Select a value-</option>
+			<?php foreach ( $this->autoSuggestData as $value ): ?>
+				<option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+			<?php endforeach; ?>
+		</select>
+		<input type="text" class="autocomplete" id="newapproved" size="40"/>
+		<input type="button" id="saveApprovedBtn" value="Save" data="{fieldtype: '<?php echo $this->type; ?>'}"/>
+	</fieldset>
+	<br/>
+	<h3>The following values still need to be approved:</h3>
+	<div id="mntReady">
+	<table id="mntTable" cellspacing="0" cellpadding="3">
 
-<h2><?php echo $header; ?></h2>
-<div id="mntReady">
-<table id="mntTable" cellspacing="0" cellpadding="3">
-
-<?php
-	$counter = 1;
-	foreach ( $this->data as $row ):
-?>
-    <tr id="tr_<?php echo $counter; ?>">
-		<td><?php echo $row->value; ?></td>
-		<td>
-			<input type="text" class="autocomplete" id="mapped_<?php echo $counter; ?>" size="40"/>
-		</td>
-		<td>
-			<input type="button" class="saveBtn" value="Save" 
-				data="{value: '<?php echo $row->value; ?>', counter: <?php echo $counter; ?>, fieldtype: '<?php echo $this->type; ?>'}"/>
-			<input type="button" class="deleteBtn" value="Delete" 
-				data="{value: '<?php echo $row->value; ?>', counter: <?php echo $counter; ?>, fieldtype: '<?php echo $this->type; ?>'}"/>
-		</td>
-	</tr>
-<?php 
-	$counter++;
-	endforeach; 
-?>
-</table>
+	<?php
+		$counter = 1;
+		foreach ( $this->data as $row ):
+	?>
+		<tr id="tr_<?php echo $counter; ?>">
+			<td><?php echo $row->value; ?> (<?php echo $row->howmany; ?>)</td>
+			<td>
+				<input type="button" class="asisBtn" value="As Is" 
+					data="{value: '<?php echo $row->value; ?>', counter: <?php echo $counter; ?>, fieldtype: '<?php echo $this->type; ?>', howmany: '<?php echo $row->howmany; ?>'}"/>
+			</td>
+			<td>
+				<input type="text" class="autocomplete" id="mapped_<?php echo $counter; ?>" size="40"/>
+			</td>
+			<td>
+				<input type="button" class="saveBtn" value="Save" 
+					data="{value: '<?php echo $row->value; ?>', counter: <?php echo $counter; ?>, fieldtype: '<?php echo $this->type; ?>', howmany: '<?php echo $row->howmany; ?>'}"/>
+				<input type="button" class="deleteBtn" value="Delete" 
+					data="{value: '<?php echo $row->value; ?>', counter: <?php echo $counter; ?>, fieldtype: '<?php echo $this->type; ?>', howmany: '<?php echo $row->howmany; ?>'}"/>
+			</td>
+		</tr>
+	<?php 
+		$counter++;
+		endforeach; 
+	?>
+	</table>
+	</div>
 </div>

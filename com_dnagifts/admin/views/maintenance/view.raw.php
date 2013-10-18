@@ -20,7 +20,7 @@ class DnaGiftsViewMaintenance extends JView
 			case 'pastor_reverend':
 				$asData = $autoSuggestData['pastorList'];
 				break;
-			case 'church_name':
+			case 'your_city':
 				$asData = $autoSuggestData['cityList'];
 				break;
 		}
