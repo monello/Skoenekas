@@ -695,3 +695,11 @@
  -------------------
  - Finished the Data Maintenance Section
  
+ 1.2.04 (2013/10/19)
+ -------------------
+ - fixed the log-test-complete function to insert test end-date and duration
+ 
+ 1.2.05 (2013/10/19)
+ -------------------
+ - Update the the test-end date for each user-test record with no end date to the date of the last question linked to that user-test instance
+ 

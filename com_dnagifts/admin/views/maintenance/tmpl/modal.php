@@ -11,7 +11,7 @@ switch ($this->type) {
 		$header = "Maintain the Pastor Name List";
 		break;
 	case "your_city":
-		$header = "Maintain the Citiess List";
+		$header = "Maintain the Cities List";
 		break;
 }
 

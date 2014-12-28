@@ -28,7 +28,7 @@ class DnaGiftsControllerReport extends JControllerForm
 		
 		ReportsHelper::generateReportPDF($displaytype, $svgData, $imgChartSRC, $userTestID, $user->name);
 		if ($is_raw < 1) {
-			ReportsHelper::emailReportPDF($userTestID, $user_id, $is_raw);
+			ReportsHelper::emailReportPDF($userTestID, $user->id, $is_raw);
 			echo json_encode(array("success" => true, "message" => jText::_('COM_DNAGIFTS_REPORT_SENTEMAIL')));
 		} else {
 			// we don't want to send an email at this stage.

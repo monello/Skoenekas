@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="template">
+        <name>dnafbtest</name>
+        <creationDate>2012-10-20</creationDate>
+        <author>Morne Louw</author>
+        <authorEmail>louw.morne@gmail.com</authorEmail>
+        <authorUrl>http://www.dnagifts.net</authorUrl>
+        <copyright>Morne Louw 2013</copyright>
+        <license>GNU/GPL</license>
+        <version>1.0.0</version>
+        <description>DNA Gifts - Home Page - Template</description>
+        <files>
+                <filename>index.php</filename>
+                <filename>templateDetails.xml</filename>
+                <folder>css</folder>
+        </files>
+        <positions></positions>
+</extension>

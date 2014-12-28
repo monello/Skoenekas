@@ -3,7 +3,6 @@ root.myNamespace.create('DnaGifts.Gift', {
     {
         var imgname = jQuery("#jform_"+type+"_image").val();
         imgsrc = juri+"/media/com_dnagifts/images/"+type+"/"+imgname;
-        console.log("IMGSRC: "+imgsrc);
         jQuery("div#imagesContainer-"+type+" img:first").attr('src',imgsrc);
     }
 });

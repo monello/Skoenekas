@@ -7,16 +7,18 @@ JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.tooltip');
 
 $this->isLoggedIn = DnaGiftsHelper::authenticate();
+
 ?>
 <script type="text/javascript">
 	var juri = '<?php echo JURI::root(true); ?>';
 </script>
 <?php
-echo '<div id="dnaTestSpace">';
 
-/*echo JText::_('COM_DNAGIFTS_TESTLANGUAGE');
+/*
+echo JText::_('COM_DNAGIFTS_TESTLANGUAGE');
 echo '<span class="testlanguage">'.JText::_('COM_DNAGIFTS_TESTLANGUAGE').'</span>';
-echo DnaGiftsHelper::loadLanguageSwitch();*/
+echo DnaGiftsHelper::loadLanguageSwitch();
+*/
 
 // Login & Register buttons
 echo $this->loadTemplate('auth');

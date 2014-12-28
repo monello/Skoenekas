@@ -4,6 +4,12 @@ defined('_JEXEC') or die('Restricted access');
 JHtml::_('behavior.tooltip');
 $model = $this->getModel('dnagifts');
 
+$raw_convert = '';
+/*
+if ($this->israw) {
+	$raw_convert = '&format=raw';
+}
+*/
 ?>
 <?php echo JText::_('COM_DNAGIFTS_TESTINTRO_HEAD'); ?>
 <!--<iframe width="400" height="225" src="//www.youtube.com/embed/cLwXtjuOwAU" frameborder="0" allowfullscreen style="float: left; margin-right:35px; margin-bottom:20px"></iframe> -->
@@ -64,7 +70,7 @@ $activeTests = $model->getAllActiveTests();
         </td>
         <td align="center">
           <?php if ($progress['inprogress']): ?>
-            <a href="<?php echo JRoute::_('index.php?option=com_dnagifts&view=test&id='.$test->test_id, false) ?>" class="doTestButton">
+            <a href="<?php echo JRoute::_('index.php?option=com_dnagifts'.$raw_convert.'&view=test&id='.$test->test_id, false) ?>" class="doTestButton">
             <span title="<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_PERCENT', $progress['percent']); ?>::<?php echo JText::sprintf('COM_DNAGIFTS_TESTINTRO_PROGRESS_QUESTIONS', $progress['answers'], $progress['howmany']); ?>"
                 href="#"
                 class="hasTip"><?php echo $progress['percent']; ?>%</span>
@@ -80,7 +86,7 @@ $activeTests = $model->getAllActiveTests();
                 title="<?php echo JText::_('COM_DNAGIFTS_TESTINTRO_DONE_BUTTON'); ?>"
                 class="hasTip"/>
             <?php else: ?>
-              <a href="<?php echo JRoute::_('index.php?option=com_dnagifts&view=test&id='.$test->test_id, false) ?>" class="doTestButton">
+              <a href="<?php echo JRoute::_('index.php?option=com_dnagifts'.$raw_convert.'&view=test&id='.$test->test_id, false) ?>" class="doTestButton">
               <img src="<?php echo JURI::root(true); ?>/media/com_dnagifts/images/play-small.png"
                 height="16px"
                 width="16px"

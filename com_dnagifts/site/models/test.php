@@ -97,10 +97,12 @@ class DnaGiftsModelTest extends JModel
 		$db->setQuery($sql);
 		$nextQuestionObj = $db->loadObject();
 		
-		// prepare the answer record
-		$this->prepareAnswer($user_test_id, $nextQuestionObj);
+		if ($nextQuestionObj) {
+			$this->prepareAnswer($user_test_id, $nextQuestionObj);
+			return $nextQuestionObj;
+		}
 		
-		return $nextQuestionObj;
+		return false;
 	}
 	
 	public function logAnswer($user_test_id, $question_id, $answer_score)
@@ -182,14 +184,18 @@ class DnaGiftsModelTest extends JModel
 		$sql = "SELECT test_id, howmany FROM #__dnagifts_count_testanswers WHERE lnk_user_test_id = $user_test_id";
 		$db->setQuery($sql);
 		$data = $db->loadObject();
-		$done = $data->howmany;
-		$test_id = $data->test_id;
+		if (!$data) {
+			$test_id = false;
+			$done = 0;
+		} else {
+			$done = $data->howmany;
+			$test_id = $data->test_id;
+		}
 		
 		if (!$test_id) {
 			$sql = "SELECT test_id FROM #__dnagifts_lnk_user_tests WHERE id = $user_test_id";
 			$db->setQuery($sql);
 			$data = $db->loadObject();
-			$done = $data->howmany;
 			$test_id = $data->test_id;
 		}
 		

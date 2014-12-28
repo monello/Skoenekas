@@ -41,7 +41,7 @@ class DnagiftsHelper
 	{
 		$user = JFactory::getUser();
 		$document = &JFactory::getDocument();
-		$renderer   = $document->loadRenderer('modules');
+		$renderer   = $document->loadRenderer('Modules');
 		$position   = 'myBtLogin';
 		$options   = array('style' => 'raw');
 		if ($user->get("id")) {

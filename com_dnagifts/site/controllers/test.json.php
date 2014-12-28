@@ -41,13 +41,22 @@ class DnaGiftsControllerTest extends JControllerForm
 			}
 		}
 		
-		$nextQuestion = false;
 		// Check if there are more questions to load
 		$nextQuestionObj = $model->getNextQuestion($test_id, $user_test_id);
 		
 		// set the next question flag to true if you found a next question
 		if ($nextQuestionObj) {
 			$nextQuestion = true;
+			$question_id = (int) $nextQuestionObj->question_id;
+			$question_text = $nextQuestionObj->question_text;
+			$show_duration = (int) $nextQuestionObj->show_duration;
+			$question_hint = $nextQuestionObj->question_hint;
+		} else {
+			$nextQuestion = false;
+			$question_id = -1;
+			$question_text = '';
+			$show_duration = 0;
+			$question_hint = '';
 		}
 		
 		// calculate the user's test progress
@@ -61,10 +70,10 @@ class DnaGiftsControllerTest extends JControllerForm
 			"success" => true,
 			"nextQuestion" => $nextQuestion,
 			"user_test_id" => (int) $user_test_id,
-			"question_id" => (int) $nextQuestionObj->question_id,
-			"question_text" => $nextQuestionObj->question_text,
-			"show_duration" => (int) $nextQuestionObj->show_duration,
-			"question_hint" => $nextQuestionObj->question_hint,
+			"question_id" => (int) $question_id,
+			"question_text" => $question_text,
+			"show_duration" => (int) $show_duration,
+			"question_hint" => $question_hint,
 			"progress" => (float) $progress,
 			"total" => (int) $total,
 			"done" => (int) $done,
@@ -75,17 +84,23 @@ class DnaGiftsControllerTest extends JControllerForm
 	
 	public function logTestComplete()
 	{
-		$test_id  = JRequest::getCmd('test_id');
-		$user_test_id  = JRequest::getCmd('user_test_id');
-		$progress  = JRequest::getCmd('progress');
+		$test_id  = JRequest::getVar('test_id');
 		
-		$db       = JFactory::getDbo();
-		$query    = $db->getQuery(true);
+		$model = $this->getModel( 'test' );
+		
+		$user_test_id = DnagiftsHelper::getUserTestID($test_id);
+		list ($progress, $total, $done, $togo) = $model->getUserTestProgress($user_test_id);
+		
+		$db = JFactory::getDbo();
+		
+		
+		$query = $db->getQuery(true);
 		$query->update('#__dnagifts_test');
 		$query->set('complete = complete + 1');
 		$query->where('id = ' . (int) $test_id);
 		$db->setQuery($query);
 		$db->query();
+		
 		
 		$query = $db->getQuery(true);
 		$query->update('#__dnagifts_lnk_user_tests');
@@ -96,6 +111,9 @@ class DnaGiftsControllerTest extends JControllerForm
 		$db->setQuery($query);
 		$db->query();
 		
-		echo json_encode(array("success" => true, "message" => '<img src="'.JURI::root(true).'/media/com_dnagifts/images/spinner16x16.gif" /> '.jText::_('COM_DNAGIFTS_TEST_PROCESSING')));
+		echo json_encode(array(
+			"success" => true, 
+			"message" => '<img src="'.JURI::root(true).'/media/com_dnagifts/images/spinner16x16.gif" /> '.jText::_('COM_DNAGIFTS_TEST_PROCESSING')
+		));
 	}
 }

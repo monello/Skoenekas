@@ -282,7 +282,7 @@ if ($msqlerr) {
 		$message .= "\n\nCOMPLETED BUT NO REPORTS:\n".$fields.$noreport_records;
 	}
 }
-$from = "reports@dnagifts.co.za";
+$from = "reports@dnagifts.net";
 $headers = "From:" . $from;
 mail($to,$subject,$message,$headers);
 echo "Mail Sent.";

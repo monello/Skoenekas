@@ -22,7 +22,10 @@ class DnaGiftsControllerMaintenance extends JControllerForm
 				$approvefield = 'city_approved';
 				break;
 		}
-		
+
+		$newvalue = preg_replace('/\s+/', ' ',$newvalue); // reduce repeating spaces
+		$newvalue = trim($newvalue); // trim leading and trailing spaces
+			
 		$db = JFactory::getDbo();
 		
 		$query = $db->getQuery(true);
@@ -33,7 +36,6 @@ class DnaGiftsControllerMaintenance extends JControllerForm
 		$db->setQuery($query);
 		$db->query();
 		
-		//echo json_encode(array("success" => false, "message" => "There was an error\nWe were unable to complete your request\nWe applogise for teh inconvenience"));
 		echo json_encode(array("success" => true, "counter" => $counter));
 	}
 	
@@ -52,7 +54,6 @@ class DnaGiftsControllerMaintenance extends JControllerForm
 		$db->setQuery($query);
 		$db->query();
 		
-		//echo json_encode(array("success" => false, "message" => "There was an error\nWe were unable to complete your request\nWe applogise for teh inconvenience"));
 		echo json_encode(array("success" => true, "counter" => $counter));
 	}
 }
