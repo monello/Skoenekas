@@ -1,7 +1,7 @@
 body {
 	padding-top: 20px;
 	background-position: 0 top;
-	background-image: url(../img/dnaPageBackground.png);
+	background-image: url(../images/dnaPageBackground.png);
 }
 
 #dnaPageLogo > img{
@@ -260,7 +260,7 @@ ol.carousel-indicators li.active.mercyDot { background-color: rgba(190,66,179,1)
 #dnaZigZag{
 	margin-top: 30px;
 	height: 40px;
-	background: url(../img/ZigZag.png) repeat-x 50% 0;
+	background: url(../images/ZigZag.png) repeat-x 50% 0;
 }
 
 footer {
