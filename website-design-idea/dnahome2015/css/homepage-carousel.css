@@ -1,0 +1,106 @@
+/* HomePage carousel CSS */
+img {
+	max-width: 100%;
+}
+
+#myCarousel{
+	margin: 20px auto;
+	width: 85%;
+	max-width: 850px;
+	margin-top: 70px;
+}
+
+.carousel.control {
+	background: none;
+}
+
+a#leftArrow {
+	left: -100px;
+}
+a#rightArrow {
+	right: -100px;
+}
+a.carousel-control {
+	background-image: none !important;
+}
+
+.carousel-indicators-container {
+	display: block;
+	height: 22px;
+	width: 361px;
+	position: relative;
+	margin-top: 20px;
+	margin-bottom: 0px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+ol.carousel-indicators {
+	display: block;
+	top: 0;
+	left: 0px !important;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-right: 40px;
+}
+
+ol.carousel-indicators li {
+	margin: 1px !important;
+	margin-left: 10px !important;
+	margin-right: 10px !important;
+	padding: 10px;
+	border-radius: 10px 10px 10px 10px;
+	border: 1px solid #ffffff;
+}
+
+ol.carousel-indicators li.perceiverDot { background-color: rgba(255,0,0,0.25); }
+ol.carousel-indicators li.servantDot { background-color: rgba(255,156,0,0.25); }
+ol.carousel-indicators li.teacherDot { background-color: rgba(255,240,1,0.25); }
+ol.carousel-indicators li.exhorterDot { background-color: rgba(90,248,94,0.25); }
+ol.carousel-indicators li.giverDot { background-color: rgba(6,104,251,0.25); }
+ol.carousel-indicators li.rulerDot { background-color: rgba(131,3,185,0.25); }
+ol.carousel-indicators li.mercyDot { background-color: rgba(190,66,179,0.25); }
+
+ol.carousel-indicators li.active.perceiverDot { background-color: rgba(255,0,0,1); }
+ol.carousel-indicators li.active.servantDot { background-color: rgba(255,156,0,1); }
+ol.carousel-indicators li.active.teacherDot { background-color: rgba(255,240,1,1); }
+ol.carousel-indicators li.active.exhorterDot { background-color: rgba(90,248,94,1); }
+ol.carousel-indicators li.active.giverDot { background-color: rgba(6,104,251,1); }
+ol.carousel-indicators li.active.rulerDot { background-color: rgba(131,3,185,1); }
+ol.carousel-indicators li.active.mercyDot { background-color: rgba(190,66,179,1); }
+
+#carouselMask,
+#dnaHeptagons0,
+#dnaHeptagons1,
+#dnaHeptagons2,
+#dnaHeptagons3,
+#dnaHeptagons4,
+#dnaHeptagons5,
+#dnaHeptagons6,
+#dnaHeptagons7 {
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+#dnaHeptagons0 { display: block; }
+#dnaHeptagons1 { display: block; }
+#dnaHeptagons2 { display: none; }
+#dnaHeptagons3 { display: none; }
+#dnaHeptagons4 { display: none; }
+#dnaHeptagons5 { display: none; }
+#dnaHeptagons6 { display: none; }
+#dnaHeptagons7 { display: none; }
+
+div.tooltip {
+	background: none;
+	border: none;
+}
+.tooltip-inner {
+	color: #000000;
+	background-color: #ffffff;
+}
+.tooltip.top .tooltip-arrow  {
+	border-top-color: #ffffff;
+}

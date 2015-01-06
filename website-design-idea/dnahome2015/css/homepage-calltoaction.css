@@ -1,0 +1,89 @@
+/* Home Page Call to action buttons */
+
+#dnaCallToActionContainer{
+	width: 100%;
+	text-align: center;
+	color: white;
+}
+
+.dnaCallToAction a,
+.dnaCallToActionSub a {
+	color: #ffffff;
+	text-decoration: none;
+}
+.dnaCallToAction a:hover,
+.dnaCallToActionSub a:hover  {
+	color: #0088CC
+}
+.dnaCallToActionSub {
+	font-style: italic;
+}
+
+#dnaDoTheTest, 
+#dnaDivider,
+#dnaPurchaseBook {
+	display: inline-block;
+}
+#dnaDoTheTest, 
+#dnaPurchaseBook {
+	padding-top: 5px;
+}
+#dnaDivider {
+	text-align: center;
+	padding: 0 25px 0 25px;
+	font-size: 3.5em;
+	vertical-align: 5px;
+}
+
+/* screen wider than 1126px (incl) *//* FF actual: 1240 (14 diff) */
+@media screen and (min-width: 1226px) { 
+	.dnaCallToAction {
+		font-size: 2em;
+	}
+	.dnaCallToActionSub {
+		font-size: 1.07em;
+	}
+}
+
+/* screen width between 1094px (incl) and 1225px (incl) *//* FF actual 1108 & 1239 (14 diff) */
+@media screen and (min-width: 1094px) and (max-width: 1225px) { 
+	.dnaCallToAction {
+		font-size: 1.8em;
+	}
+	.dnaCallToActionSub {
+		font-size: 0.96em;
+	}
+}
+
+/* screen width between 982px (incl) and 1093px (incl) *//* FF actual 994 & 1107 (14 diff) */
+@media screen and (min-width: 980px) and (max-width: 1093px) {
+	.dnaCallToAction {
+		font-size: 1.6em;
+	}
+	.dnaCallToActionSub {
+		font-size: 0.84em;
+	}
+}
+
+/* screen width between 868px (incl) and 979px (incl) *//* FF actual 882 & 993 (14 diff) */
+@media screen and (min-width: 868px) and (max-width: 979px) {
+	.dnaCallToAction {
+		font-size: 1.4em;
+	}
+	.dnaCallToActionSub {
+		font-size: 0.8em;
+	}
+}
+/* screen narrower than 867px (incl) *//* FF actual 881 (14 diff) */
+@media screen and (max-width: 867px) {
+	.dnaCallToAction {
+		font-size: 1.2em;
+	}
+	.dnaCallToActionSub {
+		display: none;
+	}
+	#dnaDivider {
+		font-size: 2em;
+		vertical-align: 0;
+	}
+}
