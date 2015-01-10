@@ -34,7 +34,7 @@
 			<nav class="col-md-8 col-md-offset-2">
 					<ul class="nav nav-pills">
 						<li><a id="homenav" href="<?php echo $this->baseurl ?>">Home</a></li>
-						<li><a id="booknav" href="<?php echo $this->baseurl ?>">The Book</a></li>
+						<li><a id="booknav" href="<?php echo $this->baseurl ?>/the-book">The Book</a></li>
 						<li><a id="buynav" href="<?php echo $this->baseurl ?>/purchase">Purchase</a></li>
 						<li><a id="testnav" href="<?php echo $this->baseurl ?>/free-test-en">Free Test</a></li>
 						<li><a id="giftsnav" href="<?php echo $this->baseurl ?>">DNA Gifts</a></li>
@@ -140,7 +140,7 @@
 	</div>
 	
 	<div class="container-fluid">
-		<div id="dnaHomeBody" class="row-fluid">
+		<div id="dnaHomeBody" class="row-fluid clearfix">
 			<div class="col-md-6 col-md-offset-3">
 				<jdoc:include type="component" />
 			</div>

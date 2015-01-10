@@ -1,0 +1,33 @@
+/* HomePage Navigation */
+
+.nav {
+	margin: auto auto;
+	margin-bottom: 20px;
+}
+.nav > li {
+	width: 14%;
+}
+
+.nav > li > a {
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	font-size: 1em;
+	text-shadow: 0px 0px 6px black;
+	height: 100%;
+	min-width: 66px;
+	padding: 4px 0px;
+}
+
+#homenav {background-color: #ff0000;}
+#booknav{background-color: #ff9c00;}
+#buynav{background-color: #fff001;}
+#testnav{background-color: #5af85e;}
+#giftsnav{background-color: #0668fb;}
+#eventsnav{background-color: #8303b9;}
+#seminarnav{background-color: #be06b3;}
+
+.nav  li  a:hover {
+	background-color: #EEEEEE !important;
+	color: black !important;
+}

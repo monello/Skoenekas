@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="2.5" type="template">
-        <name>dnahome</name>
+        <name>dnahome2015</name>
         <creationDate>2015-01-01</creationDate>
         <author>Morne Louw</author>
         <authorEmail>louw.morne@gmail.com</authorEmail>
@@ -8,7 +8,7 @@
         <copyright>Morne Louw 2015</copyright>
         <license>GNU/GPL</license>
         <version>1.0.0</version>
-        <description>DNA Gifts - Home Page - Template</description>
+        <description>DNA Gifts - Home Page - Template 2015</description>
         <files>
                 <filename>index.php</filename>
                 <filename>templateDetails.xml</filename>
@@ -17,15 +17,4 @@
 				<folder>js</folder>
 				<folder>fonts</folder>
         </files>
-        <positions>
-                <position>breadcrumb</position>
-                <position>left</position>
-                <position>right</position>
-                <position>top</position>
-                <position>user1</position>
-                <position>user2</position>
-                <position>user3</position>
-                <position>user4</position>
-                <position>footer</position>
-        </positions>
 </extension>
