@@ -1,0 +1,11 @@
+1. Create a category by the name "The Book"
+2. Create Articles for each section of "The Book" page and assign all these articles to the "The Book" category.
+	- each article must have a container frame (use a div) with a unique id that can be referred to from the menu later. Ex. "The DNA Gifts Book" - page gets an id "thebook"
+3. Create a new menu module for the "The Book" page.
+	- Add a menu item for each page (or section) in the "The Book" category. 
+	- make these "External Links" ... do not link it to the actual articles.
+	- make the link value an HTML id to match the ids of the container divs in each article ex. "#thebook"
+3. Install the Bootstrap Nav Module
+	- Create an instance of the bootstrap nav module in "user1" position, linked to the "The Book" menu
+	- Set the navigation type to "List Group", Fixed = "No", Float Navbar = "None"
+	- Make sure the menu assignment is just on the "The Book" page
