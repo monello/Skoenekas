@@ -1,6 +1,7 @@
-@import 'homepage-navigation.css';
+@import 'dna-navigation.css';
 @import 'homepage-carousel.css';
 @import 'homepage-calltoaction.css';
+@import 'backtotop.css';
 
 .container-fluid {
 	padding: 0px !important;
