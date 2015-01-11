@@ -47,7 +47,7 @@
 		</div>
 	
 		<div class="container-fluid">
-			<div id="dnaHomeBody" class="row-fluid clearfix">
+			<div id="dnaPageBody" class="row-fluid clearfix">
 				<div id="dnaSideMenu" class="col-md-2 col-md-offset-1 affix">
 					<jdoc:include type="modules" name="user1" /> 
 				</div>

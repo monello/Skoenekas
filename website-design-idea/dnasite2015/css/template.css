@@ -25,12 +25,17 @@ body {
 	margin-top: 20px;
 }
 
-#dnaHomeBody {
+#dnaPageBody {
 	background-color: white;
 	min-height: 200px;
 	padding-bottom: 20px;
 	margin-top: 200px;
+	background-image: url(../images/site-background.png);
+	color: #5F5F5F;
 }
+
+#dnaPageBody h2 { text-align: center }
+#dnaPageBody p { font-size: x-large; }
 
 #dnaFooterLinks {
 	/*background-color: #1dabf0;*/
@@ -97,4 +102,18 @@ body {
 }
 #dnaFooterLegals  p {
 	text-align: center;
+}
+
+
+/* PAGES CSS */
+
+.dnaArticle  {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.dnaArticle img.separator {
+	width: 90%;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }

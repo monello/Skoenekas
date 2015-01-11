@@ -140,7 +140,7 @@
 	</div>
 	
 	<div class="container-fluid">
-		<div id="dnaHomeBody" class="row-fluid clearfix">
+		<div id="dnaPageBody" class="row-fluid clearfix">
 			<div class="col-md-6 col-md-offset-3">
 				<jdoc:include type="component" />
 			</div>

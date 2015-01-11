@@ -46,10 +46,12 @@
 	margin-bottom: 30px;
 }
 
-#dnaHomeBody {
+#dnaPageBody {
 	background-color: white;
 	min-height: 200px;
 	padding-bottom: 20px;
+	background-image: url(../images/site-background.png);
+	color: #5F5F5F;
 }
 
 #dnaFooterLinks {

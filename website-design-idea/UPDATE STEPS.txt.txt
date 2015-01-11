@@ -1,6 +1,17 @@
 1. Create a category by the name "The Book"
 2. Create Articles for each section of "The Book" page and assign all these articles to the "The Book" category.
 	- each article must have a container frame (use a div) with a unique id that can be referred to from the menu later. Ex. "The DNA Gifts Book" - page gets an id "thebook"
+	- each container must have at least these classes:  class="dnaArticle clearfix"
+	- the last element inside each article container must be the separator image:
+		<img class="separator" src="/images/2015/article-border.png"/>
+		
+	Article template:
+<div id="{unique id}" class="dnaArticle clearfix">
+	
+	<img class="separator" src="/images/2015/article-border.png"/>
+</div>
+	
+	
 3. Create a new menu module for the "The Book" page.
 	- Add a menu item for each page (or section) in the "The Book" category. 
 	- make these "External Links" ... do not link it to the actual articles.
