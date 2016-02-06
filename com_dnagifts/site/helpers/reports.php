@@ -40,7 +40,7 @@ class ReportsHelper
 		return $result;
 	}
 	
-	public static function &documentSetup()
+	public static function &documentSetup($userTestID)
 	{
 		$author             = JText::_( 'COM_DNAGIFTS_PDF_AUTHOR' );
         $title              = JText::_( 'COM_DNAGIFTS_PDF_TITLE' );
@@ -184,7 +184,7 @@ class ReportsHelper
 		$column1_left = 15;
 		$column2_left = 107;
 		
-		$pdf =& ReportsHelper::documentSetup();
+		$pdf =& ReportsHelper::documentSetup($userTestID);
 		list ($result, $user_id, $test_id) = UtilsHelper::reverseUserTestId($userTestID);
 		
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
@@ -229,12 +229,6 @@ class ReportsHelper
 
 		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
-
-		/*
-		 * $pdf->Output() takes a second parameter $dest, which accepts a single character.
-		 * The default, $dest='I' opens the PDF in the browser.
-		 * Use F to save to file
-		 */
         $pdf->Output($filename, $displaytype);
 	}
 	
@@ -242,54 +236,46 @@ class ReportsHelper
 	{
 		$column1_left = 15;
 		$column2_left = 107;
-
-		$pdf =& ReportsHelper::documentSetup();
-
+		
+		$pdf =& ReportsHelper::documentSetup($userTestID);
 		list ($result, $user_id, $test_id) = UtilsHelper::reverseUserTestId($userTestID);
+		
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
 		
 		// ######################################### PAGE 1 ##########################################################
 		
 		ReportsHelper::generatePDF_Section1($pdf, $column1_left, $column2_left, $dnaResults, $username);
-		echo "section 1 done\n";
+		
 		ReportsHelper::reportSeperator($pdf);
 		
 		ReportsHelper::generatePDF_Section2($pdf, $column1_left, $column2_left, $imgChartSRC);
-		echo "section 2 done\n";
+		
 		ReportsHelper::reportSeperator($pdf);
 		
 		ReportsHelper::generatePDF_Section3($pdf, $column1_left, $column2_left, $svgData, false);
-		echo "section 3 done\n";
+		
 		// ######################################### PAGE 2 ##########################################################
 		
 		$pdf->AddPage();
 		
 		ReportsHelper::generatePDF_Section4($pdf, $column1_left, $column2_left, $svgData, false);
-		echo "section 4 done\n";
+		
 		ReportsHelper::reportSeperator($pdf);
 		
 		ReportsHelper::generatePDF_Section5($pdf, $column1_left, $dnaResults, $userTestID);
-		echo "section 5 done\n";
+		
 		// ######################################### PAGE 3 ##########################################################
 		
 		$pdf->AddPage();
 		
 		ReportsHelper::generatePDF_Section6($pdf, $column1_left, $column2_left, $dnaResults, $svgData, $userTestID, $user_id);
-		echo "section 6 done\n";
+		
 		ReportsHelper::reportSeperator($pdf);
 		
 		ReportsHelper::generatePDF_Section7($pdf, $column1_left, $dnaResults, $svgData, $userTestID);
-		echo "section 7 done\n";
+
 		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
-		echo "FILENAME: $filename\n";
-		die();
-
-		/*
-		 * $pdf->Output() takes a second parameter $dest, which accepts a single character.
-		 * The default, $dest='I' opens the PDF in the browser.
-		 * Use F to save to file
-		 */
         $pdf->Output($filename, $displaytype);
 	}
 	
@@ -381,7 +367,7 @@ class ReportsHelper
 		$COM_DNAGIFTS_REPORT_DNACOMP_HEAD	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_HEAD');
 		$COM_DNAGIFTS_REPORT_DNACOMP_INTERP	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_INTERP');
 		$COM_DNAGIFTS_REPORT_DNACOMP_TEXT	= JText::_('COM_DNAGIFTS_REPORT_DNACOMP_TEXT');
-
+		
 		$y = $pdf->GetY() + 7;
 		
 		$pdf->SetXY($column1_left, $y);
@@ -400,18 +386,13 @@ class ReportsHelper
 		$html = '<table border="0" width="910" cellspacing="3" cellpadding="0" style="font-size:8pt;">
 			<tr>
 				<td width="305">';
-
-		print_r($svgData);
-		echo "is_MSIE: $is_MSIE\n";
+		
 		if ($is_MSIE) {
-			echo "IS MSIE\n";
-			// if this is MSIE the svgData variable will contain image src not svg markup
 			$html .= '<img src="'.$svgData.'" />';
 		} else {
-			echo "IS *NOT* MSIE\n";
 			$html .= "&nbsp;";	
 		}
-		die();
+		
 		$html .= '		</td>
 				<td width="15">&nbsp;</td>
 				<td><p>'.$COM_DNAGIFTS_REPORT_DNACOMP_TEXT.'</p></td>		

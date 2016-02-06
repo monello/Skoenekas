@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/com_dnagifts/site/js/dnagifts.test.js" line="171" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="3e793915-ef5d-44b6-b326-d6e5121534dc" name="Default" comment="" />
     <ignored path="Skoenekas.iws" />
@@ -25,11 +22,123 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="reports.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/reports.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dnagifts.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com_dnagifts/admin/helpers/dnagifts.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="60" column="33" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/reports/tmpl/default.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-20.923077">
+              <caret line="32" column="66" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="report.json.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/report.json.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.230769">
+              <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="default.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/report/tmpl/default.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30749354">
-              <caret line="273" column="36" selection-start-line="273" selection-start-column="36" selection-end-line="273" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.011627907">
+              <caret line="261" column="12" selection-start-line="261" selection-start-column="12" selection-end-line="261" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reports.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com_dnagifts/site/helpers/reports.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.153846">
+              <caret line="227" column="101" selection-start-line="227" selection-start-column="101" selection-end-line="227" selection-end-column="101" />
+              <folding>
+                <marker date="1454765104668" expanded="true" signature="10904:10918" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="10919:10948" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="10927:10948" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="12466:12480" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="12481:12899" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="12489:12888" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="12510:12794" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="12545:12781" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="12556:12655" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="12666:12767" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="12679:12755" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="13968:13982" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="13983:14012" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="13991:14012" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="15523:15536" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="15537:15545" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="16006:16504" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="16015:16455" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="16036:16050" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="16051:16445" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="16055:16437" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="16149:16185" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="16253:16280" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="16387:16410" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="17939:18181" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="17947:18170" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="17968:18100" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="19948:20815" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="19956:20710" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="19977:20318" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="19997:20039" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="20358:20699" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="20378:20420" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="20718:20804" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="22511:23481" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="22519:23268" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="22540:22704" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="22560:22602" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="22725:22889" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="22745:22787" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="22910:23074" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="22930:22972" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="23095:23259" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="23115:23157" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="23276:23470" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="23337:23406" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="23407:23461" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="24361:24387" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="24388:24650" placeholder="..." />
+                <marker date="1454765104668" expanded="false" signature="24406:24468" placeholder="..." />
+                <marker date="1454765104668" expanded="true" signature="24469:24650" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view.html.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/com_dnagifts/admin/views/tests/view.html.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="29" column="20" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -51,11 +160,7 @@
         <option value="$PROJECT_DIR$/com_dnagifts/site/controllers/report.json.php" />
         <option value="$PROJECT_DIR$/com_dnagifts/site/controllers/reports.php" />
         <option value="$PROJECT_DIR$/com_dnagifts/site/views/reports/tmpl/default.php" />
-        <option value="$PROJECT_DIR$/com_dnagifts/admin/helpers/dnagifts.php" />
-        <option value="$PROJECT_DIR$/com_dnagifts/site/js/dnagifts.test.js" />
         <option value="$PROJECT_DIR$/com_dnagifts/site/helpers/reports.php" />
-        <option value="$PROJECT_DIR$/com_dnagifts/admin/js/dnagifts.base.js" />
-        <option value="$PROJECT_DIR$/com_dnagifts/site/js/dnagifts.report.js" />
       </list>
     </option>
   </component>
@@ -112,7 +217,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -207,7 +311,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
+              <option name="myItemId" value="reports" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -233,7 +337,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
+              <option name="myItemId" value="reports" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -315,7 +419,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
+              <option name="myItemId" value="language" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -337,7 +441,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="helpers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -366,6 +470,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -437,7 +542,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32971016" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32971016" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -447,20 +552,28 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="1" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/report/view.html.php">
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/reports.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="96" selection-start-line="85" selection-start-column="96" selection-end-line="85" selection-end-column="96" />
+          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/js/dnagifts.report.js">
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/admin/helpers/dnagifts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="33" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/reports/tmpl/default.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -468,81 +581,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/helpers/dnagifts.php">
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/admin/views/tests/view.html.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="327" column="16" selection-start-line="327" selection-start-column="16" selection-end-line="327" selection-end-column="16" />
-          <folding>
-            <marker date="1440944775267" expanded="true" signature="1414:1513" placeholder="SELECT * FRO... ${$db-&gt;nameQuote('#__dnagifts_pretest_info')}" />
-            <marker date="1440944775267" expanded="true" signature="2482:2581" placeholder="SELECT * FRO... ${$db-&gt;nameQuote('#__dnagifts_pretest_info')}" />
-            <marker date="1440944775267" expanded="true" signature="3288:3396" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_pretest_info')}" />
-            <marker date="1440944775267" expanded="true" signature="3897:4078" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
-            <marker date="1440944775267" expanded="true" signature="5315:5448" placeholder="SELECT langu... ${$db-&gt;nameQuote('#__dnagifts_lst_language_codes')}" />
-            <marker date="1440944775267" expanded="true" signature="5840:5960" placeholder="SELECT howma... ${$db-&gt;nameQuote('#__dnagifts_count_testquestions')}" />
-            <marker date="1440944775267" expanded="true" signature="6129:6336" placeholder="SELECT COUNT... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_test_answers')}" />
-            <marker date="1440944775267" expanded="true" signature="7646:7753" placeholder="SELECT * FRO... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/admin/js/dnagifts.base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <caret line="29" column="20" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/models/test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="16" />
-          <folding>
-            <marker date="1440944775288" expanded="true" signature="571:672" placeholder="SELECT use_t... ${$db-&gt;nameQuote('#__dnagifts_test')}" />
-            <marker date="1440944775288" expanded="true" signature="810:928" placeholder="SELECT howma... ${$db-&gt;nameQuote('#__dnagifts_count_testquestions')}" />
-            <marker date="1440944775288" expanded="true" signature="2180:2427" placeholder="SELECT * FRO... #__dnagifts_list_testquestions" />
-            <marker date="1440944775288" expanded="true" signature="2263:2351" placeholder="SELECT quest... #__dnagifts_lnk_user_test_answers" />
-            <marker date="1440944775288" expanded="true" signature="2787:3078" placeholder="SELECT a.*, #__dnagifts_list_testquestions" />
-            <marker date="1440944775288" expanded="true" signature="3399:3515" placeholder="SELECT id FR... #__dnagifts_lnk_user_test_answers" />
-            <marker date="1440944775288" expanded="true" signature="4894:5010" placeholder="SELECT id FR... #__dnagifts_lnk_user_test_answers" />
-            <marker date="1440944775288" expanded="true" signature="5801:5885" placeholder="SELECT test_... #__dnagifts_count_testanswers" />
-            <marker date="1440944775288" expanded="true" signature="6109:6167" placeholder="SELECT test_... #__dnagifts_lnk_user_tests" />
-            <marker date="1440944775288" expanded="true" signature="6284:6352" placeholder="SELECT howma... #__dnagifts_count_testquestions" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/report.json.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/helpers/reports.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="404" column="35" selection-start-line="404" selection-start-column="35" selection-end-line="404" selection-end-column="35" />
-          <folding>
-            <element signature="n#Header#0;n#MYPDF#0;n#!!top" expanded="false" />
-            <element signature="n#Footer#0;n#MYPDF#0;n#!!top" expanded="false" />
-            <element signature="n#aOrAn#0;n#ReportsHelper#0;n#!!top" expanded="false" />
-            <element signature="n#documentSetup#0;n#ReportsHelper#0;n#!!top" expanded="false" />
-            <element signature="n#uniqueDNAChartFilename#0;n#ReportsHelper#0;n#!!top" expanded="false" />
-            <element signature="n#generatePDFName#0;n#ReportsHelper#0;n#!!top" expanded="false" />
-            <element signature="n#prepareData#0;n#ReportsHelper#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/helpers/utils.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-          <folding>
-            <marker date="1440944775269" expanded="true" signature="381:498" placeholder="SELECT user_... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -604,10 +647,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/report/view.html.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.4615384">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/language/en-GB/en-GB.com_dnagifts.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/helpers/dnagifts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="80.42308">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1440944775267" expanded="true" signature="1414:1513" placeholder="SELECT * FRO... ${$db-&gt;nameQuote('#__dnagifts_pretest_info')}" />
+            <marker date="1440944775267" expanded="true" signature="2482:2581" placeholder="SELECT * FRO... ${$db-&gt;nameQuote('#__dnagifts_pretest_info')}" />
+            <marker date="1440944775267" expanded="true" signature="3288:3396" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_pretest_info')}" />
+            <marker date="1440944775267" expanded="true" signature="3897:4078" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
+            <marker date="1440944775267" expanded="true" signature="5315:5448" placeholder="SELECT langu... ${$db-&gt;nameQuote('#__dnagifts_lst_language_codes')}" />
+            <marker date="1440944775267" expanded="true" signature="5840:5960" placeholder="SELECT howma... ${$db-&gt;nameQuote('#__dnagifts_count_testquestions')}" />
+            <marker date="1440944775267" expanded="true" signature="6129:6336" placeholder="SELECT COUNT... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_test_answers')}" />
+            <marker date="1440944775267" expanded="true" signature="7646:7753" placeholder="SELECT * FRO... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/dnagifts/tmpl/default.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.961538">
           <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/test/tmpl/default.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2118863">
+          <caret line="58" column="10" selection-start-line="58" selection-start-column="10" selection-end-line="58" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -635,10 +719,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/test.json-old.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1440944775258" expanded="true" signature="552:681" placeholder="SELECT count... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_test_answers')}" />
+            <marker date="1440944775258" expanded="true" signature="1025:1227" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_test_answers')}" />
+            <marker date="1440944775258" expanded="true" signature="2572:2768" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_test_answers')}" />
+            <marker date="1440944775258" expanded="true" signature="3440:3526" placeholder="SELECT test_... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
+            <marker date="1440944775258" expanded="true" signature="4571:4745" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
+            <marker date="1440944775258" expanded="true" signature="5419:5518" placeholder="SELECT use_t... ${$db-&gt;nameQuote('#__dnagifts_test')}" />
+            <marker date="1440944775258" expanded="true" signature="5651:5767" placeholder="SELECT howma... ${$db-&gt;nameQuote('#__dnagifts_count_testquestions')}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/test.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.115385">
           <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.1923075">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/test.json.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32945737">
+          <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -742,6 +857,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/reports/view.html.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/com_dnagifts/site/dnagifts.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.49483204">
@@ -749,48 +871,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/language/af-ZA/af-ZA.com_dnagifts.ini">
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/reports.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55901426">
-          <caret line="118" column="25" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/test.json-old.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.014211887">
-          <caret line="179" column="23" selection-start-line="179" selection-start-column="23" selection-end-line="179" selection-end-column="23" />
-          <folding>
-            <marker date="1440944775258" expanded="true" signature="552:681" placeholder="SELECT count... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_test_answers')}" />
-            <marker date="1440944775258" expanded="true" signature="1025:1227" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_test_answers')}" />
-            <marker date="1440944775258" expanded="true" signature="2572:2768" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_test_answers')}" />
-            <marker date="1440944775258" expanded="true" signature="3440:3526" placeholder="SELECT test_... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
-            <marker date="1440944775258" expanded="true" signature="4571:4745" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
-            <marker date="1440944775258" expanded="true" signature="5419:5518" placeholder="SELECT use_t... ${$db-&gt;nameQuote('#__dnagifts_test')}" />
-            <marker date="1440944775258" expanded="true" signature="5651:5767" placeholder="SELECT howma... ${$db-&gt;nameQuote('#__dnagifts_count_testquestions')}" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/com_dnagifts/admin/views/tests/view.html.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2260982">
+        <state vertical-scroll-proportion="0.0">
           <caret line="29" column="20" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/models/reports.php">
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/admin/helpers/dnagifts.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41731265">
-          <caret line="19" column="63" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/reports/view.html.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41731265">
-          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="33" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -802,184 +903,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/admin/helpers/dnagifts.php">
+    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/helpers/reports.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.878553">
-          <caret line="60" column="33" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/reports.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.961538">
-          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/test/view.raw.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46124032">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/test/view.html.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.192308">
-          <caret line="74" column="5" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/report.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24160206">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/language/en-GB/en-GB.com_dnagifts.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.862069">
-          <caret line="54" column="28" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/test.json.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.23077">
-          <caret line="115" column="144" selection-start-line="115" selection-start-column="116" selection-end-line="115" selection-end-column="144" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/js/dnagifts.test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="195" column="69" selection-start-line="195" selection-start-column="56" selection-end-line="195" selection-end-column="69" />
+        <state vertical-scroll-proportion="-9.153846">
+          <caret line="227" column="101" selection-start-line="227" selection-start-column="101" selection-end-line="227" selection-end-column="101" />
           <folding>
-            <marker date="1440944775275" expanded="true" signature="3442:3456" placeholder="..." />
-            <marker date="1440944775275" expanded="true" signature="5770:5784" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/test/tmpl/default.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="89" selection-start-line="17" selection-start-column="89" selection-end-line="17" selection-end-column="89" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/report/view.html.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="96" selection-start-line="85" selection-start-column="96" selection-end-line="85" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/helpers/utils.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35142118">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-          <folding>
-            <marker date="1440944775269" expanded="true" signature="381:498" placeholder="SELECT user_... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
+            <marker date="1454765104668" expanded="true" signature="10904:10918" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="10919:10948" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="10927:10948" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="12466:12480" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="12481:12899" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="12489:12888" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="12510:12794" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="12545:12781" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="12556:12655" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="12666:12767" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="12679:12755" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="13968:13982" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="13983:14012" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="13991:14012" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="15523:15536" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="15537:15545" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="16006:16504" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="16015:16455" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="16036:16050" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="16051:16445" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="16055:16437" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="16149:16185" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="16253:16280" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="16387:16410" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="17939:18181" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="17947:18170" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="17968:18100" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="19948:20815" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="19956:20710" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="19977:20318" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="19997:20039" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="20358:20699" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="20378:20420" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="20718:20804" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="22511:23481" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="22519:23268" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="22540:22704" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="22560:22602" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="22725:22889" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="22745:22787" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="22910:23074" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="22930:22972" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="23095:23259" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="23115:23157" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="23276:23470" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="23337:23406" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="23407:23461" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="24361:24387" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="24388:24650" placeholder="..." />
+            <marker date="1454765104668" expanded="false" signature="24406:24468" placeholder="..." />
+            <marker date="1454765104668" expanded="true" signature="24469:24650" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/com_dnagifts/site/controllers/report.json.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1201551">
-          <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/helpers/reports.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="5.754522">
-          <caret line="404" column="35" selection-start-line="404" selection-start-column="35" selection-end-line="404" selection-end-column="35" />
-          <folding>
-            <element signature="n#Header#0;n#MYPDF#0;n#!!top" expanded="false" />
-            <element signature="n#Footer#0;n#MYPDF#0;n#!!top" expanded="false" />
-            <element signature="n#aOrAn#0;n#ReportsHelper#0;n#!!top" expanded="false" />
-            <element signature="n#documentSetup#0;n#ReportsHelper#0;n#!!top" expanded="false" />
-            <element signature="n#uniqueDNAChartFilename#0;n#ReportsHelper#0;n#!!top" expanded="false" />
-            <element signature="n#generatePDFName#0;n#ReportsHelper#0;n#!!top" expanded="false" />
-            <element signature="n#prepareData#0;n#ReportsHelper#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_7.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34366927">
-          <caret line="216" column="9" selection-start-line="216" selection-start-column="9" selection-end-line="216" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/models/test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2635659">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="16" />
-          <folding>
-            <marker date="1440944775288" expanded="true" signature="571:672" placeholder="SELECT use_t... ${$db-&gt;nameQuote('#__dnagifts_test')}" />
-            <marker date="1440944775288" expanded="true" signature="810:928" placeholder="SELECT howma... ${$db-&gt;nameQuote('#__dnagifts_count_testquestions')}" />
-            <marker date="1440944775288" expanded="true" signature="2180:2427" placeholder="SELECT * FRO... #__dnagifts_list_testquestions" />
-            <marker date="1440944775288" expanded="true" signature="2263:2351" placeholder="SELECT quest... #__dnagifts_lnk_user_test_answers" />
-            <marker date="1440944775288" expanded="true" signature="2787:3078" placeholder="SELECT a.*, #__dnagifts_list_testquestions" />
-            <marker date="1440944775288" expanded="true" signature="3399:3515" placeholder="SELECT id FR... #__dnagifts_lnk_user_test_answers" />
-            <marker date="1440944775288" expanded="true" signature="4894:5010" placeholder="SELECT id FR... #__dnagifts_lnk_user_test_answers" />
-            <marker date="1440944775288" expanded="true" signature="5801:5885" placeholder="SELECT test_... #__dnagifts_count_testanswers" />
-            <marker date="1440944775288" expanded="true" signature="6109:6167" placeholder="SELECT test_... #__dnagifts_lnk_user_tests" />
-            <marker date="1440944775288" expanded="true" signature="6284:6352" placeholder="SELECT howma... #__dnagifts_count_testquestions" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/admin/js/dnagifts.base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.84875">
-          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/helpers/dnagifts.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="7.1821704">
-          <caret line="327" column="16" selection-start-line="327" selection-start-column="16" selection-end-line="327" selection-end-column="16" />
-          <folding>
-            <marker date="1440944775267" expanded="true" signature="1414:1513" placeholder="SELECT * FRO... ${$db-&gt;nameQuote('#__dnagifts_pretest_info')}" />
-            <marker date="1440944775267" expanded="true" signature="2482:2581" placeholder="SELECT * FRO... ${$db-&gt;nameQuote('#__dnagifts_pretest_info')}" />
-            <marker date="1440944775267" expanded="true" signature="3288:3396" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_pretest_info')}" />
-            <marker date="1440944775267" expanded="true" signature="3897:4078" placeholder="SELECT id FR... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
-            <marker date="1440944775267" expanded="true" signature="5315:5448" placeholder="SELECT langu... ${$db-&gt;nameQuote('#__dnagifts_lst_language_codes')}" />
-            <marker date="1440944775267" expanded="true" signature="5840:5960" placeholder="SELECT howma... ${$db-&gt;nameQuote('#__dnagifts_count_testquestions')}" />
-            <marker date="1440944775267" expanded="true" signature="6129:6336" placeholder="SELECT COUNT... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_test_answers')}" />
-            <marker date="1440944775267" expanded="true" signature="7646:7753" placeholder="SELECT * FRO... ${$db-&gt;nameQuote('#__dnagifts_lnk_user_tests')}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/com_dnagifts/site/js/dnagifts.report.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33375">
-          <caret line="134" column="42" selection-start-line="134" selection-start-column="42" selection-end-line="134" selection-end-column="42" />
+        <state vertical-scroll-proportion="-6.230769">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/com_dnagifts/site/views/report/tmpl/default.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30749354">
-          <caret line="273" column="36" selection-start-line="273" selection-start-column="36" selection-end-line="273" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.011627907">
+          <caret line="261" column="12" selection-start-line="261" selection-start-column="12" selection-end-line="261" selection-end-column="12" />
           <folding />
         </state>
       </provider>
