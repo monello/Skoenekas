@@ -28,7 +28,7 @@ influence your behaviour and governs your abilities. The DNA Gifts will take you
 on a journey as you discover a higher purpose for your life. There is a Dynamic
 Natural Ability encoded inside of you. Tapping into this ability will produce a
 life of fulfilment and purpose. Discover why you are unique and understand other
-people’s uniqueness. Your DNA will give meaning and destiny to your life. Become
+peopleï¿½s uniqueness. Your DNA will give meaning and destiny to your life. Become
 empowered as you take this book and make it a reference guide for the whole
 family.
 
@@ -59,7 +59,7 @@ You need to make DNA Gifts and BT Login work together.
   2.	Go to Extensions >> Module Manager
   3.	Activate the BT Login Module
   4.	Open the Module in edit mode and set the following settings:
-    a.	Position: myBtLogin (type it in it won’t be in the list)
+    a.	Position: myBtLogin (type it in it wonï¿½t be in the list)
     b.	Menu Assignment:
       i. Only the pages selected 
       ii.	Check the Test menu item you just created
@@ -83,6 +83,8 @@ with a pwetty Modal Login
 Next we need to add the test intro animation and blurb to the language files,
 both the en-GB and the af-ZA.
 
+copy the TCPDF folder to the root directory
+
 VI. KNOWN ISSUES AND WORK AROUNDS
 
 * The sub menu-images in the back-end do not show! Not sure how to get it to
@@ -93,7 +95,7 @@ VII. TECHNICAL SUPPORT
 If you need technical assistance, you may me by email:
 Morne Louw | louw.morne@ymail.com
 
-Copyright © 2012 Morne Louw.
+Copyright ï¿½ 2012 Morne Louw.
 
 
 

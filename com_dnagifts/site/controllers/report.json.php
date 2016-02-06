@@ -42,6 +42,7 @@ class DnaGiftsControllerReport extends JControllerForm
 		$displaytype	= 'F'; //use 'F' for emailing not 'E' as I want to save a real file to a folder and attached that to the email
         $userTestID		= $_POST['userTestID'];
 		$is_raw			= (int) $_POST['israw'];
+
 		if ($is_raw > 0) {
 			$user = UtilsHelper::getUserObject($_POST['uid']);
 		} else {
@@ -50,7 +51,7 @@ class DnaGiftsControllerReport extends JControllerForm
 		
 		ReportsHelper::generateReportMSIEPDF($displaytype, $userTestID, $user->name);
 		if ($is_raw < 1) {
-			ReportsHelper::emailReportPDF($userTestID, $user_id, $is_raw);
+			ReportsHelper::emailReportPDF($userTestID, $user->id, $is_raw);
 			echo json_encode(array("success" => true, "message" => jText::_('COM_DNAGIFTS_REPORT_SENTEMAIL')));
 		} else {
 			echo json_encode(array("success" => true, "message" => jText::_('COM_DNAGIFTS_REPORT_PDFREADY')));

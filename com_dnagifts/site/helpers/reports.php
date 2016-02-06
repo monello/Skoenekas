@@ -29,110 +29,10 @@ class MYPDF extends TCPDF {
 
 class ReportsHelper
 {
-	public static function additionalInfo($type='') 
-	{
-		$html = '';
-		$html .= '
-			<br />
-			<img src="'.JURI::base(true).'/media/com_dnagifts/images/banner_beTHYSELF.jpg" width="930" />
-			<h3>THE DNA "BE THYSELF" SEMINAR EXPERIENCE</h3>
-			<p>The BE THYSELF Seminar is not a normal monotonous type of event, it is an interactive animation, video, props, lighting and media experience together with life changing insight to help people discover who they really are. The normal duration of a seminar is 8 hours over a period of 2 days. The DNA Seminar is presented to churches, organisations and people who want to discover their God-given gifts.</p>
-
-			<p><a href="'.JURI::root().'enquiry-dna" target="_new">CLICK HERE</a> TO ENQUIRE ABOUT A SEMINAR AT YOUR ORGANISATION</p>
-
-			<p><a href="'.JURI::root().'events/be-thyself-seminar" target="_new">UPCOMING SEMINARS (SOUTH AFRICA)</a></p>';
-		
-		if ($type == 'pdf') {
-			$html .= '<br />';
-		}
-		
-		$html.=	'<table width="100%"><tr>
-				<td colspan="2">
-					<h3>THE DNA SEMINAR IN DURBANVILLE (CAPE TOWN) SOUTH AFRICA</h3>
-				</td>
-			</tr>
-			<tr>
-			<tr>
-				<td>
-					<img src="'.JURI::base(true).'/media/com_dnagifts/images/logo_DCC2.png" align="left" height="90px" style="padding-right: 30px; padding-bottom: 10px"/>
-				</td>
-				<td>
-					<p>The "BE Thyself" seminar runs over a four week period every month on Thursday evenings from 19:00 - 21:00. <a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details">Click here</a> if you would like to register as a delegate to attend the BE THYSELF seminar in the northern suburbs of Cape Town at the <a href="http://www.d-cc.co.za/" target="_new">Durbanville Conference Centre</a></p>
-					<p>Durbanville Conference Centre is the ideal venue in the Northern Suburbs of Cape Town for your next conference or function, <a href="http://www.d-cc.co.za" target="_new">click here</a> to visit to find out out more info</p>
-				</td>
-				</tr>
-			</table>';
-		
-		if ($type == 'pdf') {
-			$html .= '
-				<table width="100%">
-				<tr><td colspan="2"> &nbsp; </td></tr>
-				<tr><td width="400px">
-					<h3>THE BE THYSELF SEMINAR IS EXCELLENT FOR</h3>
-					<ul>
-						<li>Team Dynamics</li>
-						<li>Church Dynamics</li>
-						<li>Corporate Dynamics</li>
-						<li>Engaged couples</li>
-						<li>Personal Leadership development</li>
-					</li>
-				</td>
-				<td align="right" width="200px">
-					<a href="'.JURI::root().'events/be-thyself-seminar"><img height="130px" src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png"/></a>
-				</td></tr></table>';
-		} else {		
-			$html.=	'<table width="100%"><tr><td>
-					<h3>THE BE THYSELF SEMINAR IS EXCELLENT FOR</h3>
-					<ul>
-						<li>Team Dynamics</li>
-						<li>Church Dynamics</li>
-						<li>Corporate Dynamics</li>
-						<li>Engaged couples</li>
-						<li>Personal Leadership development</li>
-					</li>
-				</td>
-				<td align="right">
-					<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details"><img height="200px" src="'.JURI::base(true).'/media/com_dnagifts/images/BETHYSELF1-267x265.png"/></a>
-				</td></tr></table>';
-		}
-		
-		$html .=	'<p>Click <a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details">here</a> to view the course outline and register online for the seminar.</p>
-			You can also host a seminar at your church, para-church organization or company.</p>'; 
-		
-		if ($type == 'pdf') {
-			$html .= '<table width="100%">
-					<tr>
-						<td align="center">
-							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details"><img height="50px" src="'.JURI::base(true).'/media/com_dnagifts/images/attendBUTTON.png" /></a>
-						</td>
-						<td align="center">
-							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details"><img height="50px" src="'.JURI::base(true).'/media/com_dnagifts/images/course_button.png" /></a>
-						</td>
-					</tr>
-					<tr><td colspan="2"> &nbsp; </td></tr>
-				</table>';
-		} else {
-			$html .= '<table width="100%">
-					<tr>
-						<td align="center">
-							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details"><img src="'.JURI::base(true).'/media/com_dnagifts/images/attendBUTTON.png" /></a>
-						</td>
-						<td align="center">
-							<a href="'.JURI::root().'upcoming-events/events-calender/be-thyself/1-be-thyself-seminar/event_details"><img src="'.JURI::base(true).'/media/com_dnagifts/images/course_button.png" /></a>
-						</td>
-					</tr>
-				</table>';
-		}
-		$html .='<br/>
-			<img src="'.JURI::base(true).'/media/com_dnagifts/images/BE THYSELF BANNER2.jpg" width="930" />
-		';
-		return $html;
-	}
-	
 	public static function aOrAn($string)
 	{
 		$vowels = array('a','e','i','o','u');
-		$letter = strtolower(substr($tring, 0, 1));
+		$letter = strtolower(substr($string, 0, 1));
 		$result = 'a';
 		if (in_array($letter, $vowels)) {
 		    $result = 'an';
@@ -328,7 +228,7 @@ class ReportsHelper
 		ReportsHelper::generatePDF_Section7($pdf, $column1_left, $dnaResults, $svgData, $userTestID);
 		
 		// ######################################### PAGE 4 ##########################################################
-		
+		/*
 		$pdf->AddPage();
 		
 		ReportsHelper::generatePDF_Section8($pdf, $column1_left, $user_id);
@@ -340,7 +240,8 @@ class ReportsHelper
 		$pdf->AddPage();
 		$additionalhtml = ReportsHelper::additionalInfo('pdf');
         $pdf->writeHTML($additionalhtml);
-		
+		*/
+
 		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
         $pdf->Output($filename, $displaytype);
@@ -390,6 +291,7 @@ class ReportsHelper
 		
 		// ######################################### PAGE 4 ##########################################################
 		
+		/*
 		$pdf->AddPage();
 		
 		ReportsHelper::generatePDF_Section8($pdf, $column1_left, $user_id);
@@ -401,7 +303,8 @@ class ReportsHelper
 		$pdf->AddPage();
 		$additionalhtml = ReportsHelper::additionalInfo('pdf');
         $pdf->writeHTML($additionalhtml);
-		
+		*/
+
 		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
         $pdf->Output($filename, $displaytype);
@@ -764,6 +667,7 @@ class ReportsHelper
         $pdf->writeHTML($html);	
 	}
 
+	/*
 	public static function generatePDF_Section8($pdf, $column1_left, $user_id)
 	{
 		$first_name = ReportsHelper::extractFirstName($user_id);
@@ -877,7 +781,8 @@ class ReportsHelper
         $pdf->writeHTML($html);
 		
 	}
-	
+	*/
+
 	public static function extractFirstName($user_id)
 	{
 		$user = UtilsHelper::getUserObject($user_id);
