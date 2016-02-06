@@ -168,4 +168,4 @@ pip-log.txt
 ##############
 ## PHPStorm
 ##############
-.idea/
+*.idea/
