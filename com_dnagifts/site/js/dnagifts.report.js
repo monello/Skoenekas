@@ -5,7 +5,8 @@ root.myNamespace.create('DnaGifts.report', {
 	intervals: {},
 	extractSVG: function(divID)
 	{
-		if (navigator.sayswho.match(/^IE/) ) {
+		//if (jQuery.browser.msie) {
+		if (BrowserDetect.browser == 'Explorer') {
 			return false;
 		}
 		var ns = DnaGifts.report;
@@ -54,7 +55,7 @@ root.myNamespace.create('DnaGifts.report', {
 			return false;
 		}
 		
-		var ns = DnaGifts.report;
+var ns = DnaGifts.report;
 		var url=juri+'/index.php?option=com_dnagifts&format=json&task=report.emailReportPDF';
 		jQuery.ajax({
 		  type: "POST",
@@ -132,7 +133,7 @@ Base.Helpers.bind_load(function () {
 	jQuery("#resendReportBtn").live("click",ns.resendReport);
     jQuery.metadata.setType('attr','data');
 	setInterval(function(){jQuery("#notificationtab").fadeOut()}, 6000);
-	if (navigator.sayswho.match(/^IE/) ) {
+    if (BrowserDetect.browser == 'Explorer') {
 		ns.dispatchMSIEReport();
 	}
 });
