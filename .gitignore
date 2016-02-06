@@ -163,9 +163,7 @@ pip-log.txt
 # Mac crap
 .DS_Store
 
-
-
 ##############
 ## PHPStorm
 ##############
-*.idea/
+.idea/workspace.xml
