@@ -69,46 +69,21 @@ root.myNamespace.create('Base.Helpers', {
 });
 
 
-var BrowserDetect = 
-{
-    init: function () 
-    {
-        this.browser = this.searchString(this.dataBrowser) || "Other";
-        this.version = this.searchVersion(navigator.userAgent) ||       this.searchVersion(navigator.appVersion) || "Unknown";
-    },
-
-    searchString: function (data) 
-    {
-        for (var i=0 ; i < data.length ; i++)   
-        {
-            var dataString = data[i].string;
-            this.versionSearchString = data[i].subString;
-
-            if (dataString.indexOf(data[i].subString) != -1)
-            {
-                return data[i].identity;
-            }
-        }
-    },
-
-    searchVersion: function (dataString) 
-    {
-        var index = dataString.indexOf(this.versionSearchString);
-        if (index == -1) return;
-        return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
-    },
-
-    dataBrowser: 
-    [
-        { string: navigator.userAgent, subString: "Chrome",  identity: "Chrome" },
-        { string: navigator.userAgent, subString: "MSIE",    identity: "Explorer" },
-        { string: navigator.userAgent, subString: "Firefox", identity: "Firefox" },
-        { string: navigator.userAgent, subString: "Safari",  identity: "Safari" },
-        { string: navigator.userAgent, subString: "Opera",   identity: "Opera" },
-    ]
-
-};
-BrowserDetect.init();
+navigator.sayswho= (function(){
+    var ua= navigator.userAgent, tem,
+        M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'IE '+(tem[1] || '');
+    }
+    if(M[1]=== 'Chrome'){
+        tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
+        if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+    }
+    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+    return M.join(' ');
+})();
 
 
 (function($) {
