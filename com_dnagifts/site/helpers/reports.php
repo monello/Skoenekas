@@ -226,21 +226,6 @@ class ReportsHelper
 		ReportsHelper::reportSeperator($pdf);
 		
 		ReportsHelper::generatePDF_Section7($pdf, $column1_left, $dnaResults, $svgData, $userTestID);
-		
-		// ######################################### PAGE 4 ##########################################################
-		/*
-		$pdf->AddPage();
-		
-		ReportsHelper::generatePDF_Section8($pdf, $column1_left, $user_id);
-		
-		ReportsHelper::reportSeperator($pdf);
-		
-		ReportsHelper::generatePDF_Section9($pdf, $column1_left, $user_id);
-		
-		$pdf->AddPage();
-		$additionalhtml = ReportsHelper::additionalInfo('pdf');
-        $pdf->writeHTML($additionalhtml);
-		*/
 
 		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
@@ -288,22 +273,6 @@ class ReportsHelper
 		ReportsHelper::reportSeperator($pdf);
 		
 		ReportsHelper::generatePDF_Section7($pdf, $column1_left, $dnaResults, $svgData, $userTestID);
-		
-		// ######################################### PAGE 4 ##########################################################
-		
-		/*
-		$pdf->AddPage();
-		
-		ReportsHelper::generatePDF_Section8($pdf, $column1_left, $user_id);
-		
-		ReportsHelper::reportSeperator($pdf);
-		
-		ReportsHelper::generatePDF_Section9($pdf, $column1_left, $user_id);
-		
-		$pdf->AddPage();
-		$additionalhtml = ReportsHelper::additionalInfo('pdf');
-        $pdf->writeHTML($additionalhtml);
-		*/
 
 		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
@@ -666,122 +635,6 @@ class ReportsHelper
 		// Print text using writeHTML()
         $pdf->writeHTML($html);	
 	}
-
-	/*
-	public static function generatePDF_Section8($pdf, $column1_left, $user_id)
-	{
-		$first_name = ReportsHelper::extractFirstName($user_id);
-		
-		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_DESIGNEDFORPURPOSE = JText::_('COM_DNAGIFTS_REPORT_DESIGNEDFORPURPOSE');
-		$HEADER = strtoupper($first_name).JText::_('COM_DNAGIFTS_REPORT_PURPOSE_HEADER');
-		$P1 = JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P1').' '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P2');
-		$P2 = $first_name.' '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P3');
-		$P3 = JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P4').'. '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P5');
-		$P4 = $first_name.' '.JText::_('COM_DNAGIFTS_REPORT_PURPOSE_P6');
-		
-		$y = $pdf->GetY();
-		
-		$pdf->SetXY($column1_left, $y);
-		$pdf->SetFont('', 'B', 12, '', true);
-		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
-		$pdf->Write(0, $COM_DNAGIFTS_REPORT_DESIGNEDFORPURPOSE, '', 0, 'L', true, 0, false, false, 0);
-		$pdf->SetTextColor(0, 0, 0); // RGB - Black
-		$pdf->SetFont('', '', 8, '', true);
-		
-		$pdf->SetXY($column1_left, $pdf->GetY()+5);
-		
-		$html = '<table border="0" cellpadding="0" cellspacing="0" width="1000">
-					<tr>
-						<td width="90px">
-							<img src="'.JURI::base(true).'/media/com_dnagifts/images/lego_blocks.jpg" height="350px" />
-						</td>
-						<td>
-							<p><strong>'.$HEADER.'</strong></p>
-							<p>'.$P1.'</p>
-							<p>'.$P2.'</p> 
-							<p>'.$P3.'</p>
-							<p>'.$P4.'</p>
-							<img src="'.JURI::base(true).'/media/com_dnagifts/images/dna_jesus.jpg" width="700px" />
-						</td>
-					</tr>
-				</table>';
-				
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
-	}
-
-	public static function generatePDF_Section9($pdf, $column1_left, $user_id)
-	{
-		$first_name = ReportsHelper::extractFirstName($user_id);
-		
-		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_PURCHASETODAY = JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY');
-		
-		$y = $pdf->GetY() + 10;
-		
-		$pdf->SetXY($column1_left, $y);
-		$pdf->SetFont('', 'B', 12, '', true);
-		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
-		$pdf->Write(0, $COM_DNAGIFTS_REPORT_PURCHASETODAY, '', 0, 'L', true, 0, false, false, 0);
-		$pdf->SetTextColor(0, 0, 0); // RGB - Black
-		$pdf->SetFont('', '', 8, '', true);
-		
-		$pdf->SetXY($column1_left, $pdf->GetY()+5);
-		
-		$html = '<table border="0" cellpadding="0" cellspacing="0" width="910">
-					<tr>
-						<td width="120">
-							<a href="'.JURI::root().'purchase">
-								<img border="0" src="'.JURI::base(true).'/media/com_dnagifts/images/dna_book.jpg" width="100px" />
-							</a>
-						</td>
-						<td>
-							<p style="font-size:8pt;color:red"><strong>'.JText::_('COM_DNAGIFTS_REPORT_PURCHASETODAY2').'</strong></p>
-							<p>'.JText::_('COM_DNAGIFTS_REPORT_BOOKDETAILS').'</p>
-						</td>
-						<td width="100">
-							<a id="buyBtn" href="'.JURI::root().'purchase">
-								<img border="0" src="'.JURI::base(true).'/media/com_dnagifts/images/buy_book.jpg" width="110px"/>
-							</a>
-						</td>
-					</tr>
-				</table>';
-				
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
-		
-		// TEXT REPLACEMENT VARIABLES
-		$COM_DNAGIFTS_REPORT_ABOUTAUTHOR = JText::_('COM_DNAGIFTS_REPORT_ABOUTAUTHOR');
-		
-		$y = $pdf->GetY();
-		
-		$pdf->SetXY($column1_left, $y);
-		$pdf->SetFont('', 'B', 12, '', true);
-		$pdf->SetTextColor(128, 128, 128); // RGB - Grey
-		$pdf->Write(0, $COM_DNAGIFTS_REPORT_ABOUTAUTHOR, '', 0, 'L', true, 0, false, false, 0);
-		$pdf->SetTextColor(0, 0, 0); // RGB - Black
-		$pdf->SetFont('', '', 8, '', true);
-		
-		$pdf->SetXY($column1_left, $pdf->GetY());
-		
-		$html = '<table border="0" cellpadding="0" cellspacing="0" width="910">
-					<tr>
-						<td width="120">
-							<img src="'.JURI::base(true).'/media/com_dnagifts/images/juan_nel.jpg" width="90px" />
-						</td>
-						<td>
-							<p>'.JText::_('COM_DNAGIFTS_REPORT_AUTHORDETAILS').'</p>
-							<p>'.JText::_('COM_DNAGIFTS_REPORT_MOREINFO').'</p>
-						</td>
-					</tr>
-				</table>';
-				
-		// Print text using writeHTML()
-        $pdf->writeHTML($html);
-		
-	}
-	*/
 
 	public static function extractFirstName($user_id)
 	{
