@@ -40,7 +40,7 @@ class ReportsHelper
 		return $result;
 	}
 	
-	public static function &documentSetup($userTestID)
+	public static function &documentSetup()
 	{
 		$author             = JText::_( 'COM_DNAGIFTS_PDF_AUTHOR' );
         $title              = JText::_( 'COM_DNAGIFTS_PDF_TITLE' );
@@ -184,7 +184,7 @@ class ReportsHelper
 		$column1_left = 15;
 		$column2_left = 107;
 		
-		$pdf =& ReportsHelper::documentSetup($userTestID);
+		$pdf =& ReportsHelper::documentSetup();
 		list ($result, $user_id, $test_id) = UtilsHelper::reverseUserTestId($userTestID);
 		
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
@@ -229,6 +229,12 @@ class ReportsHelper
 
 		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
+
+		/*
+		 * $pdf->Output() takes a second parameter $dest, which accepts a single character.
+		 * The default, $dest='I' opens the PDF in the browser.
+		 * Use F to save to file
+		 */
         $pdf->Output($filename, $displaytype);
 	}
 	
@@ -237,9 +243,8 @@ class ReportsHelper
 		$column1_left = 15;
 		$column2_left = 107;
 		
-		$pdf =& ReportsHelper::documentSetup($userTestID);
+		$pdf =& ReportsHelper::documentSetup();
 		list ($result, $user_id, $test_id) = UtilsHelper::reverseUserTestId($userTestID);
-		
 		list ($documentname, $dnaResults) = ReportsHelper::prepareData($userTestID);
 		
 		// ######################################### PAGE 1 ##########################################################
@@ -276,6 +281,11 @@ class ReportsHelper
 
 		// ######## FINALIZE DOCUMENT #########
 		$filename = ReportsHelper::getFilename($displaytype, $documentname);
+		/*
+		 * $pdf->Output() takes a second parameter $dest, which accepts a single character.
+		 * The default, $dest='I' opens the PDF in the browser.
+		 * Use F to save to file
+		 */
         $pdf->Output($filename, $displaytype);
 	}
 	
