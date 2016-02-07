@@ -17,13 +17,14 @@ root.myNamespace.create('DnaGifts.report', {
 	{
 		var ns = DnaGifts.report;
 		var svg = undefined;
-		if (jQuery("#"+divID+" iframe:first")){
+
+		if (jQuery("#"+divID+" iframe:first").length){
 			svg = jQuery("#"+divID+" iframe:first").contents().find('#chartArea').html();
 		}
-		if (!svg && jQuery("#"+divID+" svg:first")) {
-			svg = jQuery("#"+divID+" svg:first").parent().html();
+		if (!svg && jQuery("#"+divID+" svg:first").length) {
+			// to get the svg html clone it into a temporary element and get that element's html (which uses innrHTML)
+			svg = jQuery("<div />").append( jQuery("#"+divID+" svg:first").clone() ).html();
 		}
-
 		if (!svg)
 			return false;
 		clearInterval(ns.intervals[divID]);
